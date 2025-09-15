@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Level Computer Science Tutorial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5',
+                        secondary: '#818cf8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .code-block {
+            background-color: #1f2937;
+            color: #f9fafb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+        .topic-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4 md:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-indigo-900 mb-2">
+                A Level Computer Science Tutorial
+            </h1>
+            <p class="text-lg text-indigo-700 max-w-2xl mx-auto">
+                Comprehensive tutorials with definitions, examples, and past paper questions
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Topic Selection Sidebar -->
+            <div class="lg:col-span-1">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div class="bg-indigo-600 text-white p-4">
+                        <h2 class="flex items-center gap-2 text-xl font-bold">
+                            <i class="fas fa-book-open"></i>
+                            Topics
+                        </h2>
+                    </div>
+                    <div class="p-4">
+                        <select id="topicSelect" class="w-full p-2 border border-gray-300 rounded mb-4">
+                            <option value="linear-search">Linear Search</option>
+                            <option value="binary-search">Binary Search</option>
+                            <option value="bubble-sort">Bubble Sort</option>
+                            <option value="stacks">Stacks</option>
+                            <option value="queues">Queues</option>
+                            <option value="linked-lists">Linked Lists</option>
+                            <option value="binary-trees">Binary Trees</option>
+                            <option value="adt">Abstract Data Types</option>
+                            <option value="algorithm-analysis">Algorithm Analysis</option>
+                        </select>
+                        
+                        <div class="space-y-3">
+                            <button data-topic="linear-search" class="topic-btn w-full text-left p-3 rounded flex items-center bg-indigo-100 text-indigo-800 font-medium">
+                                <i class="fas fa-lightbulb mr-2"></i> Linear Search
+                            </button>
+                            <button data-topic="binary-search" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Binary Search
+                            </button>
+                            <button data-topic="bubble-sort" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Bubble Sort
+                            </button>
+                            <button data-topic="stacks" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Stacks
+                            </button>
+                            <button data-topic="queues" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Queues
+                            </button>
+                            <button data-topic="linked-lists" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Linked Lists
+                            </button>
+                            <button data-topic="binary-trees" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Binary Trees
+                            </button>
+                            <button data-topic="adt" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Abstract Data Types
+                            </button>
+                            <button data-topic="algorithm-analysis" class="topic-btn w-full text-left p-3 rounded flex items-center hover:bg-gray-100">
+                                <i class="fas fa-lightbulb mr-2"></i> Algorithm Analysis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="lg:col-span-3">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div class="bg-white border-b p-6">
+                        <h1 id="topicTitle" class="text-2xl text-indigo-900 flex items-center gap-2">
+                            <i class="fas fa-book-open text-indigo-600"></i>
+                            Linear Search
+                        </h1>
+                    </div>
+                    <div class="p-6" id="topicContent">
+                        <!-- Content will be loaded here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-gray-600 text-sm">
+            <p>A Level Computer Science Tutorial • Designed for educational purposes</p>
+        </footer>
+    </div>
+
+    <script>
+        // Tutorial content data
+        const topics = {
+            "linear-search": {
+                title: "Linear Search",
+                definition: "Linear search (also known as sequential search) is a simple algorithm that checks each element in a list or array sequentially until the desired element is found or the end of the list is reached.",
+                keyTerms: ["Algorithm", "Sequential", "Element", "Index", "Target value"],
+                content: `How it works:
+1. Start at the beginning of the list/array.
+2. Compare the current element with the target value you are searching for.
+3. If the current element matches the target value, the search is successful, and you return the index of the found element.
+4. If the current element does not match, move to the next element in the list/array.
+5. Repeat steps 2-4 until the target value is found or you have checked every element in the list/array.
+6. If the target value is not found after checking all elements, the search is unsuccessful.
+
+Time Complexity: O(n) - In the worst case, we might have to check all elements.
+Space Complexity: O(1) - No additional space is required.`,
+                example: `Searching for the number 7 in the array [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9]:
+- Check index 0: 3 ≠ 7
+- Check index 1: 1 ≠ 7
+- ...
+- Check index 13: 7 = 7 (Found at index 13)`,
+                codeExample: `def linear_search(arr, target):
+    """
+    Perform linear search on an array to find the target value.
+    
+    Args:
+        arr: List of elements to search through
+        target: Value to search for
+    
+    Returns:
+        Index of target if found, otherwise -1
+    """
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i  # Return index if found
+    return -1  # Return -1 if not found
+
+# Example usage
+numbers = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5, 8, 9, 7, 9]
+target = 7
+result = linear_search(numbers, target)
+
+if result != -1:
+    print(f"Element {target} found at index {result}")
+else:
+    print(f"Element {target} not found in the array")`,
+                pastPaperQuestions: [
+                    "Explain how a linear search algorithm works. [4 marks]",
+                    "Compare the efficiency of linear search and binary search algorithms. [4 marks]",
+                    "Write a linear search algorithm to find a specific value in an array. [6 marks]"
+                ]
+            },
+            "binary-search": {
+                title: "Binary Search",
+                definition: "Binary search is an efficient algorithm for finding an item from a sorted list of items. It works by repeatedly dividing in half the portion of the list that could contain the item, until you've narrowed down the possible locations to just one.",
+                keyTerms: ["Sorted array", "Divide and conquer", "Midpoint", "Comparison", "Efficiency"],
+                content: `How it works:
+1. Ensure the array is sorted.
+2. Compare the target value with the middle element of the array.
+3. If the target value matches the middle element, the search is complete.
+4. If the target value is less than the middle element, repeat the process with the left half of the array.
+5. If the target value is greater than the middle element, repeat the process with the right half of the array.
+6. Continue this process until the value is found or the subarray reduces to zero.
+
+Time Complexity: O(log n) - Much more efficient than linear search for large datasets.
+Space Complexity: O(1) for iterative implementation, O(log n) for recursive implementation.`,
+                example: `Searching for the number 7 in the sorted array [1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 9, 9, 9]:
+- Middle element (index 6): 5 < 7, search right half
+- Middle element (index 10): 8 > 7, search left half
+- Middle element (index 8): 6 < 7, search right half
+- Middle element (index 9): 7 = 7 (Found at index 9)`,
+                codeExample: `def binary_search(arr, target):
+    """
+    Perform binary search on a sorted array to find the target value.
+    
+    Args:
+        arr: Sorted list of elements to search through
+        target: Value to search for
+    
+    Returns:
+        Index of target if found, otherwise -1
+    """
+    left = 0
+    right = len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        
+        if arr[mid] == target:
+            return mid  # Target found
+        elif arr[mid] < target:
+            left = mid + 1  # Search right half
+        else:
+            right = mid - 1  # Search left half
+    
+    return -1  # Target not found
+
+# Example usage
+sorted_numbers = [1, 2, 3, 3, 4, 5, 5, 5, 6, 7, 8, 9, 9, 9]
+target = 7
+result = binary_search(sorted_numbers, target)
+
+if result != -1:
+    print(f"Element {target} found at index {result}")
+else:
+    print(f"Element {target} not found in the array")`,
+                pastPaperQuestions: [
+                    "Describe the binary search algorithm. [4 marks]",
+                    "Explain why binary search is more efficient than linear search. [3 marks]",
+                    "Trace through a binary search for the value 15 in the array [2, 5, 7, 9, 12, 15, 18, 20]. [5 marks]"
+                ]
+            },
+            "bubble-sort": {
+                title: "Bubble Sort",
+                definition: "Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order. The pass through the list is repeated until the list is sorted.",
+                keyTerms: ["Sorting algorithm", "Adjacent elements", "Swapping", "Pass", "Sorted portion"],
+                content: `How it works:
+1. Compare the first two elements. If the first is greater than the second, swap them.
+2. Move to the next pair of elements, compare them, and swap if necessary.
+3. Continue this process for each pair in the array.
+4. After the first pass, the largest element will be in its correct position at the end.
+5. Repeat the process for the remaining elements, excluding the sorted portion.
+6. Continue until no swaps are needed, indicating the array is sorted.
+
+Time Complexity: O(n²) - Inefficient for large datasets.
+Space Complexity: O(1) - Sorts in place, requiring minimal additional memory.`,
+                example: `Sorting the array [64, 34, 25, 12, 22, 11, 90]:
+Pass 1: [34, 25, 12, 22, 11, 64, 90] (90 moved to end)
+Pass 2: [25, 12, 22, 11, 34, 64, 90] (64 moved to correct position)
+Pass 3: [12, 22, 11, 25, 34, 64, 90] (25 moved to correct position)
+...
+Final: [11, 12, 22, 25, 34, 64, 90]`,
+                codeExample: `def bubble_sort(arr):
+    """
+    Sort an array using the bubble sort algorithm.
+    
+    Args:
+        arr: List of elements to sort
+    
+    Returns:
+        Sorted array
+    """
+    n = len(arr)
+    
+    # Traverse through all array elements
+    for i in range(n):
+        # Flag to optimize - if no swaps occur, array is sorted
+        swapped = False
+        
+        # Last i elements are already in place
+        for j in range(0, n - i - 1):
+            # Swap if the element found is greater than the next element
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        
+        # If no swapping occurred, array is sorted
+        if not swapped:
+            break
+    
+    return arr
+
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+print("Original array:", numbers)
+sorted_numbers = bubble_sort(numbers.copy())
+print("Sorted array:", sorted_numbers)`,
+                pastPaperQuestions: [
+                    "Explain how the bubble sort algorithm works. [4 marks]",
+                    "Show how bubble sort would sort the array [5, 2, 8, 1, 9]. [6 marks]",
+                    "Compare the efficiency of bubble sort with merge sort. [4 marks]"
+                ]
+            },
+            "stacks": {
+                title: "Stacks",
+                definition: "A stack is a linear data structure that follows the Last In, First Out (LIFO) principle. This means that the last element added to the stack will be the first one to be removed.",
+                keyTerms: ["LIFO", "Push", "Pop", "Peek/Top", "Overflow", "Underflow"],
+                content: `Key Operations:
+1. Push: Adds an element to the top of the stack
+2. Pop: Removes and returns the top element from the stack
+3. Peek/Top: Returns the top element without removing it
+4. isEmpty: Checks if the stack is empty
+5. Size: Returns the number of elements in the stack
+
+Applications:
+- Function call management (call stack)
+- Undo mechanisms in software
+- Expression evaluation and syntax parsing
+- Backtracking algorithms
+- Browser history management
+
+Implementation can be done using arrays or linked lists.`,
+                example: `Consider a stack of plates in a cafeteria:
+- When adding a plate, it goes on top (Push)
+- When removing a plate, you take the top one (Pop)
+- You can only see the top plate (Peek)
+- If you try to add to a full stack, it overflows
+- If you try to remove from an empty stack, it underflows`,
+                codeExample: `class Stack:
+    """Stack data structure implementation using a list"""
+    
+    def __init__(self):
+        self.items = []
+    
+    def push(self, item):
+        """Add item to top of stack"""
+        self.items.append(item)
+    
+    def pop(self):
+        """Remove and return top item"""
+        if not self.is_empty():
+            return self.items.pop()
+        raise IndexError("Pop from empty stack")
+    
+    def peek(self):
+        """Return top item without removing it"""
+        if not self.is_empty():
+            return self.items[-1]
+        raise IndexError("Peek from empty stack")
+    
+    def is_empty(self):
+        """Check if stack is empty"""
+        return len(self.items) == 0
+    
+    def size(self):
+        """Return number of items in stack"""
+        return len(self.items)
+    
+    def __str__(self):
+        """String representation of stack"""
+        return str(self.items)
+
+# Example usage
+stack = Stack()
+stack.push(10)
+stack.push(20)
+stack.push(30)
+
+print("Stack:", stack)
+print("Top item:", stack.peek())
+print("Popped item:", stack.pop())
+print("Stack after pop:", stack)
+print("Stack size:", stack.size())`,
+                pastPaperQuestions: [
+                    "Describe the stack data structure and its operations. [4 marks]",
+                    "Explain one application of a stack in computer science. [3 marks]",
+                    "Show the result of the following stack operations: push(5), push(3), pop(), push(7), peek(). [5 marks]"
+                ]
+            },
+            "queues": {
+                title: "Queues",
+                definition: "A queue is a linear data structure that follows the First In, First Out (FIFO) principle. This means that the first element added to the queue will be the first one to be removed.",
+                keyTerms: ["FIFO", "Enqueue", "Dequeue", "Front", "Rear", "Circular queue"],
+                content: `Key Operations:
+1. Enqueue: Adds an element to the rear of the queue
+2. Dequeue: Removes and returns the front element from the queue
+3. Front: Returns the front element without removing it
+4. Rear: Returns the rear element without removing it
+5. isEmpty: Checks if the queue is empty
+6. Size: Returns the number of elements in the queue
+
+Types of Queues:
+- Simple Queue: Basic FIFO structure
+- Circular Queue: Rear connects to front to form a circle
+- Priority Queue: Elements have priorities, highest priority served first
+- Deque (Double-ended Queue): Insertion and deletion at both ends
+
+Applications:
+- Task scheduling in operating systems
+- Print job management
+- Breadth-first search in graphs
+- Handling requests on shared resources`,
+                example: `Consider a queue at a bank:
+- Customers join at the rear of the queue (Enqueue)
+- The customer at the front is served first (Dequeue)
+- New customers are always added to the rear
+- The person who arrived first is served first`,
+                codeExample: `class Queue:
+    """Queue data structure implementation using a list"""
+    
+    def __init__(self):
+        self.items = []
+    
+    def enqueue(self, item):
+        """Add item to rear of queue"""
+        self.items.append(item)
+    
+    def dequeue(self):
+        """Remove and return front item"""
+        if not self.is_empty():
+            return self.items.pop(0)
+        raise IndexError("Dequeue from empty queue")
+    
+    def front(self):
+        """Return front item without removing it"""
+        if not self.is_empty():
+            return self.items[0]
+        raise IndexError("Front from empty queue")
+    
+    def rear(self):
+        """Return rear item without removing it"""
+        if not self.is_empty():
+            return self.items[-1]
+        raise IndexError("Rear from empty queue")
+    
+    def is_empty(self):
+        """Check if queue is empty"""
+        return len(self.items) == 0
+    
+    def size(self):
+        """Return number of items in queue"""
+        return len(self.items)
+    
+    def __str__(self):
+        """String representation of queue"""
+        return str(self.items)
+
+# Example usage
+queue = Queue()
+queue.enqueue("Customer 1")
+queue.enqueue("Customer 2")
+queue.enqueue("Customer 3")
+
+print("Queue:", queue)
+print("Front customer:", queue.front())
+print("Served customer:", queue.dequeue())
+print("Queue after serving:", queue)
+print("Queue size:", queue.size())`,
+                pastPaperQuestions: [
+                    "Describe the queue data structure and its operations. [4 marks]",
+                    "Compare stacks and queues in terms of their principles and operations. [4 marks]",
+                    "Explain one application of a queue in computer science. [3 marks]"
+                ]
+            },
+            "linked-lists": {
+                title: "Linked Lists",
+                definition: "A linked list is a linear data structure where elements are stored in nodes. Each node contains data and a reference (link) to the next node in the sequence. Unlike arrays, linked lists are not stored in contiguous memory locations.",
+                keyTerms: ["Node", "Head", "Next pointer", "Singly linked list", "Doubly linked list", "Circular linked list"],
+                content: `Structure:
+- Each node contains data and a pointer to the next node
+- The first node is called the head
+- The last node points to NULL (in singly linked lists)
+- No random access - elements must be accessed sequentially
+
+Types:
+1. Singly Linked List: Each node points to the next node
+2. Doubly Linked List: Each node points to both next and previous nodes
+3. Circular Linked List: Last node points back to the first node
+
+Advantages:
+- Dynamic size - can grow and shrink at runtime
+- Efficient insertion and deletion
+- No memory wastage
+
+Disadvantages:
+- No random access
+- Extra memory for storing pointers
+- Not cache friendly`,
+                example: `A linked list of student names:
+Node 1: Data="Alice" -> Next=Node 2
+Node 2: Data="Bob" -> Next=Node 3
+Node 3: Data="Charlie" -> Next=NULL
+
+To access "Charlie", we must traverse from Node 1 to Node 2 to Node 3`,
+                codeExample: `class Node:
+    """Node class for linked list"""
+    
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    """Singly linked list implementation"""
+    
+    def __init__(self):
+        self.head = None
+    
+    def append(self, data):
+        """Add new node at the end"""
+        new_node = Node(data)
+        if not self.head:
+            self.head = new_node
+            return
+        
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+    
+    def prepend(self, data):
+        """Add new node at the beginning"""
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+    
+    def delete(self, data):
+        """Delete first occurrence of data"""
+        if not self.head:
+            return
+        
+        if self.head.data == data:
+            self.head = self.head.next
+            return
+        
+        current = self.head
+        while current.next:
+            if current.next.data == data:
+                current.next = current.next.next
+                return
+            current = current.next
+    
+    def display(self):
+        """Display all elements in the list"""
+        elements = []
+        current = self.head
+        while current:
+            elements.append(current.data)
+            current = current.next
+        return elements
+
+# Example usage
+ll = LinkedList()
+ll.append("Alice")
+ll.append("Bob")
+ll.prepend("Start")
+ll.append("Charlie")
+
+print("Linked List:", ll.display())
+ll.delete("Bob")
+print("After deleting Bob:", ll.display())`,
+                pastPaperQuestions: [
+                    "Describe the structure of a linked list. [3 marks]",
+                    "Compare arrays and linked lists in terms of memory allocation and access. [4 marks]",
+                    "Explain how to insert a new node at the beginning of a singly linked list. [4 marks]"
+                ]
+            },
+            "binary-trees": {
+                title: "Binary Trees",
+                definition: "A binary tree is a hierarchical data structure in which each node has at most two children, referred to as the left child and the right child. The topmost node is called the root, and nodes with no children are called leaves.",
+                keyTerms: ["Root", "Node", "Leaf", "Parent", "Child", "Subtree", "Binary Search Tree"],
+                content: `Structure:
+- Each node contains data and references to left and right children
+- The top node is called the root
+- Nodes with no children are called leaves
+- Nodes with children are called internal nodes
+- A node's children are called siblings if they share the same parent
+
+Types:
+1. Binary Tree: Each node has at most two children
+2. Binary Search Tree (BST): Left child < parent < right child
+3. Full Binary Tree: Every node has 0 or 2 children
+4. Complete Binary Tree: All levels filled except possibly last
+5. Balanced Binary Tree: Heights of left and right subtrees differ by at most one
+
+Traversal Methods:
+1. Inorder (Left, Root, Right)
+2. Preorder (Root, Left, Right)
+3. Postorder (Left, Right, Root)
+4. Level-order (Breadth-first)`,
+                example: `A binary search tree with values [50, 30, 70, 20, 40, 60, 80]:
+        50
+       /  \\
+      30   70
+     / \\  / \\
+    20 40 60 80
+
+Inorder traversal: 20, 30, 40, 50, 60, 70, 80 (sorted order)`,
+                codeExample: `class TreeNode:
+    """Node class for binary tree"""
+    
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BinaryTree:
+    """Binary tree implementation"""
+    
+    def __init__(self):
+        self.root = None
+    
+    def insert(self, key):
+        """Insert key into binary tree"""
+        if not self.root:
+            self.root = TreeNode(key)
+        else:
+            self._insert_recursive(self.root, key)
+    
+    def _insert_recursive(self, node, key):
+        """Helper method for insertion"""
+        if key < node.key:
+            if node.left is None:
+                node.left = TreeNode(key)
+            else:
+                self._insert_recursive(node.left, key)
+        else:
+            if node.right is None:
+                node.right = TreeNode(key)
+            else:
+                self._insert_recursive(node.right, key)
+    
+    def inorder_traversal(self):
+        """Inorder traversal (Left, Root, Right)"""
+        result = []
+        self._inorder_recursive(self.root, result)
+        return result
+    
+    def _inorder_recursive(self, node, result):
+        """Helper method for inorder traversal"""
+        if node:
+            self._inorder_recursive(node.left, result)
+            result.append(node.key)
+            self._inorder_recursive(node.right, result)
+    
+    def search(self, key):
+        """Search for key in binary tree"""
+        return self._search_recursive(self.root, key)
+    
+    def _search_recursive(self, node, key):
+        """Helper method for search"""
+        if node is None or node.key == key:
+            return node
+        
+        if key < node.key:
+            return self._search_recursive(node.left, key)
+        else:
+            return self._search_recursive(node.right, key)
+
+# Example usage
+bt = BinaryTree()
+values = [50, 30, 70, 20, 40, 60, 80]
+
+for value in values:
+    bt.insert(value)
+
+print("Inorder traversal:", bt.inorder_traversal())
+search_result = bt.search(40)
+print("Search for 40:", "Found" if search_result else "Not found")`,
+                pastPaperQuestions: [
+                    "Describe the structure of a binary tree. [3 marks]",
+                    "Explain the difference between a binary tree and a binary search tree. [3 marks]",
+                    "Show the result of inserting the values 10, 5, 15, 3, 7 into an initially empty binary search tree. [5 marks]"
+                ]
+            },
+            "adt": {
+                title: "Abstract Data Types (ADT)",
+                definition: "An Abstract Data Type (ADT) is a mathematical model that defines a data type by its behavior from the point of view of a user, specifically in terms of possible values, possible operations on data of this type, and the behavior of these operations.",
+                keyTerms: ["Data abstraction", "Interface", "Implementation", "Encapsulation", "Data structure"],
+                content: `Key Characteristics:
+- Defines what operations can be performed but not how they are implemented
+- Separates the logical properties from the implementation details
+- Provides a clear interface for interacting with data
+- Encapsulation hides internal details from the user
+
+Common ADTs:
+1. Stack: LIFO structure with push/pop operations
+2. Queue: FIFO structure with enqueue/dequeue operations
+3. List: Ordered collection with insert/delete operations
+4. Set: Collection of unique elements
+5. Map/Dictionary: Key-value pairs
+6. Graph: Nodes connected by edges
+7. Tree: Hierarchical structure
+
+Benefits:
+- Modularity: Implementation can change without affecting client code
+- Reusability: Same interface can have multiple implementations
+- Maintainability: Easier to modify and extend
+- Security: Internal representation is hidden`,
+                example: `Stack ADT:
+- Operations: push(item), pop(), peek(), isEmpty()
+- Implementation: Could use array or linked list
+- User doesn't need to know implementation details
+
+The same Stack ADT interface can be implemented differently:
+1. Array-based implementation
+2. Linked list-based implementation
+Both provide the same operations but with different internal structures`,
+                codeExample: `# Stack ADT Interface (Abstract)
+class StackInterface:
+    """Abstract base class for Stack ADT"""
+    
+    def push(self, item):
+        """Add item to top of stack"""
+        raise NotImplementedError
+    
+    def pop(self):
+        """Remove and return top item"""
+        raise NotImplementedError
+    
+    def peek(self):
+        """Return top item without removing it"""
+        raise NotImplementedError
+    
+    def is_empty(self):
+        """Check if stack is empty"""
+        raise NotImplementedError
+    
+    def size(self):
+        """Return number of items in stack"""
+        raise NotImplementedError
+
+# Concrete Implementation 1: Array-based
+class ArrayStack(StackInterface):
+    """Array-based stack implementation"""
+    
+    def __init__(self):
+        self.items = []
+    
+    def push(self, item):
+        self.items.append(item)
+    
+    def pop(self):
+        if not self.is_empty():
+            return self.items.pop()
+        raise IndexError("Pop from empty stack")
+    
+    def peek(self):
+        if not self.is_empty():
+            return self.items[-1]
+        raise IndexError("Peek from empty stack")
+    
+    def is_empty(self):
+        return len(self.items) == 0
+    
+    def size(self):
+        return len(self.items)
+
+# Concrete Implementation 2: Linked list-based
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedStack(StackInterface):
+    """Linked list-based stack implementation"""
+    
+    def __init__(self):
+        self.head = None
+        self._size = 0
+    
+    def push(self, item):
+        new_node = Node(item)
+        new_node.next = self.head
+        self.head = new_node
+        self._size += 1
+    
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("Pop from empty stack")
+        data = self.head.data
+        self.head = self.head.next
+        self._size -= 1
+        return data
+    
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("Peek from empty stack")
+        return self.head.data
+    
+    def is_empty(self):
+        return self.head is None
+    
+    def size(self):
+        return self._size
+
+# Example usage with both implementations
+def test_stack(stack):
+    """Test any stack implementation"""
+    stack.push(10)
+    stack.push(20)
+    print(f"Top item: {stack.peek()}")
+    print(f"Popped: {stack.pop()}")
+    print(f"Size: {stack.size()}")
+
+# Test both implementations
+print("Array-based Stack:")
+array_stack = ArrayStack()
+test_stack(array_stack)
+
+print("\\nLinked List-based Stack:")
+linked_stack = LinkedStack()
+test_stack(linked_stack)`,
+                pastPaperQuestions: [
+                    "Explain what is meant by an Abstract Data Type. [3 marks]",
+                    "Describe the benefits of using ADTs in software development. [4 marks]",
+                    "Compare two different implementations of the Stack ADT. [5 marks]"
+                ]
+            },
+            "algorithm-analysis": {
+                title: "Algorithm Analysis",
+                definition: "Algorithm analysis is the process of evaluating the efficiency of algorithms in terms of time and space complexity. It helps determine how an algorithm's resource requirements grow as the input size increases.",
+                keyTerms: ["Time complexity", "Space complexity", "Big O notation", "Best case", "Worst case", "Average case"],
+                content: `Key Concepts:
+1. Time Complexity: How the execution time grows with input size
+2. Space Complexity: How much memory an algorithm uses
+3. Asymptotic Notation: Mathematical notation to describe complexity
+   - Big O (O): Upper bound (worst case)
+   - Big Omega (Ω): Lower bound (best case)
+   - Big Theta (Θ): Tight bound (average case)
+
+Common Complexity Classes:
+- O(1): Constant time
+- O(log n): Logarithmic time
+- O(n): Linear time
+- O(n log n): Linearithmic time
+- O(n²): Quadratic time
+- O(2ⁿ): Exponential time
+
+Analysis Methods:
+1. Empirical Analysis: Running algorithms with test data
+2. Theoretical Analysis: Mathematical analysis of algorithm steps
+3. Amortized Analysis: Average performance over a sequence of operations`,
+                example: `Comparing sorting algorithms:
+- Bubble Sort: O(n²) time, O(1) space
+- Merge Sort: O(n log n) time, O(n) space
+- Quick Sort: O(n log n) average time, O(n²) worst time, O(log n) space
+
+For n=1000:
+- Bubble Sort: ~1,000,000 operations
+- Merge Sort: ~10,000 operations
+- Quick Sort: ~10,000 operations (average)`,
+                codeExample: `import time
+import random
+
+def analyze_algorithm(func, data):
+    """Analyze time complexity of an algorithm"""
+    start_time = time.time()
+    result = func(data)
+    end_time = time.time()
+    return end_time - start_time, result
+
+# Example algorithms with different complexities
+def linear_search(arr, target):
+    """O(n) time complexity"""
+    for i in range(len(arr)):
+        if arr[i] == target:
+            return i
+    return -1
+
+def binary_search(arr, target):
+    """O(log n) time complexity"""
+    left, right = 0, len(arr) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1
+
+def bubble_sort(arr):
+    """O(n²) time complexity"""
+    n = len(arr)
+    for i in range(n):
+        swapped = False
+        for j in range(0, n - i - 1):
+            if arr[j] > arr[j + 1]:
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                swapped = True
+        if not swapped:
+            break
+    return arr
+
+# Performance comparison
+def compare_algorithms():
+    # Generate test data
+    sizes = [100, 500, 1000, 2000]
+    
+    print("Size\\tLinear Search\\tBinary Search\\tBubble Sort")
+    print("-" * 55)
+    
+    for size in sizes:
+        # Create test data
+        data = list(range(size))
+        target = size // 2
+        unsorted_data = random.sample(range(size * 2), size)
+        
+        # Time linear search
+        linear_time, _ = analyze_algorithm(
+            lambda arr: linear_search(arr, target), data
+        )
+        
+        # Time binary search
+        binary_time, _ = analyze_algorithm(
+            lambda arr: binary_search(arr, target), data
+        )
+        
+        # Time bubble sort
+        bubble_time, _ = analyze_algorithm(
+            lambda arr: bubble_sort(arr.copy()), unsorted_data
+        )
+        
+        print(f"{size}\\t{linear_time:.6f}s\\t\\t{binary_time:.6f}s\\t\\t{bubble_time:.6f}s")
+
+# Run comparison
+compare_algorithms()`,
+                pastPaperQuestions: [
+                    "Explain the difference between time complexity and space complexity. [3 marks]",
+                    "Describe what is meant by Big O notation. [3 marks]",
+                    "Compare the time complexities of linear search and binary search algorithms. [4 marks]",
+                    "Analyze the time complexity of the bubble sort algorithm. [5 marks]"
+                ]
+            }
+        };
+
+        // Function to render topic content
+        function renderTopicContent(topicId) {
+            const topic = topics[topicId];
+            if (!topic) return;
+            
+            // Update title
+            document.getElementById('topicTitle').innerHTML = `
+                <i class="fas fa-book-open text-indigo-600"></i>
+                ${topic.title}
+            `;
+            
+            // Generate key terms HTML
+            const keyTermsHtml = topic.keyTerms.map(term => 
+                `<span class="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm">${term}</span>`
+            ).join(' ');
+            
+            // Generate past paper questions HTML
+            const questionsHtml = topic.pastPaperQuestions.map((question, index) => 
+                `<li class="flex items-start">
+                    <span class="text-indigo-600 font-bold mr-2">${index + 1}.</span>
+                    <span class="text-gray-700">${question}</span>
+                </li>`
+            ).join(' ');
+            
+            // Render content
+            document.getElementById('topicContent').innerHTML = `
+                <!-- Definition Section -->
+                <div class="mb-6 p-4 bg-indigo-50 rounded-lg border border-indigo-100">
+                    <h3 class="font-semibold text-indigo-800 mb-2">Definition</h3>
+                    <p class="text-indigo-700">${topic.definition}</p>
+                </div>
+
+                <!-- Key Terms -->
+                <div class="mb-6">
+                    <h3 class="font-semibold text-indigo-800 mb-2">Key Terms</h3>
+                    <div class="flex flex-wrap gap-2">
+                        ${keyTerms
+                          </html>
