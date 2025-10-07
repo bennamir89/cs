@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - AS & A2 Computer Science</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .admin-logout {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Content Styles */
+        .content {
+            padding: 2rem;
+        }
+
+        .page-title {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+        }
+
+        .card-body {
+            color: var(--text-color);
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+        }
+
+        .btn-warning {
+            background-color: var(--warning-color);
+        }
+
+        .btn-danger {
+            background-color: var(--accent-color);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* Table Styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .table th, .table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table th {
+            background-color: var(--light-gray);
+            font-weight: 600;
+        }
+
+        .table tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--light-gray);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: #666;
+        }
+
+        /* Admin Panel */
+        .admin-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-tab {
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .admin-tab.active {
+            border-bottom-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+
+        .admin-tab:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .notification-error {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .notification-info {
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .admin-tabs {
+                flex-wrap: wrap;
+            }
+
+            .admin-tab {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="login-page">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1 class="login-title">Admin Login</h1>
+                    <p class="login-subtitle">AS & A2 Computer Science</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" style="display: none;">
+        <!-- Admin Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">Admin Panel - AS & A2 Computer Science</div>
+                <button class="admin-logout" id="admin-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Admin Content -->
+        <div class="container content">
+            <h1 class="page-title">Admin Dashboard</h1>
+            
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="resources">Manage Resources</div>
+                <div class="admin-tab" data-tab="news">Manage News</div>
+                <div class="admin-tab" data-tab="homework">Review Homework</div>
+                <div class="admin-tab" data-tab="notes">Manage Notes</div>
+            </div>
+            
+            <!-- Resources Tab -->
+            <div id="resources-tab" class="tab-content active">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Upload New Resource</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="resource-form">
+                            <div class="form-group">
+                                <label for="resource-name">Resource Name</label>
+                                <input type="text" class="form-control" id="resource-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-chapter">Chapter</label>
+                                <select class="form-control" id="resource-chapter" required>
+                                    <option value="">-- Select Chapter --</option>
+                                    <option value="1.1">1.1 Data Representation</option>
+                                    <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
+                                    <option value="1.3">1.3 Compression</option>
+                                    <option value="2.1">2.1 Networks including the internet</option>
+                                    <option value="3.1">3.1 Computers and their components</option>
+                                    <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
+                                    <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
+                                    <option value="4.2">4.2 Assembly Language</option>
+                                    <option value="4.3">4.3 Bit manipulation</option>
+                                    <option value="5.1">5.1 Operating Systems</option>
+                                    <option value="5.2">5.2 Language Translators</option>
+                                    <option value="6.1">6.1 Data Security</option>
+                                    <option value="6.2">6.2 Data Integrity</option>
+                                    <option value="7.1">7.1 Ethics and Ownership</option>
+                                    <option value="8.1">8.1 Database Concepts</option>
+                                    <option value="8.2">8.2 Database Management Systems (DBMS)</option>
+                                    <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
+                                    <option value="9.1">9.1 Computational Thinking Skills</option>
+                                    <option value="9.2">9.2 Algorithms</option>
+                                    <option value="10.1">10.1 Data Types and Records</option>
+                                    <option value="10.2">10.2 Arrays</option>
+                                    <option value="10.3">10.3 Files</option>
+                                    <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
+                                    <option value="11.1">11.1 Programming Basics</option>
+                                    <option value="11.2">11.2 Constructs</option>
+                                    <option value="11.3">11.3 Structured Programming</option>
+                                    <option value="12.1">12.1 Program Development Life cycle</option>
+                                    <option value="12.2">12.2 Program Design</option>
+                                    <option value="12.3">12.3 Program Testing and Maintenance</option>
+                                    <option value="13.1">13.1 User-defined data types</option>
+                                    <option value="13.2">13.2 File organisation and access</option>
+                                    <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
+                                    <option value="14.1">14.1 Protocols technologies</option>
+                                    <option value="14.2">14.2 Circuit switching, packet switching</option>
+                                    <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
+                                    <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
+                                    <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
+                                    <option value="16.2">16.2 Translation Software</option>
+                                    <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
+                                    <option value="18.1">18.1 Artificial Intelligence</option>
+                                    <option value="19.1">19.1 Algorithms</option>
+                                    <option value="19.2">19.2 Recursion</option>
+                                    <option value="20.1">20.1 Programming Paradigms</option>
+                                    <option value="20.2">20.2 File Processing and Exception Handling</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-file">Upload File</label>
+                                <input type="file" class="form-control" id="resource-file" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-description">Description</label>
+                                <textarea class="form-control" id="resource-description" placeholder="Brief description of the resource..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Resource</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Existing Resources</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Chapter</th>
+                                    <th>Upload Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Introduction to Data Representation</td>
+                                    <td>1.1</td>
+                                    <td>June 1, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Network Topologies</td>
+                                    <td>2.1</td>
+                                    <td>June 3, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CPU Architecture</td>
+                                    <td>4.1</td>
+                                    <td>June 5, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- News Tab -->
+            <div id="news-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Add News Item</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="news-form">
+                            <div class="form-group">
+                                <label for="news-title">News Title</label>
+                                <input type="text" class="form-control" id="news-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="news-date">Date</label>
+                                <input type="date" class="form-control" id="news-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="news-content">Content</label>
+                                <textarea class="form-control" id="news-content" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add News</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Existing News</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mock Exam Schedule Released</td>
+                                    <td>June 15, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>New Programming Resources Added</td>
+                                    <td>June 10, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Homework Deadline Reminder</td>
+                                    <td>June 5, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Homework Tab -->
+            <div id="homework-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Pending Submissions</h2>
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Student ID</th>
+                                    <th>Assignment</th>
+                                    <th>Submission Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Zhang Wei</td>
+                                    <td>2023001</td>
+                                    <td>Assembly Language Program</td>
+                                    <td>June 10, 2023</td>
+                                    <td>
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Grade</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Li Ming</td>
+                                    <td>2023002</td>
+                                    <td>Algorithm Design Homework</td>
+                                    <td>June 12, 2023</td>
+                                    <td>
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Grade</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Create New Assignment</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="assignment-form">
+                            <div class="form-group">
+                                <label for="assignment-title">Assignment Title</label>
+                                <input type="text" class="form-control" id="assignment-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignment-chapter">Chapter</label>
+                                <select class="form-control" id="assignment-chapter" required>
+                                    <option value="">-- Select Chapter --</option>
+                                    <option value="1">1 Information representation</option>
+                                    <option value="2">2 Communication</option>
+                                    <option value="3">3 Hardware</option>
+                                    <option value="4">4 Processor Fundamentals</option>
+                                    <option value="5">5 System Software</option>
+                                    <option value="6">6 Security, privacy and data integrity</option>
+                                    <option value="7">7 Ethics and Ownership</option>
+                                    <option value="8">8 Databases</option>
+                                    <option value="9">9 Algorithm Design and Problem-solving</option>
+                                    <option value="10">10 Data Types and Structures</option>
+                                    <option value="11">11 Programming</option>
+                                    <option value="12">12 Software Development</option>
+                                    <option value="13">13 Data Representation</option>
+                                    <option value="14">14 Communication and internet</option>
+                                    <option value="15">15 Hardware and Virtual Machines</option>
+                                    <option value="16">16 System Software</option>
+                                    <option value="17">17 Security</option>
+                                    <option value="18">18 Artificial Intelligence (AI)</option>
+                                    <option value="19">19 Computational thinking and Problem-solving</option>
+                                    <option value="20">20 Further Programming</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignment-description">Description</label>
+                                <textarea class="form-control" id="assignment-description" rows="5" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignment-due-date">Due Date</label>
+                                <input type="date" class="form-control" id="assignment-due-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignment-file">Assignment File (Optional)</label>
+                                <input type="file" class="form-control" id="assignment-file">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Assignment</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notes Tab -->
+            <div id="notes-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Manage Chapter Notes</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="notes-chapter-select">Select Chapter</label>
+                            <select class="form-control" id="notes-chapter-select">
+                                <option value="">-- Select Chapter --</option>
+                                <option value="1">1 Information representation</option>
+                                <option value="2">2 Communication</option>
+                                <option value="3">3 Hardware</option>
+                                <option value="4">4 Processor Fundamentals</option>
+                                <option value="5">5 System Software</option>
+                                <option value="6">6 Security, privacy and data integrity</option>
+                                <option value="7">7 Ethics and Ownership</option>
+                                <option value="8">8 Databases</option>
+                                <option value="9">9 Algorithm Design and Problem-solving</option>
+                                <option value="10">10 Data Types and Structures</option>
+                                <option value="11">11 Programming</option>
+                                <option value="12">12 Software Development</option>
+                                <option value="13">13 Data Representation</option>
+                                <option value="14">14 Communication and internet</option>
+                                <option value="15">15 Hardware and Virtual Machines</option>
+                                <option value="16">16 System Software</option>
+                                <option value="17">17 Security</option>
+                                <option value="18">18 Artificial Intelligence (AI)</option>
+                                <option value="19">19 Computational thinking and Problem-solving</option>
+                                <option value="20">20 Further Programming</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes-content">Notes Content</label>
+                            <textarea class="form-control" id="notes-content" rows="15" placeholder="Enter your notes for the selected chapter..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
+                            </label>
+                        </div>
+                        <button class="btn btn-primary">Save Notes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message">Action completed successfully!</span>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Modal Title</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Modal content will be loaded here -->
+            </div>
+            <div class="modal-footer" id="modal-footer">
+                <button class="btn" id="modal-cancel">Cancel</button>
+                <button class="btn btn-primary" id="modal-confirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginPage = document.getElementById('login-page');
+        const adminDashboard = document.getElementById('admin-dashboard');
+        const loginForm = document.getElementById('login-form');
+        const adminLogout = document.getElementById('admin-logout');
+        const adminTabs = document.querySelectorAll('.admin-tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalClose = document.getElementById('modal-close');
+        const modalCancel = document.getElementById('modal-cancel');
+        const modalConfirm = document.getElementById('modal-confirm');
+        
+        // Forms
+        const resourceForm = document.getElementById('resource-form');
+        const newsForm = document.getElementById('news-form');
+        const assignmentForm = document.getElementById('assignment-form');
+        
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check credentials
+            if (username === 'admin' && password === 'ulinkcs') {
+                loginPage.style.display = 'none';
+                adminDashboard.style.display = 'block';
+                showNotification('Login successful!', 'success');
+            } else {
+                showNotification('Invalid username or password', 'error');
+            }
+        });
+        
+        // Admin logout
+        adminLogout.addEventListener('click', () => {
+            loginPage.style.display = 'flex';
+            adminDashboard.style.display = 'none';
+            showNotification('Logged out successfully', 'info');
+        });
+        
+        // Admin tabs
+        adminTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.getAttribute('data-tab');
+                
+                // Update active tab
+                adminTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Show target tab content
+                tabContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === `${targetTab}-tab`) {
+                        content.classList.add('active');
+                    }
+                });
+            });
+        });
+        
+        // Form submissions
+        resourceForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const resourceName = document.getElementById('resource-name').value;
+            const chapter = document.getElementById('resource-chapter').value;
+            const file = document.getElementById('resource-file').files[0];
+            const description = document.getElementById('resource-description').value;
+            
+            // Simulate upload
+            showNotification('Resource uploaded successfully!', 'success');
+            
+            // Reset form
+            resourceForm.reset();
+        });
+        
+        newsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const title = document.getElementById('news-title').value;
+            const date = document.getElementById('news-date').value;
+            const content = document.getElementById('news-content').value;
+            
+            // Simulate submission
+            showNotification('News item added successfully!', 'success');
+            
+            // Reset form
+            newsForm.reset();
+        });
+        
+        assignmentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const title = document.getElementById('assignment-title').value;
+            const chapter = document.getElementById('assignment-chapter').value;
+            const description = document.getElementById('assignment-description').value;
+            const dueDate = document.getElementById('assignment-due-date').value;
+            const file = document.getElementById('assignment-file').files[0];
+            
+            // Simulate creation
+            showNotification('Assignment created successfully!', 'success');
+            
+            // Reset form
+            assignmentForm.reset();
+        });
+        
+        // Modal functions
+        function showModal(title, body, confirmCallback) {
+            modalTitle.textContent = title;
+            modalBody.innerHTML = body;
+            modal.classList.add('active');
+            
+            // Set confirm callback
+            modalConfirm.onclick = () => {
+                if (confirmCallback) confirmCallback();
+                closeModal();
+            };
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+        
+        modalClose.addEventListener('click', closeModal);
+        modalCancel.addEventListener('click', closeModal);
+        
+        // Click outside modal to close
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Notification function
+        function showNotification(message, type = 'success') {
+            notificationMessage.textContent = message;
+            
+            // Set notification class based on type
+            notification.className = 'notification';
+            if (type === 'success') {
+                notification.classList.add('notification-success');
+            } else if (type === 'error') {
+                notification.classList.add('notification-error');
+            } else if (type === 'info') {
+                notification.classList.add('notification-info');
+            }
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Edit and delete buttons for admin
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-warning') && e.target.textContent === 'Edit') {
+                const itemName = e.target.closest('tr').querySelector('td:first-child').textContent;
+                showModal(`Edit ${itemName}`, '<p>Edit form would go here.</p>', () => {
+                    showNotification(`${itemName} updated successfully!`, 'success');
+                });
+            } else if (e.target.classList.contains('btn-danger') && e.target.textContent === 'Delete') {
+                const itemName = e.target.closest('tr').querySelector('td:first-child').textContent;
+                showModal(`Delete ${itemName}`, `<p>Are you sure you want to delete ${itemName}?</p>`, () => {
+                    showNotification(`${itemName} deleted successfully!`, 'success');
+                });
+            } else if (e.target.classList.contains('btn-primary') && e.target.textContent === 'View') {
+                const studentName = e.target.closest('tr').querySelector('td:first-child').textContent;
+                showModal(`View Submission - ${studentName}`, '<p>Submission details would go here.</p>', null);
+            } else if (e.target.classList.contains('btn-success') && e.target.textContent === 'Grade') {
+                const studentName = e.target.closest('tr').querySelector('td:first-child').textContent;
+                showModal(`Grade Submission - ${studentName}`, `
+                    <div class="form-group">
+                        <label for="grade">Grade</label>
+                        <select class="form-control" id="grade">
+                            <option value="">-- Select Grade --</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                            <option value="F">F</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedback">Feedback</label>
+                        <textarea class="form-control" id="feedback" rows="5"></textarea>
+                    </div>
+                `, () => {
+                    showNotification(`Submission graded successfully!`, 'success');
+                });
+            }
+        });
+        
+        // Notes chapter select
+        document.getElementById('notes-chapter-select').addEventListener('change', (e) => {
+            const chapter = e.target.value;
+            const notesContent = document.getElementById('notes-content');
+            
+            if (chapter) {
+                // Load existing notes for the chapter
+                notesContent.value = `Notes for Chapter ${chapter}`;
+            } else {
+                notesContent.value = '';
+            }
+        });
+        
+        // Save notes button
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('btn-primary') && e.target.textContent === 'Save Notes') {
+                const chapter = document.getElementById('notes-chapter-select').value;
+                const content = document.getElementById('notes-content').value;
+                const includeMandarin = document.getElementById('notes-include-mandarin').checked;
+                
+                if (chapter && content) {
+                    showNotification('Notes saved successfully!', 'success');
+                } else {
+                    showNotification('Please select a chapter and enter notes content.', 'error');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
