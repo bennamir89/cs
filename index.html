@@ -643,28 +643,8 @@
                     <div class="card-header">
                         <h2 class="card-title">Recent News</h2>
                     </div>
-                    <div class="card-body">
-                        <div class="news-item">
-                            <div class="news-date">June 15, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">Mock Exam Schedule Released</div>
-                                <p>The mock exam schedule for the upcoming term has been released. Please check the Resources section for the detailed timetable.</p>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="news-date">June 10, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">New Programming Resources Added</div>
-                                <p>New resources for Python programming have been added to the Resources section. These include video tutorials and practice exercises.</p>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="news-date">June 5, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">Homework Deadline Reminder</div>
-                                <p>Reminder that the Algorithm Design homework is due on June 20, 2023. Please submit your work through the Homework section.</p>
-                            </div>
-                        </div>
+                    <div class="card-body" id="news-container">
+                        <!-- News items will be loaded here -->
                     </div>
                 </div>
                 
@@ -681,22 +661,8 @@
                                     <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Algorithm Design Homework</td>
-                                    <td>June 20, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Database Design Project</td>
-                                    <td>June 25, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Programming Assignment</td>
-                                    <td>July 5, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
-                                </tr>
+                            <tbody id="assignments-table">
+                                <!-- Assignments will be loaded here -->
                             </tbody>
                         </table>
                     </div>
@@ -735,63 +701,8 @@
                         <h2 class="card-title">Available Resources</h2>
                     </div>
                     <div class="card-body">
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Introduction to Data Representation</div>
-                                    <div class="resource-meta">Chapter 1.1 • PDF • 2.5 MB • Uploaded: June 1, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Network Topologies</div>
-                                    <div class="resource-meta">Chapter 2.1 • PowerPoint • 5.1 MB • Uploaded: June 3, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">CPU Architecture</div>
-                                    <div class="resource-meta">Chapter 4.1 • PDF • 3.2 MB • Uploaded: June 5, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Assembly Language Examples</div>
-                                    <div class="resource-meta">Chapter 4.2 • ZIP • 1.8 MB • Uploaded: June 7, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Operating Systems</div>
-                                    <div class="resource-meta">Chapter 5.1 • PDF • 4.3 MB • Uploaded: June 10, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Database Design Principles</div>
-                                    <div class="resource-meta">Chapter 8.1 • PowerPoint • 6.7 MB • Uploaded: June 12, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Algorithm Design Techniques</div>
-                                    <div class="resource-meta">Chapter 9.2 • PDF • 3.9 MB • Uploaded: June 14, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Python Programming Basics</div>
-                                    <div class="resource-meta">Chapter 11.1 • ZIP • 8.2 MB • Uploaded: June 16, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
+                        <ul class="resource-list" id="resources-list">
+                            <!-- Resources will be loaded here -->
                         </ul>
                     </div>
                 </div>
@@ -811,9 +722,7 @@
                                 <label for="assignment-select">Select Assignment</label>
                                 <select class="form-control" id="assignment-select" required>
                                     <option value="">-- Select Assignment --</option>
-                                    <option value="1">Algorithm Design Homework</option>
-                                    <option value="2">Database Design Project</option>
-                                    <option value="3">Programming Assignment</option>
+                                    <!-- Assignment options will be loaded here -->
                                 </select>
                             </div>
                             <div class="form-group">
@@ -841,31 +750,8 @@
                     <div class="card-header">
                         <h2 class="card-title">Your Submissions</h2>
                     </div>
-                    <div class="card-body">
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Data Representation Assignment</div>
-                                <div class="submission-date">Submitted: June 1, 2023</div>
-                            </div>
-                            <div class="submission-status status-graded">Graded: A</div>
-                            <p>Feedback: Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.</p>
-                        </div>
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Network Topologies Research</div>
-                                <div class="submission-date">Submitted: June 5, 2023</div>
-                            </div>
-                            <div class="submission-status status-graded">Graded: B+</div>
-                            <p>Feedback: Good research on different network topologies. Consider adding more real-world examples in future assignments.</p>
-                        </div>
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Assembly Language Program</div>
-                                <div class="submission-date">Submitted: June 10, 2023</div>
-                            </div>
-                            <div class="submission-status status-submitted">Submitted - Pending Review</div>
-                            <p>Your submission has been received and is currently being reviewed.</p>
-                        </div>
+                    <div class="card-body" id="submissions-container">
+                        <!-- Submissions will be loaded here -->
                     </div>
                 </div>
             </div>
@@ -912,11 +798,314 @@
         const modalCancel = document.getElementById('modal-cancel');
         const modalConfirm = document.getElementById('modal-confirm');
         
+        // Data containers
+        const newsContainer = document.getElementById('news-container');
+        const resourcesList = document.getElementById('resources-list');
+        const assignmentsTable = document.getElementById('assignments-table');
+        const assignmentSelect = document.getElementById('assignment-select');
+        const submissionsContainer = document.getElementById('submissions-container');
+        
         // Forms
         const homeworkForm = document.getElementById('homework-form');
         
         // Language state
         let isMandarin = false;
+        
+        // Initialize data
+        function initializeData() {
+            // Initialize default data if not exists
+            if (!localStorage.getItem('cs_news')) {
+                const defaultNews = [
+                    {
+                        id: 1,
+                        title: 'Mock Exam Schedule Released',
+                        date: '2023-06-15',
+                        content: 'The mock exam schedule for the upcoming term has been released. Please check the Resources section for the detailed timetable.'
+                    },
+                    {
+                        id: 2,
+                        title: 'New Programming Resources Added',
+                        date: '2023-06-10',
+                        content: 'New resources for Python programming have been added to the Resources section. These include video tutorials and practice exercises.'
+                    },
+                    {
+                        id: 3,
+                        title: 'Homework Deadline Reminder',
+                        date: '2023-06-05',
+                        content: 'Reminder that the Algorithm Design homework is due on June 20, 2023. Please submit your work through the Homework section.'
+                    }
+                ];
+                localStorage.setItem('cs_news', JSON.stringify(defaultNews));
+            }
+            
+            if (!localStorage.getItem('cs_resources')) {
+                const defaultResources = [
+                    {
+                        id: 1,
+                        name: 'Introduction to Data Representation',
+                        chapter: '1.1',
+                        type: 'PDF',
+                        size: '2.5 MB',
+                        uploadDate: '2023-06-01',
+                        url: '#'
+                    },
+                    {
+                        id: 2,
+                        name: 'Network Topologies',
+                        chapter: '2.1',
+                        type: 'PowerPoint',
+                        size: '5.1 MB',
+                        uploadDate: '2023-06-03',
+                        url: '#'
+                    },
+                    {
+                        id: 3,
+                        name: 'CPU Architecture',
+                        chapter: '4.1',
+                        type: 'PDF',
+                        size: '3.2 MB',
+                        uploadDate: '2023-06-05',
+                        url: '#'
+                    },
+                    {
+                        id: 4,
+                        name: 'Assembly Language Examples',
+                        chapter: '4.2',
+                        type: 'ZIP',
+                        size: '1.8 MB',
+                        uploadDate: '2023-06-07',
+                        url: '#'
+                    },
+                    {
+                        id: 5,
+                        name: 'Operating Systems',
+                        chapter: '5.1',
+                        type: 'PDF',
+                        size: '4.3 MB',
+                        uploadDate: '2023-06-10',
+                        url: '#'
+                    },
+                    {
+                        id: 6,
+                        name: 'Database Design Principles',
+                        chapter: '8.1',
+                        type: 'PowerPoint',
+                        size: '6.7 MB',
+                        uploadDate: '2023-06-12',
+                        url: '#'
+                    },
+                    {
+                        id: 7,
+                        name: 'Algorithm Design Techniques',
+                        chapter: '9.2',
+                        type: 'PDF',
+                        size: '3.9 MB',
+                        uploadDate: '2023-06-14',
+                        url: '#'
+                    },
+                    {
+                        id: 8,
+                        name: 'Python Programming Basics',
+                        chapter: '11.1',
+                        type: 'ZIP',
+                        size: '8.2 MB',
+                        uploadDate: '2023-06-16',
+                        url: '#'
+                    }
+                ];
+                localStorage.setItem('cs_resources', JSON.stringify(defaultResources));
+            }
+            
+            if (!localStorage.getItem('cs_assignments')) {
+                const defaultAssignments = [
+                    {
+                        id: 1,
+                        title: 'Algorithm Design Homework',
+                        chapter: '9',
+                        dueDate: '2023-06-20',
+                        description: 'Complete the algorithm design exercises in the textbook.'
+                    },
+                    {
+                        id: 2,
+                        title: 'Database Design Project',
+                        chapter: '8',
+                        dueDate: '2023-06-25',
+                        description: 'Design a database system for a small library.'
+                    },
+                    {
+                        id: 3,
+                        title: 'Programming Assignment',
+                        chapter: '11',
+                        dueDate: '2023-07-05',
+                        description: 'Implement a sorting algorithm in Python.'
+                    }
+                ];
+                localStorage.setItem('cs_assignments', JSON.stringify(defaultAssignments));
+            }
+            
+            if (!localStorage.getItem('cs_submissions')) {
+                const defaultSubmissions = [
+                    {
+                        id: 1,
+                        assignmentId: 1,
+                        assignmentTitle: 'Data Representation Assignment',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-01',
+                        status: 'graded',
+                        grade: 'A',
+                        feedback: 'Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.'
+                    },
+                    {
+                        id: 2,
+                        assignmentId: 2,
+                        assignmentTitle: 'Network Topologies Research',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-05',
+                        status: 'graded',
+                        grade: 'B+',
+                        feedback: 'Good research on different network topologies. Consider adding more real-world examples in future assignments.'
+                    },
+                    {
+                        id: 3,
+                        assignmentId: 3,
+                        assignmentTitle: 'Assembly Language Program',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-10',
+                        status: 'submitted',
+                        grade: null,
+                        feedback: 'Your submission has been received and is currently being reviewed.'
+                    }
+                ];
+                localStorage.setItem('cs_submissions', JSON.stringify(defaultSubmissions));
+            }
+            
+            if (!localStorage.getItem('cs_notes')) {
+                const defaultNotes = {};
+                localStorage.setItem('cs_notes', JSON.stringify(defaultNotes));
+            }
+        }
+        
+        // Load data from localStorage
+        function loadData() {
+            // Load news
+            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+            newsContainer.innerHTML = '';
+            
+            if (news.length === 0) {
+                newsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><h3>No news available</h3><p>Check back later for updates.</p></div>';
+            } else {
+                news.sort((a, b) => new Date(b.date) - new Date(a.date));
+                news.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <div class="news-date">${formatDate(item.date)}</div>
+                        <div class="news-content">
+                            <div class="news-title">${item.title}</div>
+                            <p>${item.content}</p>
+                        </div>
+                    `;
+                    newsContainer.appendChild(newsItem);
+                });
+            }
+            
+            // Load resources
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            resourcesList.innerHTML = '';
+            
+            if (resources.length === 0) {
+                resourcesList.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>No resources available</h3><p>Check back later for updates.</p></div>';
+            } else {
+                resources.forEach(item => {
+                    const resourceItem = document.createElement('li');
+                    resourceItem.className = 'resource-item';
+                    resourceItem.innerHTML = `
+                        <div class="resource-info">
+                            <div class="resource-name">${item.name}</div>
+                            <div class="resource-meta">Chapter ${item.chapter} • ${item.type} • ${item.size} • Uploaded: ${formatDate(item.uploadDate)}</div>
+                        </div>
+                        <button class="btn btn-primary" data-resource-id="${item.id}">Download</button>
+                    `;
+                    resourcesList.appendChild(resourceItem);
+                });
+            }
+            
+            // Load assignments
+            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+            assignmentsTable.innerHTML = '';
+            assignmentSelect.innerHTML = '<option value="">-- Select Assignment --</option>';
+            
+            if (assignments.length === 0) {
+                assignmentsTable.innerHTML = '<tr><td colspan="3" class="text-center">No assignments available</td></tr>';
+            } else {
+                assignments.forEach(item => {
+                    // Add to table
+                    const row = document.createElement('tr');
+                    const today = new Date();
+                    const dueDate = new Date(item.dueDate);
+                    const statusClass = dueDate < today ? 'status-pending' : 'status-pending';
+                    const statusText = dueDate < today ? 'Overdue' : 'Pending';
+                    
+                    row.innerHTML = `
+                        <td>${item.title}</td>
+                        <td>${formatDate(item.dueDate)}</td>
+                        <td><span class="submission-status ${statusClass}">${statusText}</span></td>
+                    `;
+                    assignmentsTable.appendChild(row);
+                    
+                    // Add to select dropdown
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.title;
+                    assignmentSelect.appendChild(option);
+                });
+            }
+            
+            // Load submissions
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            submissionsContainer.innerHTML = '';
+            
+            if (submissions.length === 0) {
+                submissionsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><h3>No submissions yet</h3><p>Submit your homework to see it here.</p></div>';
+            } else {
+                submissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
+                submissions.forEach(item => {
+                    const submissionItem = document.createElement('div');
+                    submissionItem.className = 'submission-item';
+                    
+                    let statusClass, statusText;
+                    if (item.status === 'graded') {
+                        statusClass = 'status-graded';
+                        statusText = `Graded: ${item.grade}`;
+                    } else if (item.status === 'submitted') {
+                        statusClass = 'status-submitted';
+                        statusText = 'Submitted - Pending Review';
+                    } else {
+                        statusClass = 'status-pending';
+                        statusText = 'Pending';
+                    }
+                    
+                    submissionItem.innerHTML = `
+                        <div class="submission-header">
+                            <div class="submission-title">${item.assignmentTitle}</div>
+                            <div class="submission-date">Submitted: ${formatDate(item.submissionDate)}</div>
+                        </div>
+                        <div class="submission-status ${statusClass}">${statusText}</div>
+                        <p>${item.feedback}</p>
+                    `;
+                    submissionsContainer.appendChild(submissionItem);
+                });
+            }
+        }
+        
+        // Format date function
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
         
         // Handle navigation
         navLinks.forEach(link => {
@@ -989,20 +1178,35 @@
             chapterBody.innerHTML = '<div class="spinner"></div>';
             chapterContent.style.display = 'block';
             
+            // Check if notes exist for this chapter
+            const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
+            
             // Simulate loading delay
             setTimeout(() => {
                 // Set chapter title
                 chapterTitle.textContent = getChapterTitle(chapter);
                 
                 // Set chapter content
-                chapterBody.innerHTML = getChapterContent(chapter);
-                
-                // If Mandarin is enabled, show translation
-                if (isMandarin) {
-                    const mandarinContent = document.createElement('div');
-                    mandarinContent.className = 'mandarin-content';
-                    mandarinContent.innerHTML = `<h3>中文翻译</h3><p>${getChapterMandarin(chapter)}</p>`;
-                    chapterBody.appendChild(mandarinContent);
+                if (notes[chapter]) {
+                    chapterBody.innerHTML = notes[chapter].content;
+                    
+                    // If Mandarin is enabled and translation exists, show it
+                    if (isMandarin && notes[chapter].mandarin) {
+                        const mandarinContent = document.createElement('div');
+                        mandarinContent.className = 'mandarin-content';
+                        mandarinContent.innerHTML = `<h3>中文翻译</h3><p>${notes[chapter].mandarin}</p>`;
+                        chapterBody.appendChild(mandarinContent);
+                    }
+                } else {
+                    chapterBody.innerHTML = getChapterContent(chapter);
+                    
+                    // If Mandarin is enabled, show translation
+                    if (isMandarin) {
+                        const mandarinContent = document.createElement('div');
+                        mandarinContent.className = 'mandarin-content';
+                        mandarinContent.innerHTML = `<h3>中文翻译</h3><p>${getChapterMandarin(chapter)}</p>`;
+                        chapterBody.appendChild(mandarinContent);
+                    }
                 }
             }, 500);
         }
@@ -1115,17 +1319,41 @@
             e.preventDefault();
             
             // Get form data
-            const assignment = document.getElementById('assignment-select').value;
+            const assignmentId = document.getElementById('assignment-select').value;
             const studentName = document.getElementById('student-name').value;
             const studentId = document.getElementById('student-id').value;
             const file = document.getElementById('homework-file').files[0];
             const comments = document.getElementById('homework-comments').value;
             
-            // Simulate submission
+            // Get assignment title
+            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+            const assignment = assignments.find(a => a.id == assignmentId);
+            
+            // Create new submission
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            const newSubmission = {
+                id: Date.now(),
+                assignmentId: parseInt(assignmentId),
+                assignmentTitle: assignment ? assignment.title : 'Unknown Assignment',
+                studentName,
+                studentId,
+                submissionDate: new Date().toISOString().split('T')[0],
+                status: 'submitted',
+                grade: null,
+                feedback: 'Your submission has been received and is currently being reviewed.'
+            };
+            
+            submissions.push(newSubmission);
+            localStorage.setItem('cs_submissions', JSON.stringify(submissions));
+            
+            // Show notification
             showNotification('Homework submitted successfully!', 'success');
             
             // Reset form
             homeworkForm.reset();
+            
+            // Reload submissions
+            loadData();
         });
         
         // Modal functions
@@ -1181,9 +1409,21 @@
         // Resource download buttons
         document.addEventListener('click', (e) => {
             if (e.target.classList.contains('btn-primary') && e.target.textContent === 'Download') {
-                const resourceName = e.target.closest('.resource-item').querySelector('.resource-name').textContent;
-                showNotification(`Downloading ${resourceName}...`, 'info');
+                const resourceId = e.target.getAttribute('data-resource-id');
+                const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+                const resource = resources.find(r => r.id == resourceId);
+                
+                if (resource) {
+                    showNotification(`Downloading ${resource.name}...`, 'info');
+                    // In a real implementation, this would trigger an actual download
+                }
             }
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            loadData();
         });
     </script>
 </body>
