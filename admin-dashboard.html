@@ -100,7 +100,7 @@
 
         /* Content Styles */
         .content {
-            padding: 2rem;
+            padding: 2rem 0;
         }
 
         .page-title {
@@ -227,39 +227,6 @@
 
         .table tr:hover {
             background-color: rgba(52, 152, 219, 0.05);
-        }
-
-        /* Login Page */
-        .login-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--light-gray);
-        }
-
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-        }
-
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .login-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .login-subtitle {
-            color: #666;
         }
 
         /* Admin Panel */
@@ -443,7 +410,7 @@
                     <li><a href="resources.html">Resources</a></li>
                     <li><a href="author.html">About Me</a></li>
                     <li><a href="index.html#homework">Homework</a></li>
-                    <li><a href="index.html" class="active">Admin</a></li>
+                    <li><a href="admin.html" class="active">Admin</a></li>
                 </ul>
             </nav>
             <button class="admin-logout" id="admin-logout">
@@ -457,272 +424,197 @@
     <div class="container content">
         <h1 class="page-title">Admin Dashboard</h1>
         
-        <!-- Include all the admin content from the previous admin.html -->
-        <!-- Copy the entire <main> section from the previous admin.html -->
-    </div>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="admin-dashboard" style="display: none;">
-        <!-- Admin Header -->
-        <header>
-            <div class="container header-container">
-                <div class="logo">Admin Panel - AS & A2 Computer Science</div>
-                <button class="admin-logout" id="admin-logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- Admin Content -->
-        <div class="container content">
-            <h1 class="page-title">Admin Dashboard</h1>
-            
-            <div class="admin-tabs">
-                <div class="admin-tab active" data-tab="resources">Manage Resources</div>
-                <div class="admin-tab" data-tab="news">Manage News</div>
-                <div class="admin-tab" data-tab="homework">Review Homework</div>
-                <div class="admin-tab" data-tab="notes">Manage Notes</div>
-            </div>
-            
-            <!-- Resources Tab -->
-            <div id="resources-tab" class="tab-content active">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Upload New Resource</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="resource-form">
-                            <div class="form-group">
-                                <label for="resource-name">Resource Name</label>
-                                <input type="text" class="form-control" id="resource-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-chapter">Chapter</label>
-                                <select class="form-control" id="resource-chapter" required>
-                                    <option value="">-- Select Chapter --</option>
-                                    <option value="1.1">1.1 Data Representation</option>
-                                    <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
-                                    <option value="1.3">1.3 Compression</option>
-                                    <option value="2.1">2.1 Networks including the internet</option>
-                                    <option value="3.1">3.1 Computers and their components</option>
-                                    <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
-                                    <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
-                                    <option value="4.2">4.2 Assembly Language</option>
-                                    <option value="4.3">4.3 Bit manipulation</option>
-                                    <option value="5.1">5.1 Operating Systems</option>
-                                    <option value="5.2">5.2 Language Translators</option>
-                                    <option value="6.1">6.1 Data Security</option>
-                                    <option value="6.2">6.2 Data Integrity</option>
-                                    <option value="7.1">7.1 Ethics and Ownership</option>
-                                    <option value="8.1">8.1 Database Concepts</option>
-                                    <option value="8.2">8.2 Database Management Systems (DBMS)</option>
-                                    <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
-                                    <option value="9.1">9.1 Computational Thinking Skills</option>
-                                    <option value="9.2">9.2 Algorithms</option>
-                                    <option value="10.1">10.1 Data Types and Records</option>
-                                    <option value="10.2">10.2 Arrays</option>
-                                    <option value="10.3">10.3 Files</option>
-                                    <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
-                                    <option value="11.1">11.1 Programming Basics</option>
-                                    <option value="11.2">11.2 Constructs</option>
-                                    <option value="11.3">11.3 Structured Programming</option>
-                                    <option value="12.1">12.1 Program Development Life cycle</option>
-                                    <option value="12.2">12.2 Program Design</option>
-                                    <option value="12.3">12.3 Program Testing and Maintenance</option>
-                                    <option value="13.1">13.1 User-defined data types</option>
-                                    <option value="13.2">13.2 File organisation and access</option>
-                                    <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
-                                    <option value="14.1">14.1 Protocols technologies</option>
-                                    <option value="14.2">14.2 Circuit switching, packet switching</option>
-                                    <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
-                                    <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
-                                    <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
-                                    <option value="16.2">16.2 Translation Software</option>
-                                    <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
-                                    <option value="18.1">18.1 Artificial Intelligence</option>
-                                    <option value="19.1">19.1 Algorithms</option>
-                                    <option value="19.2">19.2 Recursion</option>
-                                    <option value="20.1">20.1 Programming Paradigms</option>
-                                    <option value="20.2">20.2 File Processing and Exception Handling</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-file">Upload File</label>
-                                <input type="file" class="form-control" id="resource-file" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-description">Description</label>
-                                <div class="editor-container">
-                                    <div id="resource-description-editor"></div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Upload Resource</button>
-                        </form>
-                    </div>
+        <div class="admin-tabs">
+            <div class="admin-tab active" data-tab="resources">Manage Resources</div>
+            <div class="admin-tab" data-tab="news">Manage News</div>
+            <div class="admin-tab" data-tab="homework">Review Homework</div>
+            <div class="admin-tab" data-tab="notes">Manage Notes</div>
+        </div>
+        
+        <!-- Resources Tab -->
+        <div id="resources-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Upload New Resource</h2>
                 </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Existing Resources</h2>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Chapter</th>
-                                    <th>Upload Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resources-table">
-                                <!-- Resources will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- News Tab -->
-            <div id="news-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Add News Item</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="news-form">
-                            <div class="form-group">
-                                <label for="news-title">News Title</label>
-                                <input type="text" class="form-control" id="news-title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="news-date">Date</label>
-                                <input type="date" class="form-control" id="news-date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="news-content">Content</label>
-                                <div class="editor-container">
-                                    <div id="news-content-editor"></div>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Add News</button>
-                        </form>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Existing News</h2>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="news-table">
-                                <!-- News items will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Homework Tab -->
-            <div id="homework-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Pending Submissions</h2>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Student ID</th>
-                                    <th>Assignment</th>
-                                    <th>Submission Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="submissions-table">
-                                <!-- Submissions will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Create New Assignment</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="assignment-form">
-                            <div class="form-group">
-                                <label for="assignment-title">Assignment Title</label>
-                                <input type="text" class="form-control" id="assignment-title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-chapter">Chapter</label>
-                                <select class="form-control" id="assignment-chapter" required>
-                                    <option value="">-- Select Chapter --</option>
-                                    <option value="1">1 Information representation</option>
-                                    <option value="2">2 Communication</option>
-                                    <option value="3">3 Hardware</option>
-                                    <option value="4">4 Processor Fundamentals</option>
-                                    <option value="5">5 System Software</option>
-                                    <option value="6">6 Security, privacy and data integrity</option>
-                                    <option value="7">7 Ethics and Ownership</option>
-                                    <option value="8">8 Databases</option>
-                                    <option value="9">9 Algorithm Design and Problem-solving</option>
-                                    <option value="10">10 Data Types and Structures</option>
-                                    <option value="11">11 Programming</option>
-                                    <option value="12">12 Software Development</option>
-                                    <option value="13">13 Data Representation</option>
-                                    <option value="14">14 Communication and internet</option>
-                                    <option value="15">15 Hardware and Virtual Machines</option>
-                                    <option value="16">16 System Software</option>
-                                    <option value="17">17 Security</option>
-                                    <option value="18">18 Artificial Intelligence (AI)</option>
-                                    <option value="19">19 Computational thinking and Problem-solving</option>
-                                    <option value="20">20 Further Programming</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-description">Description</label>
-                                <div class="editor-container">
-                                    <div id="assignment-description-editor"></div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-due-date">Due Date</label>
-                                <input type="date" class="form-control" id="assignment-due-date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-file">Assignment File (Optional)</label>
-                                <input type="file" class="form-control" id="assignment-file">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create Assignment</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Notes Tab -->
-            <div id="notes-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Manage Chapter Notes</h2>
-                    </div>
-                    <div class="card-body">
+                <div class="card-body">
+                    <form id="resource-form">
                         <div class="form-group">
-                            <label for="notes-chapter-select">Select Chapter</label>
-                            <select class="form-control" id="notes-chapter-select">
+                            <label for="resource-name">Resource Name</label>
+                            <input type="text" class="form-control" id="resource-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resource-chapter">Chapter</label>
+                            <select class="form-control" id="resource-chapter" required>
+                                <option value="">-- Select Chapter --</option>
+                                <option value="1.1">1.1 Data Representation</option>
+                                <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
+                                <option value="1.3">1.3 Compression</option>
+                                <option value="2.1">2.1 Networks including the internet</option>
+                                <option value="3.1">3.1 Computers and their components</option>
+                                <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
+                                <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
+                                <option value="4.2">4.2 Assembly Language</option>
+                                <option value="4.3">4.3 Bit manipulation</option>
+                                <option value="5.1">5.1 Operating Systems</option>
+                                <option value="5.2">5.2 Language Translators</option>
+                                <option value="6.1">6.1 Data Security</option>
+                                <option value="6.2">6.2 Data Integrity</option>
+                                <option value="7.1">7.1 Ethics and Ownership</option>
+                                <option value="8.1">8.1 Database Concepts</option>
+                                <option value="8.2">8.2 Database Management Systems (DBMS)</option>
+                                <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
+                                <option value="9.1">9.1 Computational Thinking Skills</option>
+                                <option value="9.2">9.2 Algorithms</option>
+                                <option value="10.1">10.1 Data Types and Records</option>
+                                <option value="10.2">10.2 Arrays</option>
+                                <option value="10.3">10.3 Files</option>
+                                <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
+                                <option value="11.1">11.1 Programming Basics</option>
+                                <option value="11.2">11.2 Constructs</option>
+                                <option value="11.3">11.3 Structured Programming</option>
+                                <option value="12.1">12.1 Program Development Life cycle</option>
+                                <option value="12.2">12.2 Program Design</option>
+                                <option value="12.3">12.3 Program Testing and Maintenance</option>
+                                <option value="13.1">13.1 User-defined data types</option>
+                                <option value="13.2">13.2 File organisation and access</option>
+                                <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
+                                <option value="14.1">14.1 Protocols technologies</option>
+                                <option value="14.2">14.2 Circuit switching, packet switching</option>
+                                <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
+                                <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
+                                <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
+                                <option value="16.2">16.2 Translation Software</option>
+                                <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
+                                <option value="18.1">18.1 Artificial Intelligence</option>
+                                <option value="19.1">19.1 Algorithms</option>
+                                <option value="19.2">19.2 Recursion</option>
+                                <option value="20.1">20.1 Programming Paradigms</option>
+                                <option value="20.2">20.2 File Processing and Exception Handling</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="resource-file">Upload File</label>
+                            <input type="file" class="form-control" id="resource-file" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="resource-description">Description</label>
+                            <div class="editor-container">
+                                <div id="resource-description-editor"></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Upload Resource</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Existing Resources</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Chapter</th>
+                                <th>Upload Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resources-table">
+                            <!-- Resources will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- News Tab -->
+        <div id="news-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Add News Item</h2>
+                </div>
+                <div class="card-body">
+                    <form id="news-form">
+                        <div class="form-group">
+                            <label for="news-title">News Title</label>
+                            <input type="text" class="form-control" id="news-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="news-date">Date</label>
+                            <input type="date" class="form-control" id="news-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="news-content">Content</label>
+                            <div class="editor-container">
+                                <div id="news-content-editor"></div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Add News</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Existing News</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="news-table">
+                            <!-- News items will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Homework Tab -->
+        <div id="homework-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Pending Submissions</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Student ID</th>
+                                <th>Assignment</th>
+                                <th>Submission Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissions-table">
+                            <!-- Submissions will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Create New Assignment</h2>
+                </div>
+                <div class="card-body">
+                    <form id="assignment-form">
+                        <div class="form-group">
+                            <label for="assignment-title">Assignment Title</label>
+                            <input type="text" class="form-control" id="assignment-title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-chapter">Chapter</label>
+                            <select class="form-control" id="assignment-chapter" required>
                                 <option value="">-- Select Chapter --</option>
                                 <option value="1">1 Information representation</option>
                                 <option value="2">2 Communication</option>
@@ -747,24 +639,76 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="notes-content">Notes Content</label>
+                            <label for="assignment-description">Description</label>
                             <div class="editor-container">
-                                <div id="notes-content-editor"></div>
+                                <div id="assignment-description-editor"></div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
-                            </label>
+                            <label for="assignment-due-date">Due Date</label>
+                            <input type="date" class="form-control" id="assignment-due-date" required>
                         </div>
-                        <div class="form-group" id="mandarin-group" style="display: none;">
-                            <label for="notes-mandarin">Mandarin Translation</label>
-                            <div class="editor-container">
-                                <div id="notes-mandarin-editor"></div>
-                            </div>
+                        <div class="form-group">
+                            <label for="assignment-file">Assignment File (Optional)</label>
+                            <input type="file" class="form-control" id="assignment-file">
                         </div>
-                        <button class="btn btn-primary" id="save-notes">Save Notes</button>
+                        <button type="submit" class="btn btn-primary">Create Assignment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notes Tab -->
+        <div id="notes-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Manage Chapter Notes</h2>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="notes-chapter-select">Select Chapter</label>
+                        <select class="form-control" id="notes-chapter-select">
+                            <option value="">-- Select Chapter --</option>
+                            <option value="1">1 Information representation</option>
+                            <option value="2">2 Communication</option>
+                            <option value="3">3 Hardware</option>
+                            <option value="4">4 Processor Fundamentals</option>
+                            <option value="5">5 System Software</option>
+                            <option value="6">6 Security, privacy and data integrity</option>
+                            <option value="7">7 Ethics and Ownership</option>
+                            <option value="8">8 Databases</option>
+                            <option value="9">9 Algorithm Design and Problem-solving</option>
+                            <option value="10">10 Data Types and Structures</option>
+                            <option value="11">11 Programming</option>
+                            <option value="12">12 Software Development</option>
+                            <option value="13">13 Data Representation</option>
+                            <option value="14">14 Communication and internet</option>
+                            <option value="15">15 Hardware and Virtual Machines</option>
+                            <option value="16">16 System Software</option>
+                            <option value="17">17 Security</option>
+                            <option value="18">18 Artificial Intelligence (AI)</option>
+                            <option value="19">19 Computational thinking and Problem-solving</option>
+                            <option value="20">20 Further Programming</option>
+                        </select>
                     </div>
+                    <div class="form-group">
+                        <label for="notes-content">Notes Content</label>
+                        <div class="editor-container">
+                            <div id="notes-content-editor"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
+                        </label>
+                    </div>
+                    <div class="form-group" id="mandarin-group" style="display: none;">
+                        <label for="notes-mandarin">Mandarin Translation</label>
+                        <div class="editor-container">
+                            <div id="notes-mandarin-editor"></div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="save-notes">Save Notes</button>
                 </div>
             </div>
         </div>
@@ -792,14 +736,12 @@
             </div>
         </div>
     </div>
-     <!-- Quill Rich Text Editor JS -->
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>  
+
+    <!-- Quill Rich Text Editor JS -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    
     <script>
         // DOM Elements
-        const loginPage = document.getElementById('login-page');
-        const adminDashboard = document.getElementById('admin-dashboard');
-        const loginForm = document.getElementById('login-form');
-        const adminLogout = document.getElementById('admin-logout');
         const adminTabs = document.querySelectorAll('.admin-tab');
         const tabContents = document.querySelectorAll('.tab-content');
         const notification = document.getElementById('notification');
@@ -989,31 +931,6 @@
             }
         }
         
-        // Login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Check credentials
-            if (username === 'admin' && password === 'ulinkcs') {
-                loginPage.style.display = 'none';
-                adminDashboard.style.display = 'block';
-                showNotification('Login successful!', 'success');
-                loadData();
-            } else {
-                showNotification('Invalid username or password', 'error');
-            }
-        });
-        
-        // Admin logout
-        adminLogout.addEventListener('click', () => {
-            loginPage.style.display = 'flex';
-            adminDashboard.style.display = 'none';
-            showNotification('Logged out successfully', 'info');
-        });
-        
         // Admin tabs
         adminTabs.forEach(tab => {
             tab.addEventListener('click', () => {
@@ -1044,7 +961,7 @@
             const resourceName = document.getElementById('resource-name').value;
             const chapter = document.getElementById('resource-chapter').value;
             const file = document.getElementById('resource-file').files[0];
-            const description = resourceDescriptionEditor.root.innerHTML; // Get HTML content from Quill editor
+            const description = resourceDescriptionEditor.root.innerHTML;
             
             // Get existing resources
             const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
@@ -1086,7 +1003,7 @@
             // Get form data
             const title = document.getElementById('news-title').value;
             const date = document.getElementById('news-date').value;
-            const content = newsContentEditor.root.innerHTML; // Get HTML content from Quill editor
+            const content = newsContentEditor.root.innerHTML;
             
             // Get existing news
             const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
@@ -1123,7 +1040,7 @@
             // Get form data
             const title = document.getElementById('assignment-title').value;
             const chapter = document.getElementById('assignment-chapter').value;
-            const description = assignmentDescriptionEditor.root.innerHTML; // Get HTML content from Quill editor
+            const description = assignmentDescriptionEditor.root.innerHTML;
             const dueDate = document.getElementById('assignment-due-date').value;
             const file = document.getElementById('assignment-file').files[0];
             
@@ -1166,11 +1083,11 @@
                 const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
                 
                 if (notes[chapter]) {
-                    notesContentEditor.root.innerHTML = notes[chapter].content; // Set HTML content in Quill editor
+                    notesContentEditor.root.innerHTML = notes[chapter].content;
                     
                     if (notes[chapter].mandarin) {
                         notesIncludeMandarin.checked = true;
-                        notesMandarinEditor.root.innerHTML = notes[chapter].mandarin; // Set HTML content in Quill editor
+                        notesMandarinEditor.root.innerHTML = notes[chapter].mandarin;
                         mandarinGroup.style.display = 'block';
                     } else {
                         notesIncludeMandarin.checked = false;
@@ -1204,9 +1121,9 @@
         // Save notes button click
         saveNotesBtn.addEventListener('click', () => {
             const chapter = notesChapterSelect.value;
-            const content = notesContentEditor.root.innerHTML; // Get HTML content from Quill editor
+            const content = notesContentEditor.root.innerHTML;
             const includeMandarin = notesIncludeMandarin.checked;
-            const mandarin = notesMandarinEditor.root.innerHTML; // Get HTML content from Quill editor
+            const mandarin = notesMandarinEditor.root.innerHTML;
             
             if (chapter && content) {
                 // Get existing notes
@@ -1356,7 +1273,7 @@
                                 theme: 'snow',
                                 modules: {
                                     toolbar: [
-                                        [{ 'header': [1, 2, false] }],
+                                        [{ 'header': [1, 2, false] },
                                         ['bold', 'italic', 'underline'],
                                         ['link', 'image'],
                                         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
@@ -1385,6 +1302,7 @@
                             
                             // Reload data
                             loadData();
+                            closeModal();
                         });
                     }
                 } else if (type === 'news') {
@@ -1440,6 +1358,7 @@
                             
                             // Reload data
                             loadData();
+                            closeModal();
                         });
                     }
                 }
@@ -1465,6 +1384,7 @@
                             
                             // Reload data
                             loadData();
+                            closeModal();
                         });
                     }
                 } else if (type === 'news') {
@@ -1485,6 +1405,7 @@
                             
                             // Reload data
                             loadData();
+                            closeModal();
                         });
                     }
                 }
@@ -1561,6 +1482,7 @@
                         
                         // Reload data
                         loadData();
+                        closeModal();
                     });
                 }
             }
@@ -1570,19 +1492,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeEditors();
             loadData();
-        });
-    </script>
-    
-    <script>
-        // Add this additional script for the dashboard
-        document.addEventListener('DOMContentLoaded', () => {
-            // Check if user is logged in
-            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-            
-            if (isLoggedIn !== 'true') {
-                // Redirect to login page
-                window.location.href = 'admin.html';
-            }
             
             // Admin logout functionality
             const adminLogout = document.getElementById('admin-logout');
