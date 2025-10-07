@@ -1139,19 +1139,21 @@
                     </div>
                     <div class="info-item">
                         <i class="material-icons">thermostat</i>
-                        <div class="info-text">Temperature (T) too high</div>
+                        <div class="info-text">Temperature (A) too low (assuming this is 0) </div>
                     </div>
                     <div class="info-item">
                         <i class="material-icons">water_drop</i>
-                        <div class="info-text">Humidity (H) too high</div>
+                        <div class="info-text">Humidity (B) too high (assuming this is 1)</div>
                     </div>
                     <div class="info-item">
                         <i class="material-icons">door_front</i>
-                        <div class="info-text">Door (D) closed</div>
+                        <div class="info-text">Door (B) closed(assuming this is 0)</div>
                     </div>
                     <div class="info-item">
                         <i class="material-icons">build_circle</i>
-                        <div class="info-text">UNLESS maintenance mode (M) is active</div>
+                        <div class="info-text">CONDITION = 1) If temperature is too low and humidity is too high<br>
+                        2) If humidity too high or door is closed</div>
+                        3) if either both condition is happening, then the cooling fan will be off
                     </div>
                 </div>
             </div>
@@ -1184,7 +1186,7 @@
                         <i class="material-icons">code</i>
                         Example Expression
                     </div>
-                    <div class="expression">S = (A AND B AND C) OR (B XOR C)</div>
+                    <div class="expression">E = (A AND B) OR D </div>
                     <div class="info-text">
                         From this expression, we can construct:
                     </div>
@@ -1200,7 +1202,7 @@
             </div>
             <div class="right-content">
                 <img src="https://sfile.chatglm.cn/images-ppt/36790423be31.png" alt="Logic Circuit Diagram" class="circuit-image">
-                <div class="image-caption">Logic circuit representing the expression: S = (A AND B AND C) OR (B XOR C)</div>
+                <div class="image-caption">Logic circuit representing the expression: E = (A AND B) OR D </div>
             </div>
         </div>
     </div>
@@ -1356,7 +1358,7 @@
                         <i class="material-icons">code</i>
                         Example Expression
                     </div>
-                    <div class="expression">(A NAND B) OR (B XOR C)</div>
+                    <div class="expression">X = (NOT A AND B) AND (B XOR NOT C)</div>
                     <div class="info-text">
                         Derived from a logic circuit with NAND and XOR gates
                     </div>
@@ -1374,7 +1376,7 @@
             </div>
             <div class="right-content">
                 <img src="https://sfile.chatglm.cn/images-ppt/1437770b7efb.jpg" alt="Logic Circuit Diagram" class="circuit-image">
-                <div class="image-caption">Logic circuit representing the expression: (A NAND B) OR (B XOR C)</div>
+                <div class="image-caption">Logic circuit representing the expression: X = (NOT A AND B) AND (B XOR NOT C)</div>
             </div>
         </div>
     </div>
