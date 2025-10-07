@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - AS & A2 Computer Science</title>
+    <title>AS & A2 Computer Science</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -61,7 +61,31 @@
             font-weight: bold;
         }
 
-        .admin-logout {
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        nav ul li a.active {
+            color: var(--secondary-color);
+        }
+
+        .language-toggle {
             background: none;
             border: none;
             color: white;
@@ -72,8 +96,80 @@
             gap: 0.5rem;
         }
 
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            min-height: calc(100vh - 70px);
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 280px;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            overflow-y: auto;
+            height: calc(100vh - 70px);
+            position: sticky;
+            top: 70px;
+        }
+
+        .sidebar h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .syllabus-section {
+            margin-bottom: 2rem;
+        }
+
+        .syllabus-section h4 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .syllabus-section h4:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .syllabus-section ul {
+            list-style: none;
+            padding-left: 1rem;
+            margin-bottom: 0.5rem;
+            display: none;
+        }
+
+        .syllabus-section.active ul {
+            display: block;
+        }
+
+        .syllabus-section li {
+            margin-bottom: 0.3rem;
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .syllabus-section li:hover {
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        .syllabus-section li a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+        }
+
         /* Content Styles */
         .content {
+            flex: 1;
             padding: 2rem;
         }
 
@@ -203,68 +299,108 @@
             background-color: rgba(52, 152, 219, 0.05);
         }
 
-        /* Login Page */
-        .login-container {
+        /* News Section */
+        .news-item {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: var(--light-gray);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .login-card {
-            width: 100%;
-            max-width: 400px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
+        .news-item:last-child {
+            border-bottom: none;
         }
 
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .news-date {
+            flex: 0 0 100px;
+            color: var(--secondary-color);
+            font-weight: 600;
         }
 
-        .login-title {
-            font-size: 1.8rem;
-            color: var(--primary-color);
+        .news-content {
+            flex: 1;
+        }
+
+        .news-title {
+            font-weight: 600;
             margin-bottom: 0.5rem;
         }
 
-        .login-subtitle {
+        /* Resource List */
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .resource-meta {
+            font-size: 0.9rem;
             color: #666;
         }
 
-        /* Admin Panel */
-        .admin-tabs {
+        /* Homework Submission */
+        .submission-item {
+            padding: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .submission-header {
             display: flex;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 1.5rem;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
         }
 
-        .admin-tab {
-            padding: 0.8rem 1.5rem;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s;
+        .submission-title {
+            font-weight: 600;
         }
 
-        .admin-tab.active {
-            border-bottom-color: var(--secondary-color);
+        .submission-date {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .submission-status {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-pending {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+
+        .status-submitted {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+
+        .status-graded {
+            background-color: rgba(52, 152, 219, 0.2);
             color: var(--secondary-color);
-        }
-
-        .admin-tab:hover {
-            background-color: rgba(52, 152, 219, 0.05);
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
         }
 
         /* Modal Styles */
@@ -362,343 +498,269 @@
         }
 
         /* Responsive Styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 250px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+
             .header-container {
                 flex-direction: column;
                 gap: 1rem;
             }
 
-            .admin-tabs {
+            nav ul {
                 flex-wrap: wrap;
+                justify-content: center;
             }
 
-            .admin-tab {
-                padding: 0.6rem 1rem;
-                font-size: 0.9rem;
+            nav ul li {
+                margin: 0 0.5rem;
             }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: var(--secondary-color);
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
         }
     </style>
 </head>
 <body>
-    <!-- Login Page -->
-    <div id="login-page">
-        <div class="login-container">
-            <div class="login-card">
-                <div class="login-header">
-                    <h1 class="login-title">Admin Login</h1>
-                    <p class="login-subtitle">AS & A2 Computer Science</p>
-                </div>
-                <form id="login-form">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
-                </form>
-            </div>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">AS & A2 Computer Science</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="#syllabus" class="nav-link">Syllabus</a></li>
+                    <li><a href="resources.html" class="nav-link">Resources</a></li>
+                    <li><a href="#homework" class="nav-link">Homework</a></li>
+                    <li><a href="admin.html" class="nav-link" style="color: #f39c12;"><i class="fas fa-user-shield"></i> Admin</a></li>
+                </ul>
+            </nav>
+            <button class="language-toggle" id="languageToggle">
+                <i class="fas fa-globe"></i>
+                <span id="currentLang">EN</span>
+            </button>
         </div>
-    </div>
+    </header>
 
-    <!-- Admin Dashboard -->
-    <div id="admin-dashboard" style="display: none;">
-        <!-- Admin Header -->
-        <header>
-            <div class="container header-container">
-                <div class="logo">Admin Panel - AS & A2 Computer Science</div>
-                <button class="admin-logout" id="admin-logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </button>
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Syllabus Navigation</h3>
+            
+            <!-- AS Level Syllabus -->
+            <div class="syllabus-section active">
+                <h4><span>AS Level</span> <i class="fas fa-chevron-down"></i></h4>
+                <ul>
+                    <li><a href="#" data-chapter="1">1 Information representation</a></li>
+                    <li><a href="#" data-chapter="2">2 Communication</a></li>
+                    <li><a href="#" data-chapter="3">3 Hardware</a></li>
+                    <li><a href="#" data-chapter="4">4 Processor Fundamentals</a></li>
+                    <li><a href="#" data-chapter="5">5 System Software</a></li>
+                    <li><a href="#" data-chapter="6">6 Security, privacy and data integrity</a></li>
+                    <li><a href="#" data-chapter="7">7 Ethics and Ownership</a></li>
+                    <li><a href="#" data-chapter="8">8 Databases</a></li>
+                    <li><a href="#" data-chapter="9">9 Algorithm Design and Problem-solving</a></li>
+                    <li><a href="#" data-chapter="10">10 Data Types and Structures</a></li>
+                    <li><a href="#" data-chapter="11">11 Programming</a></li>
+                    <li><a href="#" data-chapter="12">12 Software Development</a></li>
+                </ul>
             </div>
-        </header>
+            
+            <!-- A2 Level Syllabus -->
+            <div class="syllabus-section">
+                <h4><span>A2 Level</span> <i class="fas fa-chevron-down"></i></h4>
+                <ul>
+                    <li><a href="#" data-chapter="13">13 Data Representation</a></li>
+                    <li><a href="#" data-chapter="14">14 Communication and internet</a></li>
+                    <li><a href="#" data-chapter="15">15 Hardware and Virtual Machines</a></li>
+                    <li><a href="#" data-chapter="16">16 System Software</a></li>
+                    <li><a href="#" data-chapter="17">17 Security</a></li>
+                    <li><a href="#" data-chapter="18">18 Artificial Intelligence (AI)</a></li>
+                    <li><a href="#" data-chapter="19">19 Computational thinking and Problem-solving</a></li>
+                    <li><a href="#" data-chapter="20">20 Further Programming</a></li>
+                </ul>
+            </div>
+        </aside>
 
-        <!-- Admin Content -->
-        <div class="container content">
-            <h1 class="page-title">Admin Dashboard</h1>
-            
-            <div class="admin-tabs">
-                <div class="admin-tab active" data-tab="resources">Manage Resources</div>
-                <div class="admin-tab" data-tab="news">Manage News</div>
-                <div class="admin-tab" data-tab="homework">Review Homework</div>
-                <div class="admin-tab" data-tab="notes">Manage Notes</div>
-            </div>
-            
-            <!-- Resources Tab -->
-            <div id="resources-tab" class="tab-content active">
+        <!-- Content Area -->
+        <main class="content">
+            <!-- Home Page -->
+            <div id="home-page" class="page-content active">
+                <h1 class="page-title">Welcome to AS & A2 Computer Science</h1>
+                
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Upload New Resource</h2>
+                        <h2 class="card-title">About This Course</h2>
                     </div>
                     <div class="card-body">
-                        <form id="resource-form">
-                            <div class="form-group">
-                                <label for="resource-name">Resource Name</label>
-                                <input type="text" class="form-control" id="resource-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-chapter">Chapter</label>
-                                <select class="form-control" id="resource-chapter" required>
-                                    <option value="">-- Select Chapter --</option>
-                                    <option value="1.1">1.1 Data Representation</option>
-                                    <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
-                                    <option value="1.3">1.3 Compression</option>
-                                    <option value="2.1">2.1 Networks including the internet</option>
-                                    <option value="3.1">3.1 Computers and their components</option>
-                                    <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
-                                    <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
-                                    <option value="4.2">4.2 Assembly Language</option>
-                                    <option value="4.3">4.3 Bit manipulation</option>
-                                    <option value="5.1">5.1 Operating Systems</option>
-                                    <option value="5.2">5.2 Language Translators</option>
-                                    <option value="6.1">6.1 Data Security</option>
-                                    <option value="6.2">6.2 Data Integrity</option>
-                                    <option value="7.1">7.1 Ethics and Ownership</option>
-                                    <option value="8.1">8.1 Database Concepts</option>
-                                    <option value="8.2">8.2 Database Management Systems (DBMS)</option>
-                                    <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
-                                    <option value="9.1">9.1 Computational Thinking Skills</option>
-                                    <option value="9.2">9.2 Algorithms</option>
-                                    <option value="10.1">10.1 Data Types and Records</option>
-                                    <option value="10.2">10.2 Arrays</option>
-                                    <option value="10.3">10.3 Files</option>
-                                    <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
-                                    <option value="11.1">11.1 Programming Basics</option>
-                                    <option value="11.2">11.2 Constructs</option>
-                                    <option value="11.3">11.3 Structured Programming</option>
-                                    <option value="12.1">12.1 Program Development Life cycle</option>
-                                    <option value="12.2">12.2 Program Design</option>
-                                    <option value="12.3">12.3 Program Testing and Maintenance</option>
-                                    <option value="13.1">13.1 User-defined data types</option>
-                                    <option value="13.2">13.2 File organisation and access</option>
-                                    <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
-                                    <option value="14.1">14.1 Protocols technologies</option>
-                                    <option value="14.2">14.2 Circuit switching, packet switching</option>
-                                    <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
-                                    <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
-                                    <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
-                                    <option value="16.2">16.2 Translation Software</option>
-                                    <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
-                                    <option value="18.1">18.1 Artificial Intelligence</option>
-                                    <option value="19.1">19.1 Algorithms</option>
-                                    <option value="19.2">19.2 Recursion</option>
-                                    <option value="20.1">20.1 Programming Paradigms</option>
-                                    <option value="20.2">20.2 File Processing and Exception Handling</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-file">Upload File</label>
-                                <input type="file" class="form-control" id="resource-file" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="resource-description">Description</label>
-                                <textarea class="form-control" id="resource-description" placeholder="Brief description of the resource..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Upload Resource</button>
-                        </form>
+                        <p>This course covers the Cambridge International AS & A Level Computer Science (9618) syllabus. Here you'll find all the resources, notes, and assignments you need to succeed in your studies.</p>
+                        <p>The course is designed to help students develop computational thinking, programming skills, and an understanding of computer systems.</p>
                     </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Existing Resources</h2>
+                        <h2 class="card-title">Recent News</h2>
                     </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Chapter</th>
-                                    <th>Upload Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resources-table">
-                                <!-- Resources will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- News Tab -->
-            <div id="news-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Add News Item</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="news-form">
-                            <div class="form-group">
-                                <label for="news-title">News Title</label>
-                                <input type="text" class="form-control" id="news-title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="news-date">Date</label>
-                                <input type="date" class="form-control" id="news-date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="news-content">Content</label>
-                                <textarea class="form-control" id="news-content" rows="5" required></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Add News</button>
-                        </form>
+                    <div class="card-body" id="news-container">
+                        <!-- News items will be loaded here -->
                     </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Existing News</h2>
+                        <h2 class="card-title">Upcoming Deadlines</h2>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Date</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="news-table">
-                                <!-- News items will be loaded here -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Homework Tab -->
-            <div id="homework-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Pending Submissions</h2>
-                    </div>
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Student Name</th>
-                                    <th>Student ID</th>
                                     <th>Assignment</th>
-                                    <th>Submission Date</th>
-                                    <th>Actions</th>
+                                    <th>Due Date</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
-                            <tbody id="submissions-table">
-                                <!-- Submissions will be loaded here -->
+                            <tbody id="assignments-table">
+                                <!-- Assignments will be loaded here -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Syllabus Page -->
+            <div id="syllabus-page" class="page-content">
+                <h1 class="page-title">Syllabus</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Select a Chapter</h2>
+                    </div>
+                    <div class="card-body">
+                        <p>Please select a chapter from the sidebar to view the detailed syllabus and notes.</p>
+                    </div>
+                </div>
+                
+                <div id="chapter-content" class="card" style="display: none;">
+                    <div class="card-header">
+                        <h2 class="card-title" id="chapter-title">Chapter Title</h2>
+                    </div>
+                    <div class="card-body" id="chapter-body">
+                        <!-- Chapter content will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Resources Page -->
+            <div id="resources-page" class="page-content">
+                <h1 class="page-title">Resources</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Available Resources</h2>
+                    </div>
+                    <div class="card-body">
+                        <ul class="resource-list" id="resources-list">
+                            <!-- Resources will be loaded here -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Homework Page -->
+            <div id="homework-page" class="page-content">
+                <h1 class="page-title">Homework</h1>
+                
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Submit Homework</h2>
+                    </div>
+                    <div class="card-body">
+                        <form id="homework-form">
+                            <div class="form-group">
+                                <label for="assignment-select">Select Assignment</label>
+                                <select class="form-control" id="assignment-select" required>
+                                    <option value="">-- Select Assignment --</option>
+                                    <!-- Assignment options will be loaded here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="student-name">Your Name</label>
+                                <input type="text" class="form-control" id="student-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="student-id">Student ID</label>
+                                <input type="text" class="form-control" id="student-id" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="homework-file">Upload File</label>
+                                <input type="file" class="form-control" id="homework-file" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="homework-comments">Additional Comments</label>
+                                <textarea class="form-control" id="homework-comments" placeholder="Any additional notes or comments about your submission..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit Homework</button>
+                        </form>
                     </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Create New Assignment</h2>
+                        <h2 class="card-title">Your Submissions</h2>
                     </div>
-                    <div class="card-body">
-                        <form id="assignment-form">
-                            <div class="form-group">
-                                <label for="assignment-title">Assignment Title</label>
-                                <input type="text" class="form-control" id="assignment-title" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-chapter">Chapter</label>
-                                <select class="form-control" id="assignment-chapter" required>
-                                    <option value="">-- Select Chapter --</option>
-                                    <option value="1">1 Information representation</option>
-                                    <option value="2">2 Communication</option>
-                                    <option value="3">3 Hardware</option>
-                                    <option value="4">4 Processor Fundamentals</option>
-                                    <option value="5">5 System Software</option>
-                                    <option value="6">6 Security, privacy and data integrity</option>
-                                    <option value="7">7 Ethics and Ownership</option>
-                                    <option value="8">8 Databases</option>
-                                    <option value="9">9 Algorithm Design and Problem-solving</option>
-                                    <option value="10">10 Data Types and Structures</option>
-                                    <option value="11">11 Programming</option>
-                                    <option value="12">12 Software Development</option>
-                                    <option value="13">13 Data Representation</option>
-                                    <option value="14">14 Communication and internet</option>
-                                    <option value="15">15 Hardware and Virtual Machines</option>
-                                    <option value="16">16 System Software</option>
-                                    <option value="17">17 Security</option>
-                                    <option value="18">18 Artificial Intelligence (AI)</option>
-                                    <option value="19">19 Computational thinking and Problem-solving</option>
-                                    <option value="20">20 Further Programming</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-description">Description</label>
-                                <textarea class="form-control" id="assignment-description" rows="5" required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-due-date">Due Date</label>
-                                <input type="date" class="form-control" id="assignment-due-date" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="assignment-file">Assignment File (Optional)</label>
-                                <input type="file" class="form-control" id="assignment-file">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Create Assignment</button>
-                        </form>
+                    <div class="card-body" id="submissions-container">
+                        <!-- Submissions will be loaded here -->
                     </div>
                 </div>
             </div>
-            
-            <!-- Notes Tab -->
-            <div id="notes-tab" class="tab-content">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Manage Chapter Notes</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="notes-chapter-select">Select Chapter</label>
-                            <select class="form-control" id="notes-chapter-select">
-                                <option value="">-- Select Chapter --</option>
-                                <option value="1">1 Information representation</option>
-                                <option value="2">2 Communication</option>
-                                <option value="3">3 Hardware</option>
-                                <option value="4">4 Processor Fundamentals</option>
-                                <option value="5">5 System Software</option>
-                                <option value="6">6 Security, privacy and data integrity</option>
-                                <option value="7">7 Ethics and Ownership</option>
-                                <option value="8">8 Databases</option>
-                                <option value="9">9 Algorithm Design and Problem-solving</option>
-                                <option value="10">10 Data Types and Structures</option>
-                                <option value="11">11 Programming</option>
-                                <option value="12">12 Software Development</option>
-                                <option value="13">13 Data Representation</option>
-                                <option value="14">14 Communication and internet</option>
-                                <option value="15">15 Hardware and Virtual Machines</option>
-                                <option value="16">16 System Software</option>
-                                <option value="17">17 Security</option>
-                                <option value="18">18 Artificial Intelligence (AI)</option>
-                                <option value="19">19 Computational thinking and Problem-solving</option>
-                                <option value="20">20 Further Programming</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="notes-content">Notes Content</label>
-                            <textarea class="form-control" id="notes-content" rows="15" placeholder="Enter your notes for the selected chapter..."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
-                            </label>
-                        </div>
-                        <div class="form-group" id="mandarin-group" style="display: none;">
-                            <label for="notes-mandarin">Mandarin Translation</label>
-                            <textarea class="form-control" id="notes-mandarin" rows="10" placeholder="Enter the Mandarin translation for the selected chapter..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" id="save-notes">Save Notes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
 
     <!-- Notification -->
@@ -726,12 +788,12 @@
 
     <script>
         // DOM Elements
-        const loginPage = document.getElementById('login-page');
-        const adminDashboard = document.getElementById('admin-dashboard');
-        const loginForm = document.getElementById('login-form');
-        const adminLogout = document.getElementById('admin-logout');
-        const adminTabs = document.querySelectorAll('.admin-tab');
-        const tabContents = document.querySelectorAll('.tab-content');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const pageContents = document.querySelectorAll('.page-content');
+        const syllabusSections = document.querySelectorAll('.syllabus-section h4');
+        const chapterLinks = document.querySelectorAll('.sidebar a[data-chapter]');
+        const languageToggle = document.getElementById('languageToggle');
+        const currentLang = document.getElementById('currentLang');
         const notification = document.getElementById('notification');
         const notificationMessage = document.getElementById('notification-message');
         const modal = document.getElementById('modal');
@@ -741,23 +803,308 @@
         const modalCancel = document.getElementById('modal-cancel');
         const modalConfirm = document.getElementById('modal-confirm');
         
-        // Table containers
-        const resourcesTable = document.getElementById('resources-table');
-        const newsTable = document.getElementById('news-table');
-        const submissionsTable = document.getElementById('submissions-table');
+        // Data containers
+        const newsContainer = document.getElementById('news-container');
+        const resourcesList = document.getElementById('resources-list');
+        const assignmentsTable = document.getElementById('assignments-table');
+        const assignmentSelect = document.getElementById('assignment-select');
+        const submissionsContainer = document.getElementById('submissions-container');
         
         // Forms
-        const resourceForm = document.getElementById('resource-form');
-        const newsForm = document.getElementById('news-form');
-        const assignmentForm = document.getElementById('assignment-form');
+        const homeworkForm = document.getElementById('homework-form');
         
-        // Notes elements
-        const notesChapterSelect = document.getElementById('notes-chapter-select');
-        const notesContent = document.getElementById('notes-content');
-        const notesIncludeMandarin = document.getElementById('notes-include-mandarin');
-        const notesMandarin = document.getElementById('notes-mandarin');
-        const mandarinGroup = document.getElementById('mandarin-group');
-        const saveNotesBtn = document.getElementById('save-notes');
+        // Language state
+        let isMandarin = false;
+        
+        // Initialize data
+        function initializeData() {
+            // Initialize default data if not exists
+            if (!localStorage.getItem('cs_news')) {
+                const defaultNews = [
+                    {
+                        id: 1,
+                        title: 'Mock Exam Schedule Released',
+                        date: '2023-06-15',
+                        content: 'The mock exam schedule for the upcoming term has been released. Please check the Resources section for the detailed timetable.'
+                    },
+                    {
+                        id: 2,
+                        title: 'New Programming Resources Added',
+                        date: '2023-06-10',
+                        content: 'New resources for Python programming have been added to the Resources section. These include video tutorials and practice exercises.'
+                    },
+                    {
+                        id: 3,
+                        title: 'Homework Deadline Reminder',
+                        date: '2023-06-05',
+                        content: 'Reminder that the Algorithm Design homework is due on June 20, 2023. Please submit your work through the Homework section.'
+                    }
+                ];
+                localStorage.setItem('cs_news', JSON.stringify(defaultNews));
+            }
+            
+            if (!localStorage.getItem('cs_resources')) {
+                const defaultResources = [
+                    {
+                        id: 1,
+                        name: 'Introduction to Data Representation',
+                        chapter: '1.1',
+                        type: 'PDF',
+                        size: '2.5 MB',
+                        uploadDate: '2023-06-01',
+                        url: '#'
+                    },
+                    {
+                        id: 2,
+                        name: 'Network Topologies',
+                        chapter: '2.1',
+                        type: 'PowerPoint',
+                        size: '5.1 MB',
+                        uploadDate: '2023-06-03',
+                        url: '#'
+                    },
+                    {
+                        id: 3,
+                        name: 'CPU Architecture',
+                        chapter: '4.1',
+                        type: 'PDF',
+                        size: '3.2 MB',
+                        uploadDate: '2023-06-05',
+                        url: '#'
+                    },
+                    {
+                        id: 4,
+                        name: 'Assembly Language Examples',
+                        chapter: '4.2',
+                        type: 'ZIP',
+                        size: '1.8 MB',
+                        uploadDate: '2023-06-07',
+                        url: '#'
+                    },
+                    {
+                        id: 5,
+                        name: 'Operating Systems',
+                        chapter: '5.1',
+                        type: 'PDF',
+                        size: '4.3 MB',
+                        uploadDate: '2023-06-10',
+                        url: '#'
+                    },
+                    {
+                        id: 6,
+                        name: 'Database Design Principles',
+                        chapter: '8.1',
+                        type: 'PowerPoint',
+                        size: '6.7 MB',
+                        uploadDate: '2023-06-12',
+                        url: '#'
+                    },
+                    {
+                        id: 7,
+                        name: 'Algorithm Design Techniques',
+                        chapter: '9.2',
+                        type: 'PDF',
+                        size: '3.9 MB',
+                        uploadDate: '2023-06-14',
+                        url: '#'
+                    },
+                    {
+                        id: 8,
+                        name: 'Python Programming Basics',
+                        chapter: '11.1',
+                        type: 'ZIP',
+                        size: '8.2 MB',
+                        uploadDate: '2023-06-16',
+                        url: '#'
+                    }
+                ];
+                localStorage.setItem('cs_resources', JSON.stringify(defaultResources));
+            }
+            
+            if (!localStorage.getItem('cs_assignments')) {
+                const defaultAssignments = [
+                    {
+                        id: 1,
+                        title: 'Algorithm Design Homework',
+                        chapter: '9',
+                        dueDate: '2023-06-20',
+                        description: 'Complete the algorithm design exercises in the textbook.'
+                    },
+                    {
+                        id: 2,
+                        title: 'Database Design Project',
+                        chapter: '8',
+                        dueDate: '2023-06-25',
+                        description: 'Design a database system for a small library.'
+                    },
+                    {
+                        id: 3,
+                        title: 'Programming Assignment',
+                        chapter: '11',
+                        dueDate: '2023-07-05',
+                        description: 'Implement a sorting algorithm in Python.'
+                    }
+                ];
+                localStorage.setItem('cs_assignments', JSON.stringify(defaultAssignments));
+            }
+            
+            if (!localStorage.getItem('cs_submissions')) {
+                const defaultSubmissions = [
+                    {
+                        id: 1,
+                        assignmentId: 1,
+                        assignmentTitle: 'Data Representation Assignment',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-01',
+                        status: 'graded',
+                        grade: 'A',
+                        feedback: 'Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.'
+                    },
+                    {
+                        id: 2,
+                        assignmentId: 2,
+                        assignmentTitle: 'Network Topologies Research',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-05',
+                        status: 'graded',
+                        grade: 'B+',
+                        feedback: 'Good research on different network topologies. Consider adding more real-world examples in future assignments.'
+                    },
+                    {
+                        id: 3,
+                        assignmentId: 3,
+                        assignmentTitle: 'Assembly Language Program',
+                        studentName: 'Student',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-10',
+                        status: 'submitted',
+                        grade: null,
+                        feedback: 'Your submission has been received and is currently being reviewed.'
+                    }
+                ];
+                localStorage.setItem('cs_submissions', JSON.stringify(defaultSubmissions));
+            }
+            
+            if (!localStorage.getItem('cs_notes')) {
+                const defaultNotes = {};
+                localStorage.setItem('cs_notes', JSON.stringify(defaultNotes));
+            }
+        }
+        
+        // Load data from localStorage
+        function loadData() {
+            // Load news
+            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+            newsContainer.innerHTML = '';
+            
+            if (news.length === 0) {
+                newsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-newspaper"></i><h3>No news available</h3><p>Check back later for updates.</p></div>';
+            } else {
+                news.sort((a, b) => new Date(b.date) - new Date(a.date));
+                news.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <div class="news-date">${formatDate(item.date)}</div>
+                        <div class="news-content">
+                            <div class="news-title">${item.title}</div>
+                            <p>${item.content}</p>
+                        </div>
+                    `;
+                    newsContainer.appendChild(newsItem);
+                });
+            }
+            
+            // Load resources
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            resourcesList.innerHTML = '';
+            
+            if (resources.length === 0) {
+                resourcesList.innerHTML = '<div class="empty-state"><i class="fas fa-folder-open"></i><h3>No resources available</h3><p>Check back later for updates.</p></div>';
+            } else {
+                resources.forEach(item => {
+                    const resourceItem = document.createElement('li');
+                    resourceItem.className = 'resource-item';
+                    resourceItem.innerHTML = `
+                        <div class="resource-info">
+                            <div class="resource-name">${item.name}</div>
+                            <div class="resource-meta">Chapter ${item.chapter} • ${item.type} • ${item.size} • Uploaded: ${formatDate(item.uploadDate)}</div>
+                        </div>
+                        <button class="btn btn-primary" data-resource-id="${item.id}">Download</button>
+                    `;
+                    resourcesList.appendChild(resourceItem);
+                });
+            }
+            
+            // Load assignments
+            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+            assignmentsTable.innerHTML = '';
+            assignmentSelect.innerHTML = '<option value="">-- Select Assignment --</option>';
+            
+            if (assignments.length === 0) {
+                assignmentsTable.innerHTML = '<tr><td colspan="3" class="text-center">No assignments available</td></tr>';
+            } else {
+                assignments.forEach(item => {
+                    // Add to table
+                    const row = document.createElement('tr');
+                    const today = new Date();
+                    const dueDate = new Date(item.dueDate);
+                    const statusClass = dueDate < today ? 'status-pending' : 'status-pending';
+                    const statusText = dueDate < today ? 'Overdue' : 'Pending';
+                    
+                    row.innerHTML = `
+                        <td>${item.title}</td>
+                        <td>${formatDate(item.dueDate)}</td>
+                        <td><span class="submission-status ${statusClass}">${statusText}</span></td>
+                    `;
+                    assignmentsTable.appendChild(row);
+                    
+                    // Add to select dropdown
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.title;
+                    assignmentSelect.appendChild(option);
+                });
+            }
+            
+            // Load submissions
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            submissionsContainer.innerHTML = '';
+            
+            if (submissions.length === 0) {
+                submissionsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><h3>No submissions yet</h3><p>Submit your homework to see it here.</p></div>';
+            } else {
+                submissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
+                submissions.forEach(item => {
+                    const submissionItem = document.createElement('div');
+                    submissionItem.className = 'submission-item';
+                    
+                    let statusClass, statusText;
+                    if (item.status === 'graded') {
+                        statusClass = 'status-graded';
+                        statusText = `Graded: ${item.grade}`;
+                    } else if (item.status === 'submitted') {
+                        statusClass = 'status-submitted';
+                        statusText = 'Submitted - Pending Review';
+                    } else {
+                        statusClass = 'status-pending';
+                        statusText = 'Pending';
+                    }
+                    
+                    submissionItem.innerHTML = `
+                        <div class="submission-header">
+                            <div class="submission-title">${item.assignmentTitle}</div>
+                            <div class="submission-date">Submitted: ${formatDate(item.submissionDate)}</div>
+                        </div>
+                        <div class="submission-status ${statusClass}">${statusText}</div>
+                        <p>${item.feedback}</p>
+                    `;
+                    submissionsContainer.appendChild(submissionItem);
+                });
+            }
+        }
         
         // Format date function
         function formatDate(dateString) {
@@ -765,314 +1112,285 @@
             return new Date(dateString).toLocaleDateString(undefined, options);
         }
         
-        // Load data from localStorage
-        function loadData() {
-            // Load resources
-            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
-            resourcesTable.innerHTML = '';
-            
-            if (resources.length === 0) {
-                resourcesTable.innerHTML = '<tr><td colspan="4" class="text-center">No resources available</td></tr>';
-            } else {
-                resources.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.name}</td>
-                        <td>${item.chapter}</td>
-                        <td>${formatDate(item.uploadDate)}</td>
-                        <td>
-                            <button class="btn btn-warning" data-action="edit" data-type="resource" data-id="${item.id}">Edit</button>
-                            <button class="btn btn-danger" data-action="delete" data-type="resource" data-id="${item.id}">Delete</button>
-                        </td>
-                    `;
-                    resourcesTable.appendChild(row);
-                });
-            }
-            
-            // Load news
-            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
-            newsTable.innerHTML = '';
-            
-            if (news.length === 0) {
-                newsTable.innerHTML = '<tr><td colspan="3" class="text-center">No news available</td></tr>';
-            } else {
-                news.sort((a, b) => new Date(b.date) - new Date(a.date));
-                news.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${item.title}</td>
-                        <td>${formatDate(item.date)}</td>
-                        <td>
-                            <button class="btn btn-warning" data-action="edit" data-type="news" data-id="${item.id}">Edit</button>
-                            <button class="btn btn-danger" data-action="delete" data-type="news" data-id="${item.id}">Delete</button>
-                        </td>
-                    `;
-                    newsTable.appendChild(row);
-                });
-            }
-            
-            // Load submissions
-            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
-            submissionsTable.innerHTML = '';
-            
-            if (submissions.length === 0) {
-                submissionsTable.innerHTML = '<tr><td colspan="5" class="text-center">No submissions available</td></tr>';
-            } else {
-                submissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
-                submissions.forEach(item => {
-                    if (item.status === 'submitted') {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td>${item.studentName}</td>
-                            <td>${item.studentId}</td>
-                            <td>${item.assignmentTitle}</td>
-                            <td>${formatDate(item.submissionDate)}</td>
-                            <td>
-                                <button class="btn btn-primary" data-action="view" data-type="submission" data-id="${item.id}">View</button>
-                                <button class="btn btn-success" data-action="grade" data-type="submission" data-id="${item.id}">Grade</button>
-                            </td>
-                        `;
-                        submissionsTable.appendChild(row);
+        // Handle navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                // If it's an external link, let it navigate normally
+                if (href.includes('.html')) {
+                    return;
+                }
+                
+                // Otherwise, handle internal navigation
+                e.preventDefault();
+                const targetPage = link.getAttribute('data-page') || href.substring(1);
+                
+                // Update active nav link
+                navLinks.forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                // Show target page
+                pageContents.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === `${targetPage}-page`) {
+                        page.classList.add('active');
                     }
                 });
-            }
-        }
-        
-        // Login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            // Check credentials
-            if (username === 'admin' && password === 'ulinkcs') {
-                loginPage.style.display = 'none';
-                adminDashboard.style.display = 'block';
-                showNotification('Login successful!', 'success');
-                loadData();
-            } else {
-                showNotification('Invalid username or password', 'error');
-            }
-        });
-        
-        // Admin logout
-        adminLogout.addEventListener('click', () => {
-            loginPage.style.display = 'flex';
-            adminDashboard.style.display = 'none';
-            showNotification('Logged out successfully', 'info');
-        });
-        
-        // Admin tabs
-        adminTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetTab = tab.getAttribute('data-tab');
-                
-                // Update active tab
-                adminTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                
-                // Show target tab content
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === `${targetTab}-tab`) {
-                        content.classList.add('active');
-                    }
-                });
-                
-                // Reload data for the active tab
-                loadData();
             });
         });
         
-        // Resource form submission
-        resourceForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const resourceName = document.getElementById('resource-name').value;
-            const chapter = document.getElementById('resource-chapter').value;
-            const file = document.getElementById('resource-file').files[0];
-            const description = document.getElementById('resource-description').value;
-            
-            // Get existing resources
-            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
-            
-            // Create new resource
-            const newResource = {
-                id: Date.now(),
-                name: resourceName,
-                chapter: chapter,
-                type: file ? file.name.split('.').pop().toUpperCase() : 'Unknown',
-                size: file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` : 'Unknown',
-                uploadDate: new Date().toISOString().split('T')[0],
-                url: '#',
-                description: description
-            };
-            
-            // Add to resources array
-            resources.push(newResource);
-            
-            // Save to localStorage
-            localStorage.setItem('cs_resources', JSON.stringify(resources));
-            
-            // Show notification
-            showNotification('Resource uploaded successfully!', 'success');
-            
-            // Reset form
-            resourceForm.reset();
-            
-            // Reload data
-            loadData();
-        });
-        
-        // News form submission
-        newsForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const title = document.getElementById('news-title').value;
-            const date = document.getElementById('news-date').value;
-            const content = document.getElementById('news-content').value;
-            
-            // Get existing news
-            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
-            
-            // Create new news item
-            const newNews = {
-                id: Date.now(),
-                title: title,
-                date: date,
-                content: content
-            };
-            
-            // Add to news array
-            news.push(newNews);
-            
-            // Save to localStorage
-            localStorage.setItem('cs_news', JSON.stringify(news));
-            
-            // Show notification
-            showNotification('News item added successfully!', 'success');
-            
-            // Reset form
-            newsForm.reset();
-            
-            // Reload data
-            loadData();
-        });
-        
-        // Assignment form submission
-        assignmentForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const title = document.getElementById('assignment-title').value;
-            const chapter = document.getElementById('assignment-chapter').value;
-            const description = document.getElementById('assignment-description').value;
-            const dueDate = document.getElementById('assignment-due-date').value;
-            const file = document.getElementById('assignment-file').files[0];
-            
-            // Get existing assignments
-            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
-            
-            // Create new assignment
-            const newAssignment = {
-                id: Date.now(),
-                title: title,
-                chapter: chapter,
-                description: description,
-                dueDate: dueDate,
-                hasFile: file ? true : false
-            };
-            
-            // Add to assignments array
-            assignments.push(newAssignment);
-            
-            // Save to localStorage
-            localStorage.setItem('cs_assignments', JSON.stringify(assignments));
-            
-            // Show notification
-            showNotification('Assignment created successfully!', 'success');
-            
-            // Reset form
-            assignmentForm.reset();
-            
-            // Reload data
-            loadData();
-        });
-        
-        // Notes chapter select change
-        notesChapterSelect.addEventListener('change', (e) => {
-            const chapter = e.target.value;
-            
-            if (chapter) {
-                // Load existing notes for the chapter
-                const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
+        // Handle anchor links for internal navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const targetPage = document.getElementById(`${targetId}-page`);
                 
+                if (targetPage) {
+                    e.preventDefault();
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pageContents.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === `${targetId}-page`) {
+                            page.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Syllabus section toggle
+        syllabusSections.forEach(section => {
+            section.addEventListener('click', () => {
+                const parentSection = section.parentElement;
+                parentSection.classList.toggle('active');
+                
+                // Toggle chevron icon
+                const icon = section.querySelector('i');
+                if (parentSection.classList.contains('active')) {
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                } else {
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                }
+            });
+        });
+        
+        // Chapter link click
+        chapterLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const chapter = link.getAttribute('data-chapter');
+                
+                // Navigate to syllabus page if not already there
+                pageContents.forEach(page => {
+                    page.classList.remove('active');
+                    if (page.id === 'syllabus-page') {
+                        page.classList.add('active');
+                    }
+                });
+                
+                navLinks.forEach(l => l.classList.remove('active'));
+                document.querySelector('[href="#syllabus"]').classList.add('active');
+                
+                // Load chapter content
+                loadChapterContent(chapter);
+            });
+        });
+        
+        // Load chapter content
+        function loadChapterContent(chapter) {
+            const chapterContent = document.getElementById('chapter-content');
+            const chapterTitle = document.getElementById('chapter-title');
+            const chapterBody = document.getElementById('chapter-body');
+            
+            // Show loading state
+            chapterTitle.textContent = `Loading Chapter ${chapter}...`;
+            chapterBody.innerHTML = '<div class="spinner"></div>';
+            chapterContent.style.display = 'block';
+            
+            // Check if notes exist for this chapter
+            const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Set chapter title
+                chapterTitle.textContent = getChapterTitle(chapter);
+                
+                // Set chapter content
                 if (notes[chapter]) {
-                    notesContent.value = notes[chapter].content;
-                    if (notes[chapter].mandarin) {
-                        notesIncludeMandarin.checked = true;
-                        notesMandarin.value = notes[chapter].mandarin;
-                        mandarinGroup.style.display = 'block';
-                    } else {
-                        notesIncludeMandarin.checked = false;
-                        notesMandarin.value = '';
-                        mandarinGroup.style.display = 'none';
+                    chapterBody.innerHTML = notes[chapter].content;
+                    
+                    // If Mandarin is enabled and translation exists, show it
+                    if (isMandarin && notes[chapter].mandarin) {
+                        const mandarinContent = document.createElement('div');
+                        mandarinContent.className = 'mandarin-content';
+                        mandarinContent.innerHTML = `<h3>中文翻译</h3><p>${notes[chapter].mandarin}</p>`;
+                        chapterBody.appendChild(mandarinContent);
                     }
                 } else {
-                    notesContent.value = '';
-                    notesIncludeMandarin.checked = false;
-                    notesMandarin.value = '';
-                    mandarinGroup.style.display = 'none';
+                    chapterBody.innerHTML = getChapterContent(chapter);
+                    
+                    // If Mandarin is enabled, show translation
+                    if (isMandarin) {
+                        const mandarinContent = document.createElement('div');
+                        mandarinContent.className = 'mandarin-content';
+                        mandarinContent.innerHTML = `<h3>中文翻译</h3><p>${getChapterMandarin(chapter)}</p>`;
+                        chapterBody.appendChild(mandarinContent);
+                    }
                 }
-            } else {
-                notesContent.value = '';
-                notesIncludeMandarin.checked = false;
-                notesMandarin.value = '';
-                mandarinGroup.style.display = 'none';
-            }
-        });
+            }, 500);
+        }
         
-        // Notes include Mandarin checkbox change
-        notesIncludeMandarin.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                mandarinGroup.style.display = 'block';
-            } else {
-                mandarinGroup.style.display = 'none';
-                notesMandarin.value = '';
-            }
-        });
+        // Get chapter title
+        function getChapterTitle(chapter) {
+            const titles = {
+                '1': '1 Information representation',
+                '2': '2 Communication',
+                '3': '3 Hardware',
+                '4': '4 Processor Fundamentals',
+                '5': '5 System Software',
+                '6': '6 Security, privacy and data integrity',
+                '7': '7 Ethics and Ownership',
+                '8': '8 Databases',
+                '9': '9 Algorithm Design and Problem-solving',
+                '10': '10 Data Types and Structures',
+                '11': '11 Programming',
+                '12': '12 Software Development',
+                '13': '13 Data Representation',
+                '14': '14 Communication and internet',
+                '15': '15 Hardware and Virtual Machines',
+                '16': '16 System Software',
+                '17': '17 Security',
+                '18': '18 Artificial Intelligence (AI)',
+                '19': '19 Computational thinking and Problem-solving',
+                '20': '20 Further Programming'
+            };
+            return titles[chapter] || 'Chapter Not Found';
+        }
         
-        // Save notes button click
-        saveNotesBtn.addEventListener('click', () => {
-            const chapter = notesChapterSelect.value;
-            const content = notesContent.value;
-            const includeMandarin = notesIncludeMandarin.checked;
-            const mandarin = notesMandarin.value;
+        // Get chapter content
+        function getChapterContent(chapter) {
+            const contents = {
+                '1': '<h3>1.1 Data Representation</h3><p>Data representation refers to the various methods used to represent information in a computer system. Computers store and process data in binary format (0s and 1s), but different types of data require different representation methods.</p><h3>1.2 Multimedia – Graphics, Sound</h3><p>Multimedia data such as graphics and sound require special representation techniques. Graphics can be represented using bitmap or vector formats, while sound is represented using digital sampling techniques.</p><h3>1.3 Compression</h3><p>Data compression is the process of reducing the size of data to save storage space or transmission time. There are two main types of compression: lossless and lossy.</p>',
+                '2': '<h3>2.1 Networks including the internet</h3><p>A computer network is a collection of interconnected computing devices that can exchange data and share resources. The internet is a global network of networks that connects billions of devices worldwide.</p>',
+                '3': '<h3>3.1 Computers and their components</h3><p>A computer system consists of hardware components that work together to process data. The main components include the CPU, memory, storage devices, input devices, and output devices.</p><h3>3.2 Logic Gates and Logic Circuits</h3><p>Logic gates are the basic building blocks of digital circuits. They perform logical operations on one or more binary inputs to produce a single binary output.</p>',
+                '4': '<h3>4.1 Central Processing Unit (CPU) Architecture</h3><p>The CPU is the brain of the computer, responsible for executing instructions. It consists of the Arithmetic Logic Unit (ALU), Control Unit (CU), and registers.</p><h3>4.2 Assembly Language</h3><p>Assembly language is a low-level programming language that is closely related to machine code. It uses mnemonic codes to represent machine instructions.</p><h3>4.3 Bit manipulation</h3><p>Bit manipulation involves working with individual bits within a binary number. Common bit manipulation operations include shifting, masking, and setting/clearing bits.</p>',
+                '5': '<h3>5.1 Operating Systems</h3><p>An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs.</p><h3>5.2 Language Translators</h3><p>Language translators convert source code written in one programming language into another language, typically machine code that can be executed by the computer.</p>',
+                '6': '<h3>6.1 Data Security</h3><p>Data security involves protecting digital data from unauthorized access, corruption, or theft throughout its lifecycle.</p><h3>6.2 Data Integrity</h3><p>Data integrity refers to maintaining and ensuring the accuracy and consistency of data over its entire lifecycle.</p>',
+                '7': '<h3>7.1 Ethics and Ownership</h3><p>Computer ethics deals with the moral issues that arise from the use of computers and information technology. Ownership refers to the legal rights associated with intellectual property.</p>',
+                '8': '<h3>8.1 Database Concepts</h3><p>A database is an organized collection of structured information, or data, typically stored electronically in a computer system.</p><h3>8.2 Database Management Systems (DBMS)</h3><p>A DBMS is software that enables users to create, maintain, and control access to databases.</p><h3>8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</h3><p>DDL is used to define and modify database structures, while DML is used to retrieve, insert, modify, and delete data in a database.</p>',
+                '9': '<h3>9.1 Computational Thinking Skills</h3><p>Computational thinking is a problem-solving process that involves various techniques and strategies for understanding and solving complex problems.</p><h3>9.2 Algorithms</h3><p>An algorithm is a finite sequence of well-defined instructions to solve a specific problem or perform a specific task.</p>',
+                '10': '<h3>10.1 Data Types and Records</h3><p>Data types define the kind of data that can be stored in a variable. Records are composite data types that group related data items together.</p><h3>10.2 Arrays</h3><p>An array is a data structure that stores a collection of elements of the same data type in contiguous memory locations.</p><h3>10.3 Files</h3><p>Files are used to store data permanently on secondary storage devices. They can be organized in various ways depending on the requirements of the application.</p><h3>10.4 Introduction to Abstract Data Types (ADT)</h3><p>An Abstract Data Type is a mathematical model for data types, where a data type is defined by its behavior (semantics) from the point of view of a user of the data.</p>',
+                '11': '<h3>11.1 Programming Basics</h3><p>Programming involves writing instructions that a computer can execute to perform specific tasks. It requires understanding of programming concepts, syntax, and problem-solving techniques.</p><h3>11.2 Constructs</h3><p>Programming constructs are the building blocks of programs, including sequence, selection, and iteration.</p><h3>11.3 Structured Programming</h3><p>Structured programming is a programming paradigm that improves clarity, quality, and development time by using subroutines, block structures, and for and while loops.</p>',
+                '12': '<h3>12.1 Program Development Life cycle</h3><p>The program development life cycle is a systematic process of developing software that includes requirements analysis, design, implementation, testing, deployment, and maintenance.</p><h3>12.2 Program Design</h3><p>Program design involves creating a detailed plan for how a program will be structured and how it will solve the problem at hand.</p><h3>12.3 Program Testing and Maintenance</h3><p>Program testing involves verifying that the software works as expected, while maintenance involves updating and improving the software after it has been deployed.</p>',
+                '13': '<h3>13.1 User-defined data types</h3><p>User-defined data types allow programmers to create their own data types based on existing types, providing more flexibility and better organization of data.</p><h3>13.2 File organisation and access</h3><p>File organization refers to how data is arranged in a file, while file access refers to how data can be retrieved from or written to a file.</p><h3>13.3 Floating-point numbers, representation and manipulation</h3><p>Floating-point numbers are used to represent real numbers with fractional parts. They are represented using a combination of sign, mantissa, and exponent.</p>',
+                '14': '<h3>14.1 Protocols technologies</h3><p>Network protocols are sets of rules that govern data exchange between devices in a network. They define how data is formatted, transmitted, and received.</p><h3>14.2 Circuit switching, packet switching</h3><p>Circuit switching and packet switching are two methods for transmitting data across a network. Circuit switching establishes a dedicated communication path, while packet switching breaks data into packets that can take different routes to the destination.</p>',
+                '15': '<h3>15.1 Processors, Parallel Processing and Virtual Machines</h3><p>Modern processors use various techniques to improve performance, including parallel processing and virtualization. Virtual machines allow multiple operating systems to run on a single physical machine.</p><h3>15.2 Boolean Algebra and Logic Circuits</h3><p>Boolean algebra is a branch of mathematics that deals with operations on logical values. It is used to design and analyze digital circuits.</p>',
+                '16': '<h3>16.1 Purposes of an Operating System (OS)</h3><p>An operating system manages computer hardware and software resources, provides common services for computer programs, and enables user interaction with the computer.</p><h3>16.2 Translation Software</h3><p>Translation software converts source code written in a high-level programming language into machine code that can be executed by the computer.</p>',
+                '17': '<h3>17.1 Encryption, Encryption Protocols and Digital certificates</h3><p>Encryption is the process of converting data into a code to prevent unauthorized access. Encryption protocols define how encryption is used in communications, while digital certificates verify the identity of entities in digital communications.</p>',
+                '18': '<h3>18.1 Artificial Intelligence</h3><p>Artificial Intelligence (AI) is a branch of computer science that aims to create intelligent machines that can simulate human thinking, learning, and behavior.</p>',
+                '19': '<h3>19.1 Algorithms</h3><p>Algorithms are step-by-step procedures for solving problems or performing tasks. They are fundamental to computer science and programming.</p><h3>19.2 Recursion</h3><p>Recursion is a programming technique where a function calls itself to solve a problem. It is particularly useful for problems that can be broken down into smaller, similar subproblems.</p>',
+                '20': '<h3>20.1 Programming Paradigms</h3><p>Programming paradigms are fundamental styles of programming, including procedural, object-oriented, functional, and logical programming.</p><h3>20.2 File Processing and Exception Handling</h3><p>File processing involves reading from and writing to files, while exception handling deals with errors and exceptional conditions that may occur during program execution.</p>'
+            };
+            return contents[chapter] || '<p>Content for this chapter is not yet available.</p>';
+        }
+        
+        // Get chapter Mandarin translation
+        function getChapterMandarin(chapter) {
+            const translations = {
+                '1': '信息表示涉及在计算机系统中表示信息的各种方法。计算机以二进制格式（0和1）存储和处理数据，但不同类型的数据需要不同的表示方法。',
+                '2': '计算机网络是相互连接的计算设备的集合，可以交换数据和共享资源。互联网是一个全球性的网络，连接着全球数十亿台设备。',
+                '3': '计算机系统由协同工作以处理数据的硬件组件组成。主要组件包括CPU、内存、存储设备、输入设备和输出设备。',
+                '4': 'CPU是计算机的大脑，负责执行指令。它由算术逻辑单元（ALU）、控制单元（CU）和寄存器组成。',
+                '5': '操作系统（OS）是系统软件，管理计算机硬件和软件资源，并为计算机程序提供通用服务。',
+                '6': '数据安全涉及保护数字数据免受未经授权的访问、损坏或盗窃，贯穿其整个生命周期。',
+                '7': '计算机伦理处理因使用计算机和信息技术而产生的道德问题。所有权指与知识产权相关的法律权利。',
+                '8': '数据库是结构化信息或数据的组织集合，通常以电子方式存储在计算机系统中。',
+                '9': '计算思维是一个解决问题的过程，涉及理解和解决复杂问题的各种技术和策略。',
+                '10': '数据类型定义了可以在变量中存储的数据类型。数组是一种数据结构，它将相同数据类型的元素集合存储在连续的内存位置中。',
+                '11': '编程涉及编写计算机可以执行以执行特定任务的指令。它需要理解编程概念、语法和解决问题的技巧。',
+                '12': '程序开发生命周期是开发软件的系统过程，包括需求分析、设计、实现、测试、部署和维护。',
+                '13': '用户定义的数据类型允许程序员基于现有类型创建自己的数据类型，提供更大的灵活性和更好的数据组织。',
+                '14': '网络协议是管理网络中设备间数据交换的规则集。它们定义了数据的格式、传输和接收方式。',
+                '15': '现代处理器使用各种技术来提高性能，包括并行处理和虚拟化。虚拟机允许多个操作系统在单个物理机上运行。',
+                '16': '操作系统管理计算机硬件和软件资源，为计算机程序提供通用服务，并使用户能够与计算机交互。',
+                '17': '加密是将数据转换为代码以防止未经授权访问的过程。加密协议定义了如何在通信中使用加密，而数字证书验证数字通信中实体的身份。',
+                '18': '人工智能（AI）是计算机科学的一个分支，旨在创建能够模拟人类思维、学习和行为的智能机器。',
+                '19': '算法是解决问题或执行任务的逐步过程。它们是计算机科学和编程的基础。',
+                '20': '编程范式是编程的基本风格，包括过程式、面向对象、函数式和逻辑编程。'
+            };
+            return translations[chapter] || '此章节的中文翻译尚不可用。';
+        }
+        
+        // Language toggle
+        languageToggle.addEventListener('click', () => {
+            isMandarin = !isMandarin;
+            currentLang.textContent = isMandarin ? '中文' : 'EN';
             
-            if (chapter && content) {
-                // Get existing notes
-                const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
-                
-                // Update notes for the chapter
-                notes[chapter] = {
-                    content: content
-                };
-                
-                if (includeMandarin && mandarin) {
-                    notes[chapter].mandarin = mandarin;
+            // Show notification
+            showNotification(`Language changed to ${isMandarin ? 'Mandarin' : 'English'}`, 'info');
+            
+            // If on syllabus page, reload chapter content with new language
+            const syllabusPage = document.getElementById('syllabus-page');
+            if (syllabusPage.classList.contains('active')) {
+                const chapterContent = document.getElementById('chapter-content');
+                if (chapterContent.style.display === 'block') {
+                    const chapterTitle = document.getElementById('chapter-title').textContent;
+                    const chapter = chapterTitle.split(' ')[1];
+                    if (chapter) {
+                        loadChapterContent(chapter);
+                    }
                 }
-                
-                // Save to localStorage
-                localStorage.setItem('cs_notes', JSON.stringify(notes));
-                
-                // Show notification
-                showNotification('Notes saved successfully!', 'success');
-            } else {
-                showNotification('Please select a chapter and enter notes content.', 'error');
             }
+        });
+        
+        // Form submissions
+        homeworkForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const assignmentId = document.getElementById('assignment-select').value;
+            const studentName = document.getElementById('student-name').value;
+            const studentId = document.getElementById('student-id').value;
+            const file = document.getElementById('homework-file').files[0];
+            const comments = document.getElementById('homework-comments').value;
+            
+            // Get assignment title
+            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+            const assignment = assignments.find(a => a.id == assignmentId);
+            
+            // Create new submission
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            const newSubmission = {
+                id: Date.now(),
+                assignmentId: parseInt(assignmentId),
+                assignmentTitle: assignment ? assignment.title : 'Unknown Assignment',
+                studentName,
+                studentId,
+                submissionDate: new Date().toISOString().split('T')[0],
+                status: 'submitted',
+                grade: null,
+                feedback: 'Your submission has been received and is currently being reviewed.'
+            };
+            
+            submissions.push(newSubmission);
+            localStorage.setItem('cs_submissions', JSON.stringify(submissions));
+            
+            // Show notification
+            showNotification('Homework submitted successfully!', 'success');
+            
+            // Reset form
+            homeworkForm.reset();
+            
+            // Reload submissions
+            loadData();
         });
         
         // Modal functions
@@ -1125,255 +1443,24 @@
             }, 3000);
         }
         
-        // Handle button clicks for edit, delete, view, grade
+        // Resource download buttons
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-warning') && e.target.getAttribute('data-action') === 'edit') {
-                const type = e.target.getAttribute('data-type');
-                const id = e.target.getAttribute('data-id');
+            if (e.target.classList.contains('btn-primary') && e.target.textContent === 'Download') {
+                const resourceId = e.target.getAttribute('data-resource-id');
+                const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+                const resource = resources.find(r => r.id == resourceId);
                 
-                if (type === 'resource') {
-                    const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
-                    const resource = resources.find(r => r.id == id);
-                    
-                    if (resource) {
-                        showModal(`Edit Resource: ${resource.name}`, `
-                            <div class="form-group">
-                                <label for="edit-resource-name">Resource Name</label>
-                                <input type="text" class="form-control" id="edit-resource-name" value="${resource.name}">
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-resource-chapter">Chapter</label>
-                                <select class="form-control" id="edit-resource-chapter">
-                                    <option value="1.1" ${resource.chapter === '1.1' ? 'selected' : ''}>1.1 Data Representation</option>
-                                    <option value="1.2" ${resource.chapter === '1.2' ? 'selected' : ''}>1.2 Multimedia – Graphics, Sound</option>
-                                    <option value="1.3" ${resource.chapter === '1.3' ? 'selected' : ''}>1.3 Compression</option>
-                                    <option value="2.1" ${resource.chapter === '2.1' ? 'selected' : ''}>2.1 Networks including the internet</option>
-                                    <option value="3.1" ${resource.chapter === '3.1' ? 'selected' : ''}>3.1 Computers and their components</option>
-                                    <option value="3.2" ${resource.chapter === '3.2' ? 'selected' : ''}>3.2 Logic Gates and Logic Circuits</option>
-                                    <option value="4.1" ${resource.chapter === '4.1' ? 'selected' : ''}>4.1 Central Processing Unit (CPU) Architecture</option>
-                                    <option value="4.2" ${resource.chapter === '4.2' ? 'selected' : ''}>4.2 Assembly Language</option>
-                                    <option value="4.3" ${resource.chapter === '4.3' ? 'selected' : ''}>4.3 Bit manipulation</option>
-                                    <option value="5.1" ${resource.chapter === '5.1' ? 'selected' : ''}>5.1 Operating Systems</option>
-                                    <option value="5.2" ${resource.chapter === '5.2' ? 'selected' : ''}>5.2 Language Translators</option>
-                                    <option value="6.1" ${resource.chapter === '6.1' ? 'selected' : ''}>6.1 Data Security</option>
-                                    <option value="6.2" ${resource.chapter === '6.2' ? 'selected' : ''}>6.2 Data Integrity</option>
-                                    <option value="7.1" ${resource.chapter === '7.1' ? 'selected' : ''}>7.1 Ethics and Ownership</option>
-                                    <option value="8.1" ${resource.chapter === '8.1' ? 'selected' : ''}>8.1 Database Concepts</option>
-                                    <option value="8.2" ${resource.chapter === '8.2' ? 'selected' : ''}>8.2 Database Management Systems (DBMS)</option>
-                                    <option value="8.3" ${resource.chapter === '8.3' ? 'selected' : ''}>8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
-                                    <option value="9.1" ${resource.chapter === '9.1' ? 'selected' : ''}>9.1 Computational Thinking Skills</option>
-                                    <option value="9.2" ${resource.chapter === '9.2' ? 'selected' : ''}>9.2 Algorithms</option>
-                                    <option value="10.1" ${resource.chapter === '10.1' ? 'selected' : ''}>10.1 Data Types and Records</option>
-                                    <option value="10.2" ${resource.chapter === '10.2' ? 'selected' : ''}>10.2 Arrays</option>
-                                    <option value="10.3" ${resource.chapter === '10.3' ? 'selected' : ''}>10.3 Files</option>
-                                    <option value="10.4" ${resource.chapter === '10.4' ? 'selected' : ''}>10.4 Introduction to Abstract Data Types (ADT)</option>
-                                    <option value="11.1" ${resource.chapter === '11.1' ? 'selected' : ''}>11.1 Programming Basics</option>
-                                    <option value="11.2" ${resource.chapter === '11.2' ? 'selected' : ''}>11.2 Constructs</option>
-                                    <option value="11.3" ${resource.chapter === '11.3' ? 'selected' : ''}>11.3 Structured Programming</option>
-                                    <option value="12.1" ${resource.chapter === '12.1' ? 'selected' : ''}>12.1 Program Development Life cycle</option>
-                                    <option value="12.2" ${resource.chapter === '12.2' ? 'selected' : ''}>12.2 Program Design</option>
-                                    <option value="12.3" ${resource.chapter === '12.3' ? 'selected' : ''}>12.3 Program Testing and Maintenance</option>
-                                    <option value="13.1" ${resource.chapter === '13.1' ? 'selected' : ''}>13.1 User-defined data types</option>
-                                    <option value="13.2" ${resource.chapter === '13.2' ? 'selected' : ''}>13.2 File organisation and access</option>
-                                    <option value="13.3" ${resource.chapter === '13.3' ? 'selected' : ''}>13.3 Floating-point numbers, representation and manipulation</option>
-                                    <option value="14.1" ${resource.chapter === '14.1' ? 'selected' : ''}>14.1 Protocols technologies</option>
-                                    <option value="14.2" ${resource.chapter === '14.2' ? 'selected' : ''}>14.2 Circuit switching, packet switching</option>
-                                    <option value="15.1" ${resource.chapter === '15.1' ? 'selected' : ''}>15.1 Processors, Parallel Processing and Virtual Machines</option>
-                                    <option value="15.2" ${resource.chapter === '15.2' ? 'selected' : ''}>15.2 Boolean Algebra and Logic Circuits</option>
-                                    <option value="16.1" ${resource.chapter === '16.1' ? 'selected' : ''}>16.1 Purposes of an Operating System (OS)</option>
-                                    <option value="16.2" ${resource.chapter === '16.2' ? 'selected' : ''}>16.2 Translation Software</option>
-                                    <option value="17.1" ${resource.chapter === '17.1' ? 'selected' : ''}>17.1 Encryption, Encryption Protocols and Digital certificates</option>
-                                    <option value="18.1" ${resource.chapter === '18.1' ? 'selected' : ''}>18.1 Artificial Intelligence</option>
-                                    <option value="19.1" ${resource.chapter === '19.1' ? 'selected' : ''}>19.1 Algorithms</option>
-                                    <option value="19.2" ${resource.chapter === '19.2' ? 'selected' : ''}>19.2 Recursion</option>
-                                    <option value="20.1" ${resource.chapter === '20.1' ? 'selected' : ''}>20.1 Programming Paradigms</option>
-                                    <option value="20.2" ${resource.chapter === '20.2' ? 'selected' : ''}>20.2 File Processing and Exception Handling</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-resource-description">Description</label>
-                                <textarea class="form-control" id="edit-resource-description">${resource.description || ''}</textarea>
-                            </div>
-                        `, () => {
-                            // Update resource
-                            const updatedName = document.getElementById('edit-resource-name').value;
-                            const updatedChapter = document.getElementById('edit-resource-chapter').value;
-                            const updatedDescription = document.getElementById('edit-resource-description').value;
-                            
-                            resource.name = updatedName;
-                            resource.chapter = updatedChapter;
-                            resource.description = updatedDescription;
-                            
-                            // Save to localStorage
-                            localStorage.setItem('cs_resources', JSON.stringify(resources));
-                            
-                            // Show notification
-                            showNotification('Resource updated successfully!', 'success');
-                            
-                            // Reload data
-                            loadData();
-                        });
-                    }
-                } else if (type === 'news') {
-                    const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
-                    const newsItem = news.find(n => n.id == id);
-                    
-                    if (newsItem) {
-                        showModal(`Edit News: ${newsItem.title}`, `
-                            <div class="form-group">
-                                <label for="edit-news-title">News Title</label>
-                                <input type="text" class="form-control" id="edit-news-title" value="${newsItem.title}">
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-news-date">Date</label>
-                                <input type="date" class="form-control" id="edit-news-date" value="${newsItem.date}">
-                            </div>
-                            <div class="form-group">
-                                <label for="edit-news-content">Content</label>
-                                <textarea class="form-control" id="edit-news-content" rows="5">${newsItem.content}</textarea>
-                            </div>
-                        `, () => {
-                            // Update news
-                            const updatedTitle = document.getElementById('edit-news-title').value;
-                            const updatedDate = document.getElementById('edit-news-date').value;
-                            const updatedContent = document.getElementById('edit-news-content').value;
-                            
-                            newsItem.title = updatedTitle;
-                            newsItem.date = updatedDate;
-                            newsItem.content = updatedContent;
-                            
-                            // Save to localStorage
-                            localStorage.setItem('cs_news', JSON.stringify(news));
-                            
-                            // Show notification
-                            showNotification('News updated successfully!', 'success');
-                            
-                            // Reload data
-                            loadData();
-                        });
-                    }
-                }
-            } else if (e.target.classList.contains('btn-danger') && e.target.getAttribute('data-action') === 'delete') {
-                const type = e.target.getAttribute('data-type');
-                const id = e.target.getAttribute('data-id');
-                
-                if (type === 'resource') {
-                    const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
-                    const resource = resources.find(r => r.id == id);
-                    
-                    if (resource) {
-                        showModal(`Delete Resource: ${resource.name}`, `<p>Are you sure you want to delete ${resource.name}?</p>`, () => {
-                            // Remove resource
-                            const index = resources.findIndex(r => r.id == id);
-                            resources.splice(index, 1);
-                            
-                            // Save to localStorage
-                            localStorage.setItem('cs_resources', JSON.stringify(resources));
-                            
-                            // Show notification
-                            showNotification('Resource deleted successfully!', 'success');
-                            
-                            // Reload data
-                            loadData();
-                        });
-                    }
-                } else if (type === 'news') {
-                    const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
-                    const newsItem = news.find(n => n.id == id);
-                    
-                    if (newsItem) {
-                        showModal(`Delete News: ${newsItem.title}`, `<p>Are you sure you want to delete ${newsItem.title}?</p>`, () => {
-                            // Remove news
-                            const index = news.findIndex(n => n.id == id);
-                            news.splice(index, 1);
-                            
-                            // Save to localStorage
-                            localStorage.setItem('cs_news', JSON.stringify(news));
-                            
-                            // Show notification
-                            showNotification('News deleted successfully!', 'success');
-                            
-                            // Reload data
-                            loadData();
-                        });
-                    }
-                }
-            } else if (e.target.classList.contains('btn-primary') && e.target.getAttribute('data-action') === 'view') {
-                const id = e.target.getAttribute('data-id');
-                const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
-                const submission = submissions.find(s => s.id == id);
-                
-                if (submission) {
-                    showModal(`View Submission - ${submission.studentName}`, `
-                        <div class="form-group">
-                            <label>Student Name</label>
-                            <p>${submission.studentName}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Student ID</label>
-                            <p>${submission.studentId}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Assignment</label>
-                            <p>${submission.assignmentTitle}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Submission Date</label>
-                            <p>${formatDate(submission.submissionDate)}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Status</label>
-                            <p>${submission.status === 'submitted' ? 'Submitted - Pending Review' : submission.status}</p>
-                        </div>
-                        <div class="form-group">
-                            <label>Feedback</label>
-                            <p>${submission.feedback}</p>
-                        </div>
-                    `, null);
-                }
-            } else if (e.target.classList.contains('btn-success') && e.target.getAttribute('data-action') === 'grade') {
-                const id = e.target.getAttribute('data-id');
-                const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
-                const submission = submissions.find(s => s.id == id);
-                
-                if (submission) {
-                    showModal(`Grade Submission - ${submission.studentName}`, `
-                        <div class="form-group">
-                            <label for="grade">Grade</label>
-                            <select class="form-control" id="grade">
-                                <option value="">-- Select Grade --</option>
-                                <option value="A">A</option>
-                                <option value="B">B</option>
-                                <option value="C">C</option>
-                                <option value="D">D</option>
-                                <option value="E">E</option>
-                                <option value="F">F</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="feedback">Feedback</label>
-                            <textarea class="form-control" id="feedback" rows="5"></textarea>
-                        </div>
-                    `, () => {
-                        // Update submission
-                        const grade = document.getElementById('grade').value;
-                        const feedback = document.getElementById('feedback').value;
-                        
-                        submission.status = 'graded';
-                        submission.grade = grade;
-                        submission.feedback = feedback;
-                        
-                        // Save to localStorage
-                        localStorage.setItem('cs_submissions', JSON.stringify(submissions));
-                        
-                        // Show notification
-                        showNotification('Submission graded successfully!', 'success');
-                        
-                        // Reload data
-                        loadData();
-                    });
+                if (resource) {
+                    showNotification(`Downloading ${resource.name}...`, 'info');
+                    // In a real implementation, this would trigger an actual download
                 }
             }
+        });
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            loadData();
         });
     </script>
 </body>
