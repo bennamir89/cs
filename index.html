@@ -430,6 +430,39 @@
             display: block;
         }
 
+        /* Login Page */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 70px);
+            background-color: var(--light-gray);
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: #666;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -591,143 +624,514 @@
             margin-bottom: 0.5rem;
             color: var(--primary-color);
         }
+
+        /* Admin Header */
+        .admin-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .admin-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .admin-logout {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">AS & A2 Computer Science</div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="syllabus">Syllabus</a></li>
-                    <li><a href="#" class="nav-link" data-page="resources">Resources</a></li>
-                    <li><a href="#" class="nav-link" data-page="homework">Homework</a></li>
-                    <li><a href="#" class="nav-link" data-page="admin">Admin</a></li>
-                </ul>
-            </nav>
-            <button class="language-toggle" id="languageToggle">
-                <i class="fas fa-globe"></i>
-                <span id="currentLang">EN</span>
-            </button>
+    <!-- Main Website -->
+    <div id="main-site">
+        <!-- Header -->
+        <header>
+            <div class="container header-container">
+                <div class="logo">AS & A2 Computer Science</div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                        <li><a href="#" class="nav-link" data-page="syllabus">Syllabus</a></li>
+                        <li><a href="#" class="nav-link" data-page="resources">Resources</a></li>
+                        <li><a href="#" class="nav-link" data-page="homework">Homework</a></li>
+                    </ul>
+                </nav>
+                <button class="language-toggle" id="languageToggle">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">EN</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Container -->
+        <div class="main-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3>Syllabus Navigation</h3>
+                
+                <!-- AS Level Syllabus -->
+                <div class="syllabus-section active">
+                    <h4><span>AS Level</span> <i class="fas fa-chevron-down"></i></h4>
+                    <ul>
+                        <li><a href="#" data-chapter="1">1 Information representation</a></li>
+                        <li><a href="#" data-chapter="2">2 Communication</a></li>
+                        <li><a href="#" data-chapter="3">3 Hardware</a></li>
+                        <li><a href="#" data-chapter="4">4 Processor Fundamentals</a></li>
+                        <li><a href="#" data-chapter="5">5 System Software</a></li>
+                        <li><a href="#" data-chapter="6">6 Security, privacy and data integrity</a></li>
+                        <li><a href="#" data-chapter="7">7 Ethics and Ownership</a></li>
+                        <li><a href="#" data-chapter="8">8 Databases</a></li>
+                        <li><a href="#" data-chapter="9">9 Algorithm Design and Problem-solving</a></li>
+                        <li><a href="#" data-chapter="10">10 Data Types and Structures</a></li>
+                        <li><a href="#" data-chapter="11">11 Programming</a></li>
+                        <li><a href="#" data-chapter="12">12 Software Development</a></li>
+                    </ul>
+                </div>
+                
+                <!-- A2 Level Syllabus -->
+                <div class="syllabus-section">
+                    <h4><span>A2 Level</span> <i class="fas fa-chevron-down"></i></h4>
+                    <ul>
+                        <li><a href="#" data-chapter="13">13 Data Representation</a></li>
+                        <li><a href="#" data-chapter="14">14 Communication and internet</a></li>
+                        <li><a href="#" data-chapter="15">15 Hardware and Virtual Machines</a></li>
+                        <li><a href="#" data-chapter="16">16 System Software</a></li>
+                        <li><a href="#" data-chapter="17">17 Security</a></li>
+                        <li><a href="#" data-chapter="18">18 Artificial Intelligence (AI)</a></li>
+                        <li><a href="#" data-chapter="19">19 Computational thinking and Problem-solving</a></li>
+                        <li><a href="#" data-chapter="20">20 Further Programming</a></li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content">
+                <!-- Home Page -->
+                <div id="home-page" class="page-content active">
+                    <h1 class="page-title">Welcome to AS & A2 Computer Science</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">About This Course</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>This course covers the Cambridge International AS & A Level Computer Science (9618) syllabus. Here you'll find all the resources, notes, and assignments you need to succeed in your studies.</p>
+                            <p>The course is designed to help students develop computational thinking, programming skills, and an understanding of computer systems.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Recent News</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="news-item">
+                                <div class="news-date">June 15, 2023</div>
+                                <div class="news-content">
+                                    <div class="news-title">Mock Exam Schedule Released</div>
+                                    <p>The mock exam schedule for the upcoming term has been released. Please check the Resources section for the detailed timetable.</p>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-date">June 10, 2023</div>
+                                <div class="news-content">
+                                    <div class="news-title">New Programming Resources Added</div>
+                                    <p>New resources for Python programming have been added to the Resources section. These include video tutorials and practice exercises.</p>
+                                </div>
+                            </div>
+                            <div class="news-item">
+                                <div class="news-date">June 5, 2023</div>
+                                <div class="news-content">
+                                    <div class="news-title">Homework Deadline Reminder</div>
+                                    <p>Reminder that the Algorithm Design homework is due on June 20, 2023. Please submit your work through the Homework section.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Upcoming Deadlines</h2>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Assignment</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Algorithm Design Homework</td>
+                                        <td>June 20, 2023</td>
+                                        <td><span class="submission-status status-pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Database Design Project</td>
+                                        <td>June 25, 2023</td>
+                                        <td><span class="submission-status status-pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Programming Assignment</td>
+                                        <td>July 5, 2023</td>
+                                        <td><span class="submission-status status-pending">Pending</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Syllabus Page -->
+                <div id="syllabus-page" class="page-content">
+                    <h1 class="page-title">Syllabus</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Select a Chapter</h2>
+                        </div>
+                        <div class="card-body">
+                            <p>Please select a chapter from the sidebar to view the detailed syllabus and notes.</p>
+                        </div>
+                    </div>
+                    
+                    <div id="chapter-content" class="card" style="display: none;">
+                        <div class="card-header">
+                            <h2 class="card-title" id="chapter-title">Chapter Title</h2>
+                        </div>
+                        <div class="card-body" id="chapter-body">
+                            <!-- Chapter content will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resources Page -->
+                <div id="resources-page" class="page-content">
+                    <h1 class="page-title">Resources</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Available Resources</h2>
+                        </div>
+                        <div class="card-body">
+                            <ul class="resource-list">
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Introduction to Data Representation</div>
+                                        <div class="resource-meta">Chapter 1.1 • PDF • 2.5 MB • Uploaded: June 1, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Network Topologies</div>
+                                        <div class="resource-meta">Chapter 2.1 • PowerPoint • 5.1 MB • Uploaded: June 3, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">CPU Architecture</div>
+                                        <div class="resource-meta">Chapter 4.1 • PDF • 3.2 MB • Uploaded: June 5, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Assembly Language Examples</div>
+                                        <div class="resource-meta">Chapter 4.2 • ZIP • 1.8 MB • Uploaded: June 7, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Operating Systems</div>
+                                        <div class="resource-meta">Chapter 5.1 • PDF • 4.3 MB • Uploaded: June 10, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Database Design Principles</div>
+                                        <div class="resource-meta">Chapter 8.1 • PowerPoint • 6.7 MB • Uploaded: June 12, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Algorithm Design Techniques</div>
+                                        <div class="resource-meta">Chapter 9.2 • PDF • 3.9 MB • Uploaded: June 14, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                                <li class="resource-item">
+                                    <div class="resource-info">
+                                        <div class="resource-name">Python Programming Basics</div>
+                                        <div class="resource-meta">Chapter 11.1 • ZIP • 8.2 MB • Uploaded: June 16, 2023</div>
+                                    </div>
+                                    <button class="btn btn-primary">Download</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Homework Page -->
+                <div id="homework-page" class="page-content">
+                    <h1 class="page-title">Homework</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Submit Homework</h2>
+                        </div>
+                        <div class="card-body">
+                            <form id="homework-form">
+                                <div class="form-group">
+                                    <label for="assignment-select">Select Assignment</label>
+                                    <select class="form-control" id="assignment-select" required>
+                                        <option value="">-- Select Assignment --</option>
+                                        <option value="1">Algorithm Design Homework</option>
+                                        <option value="2">Database Design Project</option>
+                                        <option value="3">Programming Assignment</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="student-name">Your Name</label>
+                                    <input type="text" class="form-control" id="student-name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="student-id">Student ID</label>
+                                    <input type="text" class="form-control" id="student-id" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="homework-file">Upload File</label>
+                                    <input type="file" class="form-control" id="homework-file" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="homework-comments">Additional Comments</label>
+                                    <textarea class="form-control" id="homework-comments" placeholder="Any additional notes or comments about your submission..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit Homework</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Your Submissions</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="submission-item">
+                                <div class="submission-header">
+                                    <div class="submission-title">Data Representation Assignment</div>
+                                    <div class="submission-date">Submitted: June 1, 2023</div>
+                                </div>
+                                <div class="submission-status status-graded">Graded: A</div>
+                                <p>Feedback: Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.</p>
+                            </div>
+                            <div class="submission-item">
+                                <div class="submission-header">
+                                    <div class="submission-title">Network Topologies Research</div>
+                                    <div class="submission-date">Submitted: June 5, 2023</div>
+                                </div>
+                                <div class="submission-status status-graded">Graded: B+</div>
+                                <p>Feedback: Good research on different network topologies. Consider adding more real-world examples in future assignments.</p>
+                            </div>
+                            <div class="submission-item">
+                                <div class="submission-header">
+                                    <div class="submission-title">Assembly Language Program</div>
+                                    <div class="submission-date">Submitted: June 10, 2023</div>
+                                </div>
+                                <div class="submission-status status-submitted">Submitted - Pending Review</div>
+                                <p>Your submission has been received and is currently being reviewed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
         </div>
-    </header>
+    </div>
 
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h3>Syllabus Navigation</h3>
+    <!-- Admin Login Page -->
+    <div id="admin-login" style="display: none;">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1 class="login-title">Admin Login</h1>
+                    <p class="login-subtitle">AS & A2 Computer Science</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" style="display: none;">
+        <!-- Admin Header -->
+        <header class="admin-header">
+            <div class="container header-container">
+                <div class="admin-logo">Admin Panel - AS & A2 Computer Science</div>
+                <button class="admin-logout" id="admin-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Admin Content -->
+        <div class="container" style="padding: 2rem;">
+            <h1 class="page-title">Admin Dashboard</h1>
             
-            <!-- AS Level Syllabus -->
-            <div class="syllabus-section active">
-                <h4><span>AS Level</span> <i class="fas fa-chevron-down"></i></h4>
-                <ul>
-                    <li><a href="#" data-chapter="1">1 Information representation</a></li>
-                    <li><a href="#" data-chapter="2">2 Communication</a></li>
-                    <li><a href="#" data-chapter="3">3 Hardware</a></li>
-                    <li><a href="#" data-chapter="4">4 Processor Fundamentals</a></li>
-                    <li><a href="#" data-chapter="5">5 System Software</a></li>
-                    <li><a href="#" data-chapter="6">6 Security, privacy and data integrity</a></li>
-                    <li><a href="#" data-chapter="7">7 Ethics and Ownership</a></li>
-                    <li><a href="#" data-chapter="8">8 Databases</a></li>
-                    <li><a href="#" data-chapter="9">9 Algorithm Design and Problem-solving</a></li>
-                    <li><a href="#" data-chapter="10">10 Data Types and Structures</a></li>
-                    <li><a href="#" data-chapter="11">11 Programming</a></li>
-                    <li><a href="#" data-chapter="12">12 Software Development</a></li>
-                </ul>
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="resources">Manage Resources</div>
+                <div class="admin-tab" data-tab="news">Manage News</div>
+                <div class="admin-tab" data-tab="homework">Review Homework</div>
+                <div class="admin-tab" data-tab="notes">Manage Notes</div>
             </div>
             
-            <!-- A2 Level Syllabus -->
-            <div class="syllabus-section">
-                <h4><span>A2 Level</span> <i class="fas fa-chevron-down"></i></h4>
-                <ul>
-                    <li><a href="#" data-chapter="13">13 Data Representation</a></li>
-                    <li><a href="#" data-chapter="14">14 Communication and internet</a></li>
-                    <li><a href="#" data-chapter="15">15 Hardware and Virtual Machines</a></li>
-                    <li><a href="#" data-chapter="16">16 System Software</a></li>
-                    <li><a href="#" data-chapter="17">17 Security</a></li>
-                    <li><a href="#" data-chapter="18">18 Artificial Intelligence (AI)</a></li>
-                    <li><a href="#" data-chapter="19">19 Computational thinking and Problem-solving</a></li>
-                    <li><a href="#" data-chapter="20">20 Further Programming</a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- Content Area -->
-        <main class="content">
-            <!-- Home Page -->
-            <div id="home-page" class="page-content active">
-                <h1 class="page-title">Welcome to AS & A2 Computer Science</h1>
-                
+            <!-- Resources Tab -->
+            <div id="resources-tab" class="tab-content active">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">About This Course</h2>
+                        <h2 class="card-title">Upload New Resource</h2>
                     </div>
                     <div class="card-body">
-                        <p>This course covers the Cambridge International AS & A Level Computer Science (9618) syllabus. Here you'll find all the resources, notes, and assignments you need to succeed in your studies.</p>
-                        <p>The course is designed to help students develop computational thinking, programming skills, and an understanding of computer systems.</p>
+                        <form id="resource-form">
+                            <div class="form-group">
+                                <label for="resource-name">Resource Name</label>
+                                <input type="text" class="form-control" id="resource-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-chapter">Chapter</label>
+                                <select class="form-control" id="resource-chapter" required>
+                                    <option value="">-- Select Chapter --</option>
+                                    <option value="1.1">1.1 Data Representation</option>
+                                    <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
+                                    <option value="1.3">1.3 Compression</option>
+                                    <option value="2.1">2.1 Networks including the internet</option>
+                                    <option value="3.1">3.1 Computers and their components</option>
+                                    <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
+                                    <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
+                                    <option value="4.2">4.2 Assembly Language</option>
+                                    <option value="4.3">4.3 Bit manipulation</option>
+                                    <option value="5.1">5.1 Operating Systems</option>
+                                    <option value="5.2">5.2 Language Translators</option>
+                                    <option value="6.1">6.1 Data Security</option>
+                                    <option value="6.2">6.2 Data Integrity</option>
+                                    <option value="7.1">7.1 Ethics and Ownership</option>
+                                    <option value="8.1">8.1 Database Concepts</option>
+                                    <option value="8.2">8.2 Database Management Systems (DBMS)</option>
+                                    <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
+                                    <option value="9.1">9.1 Computational Thinking Skills</option>
+                                    <option value="9.2">9.2 Algorithms</option>
+                                    <option value="10.1">10.1 Data Types and Records</option>
+                                    <option value="10.2">10.2 Arrays</option>
+                                    <option value="10.3">10.3 Files</option>
+                                    <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
+                                    <option value="11.1">11.1 Programming Basics</option>
+                                    <option value="11.2">11.2 Constructs</option>
+                                    <option value="11.3">11.3 Structured Programming</option>
+                                    <option value="12.1">12.1 Program Development Life cycle</option>
+                                    <option value="12.2">12.2 Program Design</option>
+                                    <option value="12.3">12.3 Program Testing and Maintenance</option>
+                                    <option value="13.1">13.1 User-defined data types</option>
+                                    <option value="13.2">13.2 File organisation and access</option>
+                                    <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
+                                    <option value="14.1">14.1 Protocols technologies</option>
+                                    <option value="14.2">14.2 Circuit switching, packet switching</option>
+                                    <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
+                                    <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
+                                    <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
+                                    <option value="16.2">16.2 Translation Software</option>
+                                    <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
+                                    <option value="18.1">18.1 Artificial Intelligence</option>
+                                    <option value="19.1">19.1 Algorithms</option>
+                                    <option value="19.2">19.2 Recursion</option>
+                                    <option value="20.1">20.1 Programming Paradigms</option>
+                                    <option value="20.2">20.2 File Processing and Exception Handling</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-file">Upload File</label>
+                                <input type="file" class="form-control" id="resource-file" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="resource-description">Description</label>
+                                <textarea class="form-control" id="resource-description" placeholder="Brief description of the resource..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Upload Resource</button>
+                        </form>
                     </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Recent News</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="news-item">
-                            <div class="news-date">June 15, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">Mock Exam Schedule Released</div>
-                                <p>The mock exam schedule for the upcoming term has been released. Please check the Resources section for the detailed timetable.</p>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="news-date">June 10, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">New Programming Resources Added</div>
-                                <p>New resources for Python programming have been added to the Resources section. These include video tutorials and practice exercises.</p>
-                            </div>
-                        </div>
-                        <div class="news-item">
-                            <div class="news-date">June 5, 2023</div>
-                            <div class="news-content">
-                                <div class="news-title">Homework Deadline Reminder</div>
-                                <p>Reminder that the Algorithm Design homework is due on June 20, 2023. Please submit your work through the Homework section.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Upcoming Deadlines</h2>
+                        <h2 class="card-title">Existing Resources</h2>
                     </div>
                     <div class="card-body">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Assignment</th>
-                                    <th>Due Date</th>
-                                    <th>Status</th>
+                                    <th>Name</th>
+                                    <th>Chapter</th>
+                                    <th>Upload Date</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Algorithm Design Homework</td>
-                                    <td>June 20, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
+                                    <td>Introduction to Data Representation</td>
+                                    <td>1.1</td>
+                                    <td>June 1, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Database Design Project</td>
-                                    <td>June 25, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
+                                    <td>Network Topologies</td>
+                                    <td>2.1</td>
+                                    <td>June 3, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td>Programming Assignment</td>
-                                    <td>July 5, 2023</td>
-                                    <td><span class="submission-status status-pending">Pending</span></td>
+                                    <td>CPU Architecture</td>
+                                    <td>4.1</td>
+                                    <td>June 5, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -735,483 +1139,131 @@
                 </div>
             </div>
             
-            <!-- Syllabus Page -->
-            <div id="syllabus-page" class="page-content">
-                <h1 class="page-title">Syllabus</h1>
-                
+            <!-- News Tab -->
+            <div id="news-tab" class="tab-content">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Select a Chapter</h2>
+                        <h2 class="card-title">Add News Item</h2>
                     </div>
                     <div class="card-body">
-                        <p>Please select a chapter from the sidebar to view the detailed syllabus and notes.</p>
-                    </div>
-                </div>
-                
-                <div id="chapter-content" class="card" style="display: none;">
-                    <div class="card-header">
-                        <h2 class="card-title" id="chapter-title">Chapter Title</h2>
-                    </div>
-                    <div class="card-body" id="chapter-body">
-                        <!-- Chapter content will be loaded here -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Resources Page -->
-            <div id="resources-page" class="page-content">
-                <h1 class="page-title">Resources</h1>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Available Resources</h2>
-                    </div>
-                    <div class="card-body">
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Introduction to Data Representation</div>
-                                    <div class="resource-meta">Chapter 1.1 • PDF • 2.5 MB • Uploaded: June 1, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Network Topologies</div>
-                                    <div class="resource-meta">Chapter 2.1 • PowerPoint • 5.1 MB • Uploaded: June 3, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">CPU Architecture</div>
-                                    <div class="resource-meta">Chapter 4.1 • PDF • 3.2 MB • Uploaded: June 5, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Assembly Language Examples</div>
-                                    <div class="resource-meta">Chapter 4.2 • ZIP • 1.8 MB • Uploaded: June 7, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Operating Systems</div>
-                                    <div class="resource-meta">Chapter 5.1 • PDF • 4.3 MB • Uploaded: June 10, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Database Design Principles</div>
-                                    <div class="resource-meta">Chapter 8.1 • PowerPoint • 6.7 MB • Uploaded: June 12, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Algorithm Design Techniques</div>
-                                    <div class="resource-meta">Chapter 9.2 • PDF • 3.9 MB • Uploaded: June 14, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-info">
-                                    <div class="resource-name">Python Programming Basics</div>
-                                    <div class="resource-meta">Chapter 11.1 • ZIP • 8.2 MB • Uploaded: June 16, 2023</div>
-                                </div>
-                                <button class="btn btn-primary">Download</button>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Homework Page -->
-            <div id="homework-page" class="page-content">
-                <h1 class="page-title">Homework</h1>
-                
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title">Submit Homework</h2>
-                    </div>
-                    <div class="card-body">
-                        <form id="homework-form">
+                        <form id="news-form">
                             <div class="form-group">
-                                <label for="assignment-select">Select Assignment</label>
-                                <select class="form-control" id="assignment-select" required>
-                                    <option value="">-- Select Assignment --</option>
-                                    <option value="1">Algorithm Design Homework</option>
-                                    <option value="2">Database Design Project</option>
-                                    <option value="3">Programming Assignment</option>
-                                </select>
+                                <label for="news-title">News Title</label>
+                                <input type="text" class="form-control" id="news-title" required>
                             </div>
                             <div class="form-group">
-                                <label for="student-name">Your Name</label>
-                                <input type="text" class="form-control" id="student-name" required>
+                                <label for="news-date">Date</label>
+                                <input type="date" class="form-control" id="news-date" required>
                             </div>
                             <div class="form-group">
-                                <label for="student-id">Student ID</label>
-                                <input type="text" class="form-control" id="student-id" required>
+                                <label for="news-content">Content</label>
+                                <textarea class="form-control" id="news-content" rows="5" required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="homework-file">Upload File</label>
-                                <input type="file" class="form-control" id="homework-file" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="homework-comments">Additional Comments</label>
-                                <textarea class="form-control" id="homework-comments" placeholder="Any additional notes or comments about your submission..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit Homework</button>
+                            <button type="submit" class="btn btn-primary">Add News</button>
                         </form>
                     </div>
                 </div>
                 
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Your Submissions</h2>
+                        <h2 class="card-title">Existing News</h2>
                     </div>
                     <div class="card-body">
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Data Representation Assignment</div>
-                                <div class="submission-date">Submitted: June 1, 2023</div>
-                            </div>
-                            <div class="submission-status status-graded">Graded: A</div>
-                            <p>Feedback: Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.</p>
-                        </div>
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Network Topologies Research</div>
-                                <div class="submission-date">Submitted: June 5, 2023</div>
-                            </div>
-                            <div class="submission-status status-graded">Graded: B+</div>
-                            <p>Feedback: Good research on different network topologies. Consider adding more real-world examples in future assignments.</p>
-                        </div>
-                        <div class="submission-item">
-                            <div class="submission-header">
-                                <div class="submission-title">Assembly Language Program</div>
-                                <div class="submission-date">Submitted: June 10, 2023</div>
-                            </div>
-                            <div class="submission-status status-submitted">Submitted - Pending Review</div>
-                            <p>Your submission has been received and is currently being reviewed.</p>
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mock Exam Schedule Released</td>
+                                    <td>June 15, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>New Programming Resources Added</td>
+                                    <td>June 10, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Homework Deadline Reminder</td>
+                                    <td>June 5, 2023</td>
+                                    <td>
+                                        <button class="btn btn-warning">Edit</button>
+                                        <button class="btn btn-danger">Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
             
-            <!-- Admin Page -->
-            <div id="admin-page" class="page-content">
-                <h1 class="page-title">Admin Panel</h1>
-                
-                <div class="admin-tabs">
-                    <div class="admin-tab active" data-tab="resources">Manage Resources</div>
-                    <div class="admin-tab" data-tab="news">Manage News</div>
-                    <div class="admin-tab" data-tab="homework">Review Homework</div>
-                    <div class="admin-tab" data-tab="notes">Manage Notes</div>
-                </div>
-                
-                <!-- Resources Tab -->
-                <div id="resources-tab" class="tab-content active">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Upload New Resource</h2>
-                        </div>
-                        <div class="card-body">
-                            <form id="resource-form">
-                                <div class="form-group">
-                                    <label for="resource-name">Resource Name</label>
-                                    <input type="text" class="form-control" id="resource-name" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="resource-chapter">Chapter</label>
-                                    <select class="form-control" id="resource-chapter" required>
-                                        <option value="">-- Select Chapter --</option>
-                                        <option value="1.1">1.1 Data Representation</option>
-                                        <option value="1.2">1.2 Multimedia – Graphics, Sound</option>
-                                        <option value="1.3">1.3 Compression</option>
-                                        <option value="2.1">2.1 Networks including the internet</option>
-                                        <option value="3.1">3.1 Computers and their components</option>
-                                        <option value="3.2">3.2 Logic Gates and Logic Circuits</option>
-                                        <option value="4.1">4.1 Central Processing Unit (CPU) Architecture</option>
-                                        <option value="4.2">4.2 Assembly Language</option>
-                                        <option value="4.3">4.3 Bit manipulation</option>
-                                        <option value="5.1">5.1 Operating Systems</option>
-                                        <option value="5.2">5.2 Language Translators</option>
-                                        <option value="6.1">6.1 Data Security</option>
-                                        <option value="6.2">6.2 Data Integrity</option>
-                                        <option value="7.1">7.1 Ethics and Ownership</option>
-                                        <option value="8.1">8.1 Database Concepts</option>
-                                        <option value="8.2">8.2 Database Management Systems (DBMS)</option>
-                                        <option value="8.3">8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
-                                        <option value="9.1">9.1 Computational Thinking Skills</option>
-                                        <option value="9.2">9.2 Algorithms</option>
-                                        <option value="10.1">10.1 Data Types and Records</option>
-                                        <option value="10.2">10.2 Arrays</option>
-                                        <option value="10.3">10.3 Files</option>
-                                        <option value="10.4">10.4 Introduction to Abstract Data Types (ADT)</option>
-                                        <option value="11.1">11.1 Programming Basics</option>
-                                        <option value="11.2">11.2 Constructs</option>
-                                        <option value="11.3">11.3 Structured Programming</option>
-                                        <option value="12.1">12.1 Program Development Life cycle</option>
-                                        <option value="12.2">12.2 Program Design</option>
-                                        <option value="12.3">12.3 Program Testing and Maintenance</option>
-                                        <option value="13.1">13.1 User-defined data types</option>
-                                        <option value="13.2">13.2 File organisation and access</option>
-                                        <option value="13.3">13.3 Floating-point numbers, representation and manipulation</option>
-                                        <option value="14.1">14.1 Protocols technologies</option>
-                                        <option value="14.2">14.2 Circuit switching, packet switching</option>
-                                        <option value="15.1">15.1 Processors, Parallel Processing and Virtual Machines</option>
-                                        <option value="15.2">15.2 Boolean Algebra and Logic Circuits</option>
-                                        <option value="16.1">16.1 Purposes of an Operating System (OS)</option>
-                                        <option value="16.2">16.2 Translation Software</option>
-                                        <option value="17.1">17.1 Encryption, Encryption Protocols and Digital certificates</option>
-                                        <option value="18.1">18.1 Artificial Intelligence</option>
-                                        <option value="19.1">19.1 Algorithms</option>
-                                        <option value="19.2">19.2 Recursion</option>
-                                        <option value="20.1">20.1 Programming Paradigms</option>
-                                        <option value="20.2">20.2 File Processing and Exception Handling</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="resource-file">Upload File</label>
-                                    <input type="file" class="form-control" id="resource-file" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="resource-description">Description</label>
-                                    <textarea class="form-control" id="resource-description" placeholder="Brief description of the resource..."></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Upload Resource</button>
-                            </form>
-                        </div>
+            <!-- Homework Tab -->
+            <div id="homework-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Pending Submissions</h2>
                     </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Existing Resources</h2>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Chapter</th>
-                                        <th>Upload Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Introduction to Data Representation</td>
-                                        <td>1.1</td>
-                                        <td>June 1, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Network Topologies</td>
-                                        <td>2.1</td>
-                                        <td>June 3, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>CPU Architecture</td>
-                                        <td>4.1</td>
-                                        <td>June 5, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Student ID</th>
+                                    <th>Assignment</th>
+                                    <th>Submission Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Zhang Wei</td>
+                                    <td>2023001</td>
+                                    <td>Assembly Language Program</td>
+                                    <td>June 10, 2023</td>
+                                    <td>
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Grade</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Li Ming</td>
+                                    <td>2023002</td>
+                                    <td>Algorithm Design Homework</td>
+                                    <td>June 12, 2023</td>
+                                    <td>
+                                        <button class="btn btn-primary">View</button>
+                                        <button class="btn btn-success">Grade</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 
-                <!-- News Tab -->
-                <div id="news-tab" class="tab-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Add News Item</h2>
-                        </div>
-                        <div class="card-body">
-                            <form id="news-form">
-                                <div class="form-group">
-                                    <label for="news-title">News Title</label>
-                                    <input type="text" class="form-control" id="news-title" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="news-date">Date</label>
-                                    <input type="date" class="form-control" id="news-date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="news-content">Content</label>
-                                    <textarea class="form-control" id="news-content" rows="5" required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Add News</button>
-                            </form>
-                        </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Create New Assignment</h2>
                     </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Existing News</h2>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Mock Exam Schedule Released</td>
-                                        <td>June 15, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>New Programming Resources Added</td>
-                                        <td>June 10, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Homework Deadline Reminder</td>
-                                        <td>June 5, 2023</td>
-                                        <td>
-                                            <button class="btn btn-warning">Edit</button>
-                                            <button class="btn btn-danger">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Homework Tab -->
-                <div id="homework-tab" class="tab-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Pending Submissions</h2>
-                        </div>
-                        <div class="card-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Student Name</th>
-                                        <th>Student ID</th>
-                                        <th>Assignment</th>
-                                        <th>Submission Date</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Zhang Wei</td>
-                                        <td>2023001</td>
-                                        <td>Assembly Language Program</td>
-                                        <td>June 10, 2023</td>
-                                        <td>
-                                            <button class="btn btn-primary">View</button>
-                                            <button class="btn btn-success">Grade</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Li Ming</td>
-                                        <td>2023002</td>
-                                        <td>Algorithm Design Homework</td>
-                                        <td>June 12, 2023</td>
-                                        <td>
-                                            <button class="btn btn-primary">View</button>
-                                            <button class="btn btn-success">Grade</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Create New Assignment</h2>
-                        </div>
-                        <div class="card-body">
-                            <form id="assignment-form">
-                                <div class="form-group">
-                                    <label for="assignment-title">Assignment Title</label>
-                                    <input type="text" class="form-control" id="assignment-title" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="assignment-chapter">Chapter</label>
-                                    <select class="form-control" id="assignment-chapter" required>
-                                        <option value="">-- Select Chapter --</option>
-                                        <option value="1">1 Information representation</option>
-                                        <option value="2">2 Communication</option>
-                                        <option value="3">3 Hardware</option>
-                                        <option value="4">4 Processor Fundamentals</option>
-                                        <option value="5">5 System Software</option>
-                                        <option value="6">6 Security, privacy and data integrity</option>
-                                        <option value="7">7 Ethics and Ownership</option>
-                                        <option value="8">8 Databases</option>
-                                        <option value="9">9 Algorithm Design and Problem-solving</option>
-                                        <option value="10">10 Data Types and Structures</option>
-                                        <option value="11">11 Programming</option>
-                                        <option value="12">12 Software Development</option>
-                                        <option value="13">13 Data Representation</option>
-                                        <option value="14">14 Communication and internet</option>
-                                        <option value="15">15 Hardware and Virtual Machines</option>
-                                        <option value="16">16 System Software</option>
-                                        <option value="17">17 Security</option>
-                                        <option value="18">18 Artificial Intelligence (AI)</option>
-                                        <option value="19">19 Computational thinking and Problem-solving</option>
-                                        <option value="20">20 Further Programming</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="assignment-description">Description</label>
-                                    <textarea class="form-control" id="assignment-description" rows="5" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="assignment-due-date">Due Date</label>
-                                    <input type="date" class="form-control" id="assignment-due-date" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="assignment-file">Assignment File (Optional)</label>
-                                    <input type="file" class="form-control" id="assignment-file">
-                                </div>
-                                <button type="submit" class="btn btn-primary">Create Assignment</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Notes Tab -->
-                <div id="notes-tab" class="tab-content">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">Manage Chapter Notes</h2>
-                        </div>
-                        <div class="card-body">
+                    <div class="card-body">
+                        <form id="assignment-form">
                             <div class="form-group">
-                                <label for="notes-chapter-select">Select Chapter</label>
-                                <select class="form-control" id="notes-chapter-select">
+                                <label for="assignment-title">Assignment Title</label>
+                                <input type="text" class="form-control" id="assignment-title" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="assignment-chapter">Chapter</label>
+                                <select class="form-control" id="assignment-chapter" required>
                                     <option value="">-- Select Chapter --</option>
                                     <option value="1">1 Information representation</option>
                                     <option value="2">2 Communication</option>
@@ -1236,20 +1288,70 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="notes-content">Notes Content</label>
-                                <textarea class="form-control" id="notes-content" rows="15" placeholder="Enter your notes for the selected chapter..."></textarea>
+                                <label for="assignment-description">Description</label>
+                                <textarea class="form-control" id="assignment-description" rows="5" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
-                                </label>
+                                <label for="assignment-due-date">Due Date</label>
+                                <input type="date" class="form-control" id="assignment-due-date" required>
                             </div>
-                            <button class="btn btn-primary">Save Notes</button>
-                        </div>
+                            <div class="form-group">
+                                <label for="assignment-file">Assignment File (Optional)</label>
+                                <input type="file" class="form-control" id="assignment-file">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Assignment</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </main>
+            
+            <!-- Notes Tab -->
+            <div id="notes-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Manage Chapter Notes</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="notes-chapter-select">Select Chapter</label>
+                            <select class="form-control" id="notes-chapter-select">
+                                <option value="">-- Select Chapter --</option>
+                                <option value="1">1 Information representation</option>
+                                <option value="2">2 Communication</option>
+                                <option value="3">3 Hardware</option>
+                                <option value="4">4 Processor Fundamentals</option>
+                                <option value="5">5 System Software</option>
+                                <option value="6">6 Security, privacy and data integrity</option>
+                                <option value="7">7 Ethics and Ownership</option>
+                                <option value="8">8 Databases</option>
+                                <option value="9">9 Algorithm Design and Problem-solving</option>
+                                <option value="10">10 Data Types and Structures</option>
+                                <option value="11">11 Programming</option>
+                                <option value="12">12 Software Development</option>
+                                <option value="13">13 Data Representation</option>
+                                <option value="14">14 Communication and internet</option>
+                                <option value="15">15 Hardware and Virtual Machines</option>
+                                <option value="16">16 System Software</option>
+                                <option value="17">17 Security</option>
+                                <option value="18">18 Artificial Intelligence (AI)</option>
+                                <option value="19">19 Computational thinking and Problem-solving</option>
+                                <option value="20">20 Further Programming</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="notes-content">Notes Content</label>
+                            <textarea class="form-control" id="notes-content" rows="15" placeholder="Enter your notes for the selected chapter..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
+                            </label>
+                        </div>
+                        <button class="btn btn-primary">Save Notes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Notification -->
@@ -1294,16 +1396,65 @@
         const adminTabs = document.querySelectorAll('.admin-tab');
         const tabContents = document.querySelectorAll('.tab-content');
         
+        // Page containers
+        const mainSite = document.getElementById('main-site');
+        const adminLogin = document.getElementById('admin-login');
+        const adminDashboard = document.getElementById('admin-dashboard');
+        
         // Forms
+        const loginForm = document.getElementById('login-form');
         const homeworkForm = document.getElementById('homework-form');
         const resourceForm = document.getElementById('resource-form');
         const newsForm = document.getElementById('news-form');
         const assignmentForm = document.getElementById('assignment-form');
         
+        // Admin logout button
+        const adminLogout = document.getElementById('admin-logout');
+        
         // Language state
         let isMandarin = false;
         
-        // Page navigation
+        // Check URL path on page load
+        function checkPath() {
+            const path = window.location.pathname;
+            
+            // For GitHub Pages, the path might include the repository name
+            // Extract the last part of the path
+            const pathParts = path.split('/');
+            const lastPart = pathParts[pathParts.length - 1];
+            
+            if (lastPart === 'admin') {
+                showAdminLogin();
+            } else {
+                showMainSite();
+            }
+        }
+        
+        // Show main site
+        function showMainSite() {
+            mainSite.style.display = 'block';
+            adminLogin.style.display = 'none';
+            adminDashboard.style.display = 'none';
+        }
+        
+        // Show admin login
+        function showAdminLogin() {
+            mainSite.style.display = 'none';
+            adminLogin.style.display = 'block';
+            adminDashboard.style.display = 'none';
+        }
+        
+        // Show admin dashboard
+        function showAdminDashboard() {
+            mainSite.style.display = 'none';
+            adminLogin.style.display = 'none';
+            adminDashboard.style.display = 'block';
+        }
+        
+        // Initialize page based on URL
+        checkPath();
+        
+        // Handle navigation
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1512,6 +1663,28 @@
                     }
                 });
             });
+        });
+        
+        // Login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check credentials
+            if (username === 'admin' && password === 'ulinkcs') {
+                showAdminDashboard();
+                showNotification('Login successful!', 'success');
+            } else {
+                showNotification('Invalid username or password', 'error');
+            }
+        });
+        
+        // Admin logout
+        adminLogout.addEventListener('click', () => {
+            showAdminLogin();
+            showNotification('Logged out successfully', 'info');
         });
         
         // Form submissions
