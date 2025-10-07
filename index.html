@@ -81,6 +81,10 @@
             color: var(--secondary-color);
         }
 
+        nav ul li a.active {
+            color: var(--secondary-color);
+        }
+
         .language-toggle {
             background: none;
             border: none;
@@ -569,10 +573,11 @@
             <div class="logo">AS & A2 Computer Science</div>
             <nav>
                 <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
-                    <li><a href="#" class="nav-link" data-page="syllabus">Syllabus</a></li>
-                    <li><a href="#" class="nav-link" data-page="resources">Resources</a></li>
-                    <li><a href="#" class="nav-link" data-page="homework">Homework</a></li>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="#syllabus" class="nav-link">Syllabus</a></li>
+                    <li><a href="resources.html" class="nav-link">Resources</a></li>
+                    <li><a href="#homework" class="nav-link">Homework</a></li>
+                    <li><a href="admin.html" class="nav-link" style="color: #f39c12;"><i class="fas fa-user-shield"></i> Admin</a></li>
                 </ul>
             </nav>
             <button class="language-toggle" id="languageToggle">
@@ -1110,8 +1115,16 @@
         // Handle navigation
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                
+                // If it's an external link, let it navigate normally
+                if (href.includes('.html')) {
+                    return;
+                }
+                
+                // Otherwise, handle internal navigation
                 e.preventDefault();
-                const targetPage = link.getAttribute('data-page');
+                const targetPage = link.getAttribute('data-page') || href.substring(1);
                 
                 // Update active nav link
                 navLinks.forEach(l => l.classList.remove('active'));
@@ -1124,6 +1137,30 @@
                         page.classList.add('active');
                     }
                 });
+            });
+        });
+        
+        // Handle anchor links for internal navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href').substring(1);
+                const targetPage = document.getElementById(`${targetId}-page`);
+                
+                if (targetPage) {
+                    e.preventDefault();
+                    
+                    // Update active nav link
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pageContents.forEach(page => {
+                        page.classList.remove('active');
+                        if (page.id === `${targetId}-page`) {
+                            page.classList.add('active');
+                        }
+                    });
+                }
             });
         });
         
@@ -1160,7 +1197,7 @@
                 });
                 
                 navLinks.forEach(l => l.classList.remove('active'));
-                document.querySelector('[data-page="syllabus"]').classList.add('active');
+                document.querySelector('[href="#syllabus"]').classList.add('active');
                 
                 // Load chapter content
                 loadChapterContent(chapter);
