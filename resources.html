@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - AS & A2 Computer Science</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --border-color: #ddd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .language-toggle {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: var(--light-gray);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-list {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .breadcrumb-item {
+            margin-right: 0.5rem;
+        }
+
+        .breadcrumb-item a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb-item a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-separator {
+            margin-right: 0.5rem;
+            color: #666;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        .page-title {
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* Resource Categories */
+        .resource-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .category-body {
+            padding: 1.5rem;
+        }
+
+        .category-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .category-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1rem;
+            padding: 0.5rem 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .category-action {
+            display: block;
+            width: 100%;
+            padding: 0.75rem;
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .category-action:hover {
+            background-color: #2980b9;
+        }
+
+        /* Resource Sections */
+        .resource-section {
+            margin-bottom: 3rem;
+            display: none;
+        }
+
+        .resource-section.active {
+            display: block;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-icon {
+            color: var(--secondary-color);
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--light-gray);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: #e0e0e0;
+        }
+
+        /* Resource Grid */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-header {
+            padding: 1rem;
+            background-color: var(--light-gray);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .resource-type {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .resource-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .resource-meta {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .resource-body {
+            padding: 1rem;
+        }
+
+        .resource-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .resource-footer {
+            padding: 1rem;
+            background-color: var(--light-gray);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .resource-size {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .resource-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+
+        .btn-success {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #27ae60;
+        }
+
+        /* External Links */
+        .external-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .external-link:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.1);
+        }
+
+        .link-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-right: 1rem;
+        }
+
+        .link-content {
+            flex: 1;
+        }
+
+        .link-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .link-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .link-arrow {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Filter and Search */
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        .filter-dropdown {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .filter-dropdown:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ccc;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: translateX(120%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-success {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .notification-error {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .notification-info {
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .resource-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-bar {
+                flex-direction: column;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border-left-color: var(--secondary-color);
+            animation: spin 1s linear infinite;
+            margin: 2rem auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">AS & A2 Computer Science</div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#syllabus">Syllabus</a></li>
+                    <li><a href="resources.html" style="color: var(--secondary-color);">Resources</a></li>
+                    <li><a href="index.html#homework">Homework</a></li>
+                </ul>
+            </nav>
+            <button class="language-toggle" id="languageToggle">
+                <i class="fas fa-globe"></i>
+                <span id="currentLang">EN</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></li>
+                <li class="breadcrumb-item">Resources</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Learning Resources</h1>
+
+            <!-- Resource Categories -->
+            <div class="resource-categories" id="resourceCategories">
+                <!-- Categories will be loaded here -->
+            </div>
+
+            <!-- Resource Sections -->
+            <div id="pastPapersSection" class="resource-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-file-alt section-icon"></i>
+                        Past Papers
+                    </h2>
+                    <button class="back-button" onclick="showCategories()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Categories
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search past papers..." id="pastPapersSearch">
+                    </div>
+                    <select class="filter-dropdown" id="pastPapersFilter">
+                        <option value="">All Years</option>
+                        <option value="2023">2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                        <option value="2020">2020</option>
+                        <option value="2019">2019</option>
+                    </select>
+                </div>
+
+                <div class="resource-grid" id="pastPapersGrid">
+                    <!-- Past papers will be loaded here -->
+                </div>
+            </div>
+
+            <div id="referenceLinksSection" class="resource-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-link section-icon"></i>
+                        Reference Links
+                    </h2>
+                    <button class="back-button" onclick="showCategories()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Categories
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search reference links..." id="referenceLinksSearch">
+                    </div>
+                    <select class="filter-dropdown" id="referenceLinksFilter">
+                        <option value="">All Categories</option>
+                        <option value="official">Official Cambridge</option>
+                        <option value="tutorial">Tutorials</option>
+                        <option value="practice">Practice</option>
+                        <option value="tools">Tools & Software</option>
+                    </select>
+                </div>
+
+                <div id="referenceLinksList">
+                    <!-- Reference links will be loaded here -->
+                </div>
+            </div>
+
+            <div id="slideshowsSection" class="resource-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-presentation section-icon"></i>
+                        Teacher's Slideshows
+                    </h2>
+                    <button class="back-button" onclick="showCategories()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Categories
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search slideshows..." id="slideshowsSearch">
+                    </div>
+                    <select class="filter-dropdown" id="slideshowsFilter">
+                        <option value="">All Chapters</option>
+                        <option value="as">AS Level</option>
+                        <option value="a2">A2 Level</option>
+                    </select>
+                </div>
+
+                <div class="resource-grid" id="slideshowsGrid">
+                    <!-- Slideshows will be loaded here -->
+                </div>
+            </div>
+
+            <div id="notesSection" class="resource-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-sticky-note section-icon"></i>
+                        Teacher's Notes
+                    </h2>
+                    <button class="back-button" onclick="showCategories()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Categories
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search notes..." id="notesSearch">
+                    </div>
+                    <select class="filter-dropdown" id="notesFilter">
+                        <option value="">All Chapters</option>
+                        <option value="as">AS Level</option>
+                        <option value="a2">A2 Level</option>
+                    </select>
+                </div>
+
+                <div class="resource-grid" id="notesGrid">
+                    <!-- Notes will be loaded here -->
+                </div>
+            </div>
+
+            <div id="studentDocumentsSection" class="resource-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-users section-icon"></i>
+                        Student Documents
+                    </h2>
+                    <button class="back-button" onclick="showCategories()">
+                        <i class="fas fa-arrow-left"></i>
+                        Back to Categories
+                    </button>
+                </div>
+
+                <div class="filter-bar">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search student documents..." id="studentDocumentsSearch">
+                    </div>
+                    <select class="filter-dropdown" id="studentDocumentsFilter">
+                        <option value="">All Types</option>
+                        <option value="assignment">Assignments</option>
+                        <option value="project">Projects</option>
+                        <option value="submission">Submissions</option>
+                    </select>
+                </div>
+
+                <div class="resource-grid" id="studentDocumentsGrid">
+                    <!-- Student documents will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message">Action completed successfully!</span>
+    </div>
+
+    <script>
+        // DOM Elements
+        const languageToggle = document.getElementById('languageToggle');
+        const currentLang = document.getElementById('currentLang');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        // Resource containers
+        const resourceCategories = document.getElementById('resourceCategories');
+        const pastPapersGrid = document.getElementById('pastPapersGrid');
+        const referenceLinksList = document.getElementById('referenceLinksList');
+        const slideshowsGrid = document.getElementById('slideshowsGrid');
+        const notesGrid = document.getElementById('notesGrid');
+        const studentDocumentsGrid = document.getElementById('studentDocumentsGrid');
+        
+        // Search and filter elements
+        const pastPapersSearch = document.getElementById('pastPapersSearch');
+        const pastPapersFilter = document.getElementById('pastPapersFilter');
+        const referenceLinksSearch = document.getElementById('referenceLinksSearch');
+        const referenceLinksFilter = document.getElementById('referenceLinksFilter');
+        const slideshowsSearch = document.getElementById('slideshowsSearch');
+        const slideshowsFilter = document.getElementById('slideshowsFilter');
+        const notesSearch = document.getElementById('notesSearch');
+        const notesFilter = document.getElementById('notesFilter');
+        const studentDocumentsSearch = document.getElementById('studentDocumentsSearch');
+        const studentDocumentsFilter = document.getElementById('studentDocumentsFilter');
+        
+        // Language state
+        let isMandarin = false;
+        
+        // Resource categories data
+        const categories = [
+            {
+                id: 'pastPapers',
+                title: 'Past Papers',
+                icon: 'fas fa-file-alt',
+                description: 'Cambridge International AS & A Level Computer Science past examination papers',
+                stats: { count: 24, label: 'Papers' },
+                color: '#e74c3c'
+            },
+            {
+                id: 'referenceLinks',
+                title: 'Reference Links',
+                icon: 'fas fa-link',
+                description: 'Official Cambridge resources and useful external websites',
+                stats: { count: 15, label: 'Links' },
+                color: '#3498db'
+            },
+            {
+                id: 'slideshows',
+                title: 'Teacher\'s Slideshows',
+                icon: 'fas fa-presentation',
+                description: 'Presentation slides used in classroom teaching',
+                stats: { count: 42, label: 'Slides' },
+                color: '#2ecc71'
+            },
+            {
+                id: 'notes',
+                title: 'Teacher\'s Notes',
+                icon: 'fas fa-sticky-note',
+                description: 'Comprehensive notes and study materials prepared by the teacher',
+                stats: { count: 38, label: 'Notes' },
+                color: '#f39c12'
+            },
+            {
+                id: 'studentDocuments',
+                title: 'Student Documents',
+                icon: 'fas fa-users',
+                description: 'Assignments, projects, and submitted work by students',
+                stats: { count: 156, label: 'Documents' },
+                color: '#9b59b6'
+            }
+        ];
+        
+        // Past papers data
+        const pastPapers = [
+            {
+                id: 1,
+                title: 'AS Level Computer Science Paper 1',
+                subtitle: 'May/June 2023',
+                type: 'Question Paper',
+                size: '1.2 MB',
+                year: '2023',
+                examSession: 'May/June',
+                paperNumber: 'Paper 1',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 2,
+                title: 'AS Level Computer Science Paper 2',
+                subtitle: 'May/June 2023',
+                type: 'Question Paper',
+                size: '856 KB',
+                year: '2023',
+                examSession: 'May/June',
+                paperNumber: 'Paper 2',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 3,
+                title: 'A2 Level Computer Science Paper 3',
+                subtitle: 'May/June 2023',
+                type: 'Question Paper',
+                size: '1.5 MB',
+                year: '2023',
+                examSession: 'May/June',
+                paperNumber: 'Paper 3',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 4,
+                title: 'A2 Level Computer Science Paper 4',
+                subtitle: 'May/June 2023',
+                type: 'Question Paper',
+                size: '2.1 MB',
+                year: '2023',
+                examSession: 'May/June',
+                paperNumber: 'Paper 4',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 5,
+                title: 'AS Level Computer Science Paper 1',
+                subtitle: 'Oct/Nov 2022',
+                type: 'Question Paper',
+                size: '1.1 MB',
+                year: '2022',
+                examSession: 'Oct/Nov',
+                paperNumber: 'Paper 1',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 6,
+                title: 'AS Level Computer Science Paper 2',
+                subtitle: 'Oct/Nov 2022',
+                type: 'Question Paper',
+                size: '923 KB',
+                year: '2022',
+                examSession: 'Oct/Nov',
+                paperNumber: 'Paper 2',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 7,
+                title: 'A2 Level Computer Science Paper 3',
+                subtitle: 'Oct/Nov 2022',
+                type: 'Question Paper',
+                size: '1.4 MB',
+                year: '2022',
+                examSession: 'Oct/Nov',
+                paperNumber: 'Paper 3',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            },
+            {
+                id: 8,
+                title: 'A2 Level Computer Science Paper 4',
+                subtitle: 'Oct/Nov 2022',
+                type: 'Question Paper',
+                size: '1.9 MB',
+                year: '2022',
+                examSession: 'Oct/Nov',
+                paperNumber: 'Paper 4',
+                downloadUrl: '#',
+                markSchemeUrl: '#'
+            }
+        ];
+        
+        // Reference links data
+        const referenceLinks = [
+            {
+                id: 1,
+                title: 'Cambridge International Official Website',
+                description: 'Official Cambridge AS & A Level Computer Science syllabus and resources',
+                url: 'https://www.cambridgeinternational.org/programmes-and-qualifications/cambridge-advanced/cambridge-international-as-and-a-level-computer-science-9618/',
+                category: 'official',
+                icon: 'fas fa-university'
+            },
+            {
+                id: 2,
+                title: 'Cambridge Support Hub',
+                description: 'Teaching and learning resources from Cambridge International',
+                url: 'https://www.cambridgeinternational.org/support-hub/',
+                category: 'official',
+                icon: 'fas fa-book'
+            },
+            {
+                id: 3,
+                title: 'Computer Science Field Guide',
+                description: 'Interactive guide to computer science concepts',
+                url: 'https://www.csfieldguide.org.nz/',
+                category: 'tutorial',
+                icon: 'fas fa-map'
+            },
+            {
+                id: 4,
+                title: 'W3Schools Python Tutorial',
+                description: 'Comprehensive Python programming tutorial',
+                url: 'https://www.w3schools.com/python/',
+                category: 'tutorial',
+                icon: 'fab fa-python'
+            },
+            {
+                id: 5,
+                title: 'Codecademy Computer Science',
+                description: 'Interactive computer science courses and exercises',
+                url: 'https://www.codecademy.com/learn/paths/computer-science',
+                category: 'practice',
+                icon: 'fas fa-code'
+            },
+            {
+                id: 6,
+                title: 'GitHub Desktop',
+                description: 'Version control tool for managing your code',
+                url: 'https://desktop.github.com/',
+                category: 'tools',
+                icon: 'fab fa-github'
+            },
+            {
+                id: 7,
+                title: 'Visual Studio Code',
+                description: 'Free code editor for programming',
+                url: 'https://code.visualstudio.com/',
+                category: 'tools',
+                icon: 'fas fa-code'
+            },
+            {
+                id: 8,
+                title: 'SQLite Browser',
+                description: 'Database management tool for learning SQL',
+                url: 'https://sqlitebrowser.org/',
+                category: 'tools',
+                icon: 'fas fa-database'
+            }
+        ];
+        
+        // Initialize data from localStorage or use defaults
+        function initializeData() {
+            // Initialize resources if not exists
+            if (!localStorage.getItem('cs_resources')) {
+                const defaultResources = [
+                    {
+                        id: 1,
+                        name: 'Introduction to Data Representation',
+                        chapter: '1.1',
+                        type: 'PDF',
+                        size: '2.5 MB',
+                        uploadDate: '2023-06-01',
+                        url: '#',
+                        category: 'slideshows'
+                    },
+                    {
+                        id: 2,
+                        name: 'Network Topologies',
+                        chapter: '2.1',
+                        type: 'PowerPoint',
+                        size: '5.1 MB',
+                        uploadDate: '2023-06-03',
+                        url: '#',
+                        category: 'slideshows'
+                    },
+                    {
+                        id: 3,
+                        name: 'CPU Architecture Notes',
+                        chapter: '4.1',
+                        type: 'PDF',
+                        size: '3.2 MB',
+                        uploadDate: '2023-06-05',
+                        url: '#',
+                        category: 'notes'
+                    },
+                    {
+                        id: 4,
+                        name: 'Assembly Language Examples',
+                        chapter: '4.2',
+                        type: 'ZIP',
+                        size: '1.8 MB',
+                        uploadDate: '2023-06-07',
+                        url: '#',
+                        category: 'notes'
+                    },
+                    {
+                        id: 5,
+                        name: 'Operating Systems Slides',
+                        chapter: '5.1',
+                        type: 'PowerPoint',
+                        size: '4.3 MB',
+                        uploadDate: '2023-06-10',
+                        url: '#',
+                        category: 'slideshows'
+                    },
+                    {
+                        id: 6,
+                        name: 'Database Design Principles',
+                        chapter: '8.1',
+                        type: 'PDF',
+                        size: '6.7 MB',
+                        uploadDate: '2023-06-12',
+                        url: '#',
+                        category: 'notes'
+                    }
+                ];
+                localStorage.setItem('cs_resources', JSON.stringify(defaultResources));
+            }
+            
+            // Initialize submissions if not exists
+            if (!localStorage.getItem('cs_submissions')) {
+                const defaultSubmissions = [
+                    {
+                        id: 1,
+                        assignmentId: 1,
+                        assignmentTitle: 'Data Representation Assignment',
+                        studentName: 'Zhang Wei',
+                        studentId: '2023001',
+                        submissionDate: '2023-06-01',
+                        status: 'graded',
+                        grade: 'A',
+                        feedback: 'Excellent work on binary conversion exercises.',
+                        fileName: 'data_representation_assignment.pdf',
+                        fileSize: '1.2 MB',
+                        url: '#'
+                    },
+                    {
+                        id: 2,
+                        assignmentId: 2,
+                        assignmentTitle: 'Network Topologies Research',
+                        studentName: 'Li Ming',
+                        studentId: '2023002',
+                        submissionDate: '2023-06-05',
+                        status: 'graded',
+                        grade: 'B+',
+                        feedback: 'Good research on different network topologies.',
+                        fileName: 'network_topologies_research.docx',
+                        fileSize: '2.5 MB',
+                        url: '#'
+                    },
+                    {
+                        id: 3,
+                        assignmentId: 3,
+                        assignmentTitle: 'Assembly Language Program',
+                        studentName: 'Wang Fang',
+                        studentId: '2023003',
+                        submissionDate: '2023-06-10',
+                        status: 'submitted',
+                        grade: null,
+                        feedback: 'Your submission has been received and is currently being reviewed.',
+                        fileName: 'assembly_program.zip',
+                        fileSize: '856 KB',
+                        url: '#'
+                    }
+                ];
+                localStorage.setItem('cs_submissions', JSON.stringify(defaultSubmissions));
+            }
+        }
+        
+        // Load resource categories
+        function loadCategories() {
+            resourceCategories.innerHTML = '';
+            
+            categories.forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.innerHTML = `
+                    <div class="category-header" style="background: linear-gradient(135deg, ${category.color}, ${category.color}dd);">
+                        <div class="category-icon">
+                            <i class="${category.icon}"></i>
+                        </div>
+                        <div class="category-title">${category.title}</div>
+                    </div>
+                    <div class="category-body">
+                        <p class="category-description">${category.description}</p>
+                        <div class="category-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">${category.stats.count}</div>
+                                <div class="stat-label">${category.stats.label}</div>
+                            </div>
+                        </div>
+                        <button class="category-action" onclick="showCategory('${category.id}')">
+                            View Resources
+                        </button>
+                    </div>
+                `;
+                resourceCategories.appendChild(categoryCard);
+            });
+        }
+        
+        // Show specific category
+        function showCategory(categoryId) {
+            // Hide all sections
+            document.querySelectorAll('.resource-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Hide categories
+            resourceCategories.style.display = 'none';
+            
+            // Show selected section
+            const section = document.getElementById(`${categoryId}Section`);
+            if (section) {
+                section.classList.add('active');
+                
+                // Load data for the section
+                switch(categoryId) {
+                    case 'pastPapers':
+                        loadPastPapers();
+                        break;
+                    case 'referenceLinks':
+                        loadReferenceLinks();
+                        break;
+                    case 'slideshows':
+                        loadSlideshows();
+                        break;
+                    case 'notes':
+                        loadNotes();
+                        break;
+                    case 'studentDocuments':
+                        loadStudentDocuments();
+                        break;
+                }
+            }
+        }
+        
+        // Show categories view
+        function showCategories() {
+            // Hide all sections
+            document.querySelectorAll('.resource-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show categories
+            resourceCategories.style.display = 'grid';
+        }
+        
+        // Load past papers
+        function loadPastPapers() {
+            pastPapersGrid.innerHTML = '';
+            
+            let filteredPapers = pastPapers;
+            
+            // Apply year filter
+            const yearFilter = pastPapersFilter.value;
+            if (yearFilter) {
+                filteredPapers = filteredPapers.filter(paper => paper.year === yearFilter);
+            }
+            
+            // Apply search filter
+            const searchTerm = pastPapersSearch.value.toLowerCase();
+            if (searchTerm) {
+                filteredPapers = filteredPapers.filter(paper => 
+                    paper.title.toLowerCase().includes(searchTerm) ||
+                    paper.subtitle.toLowerCase().includes(searchTerm) ||
+                    paper.paperNumber.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredPapers.length === 0) {
+                pastPapersGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No past papers found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredPapers.forEach(paper => {
+                const paperCard = document.createElement('div');
+                paperCard.className = 'resource-card';
+                paperCard.innerHTML = `
+                    <div class="resource-header">
+                        <span class="resource-type">${paper.type}</span>
+                        <h3 class="resource-title">${paper.title}</h3>
+                        <p class="resource-meta">${paper.subtitle} • ${paper.paperNumber}</p>
+                    </div>
+                    <div class="resource-body">
+                        <p class="resource-description">
+                            Download this past paper to practice for your upcoming examinations. 
+                            Includes all questions and answer sheets.
+                        </p>
+                    </div>
+                    <div class="resource-footer">
+                        <span class="resource-size">${paper.size}</span>
+                        <div class="resource-actions">
+                            <button class="btn btn-primary" onclick="downloadResource('${paper.title}', '${paper.downloadUrl}')">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                            <button class="btn btn-secondary" onclick="downloadResource('${paper.title} Mark Scheme', '${paper.markSchemeUrl}')">
+                                <i class="fas fa-file-alt"></i>
+                                Mark Scheme
+                            </button>
+                        </div>
+                    </div>
+                `;
+                pastPapersGrid.appendChild(paperCard);
+            });
+        }
+        
+        // Load reference links
+        function loadReferenceLinks() {
+            referenceLinksList.innerHTML = '';
+            
+            let filteredLinks = referenceLinks;
+            
+            // Apply category filter
+            const categoryFilter = referenceLinksFilter.value;
+            if (categoryFilter) {
+                filteredLinks = filteredLinks.filter(link => link.category === categoryFilter);
+            }
+            
+            // Apply search filter
+            const searchTerm = referenceLinksSearch.value.toLowerCase();
+            if (searchTerm) {
+                filteredLinks = filteredLinks.filter(link => 
+                    link.title.toLowerCase().includes(searchTerm) ||
+                    link.description.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredLinks.length === 0) {
+                referenceLinksList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <h3>No reference links found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredLinks.forEach(link => {
+                const linkElement = document.createElement('a');
+                linkElement.className = 'external-link';
+                linkElement.href = link.url;
+                linkElement.target = '_blank';
+                linkElement.innerHTML = `
+                    <div class="link-icon">
+                        <i class="${link.icon}"></i>
+                    </div>
+                    <div class="link-content">
+                        <div class="link-title">${link.title}</div>
+                        <div class="link-description">${link.description}</div>
+                    </div>
+                    <div class="link-arrow">
+                        <i class="fas fa-external-link-alt"></i>
+                    </div>
+                `;
+                referenceLinksList.appendChild(linkElement);
+            });
+        }
+        
+        // Load slideshows
+        function loadSlideshows() {
+            slideshowsGrid.innerHTML = '';
+            
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            const slideshows = resources.filter(resource => resource.category === 'slideshows');
+            
+            let filteredSlideshows = slideshows;
+            
+            // Apply level filter
+            const levelFilter = slideshowsFilter.value;
+            if (levelFilter) {
+                filteredSlideshows = filteredSlideshows.filter(slideshow => {
+                    const chapterNum = parseInt(slideshow.chapter.split('.')[0]);
+                    return levelFilter === 'as' ? chapterNum <= 12 : chapterNum > 12;
+                });
+            }
+            
+            // Apply search filter
+            const searchTerm = slideshowsSearch.value.toLowerCase();
+            if (searchTerm) {
+                filteredSlideshows = filteredSlideshows.filter(slideshow => 
+                    slideshow.name.toLowerCase().includes(searchTerm) ||
+                    slideshow.chapter.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredSlideshows.length === 0) {
+                slideshowsGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No slideshows found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredSlideshows.forEach(slideshow => {
+                const slideshowCard = document.createElement('div');
+                slideshowCard.className = 'resource-card';
+                slideshowCard.innerHTML = `
+                    <div class="resource-header">
+                        <span class="resource-type">${slideshow.type}</span>
+                        <h3 class="resource-title">${slideshow.name}</h3>
+                        <p class="resource-meta">Chapter ${slideshow.chapter} • Uploaded: ${formatDate(slideshow.uploadDate)}</p>
+                    </div>
+                    <div class="resource-body">
+                        <p class="resource-description">
+                            Classroom presentation slides for this chapter. Includes visual aids, 
+                            examples, and explanations to help you understand the concepts.
+                        </p>
+                    </div>
+                    <div class="resource-footer">
+                        <span class="resource-size">${slideshow.size}</span>
+                        <div class="resource-actions">
+                            <button class="btn btn-primary" onclick="downloadResource('${slideshow.name}', '${slideshow.url}')">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewResource('${slideshow.name}', '${slideshow.url}')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </div>
+                    </div>
+                `;
+                slideshowsGrid.appendChild(slideshowCard);
+            });
+        }
+        
+        // Load notes
+        function loadNotes() {
+            notesGrid.innerHTML = '';
+            
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            const notes = resources.filter(resource => resource.category === 'notes');
+            
+            let filteredNotes = notes;
+            
+            // Apply level filter
+            const levelFilter = notesFilter.value;
+            if (levelFilter) {
+                filteredNotes = filteredNotes.filter(note => {
+                    const chapterNum = parseInt(note.chapter.split('.')[0]);
+                    return levelFilter === 'as' ? chapterNum <= 12 : chapterNum > 12;
+                });
+            }
+            
+            // Apply search filter
+            const searchTerm = notesSearch.value.toLowerCase();
+            if (searchTerm) {
+                filteredNotes = filteredNotes.filter(note => 
+                    note.name.toLowerCase().includes(searchTerm) ||
+                    note.chapter.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredNotes.length === 0) {
+                notesGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No notes found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredNotes.forEach(note => {
+                const noteCard = document.createElement('div');
+                noteCard.className = 'resource-card';
+                noteCard.innerHTML = `
+                    <div class="resource-header">
+                        <span class="resource-type">${note.type}</span>
+                        <h3 class="resource-title">${note.name}</h3>
+                        <p class="resource-meta">Chapter ${note.chapter} • Uploaded: ${formatDate(note.uploadDate)}</p>
+                    </div>
+                    <div class="resource-body">
+                        <p class="resource-description">
+                            Comprehensive study notes for this chapter. Includes detailed explanations, 
+                            examples, and practice questions to help you master the material.
+                        </p>
+                    </div>
+                    <div class="resource-footer">
+                        <span class="resource-size">${note.size}</span>
+                        <div class="resource-actions">
+                            <button class="btn btn-primary" onclick="downloadResource('${note.name}', '${note.url}')">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewResource('${note.name}', '${note.url}')">
+                                <i class="fas fa-eye"></i>
+                                View
+                            </button>
+                        </div>
+                    </div>
+                `;
+                notesGrid.appendChild(noteCard);
+            });
+        }
+        
+        // Load student documents
+        function loadStudentDocuments() {
+            studentDocumentsGrid.innerHTML = '';
+            
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            
+            let filteredSubmissions = submissions;
+            
+            // Apply type filter
+            const typeFilter = studentDocumentsFilter.value;
+            if (typeFilter) {
+                filteredSubmissions = filteredSubmissions.filter(submission => {
+                    if (typeFilter === 'assignment') return submission.assignmentTitle.toLowerCase().includes('assignment');
+                    if (typeFilter === 'project') return submission.assignmentTitle.toLowerCase().includes('project');
+                    if (typeFilter === 'submission') return true;
+                    return false;
+                });
+            }
+            
+            // Apply search filter
+            const searchTerm = studentDocumentsSearch.value.toLowerCase();
+            if (searchTerm) {
+                filteredSubmissions = filteredSubmissions.filter(submission => 
+                    submission.assignmentTitle.toLowerCase().includes(searchTerm) ||
+                    submission.studentName.toLowerCase().includes(searchTerm) ||
+                    submission.studentId.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            if (filteredSubmissions.length === 0) {
+                studentDocumentsGrid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1 / -1;">
+                        <i class="fas fa-search"></i>
+                        <h3>No student documents found</h3>
+                        <p>Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredSubmissions.forEach(submission => {
+                const submissionCard = document.createElement('div');
+                submissionCard.className = 'resource-card';
+                
+                let statusClass, statusText;
+                if (submission.status === 'graded') {
+                    statusClass = 'btn-success';
+                    statusText = `Graded: ${submission.grade}`;
+                } else if (submission.status === 'submitted') {
+                    statusClass = 'btn-secondary';
+                    statusText = 'Submitted';
+                } else {
+                    statusClass = 'btn-secondary';
+                    statusText = 'Pending';
+                }
+                
+                submissionCard.innerHTML = `
+                    <div class="resource-header">
+                        <span class="resource-type">${submission.fileName.split('.').pop().toUpperCase()}</span>
+                        <h3 class="resource-title">${submission.assignmentTitle}</h3>
+                        <p class="resource-meta">${submission.studentName} • ${submission.studentId}</p>
+                    </div>
+                    <div class="resource-body">
+                        <p class="resource-description">
+                            ${submission.feedback}
+                        </p>
+                    </div>
+                    <div class="resource-footer">
+                        <span class="resource-size">${submission.fileSize}</span>
+                        <div class="resource-actions">
+                            <button class="btn ${statusClass}" disabled>
+                                <i class="fas fa-check-circle"></i>
+                                ${statusText}
+                            </button>
+                            <button class="btn btn-primary" onclick="downloadResource('${submission.fileName}', '${submission.url}')">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                `;
+                studentDocumentsGrid.appendChild(submissionCard);
+            });
+        }
+        
+        // Format date function
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+        
+        // Download resource function
+        function downloadResource(name, url) {
+            showNotification(`Downloading ${name}...`, 'info');
+            // In a real implementation, this would trigger an actual download
+            setTimeout(() => {
+                showNotification(`${name} downloaded successfully!`, 'success');
+            }, 1000);
+        }
+        
+        // View resource function
+        function viewResource(name, url) {
+            showNotification(`Opening ${name}...`, 'info');
+            // In a real implementation, this would open the resource in a new tab
+            setTimeout(() => {
+                showNotification(`${name} opened in new tab`, 'success');
+            }, 1000);
+        }
+        
+        // Language toggle
+        languageToggle.addEventListener('click', () => {
+            isMandarin = !isMandarin;
+            currentLang.textContent = isMandarin ? '中文' : 'EN';
+            showNotification(`Language changed to ${isMandarin ? 'Mandarin' : 'English'}`, 'info');
+        });
+        
+        // Search and filter event listeners
+        pastPapersSearch.addEventListener('input', loadPastPapers);
+        pastPapersFilter.addEventListener('change', loadPastPapers);
+        referenceLinksSearch.addEventListener('input', loadReferenceLinks);
+        referenceLinksFilter.addEventListener('change', loadReferenceLinks);
+        slideshowsSearch.addEventListener('input', loadSlideshows);
+        slideshowsFilter.addEventListener('change', loadSlideshows);
+        notesSearch.addEventListener('input', loadNotes);
+        notesFilter.addEventListener('change', loadNotes);
+        studentDocumentsSearch.addEventListener('input', loadStudentDocuments);
+        studentDocumentsFilter.addEventListener('change', loadStudentDocuments);
+        
+        // Notification function
+        function showNotification(message, type = 'success') {
+            notificationMessage.textContent = message;
+            
+            // Set notification class based on type
+            notification.className = 'notification';
+            if (type === 'success') {
+                notification.classList.add('notification-success');
+            } else if (type === 'error') {
+                notification.classList.add('notification-error');
+            } else if (type === 'info') {
+                notification.classList.add('notification-info');
+            }
+            
+            // Show notification
+            notification.classList.add('show');
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            loadCategories();
+        });
+    </script>
+</body>
+</html>
