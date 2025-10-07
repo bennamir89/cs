@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preparing and Organizing Small Datasets for Machine Learning Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            width: 1280px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .section {
+            padding: 40px 70px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .title-section {
+            background-image: url('https://sfile.chatglm.cn/images-ppt/179e8361e8cf.png');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            text-align: center;
+            padding: 80px 70px;
+            position: relative;
+        }
+        .title-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(25, 55, 109, 0.85);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .main-title {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .mandarin-subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            color: #90caf9;
+        }
+        .section-title {
+            color: #19376D;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title i {
+            margin-right: 15px;
+            font-size: 36px;
+            color: #576CBC;
+        }
+        .section-subtitle {
+            color: #576CBC;
+            font-size: 24px;
+            font-weight: 500;
+            margin-top: 5px;
+            margin-left: 51px;
+            margin-bottom: 30px;
+        }
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .objective-item {
+            background-color: #f0f4ff;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s;
+        }
+        .objective-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .objective-icon {
+            background-color: #576CBC;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .objective-content {
+            flex: 1;
+        }
+        .objective-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .objective-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+        }
+        .activity-container {
+            background-color: #f0f4ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .activity-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .activity-title i {
+            margin-right: 12px;
+            font-size: 28px;
+            color: #576CBC;
+        }
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        .step-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0 15px;
+            position: relative;
+        }
+        .step-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            right: -15px;
+            width: 30px;
+            height: 2px;
+            background-color: #576CBC;
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #576CBC;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .step-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 8px;
+        }
+        .step-time {
+            font-size: 16px;
+            color: #576CBC;
+            font-weight: 500;
+        }
+        .step-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+            margin-top: 8px;
+        }
+        .questions-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .question-item {
+            flex: 1 0 calc(33.33% - 14px);
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .question-item i {
+            color: #576CBC;
+            margin-right: 10px;
+            font-size: 22px;
+            margin-top: 2px;
+        }
+        .question-content {
+            flex: 1;
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .question-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .content-box {
+            background-color: #f0f4ff;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .content-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .content-title i {
+            margin-right: 10px;
+            font-size: 26px;
+            color: #576CBC;
+        }
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .key-point:last-child {
+            margin-bottom: 0;
+        }
+        .key-point i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+        .key-point-content {
+            flex: 1;
+        }
+        .key-point-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .key-point-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+        }
+        .highlight {
+            color: #576CBC;
+            font-weight: 700;
+        }
+        .data-types-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .type-item {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s;
+        }
+        .type-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .type-item i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+        .type-content {
+            flex: 1;
+        }
+        .type-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .type-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+            margin-bottom: 5px;
+        }
+        .type-desc {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+        }
+        .format-comparison {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .format-item {
+            flex: 1;
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+        .format-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .format-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .format-header i {
+            color: #576CBC;
+            margin-right: 10px;
+            font-size: 24px;
+        }
+        .format-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+        }
+        .format-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+            margin-top: 3px;
+        }
+        .format-desc {
+            font-size: 16px;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        .format-features {
+            list-style-type: none;
+        }
+        .format-feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 6px;
+            font-size: 15px;
+            color: #333;
+        }
+        .format-feature i {
+            color: #576CBC;
+            margin-right: 6px;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+        .table-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            margin-top: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 18px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        th {
+            background-color: #576CBC;
+            color: white;
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .exit-ticket-container {
+            background-color: #f0f4ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .exit-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .exit-question {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            transition: transform 0.2s;
+        }
+        .exit-question:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .question-number {
+            background-color: #576CBC;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .question-content {
+            flex: 1;
+        }
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 8px;
+        }
+        .question-mandarin {
+            font-size: 18px;
+            color: #576CBC;
+        }
+        .worksheet-container {
+            background-color: #f0f4ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 20px;
+        }
+        .instruction-list {
+            list-style-type: none;
+            margin-top: 15px;
+        }
+        .instruction-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .instruction-item:last-child {
+            margin-bottom: 0;
+        }
+        .instruction-item i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 22px;
+            margin-top: 2px;
+        }
+        .instruction-content {
+            flex: 1;
+        }
+        .instruction-text {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .instruction-mandarin {
+            font-size: 18px;
+            color: #576CBC;
+        }
+        .footer-note {
+            background-color: #f0f4ff;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .footer-note i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 24px;
+        }
+        .footer-text {
+            font-size: 18px;
+            color: #19376D;
+        }
+        .footer-mandarin {
+            font-size: 16px;
+            color: #576CBC;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title Section -->
+        <div class="title-section">
+            <div class="title-overlay">
+                <h1 class="main-title">Preparing and Organizing Small Datasets for Machine Learning Analysis</h1>
+                <h2 class="subtitle">Chapter 2 - Machine Learning Part 2</h2>
+                <h3 class="mandarin-subtitle">机器学习数据准备与组织</h3>
+            </div>
+        </div>
+
+        <!-- Learning Objectives Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">flag</i>
+                Learning Objectives
+            </h1>
+            <div class="section-subtitle">学习目标</div>
+            <div class="objectives-grid">
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Identify and collect relevant data</div>
+                        <div class="objective-mandarin">从各种来源识别和收集相关数据</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">grid_on</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Format data into structured layouts</div>
+                        <div class="objective-mandarin">将数据格式化为适合分析的结构化布局</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">cleaning_services</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Clean data by detecting and correcting errors</div>
+                        <div class="objective-mandarin">通过检测和纠正常见错误来清理数据</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">category</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Classify data types for appropriate handling</div>
+                        <div class="objective-mandarin">对数据类型进行分类以便适当处理</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">label</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Label columns clearly to aid interpretation</div>
+                        <div class="objective-mandarin">清晰标记列以帮助解释</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">sort</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Sort and filter data to highlight patterns</div>
+                        <div class="objective-mandarin">对数据进行排序和筛选以突出模式</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">save</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Save and organize data in suitable formats</div>
+                        <div class="objective-mandarin">以合适的格式保存和组织数据</div>
+                    </div>
+                </div>
+                <div class="objective-item">
+                    <div class="objective-icon">
+                        <i class="material-icons">description</i>
+                    </div>
+                    <div class="objective-content">
+                        <div class="objective-text">Document changes for traceability</div>
+                        <div class="objective-mandarin">记录更改以确保可追溯性和可重复性</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Starter Activity Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">lightbulb</i>
+                Starter Activity
+            </h1>
+            <div class="section-subtitle">开始活动</div>
+            <div class="activity-container">
+                <div class="activity-title">
+                    <i class="material-icons">groups</i>
+                    Think-Pair-Share Activity
+                </div>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Think</div>
+                        <div class="step-time">2 minutes</div>
+                        <div class="step-mandarin">思考</div>
+                        <div class="step-mandarin">2分钟</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Pair</div>
+                        <div class="step-time">3 minutes</div>
+                        <div class="step-mandarin">配对</div>
+                        <div class="step-mandarin">3分钟</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Share</div>
+                        <div class="step-time">5 minutes</div>
+                        <div class="step-mandarin">分享</div>
+                        <div class="step-mandarin">5分钟</div>
+                    </div>
+                </div>
+                
+                <div class="activity-title">
+                    <i class="material-icons">help_outline</i>
+                    Key Questions to Consider
+                </div>
+                <div class="questions-container">
+                    <div class="question-item">
+                        <i class="material-icons">psychology</i>
+                        <div class="question-content">
+                            <div class="question-text">What made information difficult to organize?</div>
+                            <div class="question-mandarin">是什么让信息难以组织？</div>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <i class="material-icons">priority_high</i>
+                        <div class="question-content">
+                            <div class="question-text">How did you decide what was important?</div>
+                            <div class="question-mandarin">你如何决定哪些信息是重要的？</div>
+                        </div>
+                    </div>
+                    <div class="question-item">
+                        <i class="material-icons">build</i>
+                        <div class="question-content">
+                            <div class="question-text">What tools did you use to organize?</div>
+                            <div class="question-mandarin">你使用了什么工具来组织信息？</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Data Preparation Matters Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">insights</i>
+                Why Data Preparation Matters
+            </h1>
+            <div class="section-subtitle">为什么数据准备很重要</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">schedule</i>
+                        Time Investment
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">schedule</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">80% Time on <span class="highlight">Data Preprocessing</span></div>
+                            <div class="key-point-mandarin">80% 时间用于数据预处理</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">warning</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">"Garbage in, garbage out"</span></div>
+                            <div class="key-point-mandarin">"垃圾进，垃圾出"</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">trending_up</i>
+                        Quality Impact
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">trending_up</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Improves <span class="highlight">Model Performance</span></div>
+                            <div class="key-point-mandarin">提高模型性能</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">build</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Enhances <span class="highlight">Data Quality</span></div>
+                            <div class="key-point-mandarin">增强数据质量</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Identify and Collect Relevant Data Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">source</i>
+                Identify and Collect Relevant Data
+            </h1>
+            <div class="section-subtitle">识别和收集相关数据</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">storage</i>
+                        Common Data Sources
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">storage</i>
+                            <div class="type-content">
+                                <div class="type-title">Databases</div>
+                                <div class="type-mandarin">数据库</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">api</i>
+                            <div class="type-content">
+                                <div class="type-title">APIs</div>
+                                <div class="type-mandarin">应用程序接口</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">grid_on</i>
+                            <div class="type-content">
+                                <div class="type-title">Spreadsheets</div>
+                                <div class="type-mandarin">电子表格</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">language</i>
+                            <div class="type-content">
+                                <div class="type-title">Web Scraping</div>
+                                <div class="type-mandarin">网络爬虫</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">lightbulb</i>
+                        Key Considerations
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">check_circle</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Ensure <span class="highlight">Relevance</span></div>
+                            <div class="key-point-mandarin">确保相关性</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">check_circle</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Quality over Quantity</span></div>
+                            <div class="key-point-mandarin">质量胜过数量</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">check_circle</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Consider <span class="highlight">Accessibility</span></div>
+                            <div class="key-point-mandarin">考虑可访问性</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Format Data into Structured Layout Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">grid_on</i>
+                Format Data into Structured Layout
+            </h1>
+            <div class="section-subtitle">将数据格式化为结构化布局</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">view_module</i>
+                        Key Principles
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">table_rows</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Rows</span> = Observations</div>
+                                <div class="type-mandarin">行 = 观测值</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">view_column</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Columns</span> = Variables</div>
+                                <div class="type-mandarin">列 = 变量</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">format_align_center</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Consistent</span> Formatting</div>
+                                <div class="type-mandarin">一致的格式</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">computer</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Machine-readable</span> Format</div>
+                                <div class="type-mandarin">机器可读格式</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">tips_and_updates</i>
+                        Best Practices
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">label</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Descriptive Headers</span></div>
+                            <div class="key-point-mandarin">描述性标题</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">data_array</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Consistent Data Types</span></div>
+                            <div class="key-point-mandarin">一致的数据类型</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">grid_off</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Avoid <span class="highlight">Merged Cells</span></div>
+                            <div class="key-point-mandarin">避免合并单元格</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">filter_1</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Single Values</span> per Cell</div>
+                            <div class="key-point-mandarin">每个单元格单一值</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clean Data by Detecting and Correcting Errors Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">cleaning_services</i>
+                Clean Data by Detecting and Correcting Errors
+            </h1>
+            <div class="section-subtitle">通过检测和纠正错误来清理数据</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">error_outline</i>
+                        Common Data Errors
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">highlight_off</i>
+                            <div class="type-content">
+                                <div class="type-title">Missing Values</div>
+                                <div class="type-mandarin">缺失值</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">content_copy</i>
+                            <div class="type-content">
+                                <div class="type-title">Duplicates</div>
+                                <div class="type-mandarin">重复值</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">show_chart</i>
+                            <div class="type-content">
+                                <div class="type-title">Outliers</div>
+                                <div class="type-mandarin">异常值</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">sync_problem</i>
+                            <div class="type-content">
+                                <div class="type-title">Inconsistencies</div>
+                                <div class="type-mandarin">不一致性</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">build</i>
+                        Correction Techniques
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">delete</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Removal</span></div>
+                            <div class="key-point-mandarin">删除</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">swap_horiz</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Imputation</span></div>
+                            <div class="key-point-mandarin">插补</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">tune</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Transformation</span></div>
+                            <div class="key-point-mandarin">转换</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">edit</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Standardization</span></div>
+                            <div class="key-point-mandarin">标准化</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Classify Data Types for Appropriate Handling Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">category</i>
+                Classify Data Types for Appropriate Handling
+            </h1>
+            <div class="section-subtitle">对数据类型进行分类以便适当处理</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">data_object</i>
+                        Common Data Types
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">tag</i>
+                            <div class="type-content">
+                                <div class="type-title">Numerical</div>
+                                <div class="type-mandarin">数值型</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">view_list</i>
+                            <div class="type-content">
+                                <div class="type-title">Categorical</div>
+                                <div class="type-mandarin">分类型</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">text_fields</i>
+                            <div class="type-content">
+                                <div class="type-title">Text</div>
+                                <div class="type-mandarin">文本型</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">schedule</i>
+                            <div class="type-content">
+                                <div class="type-title">Date/Time</div>
+                                <div class="type-mandarin">日期/时间型</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">code</i>
+                        Encoding Techniques
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">filter_1</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">One-Hot Encoding</span></div>
+                            <div class="key-point-mandarin">独热编码</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">label</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Label Encoding</span></div>
+                            <div class="key-point-mandarin">标签编码</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">compare_arrows</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Ordinal Encoding</span></div>
+                            <div class="key-point-mandarin">序数编码</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">text_rotation_none</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Text Processing</span></div>
+                            <div class="key-point-mandarin">文本处理</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Label Columns or Fields Clearly Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">label</i>
+                Label Columns or Fields Clearly
+            </h1>
+            <div class="section-subtitle">清晰标记列或字段</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">format_list_bulleted</i>
+                        Naming Principles
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">description</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Descriptive</span></div>
+                                <div class="type-mandarin">描述性的</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">format_align_center</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Consistent</span></div>
+                                <div class="type-mandarin">一致的</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">short_text</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Concise</span></div>
+                                <div class="type-mandarin">简洁的</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">straighten</i>
+                            <div class="type-content">
+                                <div class="type-title"><span class="highlight">Include Units</span></div>
+                                <div class="type-mandarin">包含单位</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">lightbulb</i>
+                        Best Practices
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">format_size</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">snake_case</span> or <span class="highlight">camelCase</span></div>
+                            <div class="key-point-mandarin">使用一致的命名风格</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">text_format</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Avoid <span class="highlight">Abbreviations</span></div>
+                            <div class="key-point-mandarin">避免缩写</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">spellcheck</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Use <span class="highlight">Full Words</span></div>
+                            <div class="key-point-mandarin">使用完整单词</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">info</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text">Include <span class="highlight">Context</span></div>
+                            <div class="key-point-mandarin">包含上下文</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sort and Filter Data to Highlight Patterns Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">sort</i>
+                Sort and Filter Data to Highlight Patterns
+            </h1>
+            <div class="section-subtitle">对数据进行排序和筛选以突出模式</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">sort</i>
+                        Sorting Techniques
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">filter_1</i>
+                            <div class="type-content">
+                                <div class="type-title">Single Column</div>
+                                <div class="type-mandarin">单列排序</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">filter_2</i>
+                            <div class="type-content">
+                                <div class="type-title">Multiple Columns</div>
+                                <div class="type-mandarin">多列排序</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">format_list_numbered</i>
+                            <div class="type-content">
+                                <div class="type-title">Custom Lists</div>
+                                <div class="type-mandarin">自定义列表</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">trending_up</i>
+                            <div class="type-content">
+                                <div class="type-title">Conditional Sorting</div>
+                                <div class="type-mandarin">条件排序</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">filter_list</i>
+                        Filtering Methods
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">text_format</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Text Filters</span></div>
+                            <div class="key-point-mandarin">文本筛选</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">calculate</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Number Filters</span></div>
+                            <div class="key-point-mandarin">数值筛选</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">event</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Date Filters</span></div>
+                            <div class="key-point-mandarin">日期筛选</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">bookmark</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Custom Views</span></div>
+                            <div class="key-point-mandarin">自定义视图</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save and Organize Data in Suitable Formats Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">save</i>
+                Save and Organize Data in Suitable Formats
+            </h1>
+            <div class="section-subtitle">以合适的格式保存和组织数据</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">description</i>
+                        Common File Formats
+                    </div>
+                    <div class="format-comparison">
+                        <div class="format-item">
+                            <div class="format-header">
+                                <i class="material-icons">grid_on</i>
+                                <div class="format-name">CSV</div>
+                            </div>
+                            <div class="format-mandarin">逗号分隔值</div>
+                            <div class="format-desc">Comma-separated values</div>
+                            <ul class="format-features">
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Universal compatibility</span>
+                                </li>
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Human-readable</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="format-item">
+                            <div class="format-header">
+                                <i class="material-icons">table_chart</i>
+                                <div class="format-name">XLSX</div>
+                            </div>
+                            <div class="format-mandarin">Excel电子表格</div>
+                            <div class="format-desc">Excel spreadsheet format</div>
+                            <ul class="format-features">
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Rich formatting</span>
+                                </li>
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Multiple sheets</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="format-item">
+                            <div class="format-header">
+                                <i class="material-icons">code</i>
+                                <div class="format-name">JSON</div>
+                            </div>
+                            <div class="format-mandarin">JavaScript对象表示法</div>
+                            <div class="format-desc">JavaScript Object Notation</div>
+                            <ul class="format-features">
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Hierarchical data</span>
+                                </li>
+                                <li class="format-feature">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>API-friendly</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">folder</i>
+                        Data Organization
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">label</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Clear Naming Conventions</span></div>
+                            <div class="key-point-mandarin">清晰的命名约定</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">account_tree</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Logical Folder Structure</span></div>
+                            <div class="key-point-mandarin">逻辑文件夹结构</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">history</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Version Control</span></div>
+                            <div class="key-point-mandarin">版本控制</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">description</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">Metadata Documentation</span></div>
+                            <div class="key-point-mandarin">元数据文档</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Document Changes for Traceability and Reproducibility Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">description</i>
+                Document Changes for Traceability and Reproducibility
+            </h1>
+            <div class="section-subtitle">记录更改以确保可追溯性和可重复性</div>
+            <div class="content-grid">
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">note_add</i>
+                        Documentation Methods
+                    </div>
+                    <div class="data-types-grid">
+                        <div class="type-item">
+                            <i class="material-icons">note_add</i>
+                            <div class="type-content">
+                                <div class="type-title">Data Logs</div>
+                                <div class="type-mandarin">数据日志</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">code</i>
+                            <div class="type-content">
+                                <div class="type-title">Code Comments</div>
+                                <div class="type-mandarin">代码注释</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">history</i>
+                            <div class="type-content">
+                                <div class="type-title">Version Control</div>
+                                <div class="type-mandarin">版本控制</div>
+                            </div>
+                        </div>
+                        <div class="type-item">
+                            <i class="material-icons">folder_shared</i>
+                            <div class="type-content">
+                                <div class="type-title">Data Versioning</div>
+                                <div class="type-mandarin">数据版本控制</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-box">
+                    <div class="content-title">
+                        <i class="material-icons">build</i>
+                        Tools for Reproducibility
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">storage</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">DVC</span></div>
+                            <div class="key-point-mandarin">数据版本控制</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">file_download</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">GitLFS</span></div>
+                            <div class="key-point-mandarin">Git大文件存储</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">water</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">LakeFS</span></div>
+                            <div class="key-point-mandarin">数据湖版本控制平台</div>
+                        </div>
+                    </div>
+                    <div class="key-point">
+                        <i class="material-icons">science</i>
+                        <div class="key-point-content">
+                            <div class="key-point-text"><span class="highlight">MLflow</span></div>
+                            <div class="key-point-mandarin">实验跟踪和可重复性</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Exit Ticket Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">exit_to_app</i>
+                Exit Ticket
+            </h1>
+            <div class="section-subtitle">出场券</div>
+            <div class="exit-ticket-container">
+                <div class="activity-title">
+                    <i class="material-icons">assignment</i>
+                    Complete the following questions before leaving
+                </div>
+                <div class="exit-questions">
+                    <div class="exit-question">
+                        <div class="question-number">1</div>
+                        <div class="question-content">
+                            <div class="question-text">What are the three most important steps in data preparation?</div>
+                            <div class="question-mandarin">你认为数据准备中最重要的三个步骤是什么？</div>
+                        </div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">2</div>
+                        <div class="question-content">
+                            <div class="question-text">Why is it important to document changes made to data?</div>
+                            <div class="question-mandarin">为什么记录对数据所做的更改很重要？</div>
+                        </div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">3</div>
+                        <div class="question-content">
+                            <div class="question-text">What challenges might you face when preparing data for machine learning?</div>
+                            <div class="question-mandarin">在为机器学习准备数据时，你可能会面临什么挑战？</div>
+                        </div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">4</div>
+                        <div class="question-content">
+                            <div class="question-text">How would you explain the importance of data preparation to someone new to machine learning?</div>
+                            <div class="question-mandarin">你会如何向机器学习新手解释数据准备的重要性？</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-note">
+                    <i class="material-icons">assignment_turned_in</i>
+                    <div class="footer-text">Submit your answers to your teacher before you leave.</div>
+                    <div class="footer-mandarin">离开前将你的答案提交给老师。</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Worksheet Section -->
+        <div class="section">
+            <h1 class="section-title">
+                <i class="material-icons">assignment</i>
+                Worksheet
+            </h1>
+            <div class="section-subtitle">工作表</div>
+            <div class="worksheet-container">
+                <div class="activity-title">
+                    <i class="material-icons">task_alt</i>
+                    Data Preparation Practice Exercise
+                </div>
+                <div class="key-point-text">Clean and prepare the following dataset for machine learning analysis.</div>
+                <div class="key-point-mandarin">清理并准备以下数据集以进行机器学习分析。</div>
+                
+                <div class="content-title">
+                    <i class="material-icons">table_chart</i>
+                    Dataset Sample: Customer Information
+                </div>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Purchase Amount</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John</td>
+                                <td>25</td>
+                                <td>M</td>
+                                <td>$120.50</td>
+                                <td>2023-01-15</td>
+                            </tr>
+                            <tr>
+                                <td>Jane</td>
+                                <td>30</td>
+                                <td>F</td>
+                                <td>$85.00</td>
+                                <td>2023-01-16</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>28</td>
+                                <td>M</td>
+                                <td>$95.25</td>
+                                <td>2023-01-17</td>
+                            </tr>
+                            <tr>
+                                <td>Alex</td>
+                                <td>35</td>
+                                <td>O</td>
+                                <td>$150.75</td>
+                                <td>2023-01-18</td>
+                            </tr>
+                            <tr>
+                                <td>Sam</td>
+                                <td>22</td>
+                                <td>F</td>
+                                <td>$110.00</td>
+                                <td>2023-01-19</td>
+                            </tr>
+                            <tr>
+                                <td>John</td>
+                                <td>25</td>
+                                <td>M</td>
+                                <td>$120.50</td>
+                                <td>2023-01-20</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="content-title">
+                    <i class="material-icons">format_list_numbered</i>
+                    Instructions
+                </div>
+                <ul class="instruction-list">
+                    <li class="instruction-item">
+                        <i class="material-icons">error_outline</i>
+                        <div class="instruction-content">
+                            <div class="instruction-text">Identify and list any issues with the data</div>
+                            <div class="instruction-mandarin">识别并列出数据中的任何问题</div>
+                        </div>
+                    </li>
+                    <li class="instruction-item">
+                        <i class="material-icons">cleaning_services</i>
+                        <div class="instruction-content">
+                            <div class="instruction-text">Suggest how you would clean the data</div>
+                            <div class="instruction-mandarin">建议你将如何清理数据</div>
+                        </div>
+                    </li>
+                    <li class="instruction-item">
+                        <i class="material-icons">label</i>
+                        <div class="instruction-content">
+                            <div class="instruction-text">Propose appropriate column names</div>
+                            <div class="instruction-mandarin">提出合适的列名</div>
+                        </div>
+                    </li>
+                    <li class="instruction-item">
+                        <i class="material-icons">category</i>
+                        <div class="instruction-content">
+                            <div class="instruction-text">Explain how you would classify the data types</div>
+                            <div class="instruction-mandarin">解释你将如何对数据类型进行分类</div>
+                        </div>
+                    </li>
+                    <li class="instruction-item">
+                        <i class="material-icons">save</i>
+                        <div class="instruction-content">
+                            <div class="instruction-text">Describe how you would save the cleaned data</div>
+                            <div class="instruction-mandarin">描述你将如何保存清理后的数据</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="footer-note">
+                    <i class="material-icons">assignment_turned_in</i>
+                    <div class="footer-text">Complete this worksheet individually and submit it by the end of the lesson.</div>
+                    <div class="footer-mandarin">单独完成此工作表并在课程结束前提交。</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
