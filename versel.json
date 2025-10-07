@@ -3,6 +3,14 @@
     {
       "source": "/admin",
       "destination": "/admin.html"
+    },
+    {
+      "source": "/author",
+      "destination": "/author.html"
+    },
+    {
+      "source": "/resources",
+      "destination": "/resources.html"
     }
   ]
 }
