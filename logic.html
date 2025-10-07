@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logic Gates & Logic Circuits</title>
+    <title>Logic Gates & Logic Circuits - Complete</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -14,63 +14,704 @@
         }
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            color: #ffffff;
-            overflow: hidden;
+            color: #333333;
+            background-color: #f5f7fa;
         }
         .slide {
             width: 1280px;
-            height: 720px;
+            min-height: 720px;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(rgba(25, 55, 109, 0.85), rgba(25, 55, 109, 0.85)), 
-                        url('https://sfile.chatglm.cn/images-ppt/94a01ea8af11.jpg');
-            background-size: cover;
-            background-position: center;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
         }
-        .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            padding: 0 70px;
-            text-align: center;
+        .header {
+            background-color: #19376D;
+            padding: 20px 70px;
+            color: white;
         }
         .title {
-            font-size: 64px;
+            font-size: 40px;
             font-weight: 700;
-            margin-bottom: 24px;
-            color: #ffffff;
-            letter-spacing: 1px;
         }
-        .subtitle {
-            font-size: 24px;
-            font-weight: 400;
-            color: #e0e0e0;
-            letter-spacing: 0.5px;
+        .content {
+            flex-grow: 1;
+            padding: 20px 70px;
+            display: flex;
+            flex-direction: column;
         }
-        .icon-container {
-            margin-bottom: 40px;
+        .section {
+            margin-bottom: 30px;
         }
-        .material-icons {
-            font-size: 64px;
-            color: #64B5F6;
+        .section-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #19376D;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section-title .material-icons {
+            margin-right: 10px;
+            font-size: 28px;
+        }
+        .two-column {
+            display: flex;
+            gap: 30px;
+        }
+        .column {
+            flex: 1;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .info-item .material-icons {
+            color: #19376D;
+            margin-right: 10px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .info-text {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .highlight {
+            color: #19376D;
+            font-weight: 600;
+        }
+        .gate-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gate-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .gate-name {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .gate-symbol {
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .gate-info {
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        .truth-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        .truth-table th, .truth-table td {
+            border: 1px solid #19376D;
+            padding: 4px;
+            text-align: center;
+        }
+        .truth-table th {
+            background-color: #19376D;
+            color: white;
+        }
+        .truth-table tr:nth-child(even) {
+            background-color: #e8eef8;
+        }
+        .construction-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .method-card {
+            flex: 1;
+            min-width: 200px;
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .method-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .method-title .material-icons {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .exit-questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        .question-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        .question-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #19376D;
+        }
+        .question-number {
+            font-size: 16px;
+            font-weight: 700;
+            color: #19376D;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .question-number .material-icons {
+            margin-right: 6px;
+            font-size: 16px;
+        }
+        .question-text {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        .video-info {
+            background-color: #e8eef8;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .video-icon {
+            background-color: #19376D;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .video-icon .material-icons {
+            font-size: 28px;
+        }
+        .video-details {
+            flex: 1;
+        }
+        .video-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .video-duration {
+            font-size: 16px;
+            color: #555;
+        }
+        .activity-box {
+            background-color: #e8eef8;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .activity-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #19376D;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .activity-title .material-icons {
+            margin-right: 8px;
+        }
+        .activity-content {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+        .examples {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .example-item {
+            background-color: white;
+            border-radius: 6px;
+            padding: 8px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .example-item .material-icons {
+            font-size: 20px;
+            color: #19376D;
+            margin-bottom: 5px;
+        }
+        .example-text {
+            font-size: 14px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
     <div class="slide">
+        <div class="header">
+            <h1 class="title">Logic Gates & Logic Circuits - Complete</h1>
+        </div>
         <div class="content">
-            <div class="icon-container">
-                <i class="material-icons">memory</i>
+            <!-- Objectives Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">school</i>
+                    Lesson Objectives
+                </div>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="info-item">
+                            <i class="material-icons">check_circle</i>
+                            <div class="info-text">Identify and describe <span class="highlight">six basic logic gates</span> (AND, OR, NOT, XOR, NAND, NOR)</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="material-icons">check_circle</i>
+                            <div class="info-text">Construct <span class="highlight">truth tables</span> for logic gates and circuits</div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="info-item">
+                            <i class="material-icons">check_circle</i>
+                            <div class="info-text">Create <span class="highlight">logic circuits</span> from problem statements, expressions, and truth tables</div>
+                        </div>
+                        <div class="info-item">
+                            <i class="material-icons">check_circle</i>
+                            <div class="info-text">Analyze logic circuits to determine output</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h1 class="title">Logic Gates & Logic Circuits</h1>
-            <h2 class="subtitle">Cambridge (CIE) A Level Computer Science</h2>
+
+            <!-- Starter Activity Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">groups</i>
+                    Starter Activity
+                </div>
+                <div class="activity-box">
+                    <div class="activity-title">
+                        <i class="material-icons">psychology</i>
+                        Think-Pair-Share
+                    </div>
+                    <div class="activity-content">
+                        In pairs, discuss where you might encounter logic gates in everyday life.
+                    </div>
+                    <div class="examples">
+                        <div class="example-item">
+                            <i class="material-icons">home</i>
+                            <div class="example-text">Household appliances</div>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">devices</i>
+                            <div class="example-text">Digital devices</div>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">security</i>
+                            <div class="example-text">Security systems</div>
+                        </div>
+                        <div class="example-item">
+                            <i class="material-icons">directions_car</i>
+                            <div class="example-text">Transportation</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logic Gates Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">memory</i>
+                    Logic Gates
+                </div>
+                <div class="gate-grid">
+                    <!-- AND Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">AND Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,30 L60,30 A20,20 0 0,1 60,70 L20,70 Z" fill="none" stroke="#19376D" stroke-width="3" transform="translate(0, -20)"/>
+                                <line x1="10" y1="20" x2="20" y2="20" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="20" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="60" y1="30" x2="70" y2="30" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="25" font-size="12" fill="#19376D">A</text>
+                                <text x="5" y="45" font-size="12" fill="#19376D">B</text>
+                                <text x="75" y="35" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (A AND B)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Returns TRUE only if both inputs are TRUE</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- OR Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">OR Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,20 Q20,50 50,50 Q80,50 80,30 Q80,10 50,10 Q20,10 20,20 Z" fill="none" stroke="#19376D" stroke-width="3"/>
+                                <line x1="10" y1="20" x2="20" y2="20" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="20" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="80" y1="30" x2="90" y2="30" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="25" font-size="12" fill="#19376D">A</text>
+                                <text x="5" y="45" font-size="12" fill="#19376D">B</text>
+                                <text x="95" y="35" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (A OR B)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Returns TRUE if either input is TRUE</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- NOT Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">NOT Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,30 L60,30 L60,50 L20,50 Z" fill="none" stroke="#19376D" stroke-width="3"/>
+                                <circle cx="65" cy="40" r="5" fill="none" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="20" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="70" y1="40" x2="80" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="45" font-size="12" fill="#19376D">A</text>
+                                <text x="85" y="45" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (NOT A)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Reverses the input value</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- XOR Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">XOR Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,20 Q20,50 50,50 Q80,50 80,30 Q80,10 50,10 Q20,10 20,20 Z" fill="none" stroke="#19376D" stroke-width="3"/>
+                                <path d="M15,20 Q15,50 45,50" fill="none" stroke="#19376D" stroke-width="3"/>
+                                <line x1="10" y1="20" x2="15" y2="20" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="15" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="80" y1="30" x2="90" y2="30" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="25" font-size="12" fill="#19376D">A</text>
+                                <text x="5" y="45" font-size="12" fill="#19376D">B</text>
+                                <text x="95" y="35" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (A XOR B)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Returns TRUE if either input is TRUE but NOT both</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- NAND Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">NAND Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,30 L60,30 A20,20 0 0,1 60,70 L20,70 Z" fill="none" stroke="#19376D" stroke-width="3" transform="translate(0, -20)"/>
+                                <circle cx="65" cy="30" r="5" fill="none" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="20" x2="20" y2="20" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="20" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="70" y1="30" x2="80" y2="30" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="25" font-size="12" fill="#19376D">A</text>
+                                <text x="5" y="45" font-size="12" fill="#19376D">B</text>
+                                <text x="85" y="35" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (A NAND B)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Returns TRUE if either or both inputs are FALSE</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!-- NOR Gate -->
+                    <div class="gate-card">
+                        <div class="gate-name">NOR Gate</div>
+                        <div class="gate-symbol">
+                            <svg width="100" height="60" viewBox="0 0 100 60">
+                                <path d="M20,20 Q20,50 50,50 Q80,50 80,30 Q80,10 50,10 Q20,10 20,20 Z" fill="none" stroke="#19376D" stroke-width="3"/>
+                                <circle cx="85" cy="30" r="5" fill="none" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="20" x2="20" y2="20" stroke="#19376D" stroke-width="2"/>
+                                <line x1="10" y1="40" x2="20" y2="40" stroke="#19376D" stroke-width="2"/>
+                                <line x1="90" y1="30" x2="100" y2="30" stroke="#19376D" stroke-width="2"/>
+                                <text x="5" y="25" font-size="12" fill="#19376D">A</text>
+                                <text x="5" y="45" font-size="12" fill="#19376D">B</text>
+                                <text x="105" y="35" font-size="12" fill="#19376D">Q</text>
+                            </svg>
+                        </div>
+                        <div class="gate-info"><span class="highlight">Expression:</span> (A NOR B)</div>
+                        <div class="gate-info"><span class="highlight">Function:</span> Returns TRUE if both inputs are FALSE</div>
+                        <table class="truth-table">
+                            <tr>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>Q</th>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logic Construction Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">build</i>
+                    Logic Construction Methods
+                </div>
+                <div class="construction-methods">
+                    <div class="method-card">
+                        <div class="method-title">
+                            <i class="material-icons">description</i>
+                            From Problem Statements
+                        </div>
+                        <div class="info-text">Written interpretation of a scenario requiring a specific logical outcome</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-title">
+                            <i class="material-icons">functions</i>
+                            From Logic Expressions
+                        </div>
+                        <div class="info-text">Shows how a logic circuit works using symbols and Boolean logic</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-title">
+                            <i class="material-icons">table_chart</i>
+                            From Truth Tables
+                        </div>
+                        <div class="info-text">Visualizes results of Boolean expressions with all input combinations</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-title">
+                            <i class="material-icons">memory</i>
+                            From Logic Circuits
+                        </div>
+                        <div class="info-text">Create logic expressions and truth tables from circuit diagrams</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">play_circle_filled</i>
+                    Video to Watch
+                </div>
+                <div class="video-info">
+                    <div class="video-icon">
+                        <i class="material-icons">play_arrow</i>
+                    </div>
+                    <div class="video-details">
+                        <div class="video-title">Boolean Logic & Logic Gates: Crash Course Computer Science #3</div>
+                        <div class="video-duration">Duration: 10 minutes | Link: pbs.org/video/boolean-logic-logic-gates</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Exit Ticket Section -->
+            <div class="section">
+                <div class="section-title">
+                    <i class="material-icons">assignment_turned_in</i>
+                    Exit Ticket
+                </div>
+                <div class="exit-questions">
+                    <div class="question-card">
+                        <div class="question-number">
+                            <i class="material-icons">looks_one</i>
+                            Question 1
+                        </div>
+                        <div class="question-text">
+                            Which logic gate returns <span class="highlight">TRUE only if both inputs are TRUE</span>?
+                        </div>
+                    </div>
+                    <div class="question-card">
+                        <div class="question-number">
+                            <i class="material-icons">looks_two</i>
+                            Question 2
+                        </div>
+                        <div class="question-text">
+                            Draw the <span class="highlight">truth table</span> for a NOT gate.
+                        </div>
+                    </div>
+                    <div class="question-card">
+                        <div class="question-number">
+                            <i class="material-icons">looks_3</i>
+                            Question 3
+                        </div>
+                        <div class="question-text">
+                            Write the <span class="highlight">logic expression</span> for a circuit that outputs TRUE when either A is TRUE or B is FALSE.
+                        </div>
+                    </div>
+                    <div class="question-card">
+                        <div class="question-number">
+                            <i class="material-icons">looks_4</i>
+                            Question 4
+                        </div>
+                        <div class="question-text">
+                            Explain one <span class="highlight">real-world application</span> of logic gates.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
