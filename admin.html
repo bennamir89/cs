@@ -516,34 +516,8 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Introduction to Data Representation</td>
-                                    <td>1.1</td>
-                                    <td>June 1, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Network Topologies</td>
-                                    <td>2.1</td>
-                                    <td>June 3, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>CPU Architecture</td>
-                                    <td>4.1</td>
-                                    <td>June 5, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
+                            <tbody id="resources-table">
+                                <!-- Resources will be loaded here -->
                             </tbody>
                         </table>
                     </div>
@@ -588,31 +562,8 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Mock Exam Schedule Released</td>
-                                    <td>June 15, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>New Programming Resources Added</td>
-                                    <td>June 10, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Homework Deadline Reminder</td>
-                                    <td>June 5, 2023</td>
-                                    <td>
-                                        <button class="btn btn-warning">Edit</button>
-                                        <button class="btn btn-danger">Delete</button>
-                                    </td>
-                                </tr>
+                            <tbody id="news-table">
+                                <!-- News items will be loaded here -->
                             </tbody>
                         </table>
                     </div>
@@ -636,27 +587,8 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Zhang Wei</td>
-                                    <td>2023001</td>
-                                    <td>Assembly Language Program</td>
-                                    <td>June 10, 2023</td>
-                                    <td>
-                                        <button class="btn btn-primary">View</button>
-                                        <button class="btn btn-success">Grade</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Li Ming</td>
-                                    <td>2023002</td>
-                                    <td>Algorithm Design Homework</td>
-                                    <td>June 12, 2023</td>
-                                    <td>
-                                        <button class="btn btn-primary">View</button>
-                                        <button class="btn btn-success">Grade</button>
-                                    </td>
-                                </tr>
+                            <tbody id="submissions-table">
+                                <!-- Submissions will be loaded here -->
                             </tbody>
                         </table>
                     </div>
@@ -758,7 +690,11 @@
                                 <input type="checkbox" id="notes-include-mandarin"> Include Mandarin Translation
                             </label>
                         </div>
-                        <button class="btn btn-primary">Save Notes</button>
+                        <div class="form-group" id="mandarin-group" style="display: none;">
+                            <label for="notes-mandarin">Mandarin Translation</label>
+                            <textarea class="form-control" id="notes-mandarin" rows="10" placeholder="Enter the Mandarin translation for the selected chapter..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" id="save-notes">Save Notes</button>
                     </div>
                 </div>
             </div>
@@ -805,10 +741,102 @@
         const modalCancel = document.getElementById('modal-cancel');
         const modalConfirm = document.getElementById('modal-confirm');
         
+        // Table containers
+        const resourcesTable = document.getElementById('resources-table');
+        const newsTable = document.getElementById('news-table');
+        const submissionsTable = document.getElementById('submissions-table');
+        
         // Forms
         const resourceForm = document.getElementById('resource-form');
         const newsForm = document.getElementById('news-form');
         const assignmentForm = document.getElementById('assignment-form');
+        
+        // Notes elements
+        const notesChapterSelect = document.getElementById('notes-chapter-select');
+        const notesContent = document.getElementById('notes-content');
+        const notesIncludeMandarin = document.getElementById('notes-include-mandarin');
+        const notesMandarin = document.getElementById('notes-mandarin');
+        const mandarinGroup = document.getElementById('mandarin-group');
+        const saveNotesBtn = document.getElementById('save-notes');
+        
+        // Format date function
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+        
+        // Load data from localStorage
+        function loadData() {
+            // Load resources
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            resourcesTable.innerHTML = '';
+            
+            if (resources.length === 0) {
+                resourcesTable.innerHTML = '<tr><td colspan="4" class="text-center">No resources available</td></tr>';
+            } else {
+                resources.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>${item.chapter}</td>
+                        <td>${formatDate(item.uploadDate)}</td>
+                        <td>
+                            <button class="btn btn-warning" data-action="edit" data-type="resource" data-id="${item.id}">Edit</button>
+                            <button class="btn btn-danger" data-action="delete" data-type="resource" data-id="${item.id}">Delete</button>
+                        </td>
+                    `;
+                    resourcesTable.appendChild(row);
+                });
+            }
+            
+            // Load news
+            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+            newsTable.innerHTML = '';
+            
+            if (news.length === 0) {
+                newsTable.innerHTML = '<tr><td colspan="3" class="text-center">No news available</td></tr>';
+            } else {
+                news.sort((a, b) => new Date(b.date) - new Date(a.date));
+                news.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${item.title}</td>
+                        <td>${formatDate(item.date)}</td>
+                        <td>
+                            <button class="btn btn-warning" data-action="edit" data-type="news" data-id="${item.id}">Edit</button>
+                            <button class="btn btn-danger" data-action="delete" data-type="news" data-id="${item.id}">Delete</button>
+                        </td>
+                    `;
+                    newsTable.appendChild(row);
+                });
+            }
+            
+            // Load submissions
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            submissionsTable.innerHTML = '';
+            
+            if (submissions.length === 0) {
+                submissionsTable.innerHTML = '<tr><td colspan="5" class="text-center">No submissions available</td></tr>';
+            } else {
+                submissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
+                submissions.forEach(item => {
+                    if (item.status === 'submitted') {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${item.studentName}</td>
+                            <td>${item.studentId}</td>
+                            <td>${item.assignmentTitle}</td>
+                            <td>${formatDate(item.submissionDate)}</td>
+                            <td>
+                                <button class="btn btn-primary" data-action="view" data-type="submission" data-id="${item.id}">View</button>
+                                <button class="btn btn-success" data-action="grade" data-type="submission" data-id="${item.id}">Grade</button>
+                            </td>
+                        `;
+                        submissionsTable.appendChild(row);
+                    }
+                });
+            }
+        }
         
         // Login form submission
         loginForm.addEventListener('submit', (e) => {
@@ -822,6 +850,7 @@
                 loginPage.style.display = 'none';
                 adminDashboard.style.display = 'block';
                 showNotification('Login successful!', 'success');
+                loadData();
             } else {
                 showNotification('Invalid username or password', 'error');
             }
@@ -850,10 +879,13 @@
                         content.classList.add('active');
                     }
                 });
+                
+                // Reload data for the active tab
+                loadData();
             });
         });
         
-        // Form submissions
+        // Resource form submission
         resourceForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -863,13 +895,38 @@
             const file = document.getElementById('resource-file').files[0];
             const description = document.getElementById('resource-description').value;
             
-            // Simulate upload
+            // Get existing resources
+            const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+            
+            // Create new resource
+            const newResource = {
+                id: Date.now(),
+                name: resourceName,
+                chapter: chapter,
+                type: file ? file.name.split('.').pop().toUpperCase() : 'Unknown',
+                size: file ? `${(file.size / (1024 * 1024)).toFixed(1)} MB` : 'Unknown',
+                uploadDate: new Date().toISOString().split('T')[0],
+                url: '#',
+                description: description
+            };
+            
+            // Add to resources array
+            resources.push(newResource);
+            
+            // Save to localStorage
+            localStorage.setItem('cs_resources', JSON.stringify(resources));
+            
+            // Show notification
             showNotification('Resource uploaded successfully!', 'success');
             
             // Reset form
             resourceForm.reset();
+            
+            // Reload data
+            loadData();
         });
         
+        // News form submission
         newsForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -878,13 +935,34 @@
             const date = document.getElementById('news-date').value;
             const content = document.getElementById('news-content').value;
             
-            // Simulate submission
+            // Get existing news
+            const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+            
+            // Create new news item
+            const newNews = {
+                id: Date.now(),
+                title: title,
+                date: date,
+                content: content
+            };
+            
+            // Add to news array
+            news.push(newNews);
+            
+            // Save to localStorage
+            localStorage.setItem('cs_news', JSON.stringify(news));
+            
+            // Show notification
             showNotification('News item added successfully!', 'success');
             
             // Reset form
             newsForm.reset();
+            
+            // Reload data
+            loadData();
         });
         
+        // Assignment form submission
         assignmentForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -895,11 +973,106 @@
             const dueDate = document.getElementById('assignment-due-date').value;
             const file = document.getElementById('assignment-file').files[0];
             
-            // Simulate creation
+            // Get existing assignments
+            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+            
+            // Create new assignment
+            const newAssignment = {
+                id: Date.now(),
+                title: title,
+                chapter: chapter,
+                description: description,
+                dueDate: dueDate,
+                hasFile: file ? true : false
+            };
+            
+            // Add to assignments array
+            assignments.push(newAssignment);
+            
+            // Save to localStorage
+            localStorage.setItem('cs_assignments', JSON.stringify(assignments));
+            
+            // Show notification
             showNotification('Assignment created successfully!', 'success');
             
             // Reset form
             assignmentForm.reset();
+            
+            // Reload data
+            loadData();
+        });
+        
+        // Notes chapter select change
+        notesChapterSelect.addEventListener('change', (e) => {
+            const chapter = e.target.value;
+            
+            if (chapter) {
+                // Load existing notes for the chapter
+                const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
+                
+                if (notes[chapter]) {
+                    notesContent.value = notes[chapter].content;
+                    if (notes[chapter].mandarin) {
+                        notesIncludeMandarin.checked = true;
+                        notesMandarin.value = notes[chapter].mandarin;
+                        mandarinGroup.style.display = 'block';
+                    } else {
+                        notesIncludeMandarin.checked = false;
+                        notesMandarin.value = '';
+                        mandarinGroup.style.display = 'none';
+                    }
+                } else {
+                    notesContent.value = '';
+                    notesIncludeMandarin.checked = false;
+                    notesMandarin.value = '';
+                    mandarinGroup.style.display = 'none';
+                }
+            } else {
+                notesContent.value = '';
+                notesIncludeMandarin.checked = false;
+                notesMandarin.value = '';
+                mandarinGroup.style.display = 'none';
+            }
+        });
+        
+        // Notes include Mandarin checkbox change
+        notesIncludeMandarin.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                mandarinGroup.style.display = 'block';
+            } else {
+                mandarinGroup.style.display = 'none';
+                notesMandarin.value = '';
+            }
+        });
+        
+        // Save notes button click
+        saveNotesBtn.addEventListener('click', () => {
+            const chapter = notesChapterSelect.value;
+            const content = notesContent.value;
+            const includeMandarin = notesIncludeMandarin.checked;
+            const mandarin = notesMandarin.value;
+            
+            if (chapter && content) {
+                // Get existing notes
+                const notes = JSON.parse(localStorage.getItem('cs_notes') || '{}');
+                
+                // Update notes for the chapter
+                notes[chapter] = {
+                    content: content
+                };
+                
+                if (includeMandarin && mandarin) {
+                    notes[chapter].mandarin = mandarin;
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('cs_notes', JSON.stringify(notes));
+                
+                // Show notification
+                showNotification('Notes saved successfully!', 'success');
+            } else {
+                showNotification('Please select a chapter and enter notes content.', 'error');
+            }
         });
         
         // Modal functions
@@ -952,70 +1125,253 @@
             }, 3000);
         }
         
-        // Edit and delete buttons for admin
+        // Handle button clicks for edit, delete, view, grade
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-warning') && e.target.textContent === 'Edit') {
-                const itemName = e.target.closest('tr').querySelector('td:first-child').textContent;
-                showModal(`Edit ${itemName}`, '<p>Edit form would go here.</p>', () => {
-                    showNotification(`${itemName} updated successfully!`, 'success');
-                });
-            } else if (e.target.classList.contains('btn-danger') && e.target.textContent === 'Delete') {
-                const itemName = e.target.closest('tr').querySelector('td:first-child').textContent;
-                showModal(`Delete ${itemName}`, `<p>Are you sure you want to delete ${itemName}?</p>`, () => {
-                    showNotification(`${itemName} deleted successfully!`, 'success');
-                });
-            } else if (e.target.classList.contains('btn-primary') && e.target.textContent === 'View') {
-                const studentName = e.target.closest('tr').querySelector('td:first-child').textContent;
-                showModal(`View Submission - ${studentName}`, '<p>Submission details would go here.</p>', null);
-            } else if (e.target.classList.contains('btn-success') && e.target.textContent === 'Grade') {
-                const studentName = e.target.closest('tr').querySelector('td:first-child').textContent;
-                showModal(`Grade Submission - ${studentName}`, `
-                    <div class="form-group">
-                        <label for="grade">Grade</label>
-                        <select class="form-control" id="grade">
-                            <option value="">-- Select Grade --</option>
-                            <option value="A">A</option>
-                            <option value="B">B</option>
-                            <option value="C">C</option>
-                            <option value="D">D</option>
-                            <option value="E">E</option>
-                            <option value="F">F</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="feedback">Feedback</label>
-                        <textarea class="form-control" id="feedback" rows="5"></textarea>
-                    </div>
-                `, () => {
-                    showNotification(`Submission graded successfully!`, 'success');
-                });
-            }
-        });
-        
-        // Notes chapter select
-        document.getElementById('notes-chapter-select').addEventListener('change', (e) => {
-            const chapter = e.target.value;
-            const notesContent = document.getElementById('notes-content');
-            
-            if (chapter) {
-                // Load existing notes for the chapter
-                notesContent.value = `Notes for Chapter ${chapter}`;
-            } else {
-                notesContent.value = '';
-            }
-        });
-        
-        // Save notes button
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-primary') && e.target.textContent === 'Save Notes') {
-                const chapter = document.getElementById('notes-chapter-select').value;
-                const content = document.getElementById('notes-content').value;
-                const includeMandarin = document.getElementById('notes-include-mandarin').checked;
+            if (e.target.classList.contains('btn-warning') && e.target.getAttribute('data-action') === 'edit') {
+                const type = e.target.getAttribute('data-type');
+                const id = e.target.getAttribute('data-id');
                 
-                if (chapter && content) {
-                    showNotification('Notes saved successfully!', 'success');
-                } else {
-                    showNotification('Please select a chapter and enter notes content.', 'error');
+                if (type === 'resource') {
+                    const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+                    const resource = resources.find(r => r.id == id);
+                    
+                    if (resource) {
+                        showModal(`Edit Resource: ${resource.name}`, `
+                            <div class="form-group">
+                                <label for="edit-resource-name">Resource Name</label>
+                                <input type="text" class="form-control" id="edit-resource-name" value="${resource.name}">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-resource-chapter">Chapter</label>
+                                <select class="form-control" id="edit-resource-chapter">
+                                    <option value="1.1" ${resource.chapter === '1.1' ? 'selected' : ''}>1.1 Data Representation</option>
+                                    <option value="1.2" ${resource.chapter === '1.2' ? 'selected' : ''}>1.2 Multimedia – Graphics, Sound</option>
+                                    <option value="1.3" ${resource.chapter === '1.3' ? 'selected' : ''}>1.3 Compression</option>
+                                    <option value="2.1" ${resource.chapter === '2.1' ? 'selected' : ''}>2.1 Networks including the internet</option>
+                                    <option value="3.1" ${resource.chapter === '3.1' ? 'selected' : ''}>3.1 Computers and their components</option>
+                                    <option value="3.2" ${resource.chapter === '3.2' ? 'selected' : ''}>3.2 Logic Gates and Logic Circuits</option>
+                                    <option value="4.1" ${resource.chapter === '4.1' ? 'selected' : ''}>4.1 Central Processing Unit (CPU) Architecture</option>
+                                    <option value="4.2" ${resource.chapter === '4.2' ? 'selected' : ''}>4.2 Assembly Language</option>
+                                    <option value="4.3" ${resource.chapter === '4.3' ? 'selected' : ''}>4.3 Bit manipulation</option>
+                                    <option value="5.1" ${resource.chapter === '5.1' ? 'selected' : ''}>5.1 Operating Systems</option>
+                                    <option value="5.2" ${resource.chapter === '5.2' ? 'selected' : ''}>5.2 Language Translators</option>
+                                    <option value="6.1" ${resource.chapter === '6.1' ? 'selected' : ''}>6.1 Data Security</option>
+                                    <option value="6.2" ${resource.chapter === '6.2' ? 'selected' : ''}>6.2 Data Integrity</option>
+                                    <option value="7.1" ${resource.chapter === '7.1' ? 'selected' : ''}>7.1 Ethics and Ownership</option>
+                                    <option value="8.1" ${resource.chapter === '8.1' ? 'selected' : ''}>8.1 Database Concepts</option>
+                                    <option value="8.2" ${resource.chapter === '8.2' ? 'selected' : ''}>8.2 Database Management Systems (DBMS)</option>
+                                    <option value="8.3" ${resource.chapter === '8.3' ? 'selected' : ''}>8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</option>
+                                    <option value="9.1" ${resource.chapter === '9.1' ? 'selected' : ''}>9.1 Computational Thinking Skills</option>
+                                    <option value="9.2" ${resource.chapter === '9.2' ? 'selected' : ''}>9.2 Algorithms</option>
+                                    <option value="10.1" ${resource.chapter === '10.1' ? 'selected' : ''}>10.1 Data Types and Records</option>
+                                    <option value="10.2" ${resource.chapter === '10.2' ? 'selected' : ''}>10.2 Arrays</option>
+                                    <option value="10.3" ${resource.chapter === '10.3' ? 'selected' : ''}>10.3 Files</option>
+                                    <option value="10.4" ${resource.chapter === '10.4' ? 'selected' : ''}>10.4 Introduction to Abstract Data Types (ADT)</option>
+                                    <option value="11.1" ${resource.chapter === '11.1' ? 'selected' : ''}>11.1 Programming Basics</option>
+                                    <option value="11.2" ${resource.chapter === '11.2' ? 'selected' : ''}>11.2 Constructs</option>
+                                    <option value="11.3" ${resource.chapter === '11.3' ? 'selected' : ''}>11.3 Structured Programming</option>
+                                    <option value="12.1" ${resource.chapter === '12.1' ? 'selected' : ''}>12.1 Program Development Life cycle</option>
+                                    <option value="12.2" ${resource.chapter === '12.2' ? 'selected' : ''}>12.2 Program Design</option>
+                                    <option value="12.3" ${resource.chapter === '12.3' ? 'selected' : ''}>12.3 Program Testing and Maintenance</option>
+                                    <option value="13.1" ${resource.chapter === '13.1' ? 'selected' : ''}>13.1 User-defined data types</option>
+                                    <option value="13.2" ${resource.chapter === '13.2' ? 'selected' : ''}>13.2 File organisation and access</option>
+                                    <option value="13.3" ${resource.chapter === '13.3' ? 'selected' : ''}>13.3 Floating-point numbers, representation and manipulation</option>
+                                    <option value="14.1" ${resource.chapter === '14.1' ? 'selected' : ''}>14.1 Protocols technologies</option>
+                                    <option value="14.2" ${resource.chapter === '14.2' ? 'selected' : ''}>14.2 Circuit switching, packet switching</option>
+                                    <option value="15.1" ${resource.chapter === '15.1' ? 'selected' : ''}>15.1 Processors, Parallel Processing and Virtual Machines</option>
+                                    <option value="15.2" ${resource.chapter === '15.2' ? 'selected' : ''}>15.2 Boolean Algebra and Logic Circuits</option>
+                                    <option value="16.1" ${resource.chapter === '16.1' ? 'selected' : ''}>16.1 Purposes of an Operating System (OS)</option>
+                                    <option value="16.2" ${resource.chapter === '16.2' ? 'selected' : ''}>16.2 Translation Software</option>
+                                    <option value="17.1" ${resource.chapter === '17.1' ? 'selected' : ''}>17.1 Encryption, Encryption Protocols and Digital certificates</option>
+                                    <option value="18.1" ${resource.chapter === '18.1' ? 'selected' : ''}>18.1 Artificial Intelligence</option>
+                                    <option value="19.1" ${resource.chapter === '19.1' ? 'selected' : ''}>19.1 Algorithms</option>
+                                    <option value="19.2" ${resource.chapter === '19.2' ? 'selected' : ''}>19.2 Recursion</option>
+                                    <option value="20.1" ${resource.chapter === '20.1' ? 'selected' : ''}>20.1 Programming Paradigms</option>
+                                    <option value="20.2" ${resource.chapter === '20.2' ? 'selected' : ''}>20.2 File Processing and Exception Handling</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-resource-description">Description</label>
+                                <textarea class="form-control" id="edit-resource-description">${resource.description || ''}</textarea>
+                            </div>
+                        `, () => {
+                            // Update resource
+                            const updatedName = document.getElementById('edit-resource-name').value;
+                            const updatedChapter = document.getElementById('edit-resource-chapter').value;
+                            const updatedDescription = document.getElementById('edit-resource-description').value;
+                            
+                            resource.name = updatedName;
+                            resource.chapter = updatedChapter;
+                            resource.description = updatedDescription;
+                            
+                            // Save to localStorage
+                            localStorage.setItem('cs_resources', JSON.stringify(resources));
+                            
+                            // Show notification
+                            showNotification('Resource updated successfully!', 'success');
+                            
+                            // Reload data
+                            loadData();
+                        });
+                    }
+                } else if (type === 'news') {
+                    const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+                    const newsItem = news.find(n => n.id == id);
+                    
+                    if (newsItem) {
+                        showModal(`Edit News: ${newsItem.title}`, `
+                            <div class="form-group">
+                                <label for="edit-news-title">News Title</label>
+                                <input type="text" class="form-control" id="edit-news-title" value="${newsItem.title}">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-news-date">Date</label>
+                                <input type="date" class="form-control" id="edit-news-date" value="${newsItem.date}">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-news-content">Content</label>
+                                <textarea class="form-control" id="edit-news-content" rows="5">${newsItem.content}</textarea>
+                            </div>
+                        `, () => {
+                            // Update news
+                            const updatedTitle = document.getElementById('edit-news-title').value;
+                            const updatedDate = document.getElementById('edit-news-date').value;
+                            const updatedContent = document.getElementById('edit-news-content').value;
+                            
+                            newsItem.title = updatedTitle;
+                            newsItem.date = updatedDate;
+                            newsItem.content = updatedContent;
+                            
+                            // Save to localStorage
+                            localStorage.setItem('cs_news', JSON.stringify(news));
+                            
+                            // Show notification
+                            showNotification('News updated successfully!', 'success');
+                            
+                            // Reload data
+                            loadData();
+                        });
+                    }
+                }
+            } else if (e.target.classList.contains('btn-danger') && e.target.getAttribute('data-action') === 'delete') {
+                const type = e.target.getAttribute('data-type');
+                const id = e.target.getAttribute('data-id');
+                
+                if (type === 'resource') {
+                    const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
+                    const resource = resources.find(r => r.id == id);
+                    
+                    if (resource) {
+                        showModal(`Delete Resource: ${resource.name}`, `<p>Are you sure you want to delete ${resource.name}?</p>`, () => {
+                            // Remove resource
+                            const index = resources.findIndex(r => r.id == id);
+                            resources.splice(index, 1);
+                            
+                            // Save to localStorage
+                            localStorage.setItem('cs_resources', JSON.stringify(resources));
+                            
+                            // Show notification
+                            showNotification('Resource deleted successfully!', 'success');
+                            
+                            // Reload data
+                            loadData();
+                        });
+                    }
+                } else if (type === 'news') {
+                    const news = JSON.parse(localStorage.getItem('cs_news') || '[]');
+                    const newsItem = news.find(n => n.id == id);
+                    
+                    if (newsItem) {
+                        showModal(`Delete News: ${newsItem.title}`, `<p>Are you sure you want to delete ${newsItem.title}?</p>`, () => {
+                            // Remove news
+                            const index = news.findIndex(n => n.id == id);
+                            news.splice(index, 1);
+                            
+                            // Save to localStorage
+                            localStorage.setItem('cs_news', JSON.stringify(news));
+                            
+                            // Show notification
+                            showNotification('News deleted successfully!', 'success');
+                            
+                            // Reload data
+                            loadData();
+                        });
+                    }
+                }
+            } else if (e.target.classList.contains('btn-primary') && e.target.getAttribute('data-action') === 'view') {
+                const id = e.target.getAttribute('data-id');
+                const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+                const submission = submissions.find(s => s.id == id);
+                
+                if (submission) {
+                    showModal(`View Submission - ${submission.studentName}`, `
+                        <div class="form-group">
+                            <label>Student Name</label>
+                            <p>${submission.studentName}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Student ID</label>
+                            <p>${submission.studentId}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Assignment</label>
+                            <p>${submission.assignmentTitle}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Submission Date</label>
+                            <p>${formatDate(submission.submissionDate)}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <p>${submission.status === 'submitted' ? 'Submitted - Pending Review' : submission.status}</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Feedback</label>
+                            <p>${submission.feedback}</p>
+                        </div>
+                    `, null);
+                }
+            } else if (e.target.classList.contains('btn-success') && e.target.getAttribute('data-action') === 'grade') {
+                const id = e.target.getAttribute('data-id');
+                const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+                const submission = submissions.find(s => s.id == id);
+                
+                if (submission) {
+                    showModal(`Grade Submission - ${submission.studentName}`, `
+                        <div class="form-group">
+                            <label for="grade">Grade</label>
+                            <select class="form-control" id="grade">
+                                <option value="">-- Select Grade --</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="feedback">Feedback</label>
+                            <textarea class="form-control" id="feedback" rows="5"></textarea>
+                        </div>
+                    `, () => {
+                        // Update submission
+                        const grade = document.getElementById('grade').value;
+                        const feedback = document.getElementById('feedback').value;
+                        
+                        submission.status = 'graded';
+                        submission.grade = grade;
+                        submission.feedback = feedback;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('cs_submissions', JSON.stringify(submissions));
+                        
+                        // Show notification
+                        showNotification('Submission graded successfully!', 'success');
+                        
+                        // Reload data
+                        loadData();
+                    });
                 }
             }
         });
