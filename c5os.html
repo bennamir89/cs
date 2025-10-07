@@ -14,20 +14,18 @@
         }
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
             background-color: #f5f7fa;
             color: #002060;
         }
         .slide {
-            display: none;
             width: 1280px;
             min-height: 720px;
             position: relative;
             margin: 0 auto;
-            flex-direction: column;
-        }
-        .slide.active {
             display: flex;
+            flex-direction: column;
+            padding: 40px 0;
         }
         .header {
             padding: 40px 70px 20px;
@@ -49,46 +47,12 @@
             display: flex;
             padding: 0 70px 40px;
         }
-        .navigation {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 100;
-        }
-        .nav-button {
-            background-color: #1976D2;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .nav-button:hover {
-            background-color: #1565C0;
-        }
-        .slide-indicator {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: rgba(0,0,0,0.5);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 14px;
-        }
         .highlight {
             color: #1976D2;
             font-weight: 600;
         }
         
-        /* Slide 1: Title */
+        /* Title Slide */
         .title-slide {
             background: linear-gradient(rgba(0, 32, 96, 0.85), rgba(0, 32, 96, 0.85)), 
                         url('https://picsum.photos/seed/computer-operating-system/1280/720.jpg');
@@ -113,7 +77,7 @@
             opacity: 0.9;
         }
         
-        /* Slide 2: Contents */
+        /* Contents Slide */
         .contents-container {
             display: flex;
             gap: 20px;
@@ -163,7 +127,7 @@
             margin-right: 8px;
         }
         
-        /* Slide 3: Lesson Objectives */
+        /* Lesson Objectives */
         .objectives-container {
             flex: 1;
             display: flex;
@@ -210,7 +174,7 @@
             line-height: 1.4;
         }
         
-        /* Slide 4: Starter Activity */
+        /* Starter Activity */
         .activity-container {
             flex: 1;
             display: flex;
@@ -294,7 +258,7 @@
             line-height: 1.5;
         }
         
-        /* Slide 5: Resource Management Introduction */
+        /* Resource Management */
         .left-content, .right-content {
             flex: 1;
             display: flex;
@@ -373,544 +337,7 @@
             object-fit: cover;
         }
         
-        /* Slide 6: Start-up and System Loading */
-        .process-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .process-steps {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        .step {
-            display: flex;
-            margin-bottom: 20px;
-            align-items: flex-start;
-        }
-        .step-number {
-            background-color: #1976D2;
-            color: white;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .step-content {
-            flex-grow: 1;
-        }
-        .step-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #002060;
-        }
-        .step-description {
-            font-size: 18px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        .devices-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            margin-left: 20px;
-        }
-        .device-card {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            margin-bottom: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .device-features {
-            list-style-type: none;
-        }
-        .device-feature {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            font-size: 18px;
-            color: #4a5568;
-        }
-        .device-feature .material-icons {
-            color: #64B5F6;
-            margin-right: 10px;
-            font-size: 18px;
-            margin-top: 3px;
-        }
-        
-        /* Slide 7: Kernel */
-        .kernel-definition {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        .definition-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #1976D2;
-            display: flex;
-            align-items: center;
-        }
-        .definition-title .material-icons {
-            margin-right: 10px;
-            color: #1976D2;
-            font-size: 28px;
-        }
-        .definition-text {
-            font-size: 20px;
-            line-height: 1.5;
-            color: #4a5568;
-        }
-        .responsibilities {
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            flex-grow: 1;
-        }
-        .responsibility-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-gap: 20px;
-        }
-        .responsibility-item {
-            display: flex;
-            align-items: flex-start;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            transition: transform 0.2s ease;
-        }
-        .responsibility-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .responsibility-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .responsibility-content {
-            flex-grow: 1;
-        }
-        .responsibility-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #002060;
-        }
-        .responsibility-chinese {
-            font-size: 14px;
-            color: #7B1FA2;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-        .responsibility-description {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        
-        /* Slide 8: CPU Resource Management */
-        .algorithms-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        .algorithm {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            flex: 1 0 calc(50% - 15px);
-            min-width: 180px;
-            transition: transform 0.2s ease;
-        }
-        .algorithm:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .algorithm-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .algorithm-name .material-icons {
-            font-size: 18px;
-            margin-right: 8px;
-            color: #1976D2;
-        }
-        .algorithm-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        
-        /* Slide 9: Memory Resource Management */
-        .memory-types {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .memory-type {
-            flex: 1;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            transition: transform 0.2s ease;
-        }
-        .memory-type:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .memory-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .memory-title .material-icons {
-            font-size: 18px;
-            margin-right: 8px;
-            color: #1976D2;
-        }
-        .memory-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        .virtual-memory-process {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 15px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-        }
-        .process-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 30%;
-        }
-        .step-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-        }
-        .step-icon .material-icons {
-            font-size: 24px;
-        }
-        .step-text {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.3;
-        }
-        .arrow {
-            color: #1976D2;
-            font-size: 24px;
-        }
-        
-        /* Slide 10: I/O Management and DMA */
-        .device-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .device-table th {
-            background-color: #1976D2;
-            color: white;
-            text-align: left;
-            padding: 12px 15px;
-            font-size: 18px;
-        }
-        .device-table td {
-            padding: 12px 15px;
-            font-size: 16px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .device-table tr:last-child td {
-            border-bottom: none;
-        }
-        .device-table tr:nth-child(even) {
-            background-color: rgba(25, 118, 210, 0.05);
-        }
-        .dma-process {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 15px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-        }
-        
-        /* Slide 11: Hiding Hardware Complexity */
-        .abstraction-layers {
-            display: flex;
-            flex-direction: column;
-            margin-top: 15px;
-            gap: 10px;
-        }
-        .layer {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            transition: transform 0.2s ease;
-        }
-        .layer:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .layer-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .layer-content {
-            flex-grow: 1;
-        }
-        .layer-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #002060;
-        }
-        .layer-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        .comparison {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .comparison-item {
-            flex: 1;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-            transition: transform 0.2s ease;
-        }
-        .comparison-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .comparison-icon {
-            font-size: 36px;
-            color: #1976D2;
-            margin-bottom: 10px;
-        }
-        .comparison-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-        }
-        .comparison-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        
-        /* Slide 12: Resource Management Summary */
-        .table-container {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            padding: 25px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .resource-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 10px;
-        }
-        .resource-table th {
-            background-color: #1976D2;
-            color: white;
-            text-align: left;
-            padding: 15px 20px;
-            font-size: 20px;
-            font-weight: 600;
-        }
-        .resource-table th:first-child {
-            border-top-left-radius: 8px;
-        }
-        .resource-table th:last-child {
-            border-top-right-radius: 8px;
-        }
-        .resource-table td {
-            padding: 15px 20px;
-            font-size: 18px;
-            border-bottom: 1px solid #e0e0e0;
-            vertical-align: top;
-        }
-        .resource-table tr:last-child td {
-            border-bottom: none;
-        }
-        .resource-table tr:nth-child(even) {
-            background-color: rgba(25, 118, 210, 0.05);
-        }
-        .resource-name {
-            font-weight: 600;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .resource-name .material-icons {
-            margin-right: 10px;
-            color: #1976D2;
-            font-size: 24px;
-        }
-        .technique {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .technique:last-child {
-            margin-bottom: 0;
-        }
-        .technique .material-icons {
-            color: #64B5F6;
-            margin-right: 8px;
-            font-size: 18px;
-        }
-        
-        /* Slide 13: Multitasking & Process States */
-        .process-illustration {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .process-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 30%;
-        }
-        .step-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        .step-icon .material-icons {
-            font-size: 30px;
-        }
-        .step-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-        }
-        .step-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.3;
-        }
-        .process-components {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .component {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 15px;
-            flex: 1 0 calc(50% - 15px);
-            min-width: 180px;
-            transition: transform 0.2s ease;
-        }
-        .component:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .component-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .component-title .material-icons {
-            font-size: 18px;
-            margin-right: 8px;
-            color: #1976D2;
-        }
-        .component-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        
-        /* Slide 14: Process States */
+        /* Process States */
         .states-container {
             display: flex;
             gap: 25px;
@@ -1008,163 +435,7 @@
             background-color: #F44336;
         }
         
-        /* Slide 15: Scheduling Routines */
-        .scheduling-types {
-            display: flex;
-            gap: 20px;
-            margin-top: 15px;
-        }
-        .scheduling-type {
-            flex: 1;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.2s ease;
-        }
-        .scheduling-type:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .type-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .type-title .material-icons {
-            font-size: 22px;
-            margin-right: 8px;
-            color: #1976D2;
-        }
-        .type-desc {
-            font-size: 18px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        .algorithms {
-            margin-top: 15px;
-        }
-        .algorithm {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-            background-color: rgba(25, 118, 210, 0.05);
-            padding: 8px 12px;
-            border-radius: 6px;
-        }
-        .algorithm .material-icons {
-            color: #1976D2;
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        .algorithm-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #002060;
-        }
-        
-        /* Slide 16: Scheduling Categories */
-        .comparison-container {
-            display: flex;
-            gap: 30px;
-            width: 100%;
-        }
-        .category-card {
-            flex: 1;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-        .category-card:hover {
-            transform: translateY(-5px);
-        }
-        .category-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-        .category-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-        }
-        .category-icon .material-icons {
-            font-size: 32px;
-        }
-        .category-title {
-            font-size: 28px;
-            font-weight: 600;
-            color: #002060;
-        }
-        .category-description {
-            font-size: 20px;
-            line-height: 1.5;
-            color: #4a5568;
-            margin-bottom: 25px;
-        }
-        .algorithm-examples {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .algorithm-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .algorithm-title .material-icons {
-            margin-right: 8px;
-            color: #1976D2;
-        }
-        .algorithm-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .algorithm {
-            background-color: white;
-            border-radius: 6px;
-            padding: 10px 15px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1976D2;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 32, 96, 0.1);
-        }
-        .algorithm .material-icons {
-            font-size: 16px;
-            margin-right: 6px;
-        }
-        .preemptive {
-            border-top: 5px solid #4CAF50;
-        }
-        .preemptive .category-icon {
-            background-color: #4CAF50;
-        }
-        .non-preemptive {
-            border-top: 5px solid #FF9800;
-        }
-        .non-preemptive .category-icon {
-            background-color: #FF9800;
-        }
-        
-        /* Slide 17: Scheduling Algorithms */
+        /* Scheduling Algorithms */
         .algorithm-card {
             flex: 1;
             background-color: white;
@@ -1289,257 +560,7 @@
             color: #4a5568;
         }
         
-        /* Slide 18: More Scheduling Algorithms */
-        .algorithms-container {
-            display: flex;
-            gap: 20px;
-            flex-grow: 1;
-        }
-        .technique-card {
-            flex: 1;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.3s ease;
-        }
-        .technique-card:hover {
-            transform: translateY(-5px);
-        }
-        .technique-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .technique-icon {
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .technique-icon .material-icons {
-            font-size: 28px;
-        }
-        .technique-title-container {
-            flex-grow: 1;
-        }
-        .technique-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #002060;
-            margin-bottom: 5px;
-        }
-        .technique-type {
-            display: inline-block;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-        .technique-description {
-            font-size: 18px;
-            line-height: 1.4;
-            color: #4a5568;
-            margin-bottom: 20px;
-        }
-        .mlfq {
-            border-top: 5px solid #9C27B0;
-        }
-        .mlfq .technique-icon {
-            background-color: #9C27B0;
-        }
-        .mlfq .technique-type {
-            background-color: #f3e5f5;
-            color: #9C27B0;
-        }
-        .mlfq .feature-item .material-icons {
-            color: #9C27B0;
-        }
-        .mlfq .highlight {
-            color: #9C27B0;
-        }
-        .mlfq .process {
-            background-color: white;
-            border: 2px solid #9C27B0;
-            color: #002060;
-        }
-        .mlfq .arrow {
-            color: #9C27B0;
-        }
-        .sjf {
-            border-top: 5px solid #2196F3;
-        }
-        .sjf .technique-icon {
-            background-color: #2196F3;
-        }
-        .sjf .technique-type {
-            background-color: #e3f2fd;
-            color: #2196F3;
-        }
-        .sjf .feature-item .material-icons {
-            color: #2196F3;
-        }
-        .sjf .highlight {
-            color: #2196F3;
-        }
-        .sjf .process {
-            background-color: white;
-            border: 2px solid #2196F3;
-            color: #002060;
-        }
-        .sjf .arrow {
-            color: #2196F3;
-        }
-        .srtf {
-            border-top: 5px solid #00BCD4;
-        }
-        .srtf .technique-icon {
-            background-color: #00BCD4;
-        }
-        .srtf .technique-type {
-            background-color: #e0f7fa;
-            color: #00BCD4;
-        }
-        .srtf .feature-item .material-icons {
-            color: #00BCD4;
-        }
-        .srtf .highlight {
-            color: #00BCD4;
-        }
-        .srtf .process {
-            background-color: white;
-            border: 2px solid #00BCD4;
-            color: #002060;
-        }
-        .srtf .arrow {
-            color: #00BCD4;
-        }
-        
-        /* Slide 19: Scheduling Algorithms Summary */
-        .algorithm-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 10px;
-        }
-        .algorithm-table th {
-            background-color: #1976D2;
-            color: white;
-            text-align: left;
-            padding: 15px 20px;
-            font-size: 20px;
-            font-weight: 600;
-        }
-        .algorithm-table th:first-child {
-            border-top-left-radius: 8px;
-        }
-        .algorithm-table th:last-child {
-            border-top-right-radius: 8px;
-        }
-        .algorithm-table td {
-            padding: 15px 20px;
-            font-size: 18px;
-            border-bottom: 1px solid #e0e0e0;
-            vertical-align: top;
-        }
-        .algorithm-table tr:last-child td {
-            border-bottom: none;
-        }
-        .algorithm-table tr:nth-child(even) {
-            background-color: rgba(25, 118, 210, 0.05);
-        }
-        .algorithm-name {
-            font-weight: 600;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .algorithm-name .material-icons {
-            margin-right: 10px;
-            color: #1976D2;
-            font-size: 24px;
-        }
-        .benefits-list, .drawbacks-list {
-            list-style-type: none;
-        }
-        .benefit-item, .drawback-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-        .benefit-item:last-child, .drawback-item:last-child {
-            margin-bottom: 0;
-        }
-        .benefit-item .material-icons {
-            color: #4CAF50;
-            margin-right: 8px;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        .drawback-item .material-icons {
-            color: #F44336;
-            margin-right: 8px;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
-        
-        /* Slide 20: Memory Management Introduction */
-        .techniques {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .technique {
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            transition: transform 0.2s ease;
-        }
-        .technique:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
-        }
-        .technique-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        .technique-icon .material-icons {
-            font-size: 24px;
-        }
-        .technique-content {
-            flex-grow: 1;
-        }
-        .technique-title {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: #002060;
-        }
-        .technique-desc {
-            font-size: 18px;
-            color: #4a5568;
-            line-height: 1.4;
-        }
-        
-        /* Slide 21: Paging and Segmentation */
+        /* Memory Management */
         .technique-card {
             flex: 1;
             background-color: white;
@@ -1670,125 +691,7 @@
             border-color: #FF9800;
         }
         
-        /* Slide 22: Virtual Memory and Summary */
-        .virtual-memory-illustration {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 20px;
-            background-color: #f5f7fa;
-            border-radius: 8px;
-            padding: 20px;
-        }
-        .memory-component {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            width: 30%;
-        }
-        .component-icon {
-            background-color: #1976D2;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-        .component-icon .material-icons {
-            font-size: 30px;
-        }
-        .component-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #002060;
-        }
-        .component-chinese {
-            font-size: 14px;
-            color: #7B1FA2;
-            font-style: italic;
-            margin-bottom: 5px;
-        }
-        .component-desc {
-            font-size: 16px;
-            color: #4a5568;
-            line-height: 1.3;
-        }
-        .summary-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 15px;
-        }
-        .summary-table th {
-            background-color: #1976D2;
-            color: white;
-            text-align: left;
-            padding: 12px 15px;
-            font-size: 18px;
-            font-weight: 600;
-        }
-        .summary-table th:first-child {
-            border-top-left-radius: 8px;
-        }
-        .summary-table th:last-child {
-            border-top-right-radius: 8px;
-        }
-        .summary-table td {
-            padding: 12px 15px;
-            font-size: 16px;
-            border-bottom: 1px solid #e0e0e0;
-            vertical-align: top;
-        }
-        .summary-table tr:last-child td {
-            border-bottom: none;
-        }
-        .summary-table tr:nth-child(even) {
-            background-color: rgba(25, 118, 210, 0.05);
-        }
-        .technique-name {
-            font-weight: 600;
-            color: #002060;
-            display: flex;
-            align-items: center;
-        }
-        .technique-name .material-icons {
-            margin-right: 8px;
-            color: #1976D2;
-            font-size: 18px;
-        }
-        .technique-chinese {
-            font-size: 14px;
-            color: #7B1FA2;
-            font-style: italic;
-            margin-left: 5px;
-        }
-        .benefit-item, .drawback-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 6px;
-        }
-        .benefit-item:last-child, .drawback-item:last-child {
-            margin-bottom: 0;
-        }
-        .benefit-item .material-icons {
-            color: #4CAF50;
-            margin-right: 6px;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-        .drawback-item .material-icons {
-            color: #F44336;
-            margin-right: 6px;
-            font-size: 16px;
-            flex-shrink: 0;
-        }
-        
-        /* Slide 23: Past Paper Questions */
+        /* Past Paper Questions */
         .question-container {
             background-color: white;
             border-radius: 12px;
@@ -1904,7 +807,7 @@
             margin-right: 6px;
         }
         
-        /* Slide 24: Exit Ticket */
+        /* Exit Ticket */
         .exit-ticket-container {
             background-color: white;
             border-radius: 12px;
@@ -2018,25 +921,644 @@
             font-style: italic;
             margin-top: 5px;
         }
+        
+        /* Table styles */
+        .table-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .resource-table, .algorithm-table, .summary-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 10px;
+        }
+        .resource-table th, .algorithm-table th, .summary-table th {
+            background-color: #1976D2;
+            color: white;
+            text-align: left;
+            padding: 15px 20px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .resource-table th:first-child, .algorithm-table th:first-child, .summary-table th:first-child {
+            border-top-left-radius: 8px;
+        }
+        .resource-table th:last-child, .algorithm-table th:last-child, .summary-table th:last-child {
+            border-top-right-radius: 8px;
+        }
+        .resource-table td, .algorithm-table td, .summary-table td {
+            padding: 15px 20px;
+            font-size: 18px;
+            border-bottom: 1px solid #e0e0e0;
+            vertical-align: top;
+        }
+        .resource-table tr:last-child td, .algorithm-table tr:last-child td, .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+        .resource-table tr:nth-child(even), .algorithm-table tr:nth-child(even), .summary-table tr:nth-child(even) {
+            background-color: rgba(25, 118, 210, 0.05);
+        }
+        .resource-name, .algorithm-name, .technique-name {
+            font-weight: 600;
+            color: #002060;
+            display: flex;
+            align-items: center;
+        }
+        .resource-name .material-icons, .algorithm-name .material-icons, .technique-name .material-icons {
+            margin-right: 10px;
+            color: #1976D2;
+            font-size: 24px;
+        }
+        .technique-chinese {
+            font-size: 14px;
+            color: #7B1FA2;
+            font-style: italic;
+            margin-left: 5px;
+        }
+        .technique {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .technique:last-child {
+            margin-bottom: 0;
+        }
+        .technique .material-icons {
+            color: #64B5F6;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+        .benefits-list, .drawbacks-list {
+            list-style-type: none;
+        }
+        .benefit-item, .drawback-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        .benefit-item:last-child, .drawback-item:last-child {
+            margin-bottom: 0;
+        }
+        .benefit-item .material-icons {
+            color: #4CAF50;
+            margin-right: 8px;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .drawback-item .material-icons {
+            color: #F44336;
+            margin-right: 8px;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        /* Algorithm containers */
+        .algorithms-container {
+            display: flex;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .scheduling-types {
+            display: flex;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .scheduling-type {
+            flex: 1;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s ease;
+        }
+        .scheduling-type:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .type-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #002060;
+            display: flex;
+            align-items: center;
+        }
+        .type-title .material-icons {
+            font-size: 22px;
+            margin-right: 8px;
+            color: #1976D2;
+        }
+        .type-desc {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        .algorithms {
+            margin-top: 15px;
+        }
+        .algorithm {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            background-color: rgba(25, 118, 210, 0.05);
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        .algorithm .material-icons {
+            color: #1976D2;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        .algorithm-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #002060;
+        }
+        
+        /* Comparison containers */
+        .comparison-container {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+        }
+        .category-card {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 32, 96, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .category-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        .category-icon .material-icons {
+            font-size: 32px;
+        }
+        .category-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #002060;
+        }
+        .category-description {
+            font-size: 20px;
+            line-height: 1.5;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        .algorithm-examples {
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .algorithm-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #002060;
+            display: flex;
+            align-items: center;
+        }
+        .algorithm-title .material-icons {
+            margin-right: 8px;
+            color: #1976D2;
+        }
+        .algorithm-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .algorithm {
+            background-color: white;
+            border-radius: 6px;
+            padding: 10px 15px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1976D2;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 32, 96, 0.1);
+        }
+        .algorithm .material-icons {
+            font-size: 16px;
+            margin-right: 6px;
+        }
+        .preemptive {
+            border-top: 5px solid #4CAF50;
+        }
+        .preemptive .category-icon {
+            background-color: #4CAF50;
+        }
+        .non-preemptive {
+            border-top: 5px solid #FF9800;
+        }
+        .non-preemptive .category-icon {
+            background-color: #FF9800;
+        }
+        
+        /* Memory types */
+        .memory-types {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .memory-type {
+            flex: 1;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+            transition: transform 0.2s ease;
+        }
+        .memory-type:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .memory-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #002060;
+            display: flex;
+            align-items: center;
+        }
+        .memory-title .material-icons {
+            font-size: 18px;
+            margin-right: 8px;
+            color: #1976D2;
+        }
+        .memory-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        .virtual-memory-process {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 30%;
+        }
+        .step-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+        .step-icon .material-icons {
+            font-size: 24px;
+        }
+        .step-text {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.3;
+        }
+        .arrow {
+            color: #1976D2;
+            font-size: 24px;
+        }
+        
+        /* Virtual memory illustration */
+        .virtual-memory-illustration {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .memory-component {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 30%;
+        }
+        .component-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .component-icon .material-icons {
+            font-size: 30px;
+        }
+        .component-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #002060;
+        }
+        .component-chinese {
+            font-size: 14px;
+            color: #7B1FA2;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        .component-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.3;
+        }
+        
+        /* Process illustration */
+        .process-illustration {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 30%;
+        }
+        .step-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        .step-icon .material-icons {
+            font-size: 30px;
+        }
+        .step-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #002060;
+        }
+        .step-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.3;
+        }
+        .process-components {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .component {
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+            flex: 1 0 calc(50% - 15px);
+            min-width: 180px;
+            transition: transform 0.2s ease;
+        }
+        .component:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .component-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #002060;
+            display: flex;
+            align-items: center;
+        }
+        .component-title .material-icons {
+            font-size: 18px;
+            margin-right: 8px;
+            color: #1976D2;
+        }
+        .component-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        
+        /* Device table */
+        .device-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .device-table th {
+            background-color: #1976D2;
+            color: white;
+            text-align: left;
+            padding: 12px 15px;
+            font-size: 18px;
+        }
+        .device-table td {
+            padding: 12px 15px;
+            font-size: 16px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .device-table tr:last-child td {
+            border-bottom: none;
+        }
+        .device-table tr:nth-child(even) {
+            background-color: rgba(25, 118, 210, 0.05);
+        }
+        
+        /* DMA process */
+        .dma-process {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 15px;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        /* Abstraction layers */
+        .abstraction-layers {
+            display: flex;
+            flex-direction: column;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        .layer {
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        .layer:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .layer-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .layer-content {
+            flex-grow: 1;
+        }
+        .layer-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #002060;
+        }
+        .layer-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        .comparison {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .comparison-item {
+            flex: 1;
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .comparison-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .comparison-icon {
+            font-size: 36px;
+            color: #1976D2;
+            margin-bottom: 10px;
+        }
+        .comparison-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #002060;
+        }
+        .comparison-desc {
+            font-size: 16px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        
+        /* Techniques */
+        .techniques {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .technique {
+            background-color: #f5f7fa;
+            border-radius: 8px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+        .technique:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 32, 96, 0.1);
+        }
+        .technique-icon {
+            background-color: #1976D2;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .technique-icon .material-icons {
+            font-size: 24px;
+        }
+        .technique-content {
+            flex-grow: 1;
+        }
+        .technique-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #002060;
+        }
+        .technique-desc {
+            font-size: 18px;
+            color: #4a5568;
+            line-height: 1.4;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1280px) {
+            .slide {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <div class="navigation">
-        <button class="nav-button" id="prevBtn">
-            <i class="material-icons">arrow_back</i>
-        </button>
-        <button class="nav-button" id="nextBtn">
-            <i class="material-icons">arrow_forward</i>
-        </button>
-    </div>
-    
-    <div class="slide-indicator">
-        <span id="currentSlide">1</span> / <span id="totalSlides">24</span>
-    </div>
-    
     <!-- Slide 1: Title -->
-    <div class="slide title-slide active" id="slide1">
+    <div class="slide title-slide">
         <div class="title-content">
             <h1>Purposes of an Operating System (OS)</h1>
             <h2>Cambridge (CIE) A Level Computer Science</h2>
@@ -2044,7 +1566,7 @@
     </div>
     
     <!-- Slide 2: Contents -->
-    <div class="slide" id="slide2">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Contents</h1>
         </div>
@@ -2094,7 +1616,7 @@
     </div>
     
     <!-- Slide 3: Lesson Objectives -->
-    <div class="slide" id="slide3">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Lesson Objectives</h1>
         </div>
@@ -2137,7 +1659,7 @@
     </div>
     
     <!-- Slide 4: Starter Activity -->
-    <div class="slide" id="slide4">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Starter Activity</h1>
         </div>
@@ -2196,7 +1718,7 @@
     </div>
     
     <!-- Slide 5: Resource Management Introduction -->
-    <div class="slide" id="slide5">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Resource Management</h1>
         </div>
@@ -2238,34 +1760,42 @@
                         Types of Resources
                     </h2>
                     <div class="card-content">
-                        <div class="algorithms-container">
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                        <div class="techniques">
+                            <div class="technique">
+                                <div class="technique-icon">
                                     <i class="material-icons">memory</i>
-                                    CPU
-                                </h3>
-                                <p class="algorithm-desc">Processing power and execution time</p>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">CPU</h3>
+                                    <p class="technique-desc">Processing power and execution time</p>
+                                </div>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="technique">
+                                <div class="technique-icon">
                                     <i class="material-icons">sd_storage</i>
-                                    Memory
-                                </h3>
-                                <p class="algorithm-desc">RAM allocation and management</p>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Memory</h3>
+                                    <p class="technique-desc">RAM allocation and management</p>
+                                </div>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="technique">
+                                <div class="technique-icon">
                                     <i class="material-icons">devices</i>
-                                    I/O Devices
-                                </h3>
-                                <p class="algorithm-desc">Input/output operations</p>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">I/O Devices</h3>
+                                    <p class="technique-desc">Input/output operations</p>
+                                </div>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="technique">
+                                <div class="technique-icon">
                                     <i class="material-icons">storage</i>
-                                    Storage
-                                </h3>
-                                <p class="algorithm-desc">File system management</p>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Storage</h3>
+                                    <p class="technique-desc">File system management</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2275,157 +1805,166 @@
     </div>
     
     <!-- Slide 6: Start-up and System Loading -->
-    <div class="slide" id="slide6">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Start-up and System Loading</h1>
         </div>
         <div class="content">
-            <div class="process-container">
-                <div class="process-steps">
+            <div class="left-content">
+                <div class="card">
                     <h2 class="card-title">
                         <i class="material-icons">power_settings_new</i>
                         Boot Process
                     </h2>
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title">BIOS Activation</h3>
-                            <p class="step-description">When computer is switched on, <span class="highlight">BIOS</span> (stored in ROM) runs a bootstrap program</p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Kernel Loading</h3>
-                            <p class="step-description">Bootstrap loads the <span class="highlight">kernel</span> and essential parts of the OS from storage into <span class="highlight">main memory (RAM)</span></p>
-                        </div>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title">System Initialization</h3>
-                            <p class="step-description">OS initializes hardware components and prepares the system for user interaction</p>
+                    <div class="card-content">
+                        <div class="techniques">
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">looks_one</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">BIOS Activation</h3>
+                                    <p class="technique-desc">When computer is switched on, <span class="highlight">BIOS</span> (stored in ROM) runs a bootstrap program</p>
+                                </div>
+                            </div>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">looks_two</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Kernel Loading</h3>
+                                    <p class="technique-desc">Bootstrap loads the <span class="highlight">kernel</span> and essential parts of the OS from storage into <span class="highlight">main memory (RAM)</span></p>
+                                </div>
+                            </div>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">looks_3</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">System Initialization</h3>
+                                    <p class="technique-desc">OS initializes hardware components and prepares the system for user interaction</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="devices-container">
-                <div class="device-card">
+            <div class="right-content">
+                <div class="card">
                     <h2 class="card-title">
-                        <i class="material-icons">computer</i>
-                        Traditional Computers
+                        <i class="material-icons">devices</i>
+                        Device Differences
                     </h2>
-                    <p class="card-content">Standard boot process with BIOS loading OS from hard disk or flash storage</p>
-                    <div class="image-container">
-                        <img src="https://picsum.photos/seed/desktop-computer-boot-process/500/180.jpg" alt="Desktop Computer Boot Process">
+                    <div class="card-content">
+                        <div class="techniques">
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">computer</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Traditional Computers</h3>
+                                    <p class="technique-desc">Standard boot process with BIOS loading OS from hard disk or flash storage</p>
+                                </div>
+                            </div>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">smartphone</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Tablets & Smartphones</h3>
+                                    <p class="technique-desc">Flash memory contains <span class="highlight">read-only section</span> for the OS and a second section for <span class="highlight">apps and user data</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="image-container">
+                            <img src="https://picsum.photos/seed/desktop-computer-boot-process/600/200.jpg" alt="Desktop Computer Boot Process">
+                        </div>
                     </div>
-                </div>
-                <div class="device-card">
-                    <h2 class="card-title">
-                        <i class="material-icons">smartphone</i>
-                        Tablets & Smartphones
-                    </h2>
-                    <ul class="device-features">
-                        <li class="device-feature">
-                            <i class="material-icons">memory</i>
-                            <span>Flash memory contains <span class="highlight">read-only section</span> for the OS</span>
-                        </li>
-                        <li class="device-feature">
-                            <i class="material-icons">storage</i>
-                            <span>Second section for <span class="highlight">apps and user data</span></span>
-                        </li>
-                        <li class="device-feature">
-                            <i class="material-icons">speed</i>
-                            <span>RAM used to execute apps and store active data</span>
-                        </li>
-                    </ul>
                 </div>
             </div>
         </div>
     </div>
     
     <!-- Slide 7: Kernel -->
-    <div class="slide" id="slide7">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Kernel</h1>
             <p class="chinese">内核</p>
         </div>
         <div class="content">
             <div class="left-content">
-                <div class="kernel-definition">
-                    <h2 class="definition-title">
+                <div class="card">
+                    <h2 class="card-title">
                         <i class="material-icons">memory</i>
                         What is the Kernel?
                     </h2>
-                    <p class="definition-text">
-                        The <span class="highlight">core</span> of the Operating System that manages all hardware and software resources
-                    </p>
-                    <p class="chinese">操作系统的核心，管理所有硬件和软件资源</p>
-                    <p class="definition-text" style="margin-top: 10px;">
-                        Acts as a bridge between applications and hardware, providing essential services
-                    </p>
-                    <p class="chinese">作为应用程序和硬件之间的桥梁，提供基本服务</p>
-                </div>
-                <div class="image-container">
-                    <img src="https://picsum.photos/seed/operating-system-kernel-architecture/600/200.jpg" alt="Operating System Kernel Architecture">
+                    <div class="card-content">
+                        <p>The <span class="highlight">core</span> of the Operating System that manages all hardware and software resources</p>
+                        <p class="chinese">操作系统的核心，管理所有硬件和软件资源</p>
+                        <p style="margin-top: 10px;">Acts as a bridge between applications and hardware, providing essential services</p>
+                        <p class="chinese">作为应用程序和硬件之间的桥梁，提供基本服务</p>
+                    </div>
                 </div>
             </div>
             <div class="right-content">
-                <div class="responsibilities">
+                <div class="card">
                     <h2 class="card-title">
                         <i class="material-icons">settings</i>
                         Key Responsibilities
                     </h2>
                     <p class="chinese">主要职责</p>
-                    <div class="responsibility-grid">
-                        <div class="responsibility-item">
-                            <div class="responsibility-icon">
-                                <i class="material-icons">swap_horiz</i>
+                    <div class="card-content">
+                        <div class="techniques">
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">swap_horiz</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Process Management</h3>
+                                    <p class="technique-chinese">进程管理</p>
+                                    <p class="technique-desc">Schedules processes, allocates CPU time, handles multitasking</p>
+                                </div>
                             </div>
-                            <div class="responsibility-content">
-                                <h3 class="responsibility-name">Process Management</h3>
-                                <p class="responsibility-chinese">进程管理</p>
-                                <p class="responsibility-description">Schedules processes, allocates CPU time, handles multitasking</p>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">sd_storage</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Memory Management</h3>
+                                    <p class="technique-chinese">内存管理</p>
+                                    <p class="technique-desc">Allocates RAM, handles virtual memory, prevents clashes</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="responsibility-item">
-                            <div class="responsibility-icon">
-                                <i class="material-icons">sd_storage</i>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">devices</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Device Management</h3>
+                                    <p class="technique-chinese">设备管理</p>
+                                    <p class="technique-desc">Controls I/O devices using device drivers</p>
+                                </div>
                             </div>
-                            <div class="responsibility-content">
-                                <h3 class="responsibility-name">Memory Management</h3>
-                                <p class="responsibility-chinese">内存管理</p>
-                                <p class="responsibility-description">Allocates RAM, handles virtual memory, prevents clashes</p>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">notifications_active</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">Interrupt Handling</h3>
+                                    <p class="technique-chinese">中断处理</p>
+                                    <p class="technique-desc">Deals with interrupts from hardware components</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="responsibility-item">
-                            <div class="responsibility-icon">
-                                <i class="material-icons">devices</i>
-                            </div>
-                            <div class="responsibility-content">
-                                <h3 class="responsibility-name">Device Management</h3>
-                                <p class="responsibility-chinese">设备管理</p>
-                                <p class="responsibility-description">Controls I/O devices using device drivers</p>
-                            </div>
-                        </div>
-                        <div class="responsibility-item">
-                            <div class="responsibility-icon">
-                                <i class="material-icons">notifications_active</i>
-                            </div>
-                            <div class="responsibility-content">
-                                <h3 class="responsibility-name">Interrupt Handling</h3>
-                                <p class="responsibility-chinese">中断处理</p>
-                                <p class="responsibility-description">Deals with interrupts from hardware components</p>
-                            </div>
-                        </div>
-                        <div class="responsibility-item">
-                            <div class="responsibility-icon">
-                                <i class="material-icons">folder</i>
-                            </div>
-                            <div class="responsibility-content">
-                                <h3 class="responsibility-name">File Management</h3>
-                                <p class="responsibility-chinese">文件管理</p>
-                                <p class="responsibility-description">Handles reading/writing from files and file systems</p>
+                            <div class="technique">
+                                <div class="technique-icon">
+                                    <i class="material-icons">folder</i>
+                                </div>
+                                <div class="technique-content">
+                                    <h3 class="technique-title">File Management</h3>
+                                    <p class="technique-chinese">文件管理</p>
+                                    <p class="technique-desc">Handles reading/writing from files and file systems</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2435,7 +1974,7 @@
     </div>
     
     <!-- Slide 8: CPU Resource Management -->
-    <div class="slide" id="slide8">
+    <div class="slide">
         <div class="header">
             <h1 class="title">CPU Resource Management</h1>
         </div>
@@ -2463,10 +2002,6 @@
                                 <span>Optimizes system performance and responsiveness</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/cpu-scheduling-multitasking/600/180.jpg" alt="CPU Scheduling and Multitasking">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2479,34 +2014,34 @@
                     <div class="card-content">
                         <p>Different algorithms are used to allocate CPU time based on system requirements:</p>
                         
-                        <div class="algorithms-container">
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                        <div class="scheduling-types">
+                            <div class="scheduling-type">
+                                <h3 class="type-title">
                                     <i class="material-icons">loop</i>
                                     Round Robin
                                 </h3>
-                                <p class="algorithm-desc">Equal time slices for all processes, good for time-sharing systems</p>
+                                <p class="type-desc">Equal time slices for all processes</p>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="scheduling-type">
+                                <h3 class="type-title">
                                     <i class="material-icons">low_priority</i>
                                     Priority-based
                                 </h3>
-                                <p class="algorithm-desc">Higher priority processes get CPU time first</p>
+                                <p class="type-desc">Higher priority processes get CPU time first</p>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="scheduling-type">
+                                <h3 class="type-title">
                                     <i class="material-icons">first_page</i>
                                     First Come First Served
                                 </h3>
-                                <p class="algorithm-desc">Simple queue-based approach, processes served in arrival order</p>
+                                <p class="type-desc">Simple queue-based approach</p>
                             </div>
-                            <div class="algorithm">
-                                <h3 class="algorithm-name">
+                            <div class="scheduling-type">
+                                <h3 class="type-title">
                                     <i class="material-icons">timer</i>
                                     Shortest Job First
                                 </h3>
-                                <p class="algorithm-desc">Prioritizes processes with shortest execution time</p>
+                                <p class="type-desc">Prioritizes processes with shortest execution time</p>
                             </div>
                         </div>
                     </div>
@@ -2516,7 +2051,7 @@
     </div>
     
     <!-- Slide 9: Memory Resource Management -->
-    <div class="slide" id="slide9">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Memory Resource Management</h1>
         </div>
@@ -2544,23 +2079,6 @@
                                 <span>Optimizes system performance for multitasking</span>
                             </li>
                         </ul>
-                        
-                        <div class="memory-types">
-                            <div class="memory-type">
-                                <h3 class="memory-title">
-                                    <i class="material-icons">sd_storage</i>
-                                    RAM
-                                </h3>
-                                <p class="memory-desc">Fast, volatile memory for active processes</p>
-                            </div>
-                            <div class="memory-type">
-                                <h3 class="memory-title">
-                                    <i class="material-icons">storage</i>
-                                    Virtual Memory
-                                </h3>
-                                <p class="memory-desc">Disk space used as RAM extension</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2595,10 +2113,6 @@
                                 <p class="step-text">More programs can run simultaneously</p>
                             </div>
                         </div>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/virtual-memory-management/600/180.jpg" alt="Virtual Memory Management">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2606,7 +2120,7 @@
     </div>
     
     <!-- Slide 10: I/O Management and DMA -->
-    <div class="slide" id="slide10">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Input/Output Management and DMA</h1>
         </div>
@@ -2628,10 +2142,6 @@
                             <li class="feature-item">
                                 <i class="material-icons">swap_horiz</i>
                                 <span>Buffering techniques to handle speed differences</span>
-                            </li>
-                            <li class="feature-item">
-                                <i class="material-icons">speed</i>
-                                <span>Optimizes system performance by freeing CPU resources</span>
                             </li>
                         </ul>
                         
@@ -2706,10 +2216,6 @@
                                 <span>Enables true multitasking capability</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/dma-controller-data-transfer/600/180.jpg" alt="DMA Controller Data Transfer">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2717,7 +2223,7 @@
     </div>
     
     <!-- Slide 11: Hiding Hardware Complexity -->
-    <div class="slide" id="slide11">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Hiding Hardware Complexity</h1>
         </div>
@@ -2799,10 +2305,6 @@
                                 <span>Provides <span class="highlight">security layers</span> between users and hardware</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/operating-system-user-interface-abstract/600/200.jpg" alt="Operating System User Interface Abstraction">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2810,7 +2312,7 @@
     </div>
     
     <!-- Slide 12: Resource Management Summary -->
-    <div class="slide" id="slide12">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Resource Management Summary</h1>
         </div>
@@ -2938,7 +2440,7 @@
     </div>
     
     <!-- Slide 13: Multitasking & Process States -->
-    <div class="slide" id="slide13">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Multitasking & Process States</h1>
         </div>
@@ -3019,9 +2521,9 @@
                             </div>
                             <div class="component">
                                 <h3 class="component-title">
-                                    <i class="material-icons">settings Register Values
-                                </h</i>
-                                   3>
+                                    <i class="material-icons">settings</i>
+                                    Register Values
+                                </h3>
                                 <p class="component-desc">CPU state information</p>
                             </div>
                             <div class="component">
@@ -3043,10 +2545,6 @@
                                 <span>Processes change state based on resource availability</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/multitasking-process-management/600/200.jpg" alt="Multitasking Process Management">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -3054,7 +2552,7 @@
     </div>
     
     <!-- Slide 14: Process States -->
-    <div class="slide" id="slide14">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Process States</h1>
             <p class="chinese">进程状态</p>
@@ -3128,7 +2626,7 @@
     </div>
     
     <!-- Slide 15: Scheduling Routines -->
-    <div class="slide" id="slide15">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Scheduling Routines</h1>
         </div>
@@ -3156,10 +2654,6 @@
                                 <span>Each has unique benefits and drawbacks</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/cpu-scheduling-algorithms-queue/600/180.jpg" alt="CPU Scheduling Algorithms Queue">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -3233,7 +2727,7 @@
     </div>
     
     <!-- Slide 16: Scheduling Categories -->
-    <div class="slide" id="slide16">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Scheduling Categories</h1>
         </div>
@@ -3327,7 +2821,7 @@
     </div>
     
     <!-- Slide 17: Scheduling Algorithms -->
-    <div class="slide" id="slide17">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Scheduling Algorithms</h1>
         </div>
@@ -3429,7 +2923,7 @@
     </div>
     
     <!-- Slide 18: More Scheduling Algorithms -->
-    <div class="slide" id="slide18">
+    <div class="slide">
         <div class="header">
             <h1 class="title">More Scheduling Algorithms</h1>
         </div>
@@ -3565,7 +3059,7 @@
     </div>
     
     <!-- Slide 19: Scheduling Algorithms Summary -->
-    <div class="slide" id="slide19">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Scheduling Algorithms Summary</h1>
         </div>
@@ -3756,7 +3250,7 @@
     </div>
     
     <!-- Slide 20: Memory Management Introduction -->
-    <div class="slide" id="slide20">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Memory Management</h1>
         </div>
@@ -3784,10 +3278,6 @@
                                 <span>Primary memory is a <span class="highlight">limited resource</span> requiring careful management</span>
                             </li>
                         </ul>
-                        
-                        <div class="image-container">
-                            <img src="https://picsum.photos/seed/memory-management-allocation/600/200.jpg" alt="Memory Management Allocation">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -3849,7 +3339,7 @@
     </div>
     
     <!-- Slide 21: Paging and Segmentation -->
-    <div class="slide" id="slide21">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Paging and Segmentation</h1>
         </div>
@@ -3936,7 +3426,7 @@
     </div>
     
     <!-- Slide 22: Virtual Memory and Summary -->
-    <div class="slide" id="slide22">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Virtual Memory and Summary</h1>
             <p class="chinese">虚拟内存和总结</p>
@@ -4106,7 +3596,7 @@
     </div>
     
     <!-- Slide 23: Past Paper Questions -->
-    <div class="slide" id="slide23">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Past Paper Questions</h1>
             <p class="chinese">历年考题</p>
@@ -4184,7 +3674,7 @@
     </div>
     
     <!-- Slide 24: Exit Ticket -->
-    <div class="slide" id="slide24">
+    <div class="slide">
         <div class="header">
             <h1 class="title">Exit Ticket</h1>
             <p class="chinese">离场券</p>
@@ -4249,55 +3739,11 @@
     </div>
     
     <script>
-        // JavaScript for slide navigation
-        let currentSlide = 1;
-        const totalSlides = 24;
-        
-        function showSlide(n) {
-            // Hide all slides
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.remove('active');
-            });
-            
-            // Show the current slide
-            document.getElementById(`slide${n}`).classList.add('active');
-            
-            // Update the slide indicator
-            document.getElementById('currentSlide').textContent = n;
-            
-            // Update navigation buttons
-            document.getElementById('prevBtn').style.visibility = n === 1 ? 'hidden' : 'visible';
-            document.getElementById('nextBtn').style.visibility = n === totalSlides ? 'hidden' : 'visible';
-        }
-        
-        // Event listeners for navigation buttons
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            if (currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
+        // Smooth scrolling for better user experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
         });
-        
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft' && currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        });
-        
-        // Initialize the first slide
-        showSlide(1);
     </script>
 </body>
 </html>
