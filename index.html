@@ -8,8 +8,8 @@
     <style>
         :root {
             --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #e74c3c;
+            --secondary-color: #e91e63; /* Changed from blue to pink */
+            --accent-color: #f44336;
             --light-color: #ecf0f1;
             --dark-color: #2c3e50;
             --success-color: #2ecc71;
@@ -17,6 +17,29 @@
             --text-color: #333;
             --light-gray: #f5f5f5;
             --border-color: #ddd;
+            --background-color: #fff;
+            --card-background: #fff;
+            --header-bg: var(--primary-color);
+            --sidebar-bg: var(--light-gray);
+            --nav-text: #fff;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #1a1a1a;
+            --secondary-color: #f06292; /* Lighter pink for dark mode */
+            --accent-color: #ff5252;
+            --light-color: #121212;
+            --dark-color: #e0e0e0;
+            --success-color: #66bb6a;
+            --warning-color: #ffb74d;
+            --text-color: #e0e0e0;
+            --light-gray: #2d2d2d;
+            --border-color: #444;
+            --background-color: #121212;
+            --card-background: #1e1e1e;
+            --header-bg: #0d0d0d;
+            --sidebar-bg: #1a1a1a;
+            --nav-text: #e0e0e0;
         }
 
         * {
@@ -29,7 +52,8 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
-            background-color: #fff;
+            background-color: var(--background-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         .container {
@@ -41,24 +65,64 @@
 
         /* Header Styles */
         header {
-            background-color: var(--primary-color);
+            position: relative;
+            z-index: 100;
+        }
+
+        .header-banner {
+            width: 100%;
+            height: 200px;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/b6db21d5-147c-4a39-836c-7e46186e9228_nano-banana-2025-10-07T07-53-56.png?auth_key=1791426237-971f38e529e949f7b494acb417297256-0-b5b41023e0b00ebfffdb0cff944fa6d0');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-title {
             color: white;
-            padding: 1rem 0;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .header-title h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .header-title p {
+            font-size: 1.2rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+
+        .header-nav {
+            background-color: var(--header-bg);
+            color: var(--nav-text);
+            padding: 0.5rem 0;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            transition: background-color 0.3s;
         }
 
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
         }
 
         nav ul {
@@ -71,7 +135,7 @@
         }
 
         nav ul li a {
-            color: white;
+            color: var(--nav-text);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
@@ -85,32 +149,46 @@
             color: var(--secondary-color);
         }
 
-        .language-toggle {
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle, .language-toggle {
             background: none;
             border: none;
-            color: white;
+            color: var(--nav-text);
             cursor: pointer;
             font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .theme-toggle:hover, .language-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         /* Main Layout */
         .main-container {
             display: flex;
-            min-height: calc(100vh - 70px);
+            min-height: calc(100vh - 270px); /* Adjusted for header height */
         }
 
         /* Sidebar Styles */
         .sidebar {
             width: 280px;
-            background-color: var(--light-gray);
+            background-color: var(--sidebar-bg);
             padding: 1.5rem;
             overflow-y: auto;
-            height: calc(100vh - 70px);
+            height: calc(100vh - 270px); /* Adjusted for header height */
             position: sticky;
             top: 70px;
+            transition: background-color 0.3s;
         }
 
         .sidebar h3 {
@@ -136,7 +214,7 @@
         }
 
         .syllabus-section h4:hover {
-            background-color: rgba(52, 152, 219, 0.1);
+            background-color: rgba(233, 30, 99, 0.1); /* Changed to pink */
         }
 
         .syllabus-section ul {
@@ -158,7 +236,7 @@
         }
 
         .syllabus-section li:hover {
-            background-color: rgba(52, 152, 219, 0.1);
+            background-color: rgba(233, 30, 99, 0.1); /* Changed to pink */
         }
 
         .syllabus-section li a {
@@ -182,12 +260,12 @@
 
         /* Card Styles */
         .card {
-            background-color: white;
+            background-color: var(--card-background);
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             padding: 1.5rem;
             margin-bottom: 1.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
 
         .card:hover {
@@ -228,7 +306,7 @@
         }
 
         .btn:hover {
-            background-color: #2980b9;
+            background-color: #c2185b; /* Darker pink */
         }
 
         .btn-primary {
@@ -264,12 +342,14 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             font-size: 1rem;
+            background-color: var(--card-background);
+            color: var(--text-color);
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 2px rgba(233, 30, 99, 0.2); /* Changed to pink */
         }
 
         textarea.form-control {
@@ -296,7 +376,7 @@
         }
 
         .table tr:hover {
-            background-color: rgba(52, 152, 219, 0.05);
+            background-color: rgba(233, 30, 99, 0.05); /* Changed to pink */
         }
 
         /* News Section */
@@ -399,7 +479,7 @@
         }
 
         .status-graded {
-            background-color: rgba(52, 152, 219, 0.2);
+            background-color: rgba(233, 30, 99, 0.2); /* Changed to pink */
             color: var(--secondary-color);
         }
 
@@ -422,7 +502,7 @@
         }
 
         .modal-content {
-            background-color: white;
+            background-color: var(--card-background);
             border-radius: 8px;
             width: 90%;
             max-width: 600px;
@@ -470,7 +550,7 @@
             top: 80px;
             right: 20px;
             padding: 1rem 1.5rem;
-            background-color: white;
+            background-color: var(--card-background);
             border-radius: 4px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             display: flex;
@@ -505,6 +585,14 @@
         }
 
         @media (max-width: 768px) {
+            .header-title h1 {
+                font-size: 2rem;
+            }
+            
+            .header-title p {
+                font-size: 1rem;
+            }
+            
             .main-container {
                 flex-direction: column;
             }
@@ -569,22 +657,36 @@
 <body>
     <!-- Header -->
 <header>
-    <div class="container header-container">
-        <div class="logo">AS & A2 Computer Science</div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="nav-link active">Home</a></li>
-                <li><a href="#syllabus" class="nav-link">Syllabus</a></li>
-                <li><a href="resources.html" class="nav-link">Resources</a></li>
-                <li><a href="#homework" class="nav-link">Homework</a></li>
-                <li><a href="author.html" class="nav-link">About Me</a></li>
-                <li><a href="admin.html" class="nav-link" style="color: #f39c12;"><i class="fas fa-user-shield"></i> Admin</a></li>
-            </ul>
-        </nav>
-        <button class="language-toggle" id="languageToggle">
-            <i class="fas fa-globe"></i>
-            <span id="currentLang">EN</span>
-        </button>
+    <div class="header-banner">
+        <div class="header-overlay">
+            <div class="header-title">
+                <h1>AS & A2 Computer Science</h1>
+                <p>Ben Amir - Computer Science Teacher</p>
+            </div>
+        </div>
+    </div>
+    <div class="header-nav">
+        <div class="container header-container">
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="#syllabus" class="nav-link">Syllabus</a></li>
+                    <li><a href="resources.html" class="nav-link">Resources</a></li>
+                    <li><a href="#homework" class="nav-link">Homework</a></li>
+                    <li><a href="author.html" class="nav-link">About Me</a></li>
+                    <li><a href="admin.html" class="nav-link" style="color: #f39c12;"><i class="fas fa-user-shield"></i> Admin</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+                <button class="language-toggle" id="languageToggle">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">EN</span>
+                </button>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -804,6 +906,10 @@
         const modalCancel = document.getElementById('modal-cancel');
         const modalConfirm = document.getElementById('modal-confirm');
         
+        // Theme toggle elements
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        
         // Data containers
         const newsContainer = document.getElementById('news-container');
         const resourcesList = document.getElementById('resources-list');
@@ -816,6 +922,38 @@
         
         // Language state
         let isMandarin = false;
+        
+        // Theme state
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        
+        // Initialize theme
+        function initializeTheme() {
+            if (isDarkMode) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        }
+        
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            isDarkMode = !isDarkMode;
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            if (isDarkMode) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
         
         // Initialize data
         function initializeData() {
@@ -1282,23 +1420,23 @@
                 '1': '<h3>1.1 Data Representation</h3><p>Data representation refers to the various methods used to represent information in a computer system. Computers store and process data in binary format (0s and 1s), but different types of data require different representation methods.</p><h3>1.2 Multimedia – Graphics, Sound</h3><p>Multimedia data such as graphics and sound require special representation techniques. Graphics can be represented using bitmap or vector formats, while sound is represented using digital sampling techniques.</p><h3>1.3 Compression</h3><p>Data compression is the process of reducing the size of data to save storage space or transmission time. There are two main types of compression: lossless and lossy.</p>',
                 '2': '<h3>2.1 Networks including the internet</h3><p>A computer network is a collection of interconnected computing devices that can exchange data and share resources. The internet is a global network of networks that connects billions of devices worldwide.</p>',
                 '3': '<h3>3.1 Computers and their components</h3><p>A computer system consists of hardware components that work together to process data. The main components include the CPU, memory, storage devices, input devices, and output devices.</p><h3>3.2 Logic Gates and Logic Circuits</h3><p>Logic gates are the basic building blocks of digital circuits. They perform logical operations on one or more binary inputs to produce a single binary output.</p>',
-                '4': '<h3>4.1 Central Processing Unit (CPU) Architecture</h3><p>The CPU is the brain of the computer, responsible for executing instructions. It consists of the Arithmetic Logic Unit (ALU), Control Unit (CU), and registers.</p><h3>4.2 Assembly Language</h3><p>Assembly language is a low-level programming language that is closely related to machine code. It uses mnemonic codes to represent machine instructions.</p><h3>4.3 Bit manipulation</h3><p>Bit manipulation involves working with individual bits within a binary number. Common bit manipulation operations include shifting, masking, and setting/clearing bits.</p>',
-                '5': '<h3>5.1 Operating Systems</h3><p>An operating system (OS) is system software that manages computer hardware and software resources and provides common services for computer programs.</p><h3>5.2 Language Translators</h3><p>Language translators convert source code written in one programming language into another language, typically machine code that can be executed by the computer.</p>',
-                '6': '<h3>6.1 Data Security</h3><p>Data security involves protecting digital data from unauthorized access, corruption, or theft throughout its lifecycle.</p><h3>6.2 Data Integrity</h3><p>Data integrity refers to maintaining and ensuring the accuracy and consistency of data over its entire lifecycle.</p>',
-                '7': '<h3>7.1 Ethics and Ownership</h3><p>Computer ethics deals with the moral issues that arise from the use of computers and information technology. Ownership refers to the legal rights associated with intellectual property.</p>',
-                '8': '<h3>8.1 Database Concepts</h3><p>A database is an organized collection of structured information, or data, typically stored electronically in a computer system.</p><h3>8.2 Database Management Systems (DBMS)</h3><p>A DBMS is software that enables users to create, maintain, and control access to databases.</p><h3>8.3 Data Definition Language (DDL) and Data Manipulation Language (DML)</h3><p>DDL is used to define and modify database structures, while DML is used to retrieve, insert, modify, and delete data in a database.</p>',
-                '9': '<h3>9.1 Computational Thinking Skills</h3><p>Computational thinking is a problem-solving process that involves various techniques and strategies for understanding and solving complex problems.</p><h3>9.2 Algorithms</h3><p>An algorithm is a finite sequence of well-defined instructions to solve a specific problem or perform a specific task.</p>',
-                '10': '<h3>10.1 Data Types and Records</h3><p>Data types define the kind of data that can be stored in a variable. Records are composite data types that group related data items together.</p><h3>10.2 Arrays</h3><p>An array is a data structure that stores a collection of elements of the same data type in contiguous memory locations.</p><h3>10.3 Files</h3><p>Files are used to store data permanently on secondary storage devices. They can be organized in various ways depending on the requirements of the application.</p><h3>10.4 Introduction to Abstract Data Types (ADT)</h3><p>An Abstract Data Type is a mathematical model for data types, where a data type is defined by its behavior (semantics) from the point of view of a user of the data.</p>',
-                '11': '<h3>11.1 Programming Basics</h3><p>Programming involves writing instructions that a computer can execute to perform specific tasks. It requires understanding of programming concepts, syntax, and problem-solving techniques.</p><h3>11.2 Constructs</h3><p>Programming constructs are the building blocks of programs, including sequence, selection, and iteration.</p><h3>11.3 Structured Programming</h3><p>Structured programming is a programming paradigm that improves clarity, quality, and development time by using subroutines, block structures, and for and while loops.</p>',
-                '12': '<h3>12.1 Program Development Life cycle</h3><p>The program development life cycle is a systematic process of developing software that includes requirements analysis, design, implementation, testing, deployment, and maintenance.</p><h3>12.2 Program Design</h3><p>Program design involves creating a detailed plan for how a program will be structured and how it will solve the problem at hand.</p><h3>12.3 Program Testing and Maintenance</h3><p>Program testing involves verifying that the software works as expected, while maintenance involves updating and improving the software after it has been deployed.</p>',
-                '13': '<h3>13.1 User-defined data types</h3><p>User-defined data types allow programmers to create their own data types based on existing types, providing more flexibility and better organization of data.</p><h3>13.2 File organisation and access</h3><p>File organization refers to how data is arranged in a file, while file access refers to how data can be retrieved from or written to a file.</p><h3>13.3 Floating-point numbers, representation and manipulation</h3><p>Floating-point numbers are used to represent real numbers with fractional parts. They are represented using a combination of sign, mantissa, and exponent.</p>',
-                '14': '<h3>14.1 Protocols technologies</h3><p>Network protocols are sets of rules that govern data exchange between devices in a network. They define how data is formatted, transmitted, and received.</p><h3>14.2 Circuit switching, packet switching</h3><p>Circuit switching and packet switching are two methods for transmitting data across a network. Circuit switching establishes a dedicated communication path, while packet switching breaks data into packets that can take different routes to the destination.</p>',
-                '15': '<h3>15.1 Processors, Parallel Processing and Virtual Machines</h3><p>Modern processors use various techniques to improve performance, including parallel processing and virtualization. Virtual machines allow multiple operating systems to run on a single physical machine.</p><h3>15.2 Boolean Algebra and Logic Circuits</h3><p>Boolean algebra is a branch of mathematics that deals with operations on logical values. It is used to design and analyze digital circuits.</p>',
-                '16': '<h3>16.1 Purposes of an Operating System (OS)</h3><p>An operating system manages computer hardware and software resources, provides common services for computer programs, and enables user interaction with the computer.</p><h3>16.2 Translation Software</h3><p>Translation software converts source code written in a high-level programming language into machine code that can be executed by the computer.</p>',
-                '17': '<h3>17.1 Encryption, Encryption Protocols and Digital certificates</h3><p>Encryption is the process of converting data into a code to prevent unauthorized access. Encryption protocols define how encryption is used in communications, while digital certificates verify the identity of entities in digital communications.</p>',
-                '18': '<h3>18.1 Artificial Intelligence</h3><p>Artificial Intelligence (AI) is a branch of computer science that aims to create intelligent machines that can simulate human thinking, learning, and behavior.</p>',
-                '19': '<h3>19.1 Algorithms</h3><p>Algorithms are step-by-step procedures for solving problems or performing tasks. They are fundamental to computer science and programming.</p><h3>19.2 Recursion</h3><p>Recursion is a programming technique where a function calls itself to solve a problem. It is particularly useful for problems that can be broken down into smaller, similar subproblems.</p>',
-                '20': '<h3>20.1 Programming Paradigms</h3><p>Programming paradigms are fundamental styles of programming, including procedural, object-oriented, functional, and logical programming.</p><h3>20.2 File Processing and Exception Handling</h3><p>File processing involves reading from and writing to files, while exception handling deals with errors and exceptional conditions that may occur during program execution.</p>'
+                '4': '<h3>4.1 Processor Architecture</h3><p>The processor (CPU) is the "brain" of a computer system. It executes instructions and performs calculations. Modern processors use complex architectures to improve performance.</p><h3>4.2 Assembly Language</h3><p>Assembly language is a low-level programming language that is closely related to machine code. It provides a more human-readable way to write programs that directly interact with hardware.</p>',
+                '5': '<h3>5.1 Operating Systems</h3><p>An operating system (OS) is system software that manages computer hardware, software resources, and provides common services for computer programs.</p><h3>5.2 Utility Programs</h3><p>Utility programs are software tools designed to help analyze, configure, optimize, or maintain a computer. They perform specific tasks related to managing computer resources.</p>',
+                '6': '<h3>6.1 Security and Privacy</h3><p>Computer security involves protecting computer systems and data from theft, damage, or unauthorized access. Privacy concerns relate to the collection and use of personal information.</p><h3>6.2 Data Integrity</h3><p>Data integrity refers to maintaining and ensuring the accuracy and consistency of data over its entire lifecycle. It is a critical aspect of the design, implementation, and usage of any system that stores, processes, or retrieves data.</p>',
+                '7': '<h3>7.1 Ethics</h3><p>Computer ethics deals with the moral issues that arise from the use of computers and information technology. It involves questions about what is morally right and wrong in the digital world.</p><h3>7.2 Ownership</h3><p>Intellectual property rights in the digital age include copyright, patents, and trademarks. These rights protect the creators of software, digital content, and other digital assets.</p>',
+                '8': '<h3>8.1 Database Concepts</h3><p>A database is an organized collection of structured information, or data, typically stored electronically in a computer system. Databases are controlled by a Database Management System (DBMS).</p><h3>8.2 Database Design</h3><p>Database design is the process of producing a detailed data model of a database. This logical data model contains all the needed logical and physical design choices and physical storage parameters.</p>',
+                '9': '<h3>9.1 Algorithm Design</h3><p>An algorithm is a finite sequence of well-defined, computer-implementable instructions, typically to solve a specific class of problems or to perform a computation.</p><h3>9.2 Problem-Solving</h3><p>Computational problem-solving involves understanding a problem, designing an algorithm to solve it, and implementing that algorithm in a programming language.</p>',
+                '10': '<h3>10.1 Data Types</h3><p>Data types are classifications that specify which type of value a variable can hold in programming. Common data types include integers, floating-point numbers, characters, and booleans.</p><h3>10.2 Data Structures</h3><p>Data structures are particular ways of organizing and storing data in a computer so that it can be accessed and modified efficiently. Common data structures include arrays, linked lists, stacks, queues, and trees.</p>',
+                '11': '<h3>11.1 Programming Concepts</h3><p>Programming involves writing instructions that a computer can execute to perform specific tasks. It requires understanding programming concepts like variables, control structures, functions, and objects.</p><h3>11.2 Programming Paradigms</h3><p>Programming paradigms are fundamental styles of programming. Common paradigms include procedural programming, object-oriented programming, and functional programming.</p>',
+                '12': '<h3>12.1 Software Development Lifecycle</h3><p>The software development lifecycle (SDLC) is a process used by the software industry to design, develop, and test high-quality software. It typically includes requirements analysis, design, implementation, testing, and maintenance.</p><h3>12.2 Software Testing</h3><p>Software testing is the process of evaluating and verifying that a software product or application does what it is supposed to do. It helps identify defects and ensure quality.</p>',
+                '13': '<h3>13.1 Advanced Data Representation</h3><p>At the A2 level, data representation explores more complex concepts such as floating-point numbers, character encoding standards, and error detection and correction methods.</p>',
+                '14': '<h3>14.1 Internet Technologies</h3><p>The internet is built on a stack of technologies including TCP/IP, DNS, HTTP, and various protocols that enable communication between devices worldwide.</p>',
+                '15': '<h3>15.1 Advanced Hardware Concepts</h3><p>This section explores more advanced hardware concepts including parallel processing, virtualization, and cloud computing infrastructure.</p>',
+                '16': '<h3>16.1 Advanced System Software</h3><p>Advanced system software topics include distributed operating systems, virtual machines, and containerization technologies.</p>',
+                '17': '<h3>17.1 Advanced Security</h3><p>Advanced security topics include cryptography, network security protocols, and security management in enterprise environments.</p>',
+                '18': '<h3>18.1 Artificial Intelligence</h3><p>AI involves creating computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, and decision-making.</p>',
+                '19': '<h3>19.1 Advanced Computational Thinking</h3><p>Computational thinking involves formulating problems and expressing their solutions in ways that a computer can effectively execute.</p>',
+                '20': '<h3>20.1 Advanced Programming</h3><p>Advanced programming topics include design patterns, software architecture, and specialized programming paradigms for complex applications.</p>'
             };
             return contents[chapter] || '<p>Content for this chapter is not yet available.</p>';
         }
@@ -1306,160 +1444,33 @@
         // Get chapter Mandarin translation
         function getChapterMandarin(chapter) {
             const translations = {
-                '1': '信息表示涉及在计算机系统中表示信息的各种方法。计算机以二进制格式（0和1）存储和处理数据，但不同类型的数据需要不同的表示方法。',
-                '2': '计算机网络是相互连接的计算设备的集合，可以交换数据和共享资源。互联网是一个全球性的网络，连接着全球数十亿台设备。',
-                '3': '计算机系统由协同工作以处理数据的硬件组件组成。主要组件包括CPU、内存、存储设备、输入设备和输出设备。',
-                '4': 'CPU是计算机的大脑，负责执行指令。它由算术逻辑单元（ALU）、控制单元（CU）和寄存器组成。',
-                '5': '操作系统（OS）是系统软件，管理计算机硬件和软件资源，并为计算机程序提供通用服务。',
-                '6': '数据安全涉及保护数字数据免受未经授权的访问、损坏或盗窃，贯穿其整个生命周期。',
-                '7': '计算机伦理处理因使用计算机和信息技术而产生的道德问题。所有权指与知识产权相关的法律权利。',
-                '8': '数据库是结构化信息或数据的组织集合，通常以电子方式存储在计算机系统中。',
-                '9': '计算思维是一个解决问题的过程，涉及理解和解决复杂问题的各种技术和策略。',
-                '10': '数据类型定义了可以在变量中存储的数据类型。数组是一种数据结构，它将相同数据类型的元素集合存储在连续的内存位置中。',
-                '11': '编程涉及编写计算机可以执行以执行特定任务的指令。它需要理解编程概念、语法和解决问题的技巧。',
-                '12': '程序开发生命周期是开发软件的系统过程，包括需求分析、设计、实现、测试、部署和维护。',
-                '13': '用户定义的数据类型允许程序员基于现有类型创建自己的数据类型，提供更大的灵活性和更好的数据组织。',
-                '14': '网络协议是管理网络中设备间数据交换的规则集。它们定义了数据的格式、传输和接收方式。',
-                '15': '现代处理器使用各种技术来提高性能，包括并行处理和虚拟化。虚拟机允许多个操作系统在单个物理机上运行。',
-                '16': '操作系统管理计算机硬件和软件资源，为计算机程序提供通用服务，并使用户能够与计算机交互。',
-                '17': '加密是将数据转换为代码以防止未经授权访问的过程。加密协议定义了如何在通信中使用加密，而数字证书验证数字通信中实体的身份。',
-                '18': '人工智能（AI）是计算机科学的一个分支，旨在创建能够模拟人类思维、学习和行为的智能机器。',
-                '19': '算法是解决问题或执行任务的逐步过程。它们是计算机科学和编程的基础。',
-                '20': '编程范式是编程的基本风格，包括过程式、面向对象、函数式和逻辑编程。'
+                '1': '1.1 数据表示：数据表示指的是在计算机系统中表示信息的各种方法。计算机以二进制格式（0和1）存储和处理数据，但不同类型的数据需要不同的表示方法。1.2 多媒体 - 图形、声音：如图形和声音等多媒体数据需要特殊的表示技术。图形可以使用位图或矢量格式表示，而声音则使用数字采样技术表示。1.3 压缩：数据压缩是减少数据大小以节省存储空间或传输时间的过程。主要有两种类型的压缩：无损和有损。',
+                '2': '2.1 包括互联网在内的网络：计算机网络是互连的计算设备的集合，可以交换数据和共享资源。互联网是一个全球性的网络网络，连接着全球数十亿台设备。',
+                '3': '3.1 计算机及其组件：计算机系统由协同工作以处理数据的硬件组件组成。主要组件包括CPU、内存、存储设备、输入设备和输出设备。3.2 逻辑门和逻辑电路：逻辑门是数字电路的基本构建块。它们对一个或多个二进制输入执行逻辑操作以产生单个二进制输出。',
+                '4': '4.1 处理器架构：处理器（CPU）是计算机系统的"大脑"。它执行指令并执行计算。现代处理器使用复杂的架构来提高性能。4.2 汇编语言：汇编语言是一种与机器代码密切相关的低级编程语言。它提供了一种更人性化的方式来编写直接与硬件交互的程序。',
+                '5': '5.1 操作系统：操作系统（OS）是管理计算机硬件、软件资源并为计算机程序提供公共服务的系统软件。5.2 实用程序：实用程序是设计用于帮助分析、配置、优化或维护计算机的软件工具。它们执行与管理计算机资源相关的特定任务。',
+                '6': '6.1 安全与隐私：计算机安全涉及保护计算机系统和数据免受盗窃、损坏或未经授权的访问。隐私问题涉及个人信息的收集和使用。6.2 数据完整性：数据完整性指在其整个生命周期中维护和确保数据的准确性和一致性。它是设计、实现和使用任何存储、处理或检索数据的系统的关键方面。',
+                '7': '7.1 伦理：计算机伦理处理因使用计算机和信息技术而产生的道德问题。它涉及数字世界中什么是道德上正确和错误的问题。7.2 所有权：数字时代的知识产权包括版权、专利和商标。这些权利保护软件、数字内容和其他数字资产的创建者。',
+                '8': '8.1 数据库概念：数据库是结构化信息的有组织集合，通常以电子方式存储在计算机系统中。数据库由数据库管理系统（DBMS）控制。8.2 数据库设计：数据库设计是生成数据库详细数据模型的过程。这个逻辑数据模型包含所有需要的逻辑和物理设计选择以及物理存储参数。',
+                '9': '9.1 算法设计：算法是明确定义的、可由计算机实现的指令的有限序列，通常用于解决特定类问题或执行计算。9.2 问题解决：计算问题解决涉及理解问题，设计算法来解决它，并在编程语言中实现该算法。',
+                '10': '10.1 数据类型：数据类型是分类，指定变量在编程中可以保存哪种类型的值。常见数据类型包括整数、浮点数、字符和布尔值。10.2 数据结构：数据结构是在计算机中组织和存储数据的特定方式，以便可以高效地访问和修改它们。常见数据结构包括数组、链表、堆栈、队列和树。',
+                '11': '11.1 编程概念：编程涉及编写计算机可以执行以执行特定任务的指令。它需要理解编程概念，如变量、控制结构、函数和对象。11.2 编程范式：编程范式是编程的基本风格。常见范式包括过程式编程、面向对象编程和函数式编程。',
+                '12': '12.1 软件开发生命周期：软件开发生命周期（SDLC）是软件行业用于设计、开发和测试高质量软件的过程。它通常包括需求分析、设计、实现、测试和维护。12.2 软件测试：软件测试是评估和验证软件产品或应用程序是否执行其应执行的任务的过程。它有助于识别缺陷并确保质量。',
+                '13': '13.1 高级数据表示：在A2级别，数据表示探索更复杂的概念，如浮点数、字符编码标准和错误检测和纠正方法。',
+                '14': '14.1 互联网技术：互联网建立在一系列技术之上，包括TCP/IP、DNS、HTTP和各种协议，使全球设备之间的通信成为可能。',
+                '15': '15.1 高级硬件概念：本节探讨更高级的硬件概念，包括并行处理、虚拟化和云计算基础设施。',
+                '16': '16.1 高级系统软件：高级系统软件主题包括分布式操作系统、虚拟机和容器化技术。',
+                '17': '17.1 高级安全：高级安全主题包括密码学、网络安全协议和企业环境中的安全管理。',
+                '18': '18.1 人工智能：AI涉及创建能够执行通常需要人类智能的任务的计算机系统，如视觉感知、语音识别和决策制定。',
+                '19': '19.1 高级计算思维：计算思维涉及制定问题并以计算机可以有效执行的方式表达其解决方案。',
+                '20': '20.1 高级编程：高级编程主题包括设计模式、软件架构和用于复杂应用程序的专门编程范式。'
             };
-            return translations[chapter] || '此章节的中文翻译尚不可用。';
+            return translations[chapter] || '此章节的内容尚不可用。';
         }
         
-        // Language toggle
-        languageToggle.addEventListener('click', () => {
-            isMandarin = !isMandarin;
-            currentLang.textContent = isMandarin ? '中文' : 'EN';
-            
-            // Show notification
-            showNotification(`Language changed to ${isMandarin ? 'Mandarin' : 'English'}`, 'info');
-            
-            // If on syllabus page, reload chapter content with new language
-            const syllabusPage = document.getElementById('syllabus-page');
-            if (syllabusPage.classList.contains('active')) {
-                const chapterContent = document.getElementById('chapter-content');
-                if (chapterContent.style.display === 'block') {
-                    const chapterTitle = document.getElementById('chapter-title').textContent;
-                    const chapter = chapterTitle.split(' ')[1];
-                    if (chapter) {
-                        loadChapterContent(chapter);
-                    }
-                }
-            }
-        });
-        
-        // Form submissions
-        homeworkForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form data
-            const assignmentId = document.getElementById('assignment-select').value;
-            const studentName = document.getElementById('student-name').value;
-            const studentId = document.getElementById('student-id').value;
-            const file = document.getElementById('homework-file').files[0];
-            const comments = document.getElementById('homework-comments').value;
-            
-            // Get assignment title
-            const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
-            const assignment = assignments.find(a => a.id == assignmentId);
-            
-            // Create new submission
-            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
-            const newSubmission = {
-                id: Date.now(),
-                assignmentId: parseInt(assignmentId),
-                assignmentTitle: assignment ? assignment.title : 'Unknown Assignment',
-                studentName,
-                studentId,
-                submissionDate: new Date().toISOString().split('T')[0],
-                status: 'submitted',
-                grade: null,
-                feedback: 'Your submission has been received and is currently being reviewed.'
-            };
-            
-            submissions.push(newSubmission);
-            localStorage.setItem('cs_submissions', JSON.stringify(submissions));
-            
-            // Show notification
-            showNotification('Homework submitted successfully!', 'success');
-            
-            // Reset form
-            homeworkForm.reset();
-            
-            // Reload submissions
-            loadData();
-        });
-        
-        // Modal functions
-        function showModal(title, body, confirmCallback) {
-            modalTitle.textContent = title;
-            modalBody.innerHTML = body;
-            modal.classList.add('active');
-            
-            // Set confirm callback
-            modalConfirm.onclick = () => {
-                if (confirmCallback) confirmCallback();
-                closeModal();
-            };
-        }
-        
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-        
-        modalClose.addEventListener('click', closeModal);
-        modalCancel.addEventListener('click', closeModal);
-        
-        // Click outside modal to close
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
-        
-        // Notification function
-        function showNotification(message, type = 'success') {
-            notificationMessage.textContent = message;
-            
-            // Set notification class based on type
-            notification.className = 'notification';
-            if (type === 'success') {
-                notification.classList.add('notification-success');
-            } else if (type === 'error') {
-                notification.classList.add('notification-error');
-            } else if (type === 'info') {
-                notification.classList.add('notification-info');
-            }
-            
-            // Show notification
-            notification.classList.add('show');
-            
-            // Hide after 3 seconds
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-        
-        // Resource download buttons
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('btn-primary') && e.target.textContent === 'Download') {
-                const resourceId = e.target.getAttribute('data-resource-id');
-                const resources = JSON.parse(localStorage.getItem('cs_resources') || '[]');
-                const resource = resources.find(r => r.id == resourceId);
-                
-                if (resource) {
-                    showNotification(`Downloading ${resource.name}...`, 'info');
-                    // In a real implementation, this would trigger an actual download
-                }
-            }
-        });
-        
-        // Initialize the page
+        // Initialize page
         document.addEventListener('DOMContentLoaded', () => {
+            initializeTheme();
             initializeData();
             loadData();
         });
