@@ -443,6 +443,11 @@
             border: 1px solid var(--border-color);
             border-radius: 4px;
             margin-bottom: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .submission-item:hover {
+            background-color: rgba(233, 30, 99, 0.05);
         }
 
         .submission-header {
@@ -481,6 +486,109 @@
         .status-graded {
             background-color: rgba(233, 30, 99, 0.2); /* Changed to pink */
             color: var(--secondary-color);
+        }
+
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .file-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Student Selection */
+        .student-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .student-chip {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .student-chip:hover {
+            background-color: rgba(233, 30, 99, 0.1);
+        }
+
+        .student-chip.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .student-chip.as-level {
+            border-left: 4px solid var(--success-color);
+        }
+
+        .student-chip.a2-level {
+            border-left: 4px solid var(--warning-color);
+        }
+
+        /* Admin View Styles */
+        .admin-submission {
+            background-color: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-submission-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .submission-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .grade-input {
+            width: 60px;
+            padding: 0.3rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
         }
 
         /* Modal Styles */
@@ -820,6 +928,18 @@
             <div id="homework-page" class="page-content">
                 <h1 class="page-title">Homework</h1>
                 
+                <!-- Student Selection -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Select Student</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="student-selector" id="studentSelector">
+                            <!-- Student chips will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title">Submit Homework</h2>
@@ -835,11 +955,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="student-name">Your Name</label>
-                                <input type="text" class="form-control" id="student-name" required>
+                                <input type="text" class="form-control" id="student-name" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="student-id">Student ID</label>
-                                <input type="text" class="form-control" id="student-id" required>
+                                <input type="text" class="form-control" id="student-id" readonly>
                             </div>
                             <div class="form-group">
                                 <label for="homework-file">Upload File</label>
@@ -916,6 +1036,7 @@
         const assignmentsTable = document.getElementById('assignments-table');
         const assignmentSelect = document.getElementById('assignment-select');
         const submissionsContainer = document.getElementById('submissions-container');
+        const studentSelector = document.getElementById('studentSelector');
         
         // Forms
         const homeworkForm = document.getElementById('homework-form');
@@ -925,6 +1046,25 @@
         
         // Theme state
         let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        
+        // Current student state
+        let currentStudent = null;
+        
+        // Student database
+        const students = {
+            'AS': [
+                { id: 'AS001', name: 'Eva' },
+                { id: 'AS002', name: 'Yimi' },
+                { id: 'AS003', name: 'Steven' },
+                { id: 'AS004', name: 'Mark' },
+                { id: 'AS005', name: 'Cecilia' }
+            ],
+            'A2': [
+                { id: 'A2001', name: 'Zack' },
+                { id: 'A2002', name: 'Caesar' },
+                { id: 'A2003', name: 'Michael' }
+            ]
+        };
         
         // Initialize theme
         function initializeTheme() {
@@ -954,6 +1094,60 @@
                 themeIcon.classList.add('fa-moon');
             }
         });
+        
+        // Initialize student selector
+        function initializeStudentSelector() {
+            studentSelector.innerHTML = '';
+            
+            // Add AS Level students
+            students.AS.forEach(student => {
+                const chip = document.createElement('div');
+                chip.className = 'student-chip as-level';
+                chip.textContent = student.name;
+                chip.dataset.studentId = student.id;
+                chip.dataset.studentName = student.name;
+                chip.dataset.level = 'AS';
+                chip.addEventListener('click', selectStudent);
+                studentSelector.appendChild(chip);
+            });
+            
+            // Add A2 Level students
+            students.A2.forEach(student => {
+                const chip = document.createElement('div');
+                chip.className = 'student-chip a2-level';
+                chip.textContent = student.name;
+                chip.dataset.studentId = student.id;
+                chip.dataset.studentName = student.name;
+                chip.dataset.level = 'A2';
+                chip.addEventListener('click', selectStudent);
+                studentSelector.appendChild(chip);
+            });
+        }
+        
+        // Select student
+        function selectStudent(e) {
+            // Remove active class from all chips
+            document.querySelectorAll('.student-chip').forEach(chip => {
+                chip.classList.remove('active');
+            });
+            
+            // Add active class to selected chip
+            e.target.classList.add('active');
+            
+            // Set current student
+            currentStudent = {
+                id: e.target.dataset.studentId,
+                name: e.target.dataset.studentName,
+                level: e.target.dataset.level
+            };
+            
+            // Update form fields
+            document.getElementById('student-name').value = currentStudent.name;
+            document.getElementById('student-id').value = currentStudent.id;
+            
+            // Load submissions for this student
+            loadStudentSubmissions();
+        }
         
         // Initialize data
         function initializeData() {
@@ -1088,41 +1282,7 @@
             }
             
             if (!localStorage.getItem('cs_submissions')) {
-                const defaultSubmissions = [
-                    {
-                        id: 1,
-                        assignmentId: 1,
-                        assignmentTitle: 'Data Representation Assignment',
-                        studentName: 'Student',
-                        studentId: '2023001',
-                        submissionDate: '2023-06-01',
-                        status: 'graded',
-                        grade: 'A',
-                        feedback: 'Excellent work on binary conversion exercises. Make sure to review floating-point representation for the next assessment.'
-                    },
-                    {
-                        id: 2,
-                        assignmentId: 2,
-                        assignmentTitle: 'Network Topologies Research',
-                        studentName: 'Student',
-                        studentId: '2023001',
-                        submissionDate: '2023-06-05',
-                        status: 'graded',
-                        grade: 'B+',
-                        feedback: 'Good research on different network topologies. Consider adding more real-world examples in future assignments.'
-                    },
-                    {
-                        id: 3,
-                        assignmentId: 3,
-                        assignmentTitle: 'Assembly Language Program',
-                        studentName: 'Student',
-                        studentId: '2023001',
-                        submissionDate: '2023-06-10',
-                        status: 'submitted',
-                        grade: null,
-                        feedback: 'Your submission has been received and is currently being reviewed.'
-                    }
-                ];
+                const defaultSubmissions = [];
                 localStorage.setItem('cs_submissions', JSON.stringify(defaultSubmissions));
             }
             
@@ -1207,16 +1367,25 @@
                     assignmentSelect.appendChild(option);
                 });
             }
+        }
+        
+        // Load student submissions
+        function loadStudentSubmissions() {
+            if (!currentStudent) {
+                submissionsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-user-circle"></i><h3>Please select a student</h3><p>Choose a student from the selector above to view their submissions.</p></div>';
+                return;
+            }
             
-            // Load submissions
             const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            const studentSubmissions = submissions.filter(s => s.studentId === currentStudent.id);
+            
             submissionsContainer.innerHTML = '';
             
-            if (submissions.length === 0) {
+            if (studentSubmissions.length === 0) {
                 submissionsContainer.innerHTML = '<div class="empty-state"><i class="fas fa-file-alt"></i><h3>No submissions yet</h3><p>Submit your homework to see it here.</p></div>';
             } else {
-                submissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
-                submissions.forEach(item => {
+                studentSubmissions.sort((a, b) => new Date(b.submissionDate) - new Date(a.submissionDate));
+                studentSubmissions.forEach(item => {
                     const submissionItem = document.createElement('div');
                     submissionItem.className = 'submission-item';
                     
@@ -1239,9 +1408,92 @@
                         </div>
                         <div class="submission-status ${statusClass}">${statusText}</div>
                         <p>${item.feedback}</p>
+                        ${item.fileName ? `
+                            <div class="file-info">
+                                <i class="fas fa-file"></i>
+                                <span>${item.fileName} (${formatFileSize(item.fileSize)})</span>
+                                ${item.fileData ? `<a href="#" class="file-link" onclick="downloadFile('${item.id}')"><i class="fas fa-download"></i> Download</a>` : ''}
+                            </div>
+                        ` : ''}
                     `;
                     submissionsContainer.appendChild(submissionItem);
                 });
+            }
+        }
+        
+        // Handle homework form submission
+        homeworkForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            if (!currentStudent) {
+                showNotification('Please select a student first', 'error');
+                return;
+            }
+            
+            const fileInput = document.getElementById('homework-file');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                showNotification('Please select a file to upload', 'error');
+                return;
+            }
+            
+            // Read file as base64
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const assignments = JSON.parse(localStorage.getItem('cs_assignments') || '[]');
+                const selectedAssignment = assignments.find(a => a.id == assignmentSelect.value);
+                
+                const submission = {
+                    id: Date.now().toString(),
+                    assignmentId: assignmentSelect.value,
+                    assignmentTitle: selectedAssignment.title,
+                    studentId: currentStudent.id,
+                    studentName: currentStudent.name,
+                    studentLevel: currentStudent.level,
+                    submissionDate: new Date().toISOString().split('T')[0],
+                    status: 'submitted',
+                    grade: null,
+                    feedback: 'Your submission has been received and is currently being reviewed.',
+                    fileName: file.name,
+                    fileSize: file.size,
+                    fileType: file.type,
+                    fileData: event.target.result,
+                    comments: document.getElementById('homework-comments').value
+                };
+                
+                // Save submission
+                const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+                submissions.push(submission);
+                localStorage.setItem('cs_submissions', JSON.stringify(submissions));
+                
+                // Reset form
+                homeworkForm.reset();
+                document.getElementById('student-name').value = currentStudent.name;
+                document.getElementById('student-id').value = currentStudent.id;
+                
+                // Reload submissions
+                loadStudentSubmissions();
+                
+                // Show success notification
+                showNotification('Homework submitted successfully!', 'success');
+            };
+            
+            reader.readAsDataURL(file);
+        });
+        
+        // Download file function
+        function downloadFile(submissionId) {
+            const submissions = JSON.parse(localStorage.getItem('cs_submissions') || '[]');
+            const submission = submissions.find(s => s.id === submissionId);
+            
+            if (submission && submission.fileData) {
+                const link = document.createElement('a');
+                link.href = submission.fileData;
+                link.download = submission.fileName;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
             }
         }
         
@@ -1249,6 +1501,26 @@
         function formatDate(dateString) {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+        
+        // Format file size function
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Show notification
+        function showNotification(message, type = 'info') {
+            notificationMessage.textContent = message;
+            notification.className = `notification notification-${type}`;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
         
         // Handle navigation
@@ -1472,6 +1744,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             initializeTheme();
             initializeData();
+            initializeStudentSelector();
             loadData();
         });
     </script>
