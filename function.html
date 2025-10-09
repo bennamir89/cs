@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Types and Structures in Computer Science - Complete Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f5f7fa;
+            color: #19376D;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background: linear-gradient(rgba(25, 55, 109, 0.85), rgba(25, 55, 109, 0.85)), 
+                        url('https://sfile.chatglm.cn/images-ppt/36966f4e1a94.png');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #19376D;
+            border-bottom: 2px solid #576CBC;
+            padding-bottom: 10px;
+        }
+        h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #19376D;
+        }
+        section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .intro {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .intro-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(25, 55, 109, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .intro-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #19376D;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        .intro-icon .material-icons {
+            color: white;
+            font-size: 24px;
+        }
+        .intro-text {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .function-grid, .operator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .function-card, .operator-card {
+            background-color: rgba(25, 55, 109, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            transition: transform 0.2s;
+        }
+        .function-card:hover, .operator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .function-header, .operator-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .function-icon, .operator-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(25, 55, 109, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        .function-icon .material-icons, .operator-icon .material-icons {
+            color: #19376D;
+            font-size: 20px;
+        }
+        .function-name, .operator-name {
+            font-size: 22px;
+            font-weight: 600;
+            color: #19376D;
+        }
+        .function-desc, .operator-desc {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .function-example, .operator-example {
+            background-color: rgba(25, 55, 109, 0.1);
+            padding: 12px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+        .highlight {
+            color: #576CBC;
+            font-weight: 600;
+        }
+        .note {
+            font-size: 16px;
+            font-style: italic;
+            color: #666;
+            margin-top: 10px;
+        }
+        .toc {
+            background-color: rgba(25, 55, 109, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        .toc-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #19376D;
+        }
+        .toc-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .toc-item {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+        }
+        .toc-item .material-icons {
+            color: #576CBC;
+            margin-right: 10px;
+        }
+        .toc-link {
+            font-size: 18px;
+            color: #19376D;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .toc-link:hover {
+            text-decoration: underline;
+        }
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #19376D;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .back-to-top:hover {
+            background-color: #576CBC;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 16px;
+            margin-top: 40px;
+        }
+        .objectives-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .objective-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(25, 55, 109, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .objective-item .material-icons {
+            color: #576CBC;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        .objective-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .benefits-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .benefit-item {
+            flex: 1;
+            min-width: 250px;
+            background-color: rgba(25, 55, 109, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: flex-start;
+        }
+        .benefit-item .material-icons {
+            color: #576CBC;
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        .benefit-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .exit-ticket {
+            background-color: rgba(25, 55, 109, 0.05);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .exit-ticket-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #19376D;
+            display: flex;
+            align-items: center;
+        }
+        .exit-ticket-title .material-icons {
+            margin-right: 10px;
+            color: #19376D;
+        }
+        .exit-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .exit-question {
+            flex: 1;
+            min-width: 250px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .question-number {
+            font-size: 20px;
+            font-weight: 700;
+            color: #576CBC;
+            margin-bottom: 10px;
+        }
+        .question-text {
+            font-size: 18px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Types and Structures in Computer Science</h1>
+            <p>Functions and Operations - Complete Guide</p>
+        </header>
+
+        <div class="toc">
+            <div class="toc-title">Table of Contents</div>
+            <div class="toc-list">
+                <div class="toc-item">
+                    <i class="material-icons">school</i>
+                    <a href="#objectives" class="toc-link">Lesson Objectives</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">info</i>
+                    <a href="#overview" class="toc-link">Overview</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">library_books</i>
+                    <a href="#benefits" class="toc-link">Benefits of Library Routines</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">text_fields</i>
+                    <a href="#string-functions" class="toc-link">String Functions</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">calculate</i>
+                    <a href="#numeric-functions" class="toc-link">Numeric Functions</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">event</i>
+                    <a href="#date-functions" class="toc-link">Date Functions</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">description</i>
+                    <a href="#file-functions" class="toc-link">File Functions</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">code</i>
+                    <a href="#operators" class="toc-link">Operators</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">compare_arrows</i>
+                    <a href="#comparison-operators" class="toc-link">Comparison Operators</a>
+                </div>
+                <div class="toc-item">
+                    <i class="material-icons">assignment_turned_in</i>
+                    <a href="#exit-ticket" class="toc-link">Exit Ticket</a>
+                </div>
+            </div>
+        </div>
+
+        <section id="objectives">
+            <h2>Lesson Objectives</h2>
+            <div class="objectives-list">
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Understand string and character functions and their applications</div>
+                </div>
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Learn numeric functions for mathematical operations</div>
+                </div>
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Explore date functions for manipulating date values</div>
+                </div>
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Understand text file functions for file operations</div>
+                </div>
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Master various operators for data manipulation</div>
+                </div>
+                <div class="objective-item">
+                    <i class="material-icons">check_circle</i>
+                    <div class="objective-text">Apply comparison operators for logical operations</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="overview">
+            <h2>Overview</h2>
+            <div class="intro">
+                <div class="intro-item">
+                    <div class="intro-icon">
+                        <i class="material-icons">text_fields</i>
+                    </div>
+                    <div class="intro-text">String and Character Functions</div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">
+                        <i class="material-icons">calculate</i>
+                    </div>
+                    <div class="intro-text">Numeric Functions</div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">
+                        <i class="material-icons">event</i>
+                    </div>
+                    <div class="intro-text">Date Functions</div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">
+                        <i class="material-icons">description</i>
+                    </div>
+                    <div class="intro-text">Text File Functions</div>
+                </div>
+                <div class="intro-item">
+                    <div class="intro-icon">
+                        <i class="material-icons">code</i>
+                    </div>
+                    <div class="intro-text">Operators</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits">
+            <h2>Benefits of Library Routines</h2>
+            <div class="benefits-list">
+                <div class="benefit-item">
+                    <i class="material-icons">verified</i>
+                    <div class="benefit-text">They are tried and tested so free from errors</div>
+                </div>
+                <div class="benefit-item">
+                    <i class="material-icons">security</i>
+                    <div class="benefit-text">They perform a function that you may not be able to program yourself (for example encryption)</div>
+                </div>
+                <div class="benefit-item">
+                    <i class="material-icons">speed</i>
+                    <div class="benefit-text">They are readily available / speed up development time</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="string-functions">
+            <h2>String and Character Functions</h2>
+            <div class="function-grid">
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">arrow_back</i>
+                        </div>
+                        <div class="function-name">LEFT</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns leftmost x characters from string
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">LEFT("ABCDEFGH", 3)</span> returns "ABC"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">arrow_forward</i>
+                        </div>
+                        <div class="function-name">RIGHT</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns rightmost x characters from string
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">RIGHT("ABCDEFGH", 3)</span> returns "FGH"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">content_cut</i>
+                        </div>
+                        <div class="function-name">MID</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns substring of length y starting at position x
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">MID("ABCDEFGH", 2, 3)</span> returns "BCD"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">straighten</i>
+                        </div>
+                        <div class="function-name">LENGTH</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns integer value representing string length
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">LENGTH("Happy Days")</span> returns 10
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">text_lowercase</i>
+                        </div>
+                        <div class="function-name">LCASE</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns lower-case equivalent of character
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">LCASE('W')</span> returns 'w'
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">text_uppercase</i>
+                        </div>
+                        <div class="function-name">UCASE</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns upper-case equivalent of character
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">UCASE('a')</span> returns 'A'
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">format_size</i>
+                        </div>
+                        <div class="function-name">TO_UPPER</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns string with all characters in upper case
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">TO_UPPER("Error 803")</span> returns "ERROR 803"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">format_size</i>
+                        </div>
+                        <div class="function-name">TO_LOWER</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns string with all characters in lower case
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">TO_LOWER("JIM 803")</span> returns "jim 803"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">123</i>
+                        </div>
+                        <div class="function-name">NUM_TO_STR</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns string representation of numeric value
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">NUM_TO_STR(87.5)</span> returns "87.5"
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">text_fields</i>
+                        </div>
+                        <div class="function-name">STR_TO_NUM</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns numeric representation of string
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">STR_TO_NUM("23.45")</span> returns 23.45
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">check_circle</i>
+                        </div>
+                        <div class="function-name">IS_NUM</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns TRUE if string represents valid numeric value
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">IS_NUM("-12.36")</span> returns TRUE
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">code</i>
+                        </div>
+                        <div class="function-name">ASC</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns ASCII value of character
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">ASC('A')</span> returns 65
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">text_format</i>
+                        </div>
+                        <div class="function-name">CHR</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns character whose ASCII value is x
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">CHR(65)</span> returns 'A'
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="numeric-functions">
+            <h2>Numeric Functions</h2>
+            <div class="function-grid">
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">exposure_zero</i>
+                        </div>
+                        <div class="function-name">INT</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns the integer part of a real number by truncating the decimal portion
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">INT(27.5415)</span> returns 27
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">casino</i>
+                        </div>
+                        <div class="function-name">RAND</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns a random real number in the range 0 to x (not inclusive of x)
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">RAND(87)</span> could return 35.43
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="date-functions">
+            <h2>Date Functions</h2>
+            <div class="function-grid">
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">calendar_today</i>
+                        </div>
+                        <div class="function-name">DAY</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns the current day number from a date
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">DAY(04/10/2003)</span> returns 4
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <div class="function-name">MONTH</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns the current month number from a date
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">MONTH(04/10/2003)</span> returns 10
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">event</i>
+                        </div>
+                        <div class="function-name">YEAR</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns the current year number from a date
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">YEAR(04/10/2003)</span> returns 2003
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">view_week</i>
+                        </div>
+                        <div class="function-name">DAYINDEX</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns the day index number where Sunday = 1, Monday = 2, etc.
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">DAYINDEX(12/05/2020)</span> returns 3
+                    </div>
+                    <div class="note">Tuesday</div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">edit_calendar</i>
+                        </div>
+                        <div class="function-name">SETDATE</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns a date variable with the value of Day/Month/Year
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">SETDATE(26, 10, 2003)</span> returns 26/10/2003
+                    </div>
+                </div>
+                <div class="function-card">
+                    <div class="function-header">
+                        <div class="function-icon">
+                            <i class="material-icons">today</i>
+                        </div>
+                        <div class="function-name">TODAY</div>
+                    </div>
+                    <div class="function-desc">
+                        Returns a date variable corresponding to the current date
+                    </div>
+                    <div class="function-example">
+                        <span class="highlight">TODAY()</span> returns current date
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="file-functions">
+            <h2>Text File Functions</h2>
+            <div class="function-card">
+                <div class="function-header">
+                    <div class="function-icon">
+                        <i class="material-icons">description</i>
+                    </div>
+                    <div class="function-name">EOF</div>
+                </div>
+                <div class="function-desc">
+                    Returns TRUE if there are no more lines to be read from file FileName
+                </div>
+                <div class="function-example">
+                    <span class="highlight">EOF("data.txt")</span> returns TRUE when at end of file
+                </div>
+                <div class="note">
+                    Note: The function will generate an error if the file is not already open in READ mode.
+                </div>
+            </div>
+        </section>
+
+        <section id="operators">
+            <h2>Operators</h2>
+            <div class="operator-grid">
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">add</i>
+                        </div>
+                        <div class="operator-name">& (Concatenation)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Joins two strings together
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">"Summer" & " " & "Pudding"</span><br>
+                        evaluates to "Summer Pudding"
+                    </div>
+                    <div class="note">
+                        Can also concatenate CHAR with STRING
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">add_circle</i>
+                        </div>
+                        <div class="operator-name">AND</div>
+                    </div>
+                    <div class="operator-desc">
+                        Performs a logical AND on two Boolean values
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">TRUE AND FALSE</span><br>
+                        evaluates to FALSE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">add_circle_outline</i>
+                        </div>
+                        <div class="operator-name">OR</div>
+                    </div>
+                    <div class="operator-desc">
+                        Performs a logical OR on two Boolean values
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">TRUE OR FALSE</span><br>
+                        evaluates to TRUE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">block</i>
+                        </div>
+                        <div class="operator-name">NOT</div>
+                    </div>
+                    <div class="operator-desc">
+                        Performs a logical NOT on a Boolean value
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">NOT TRUE</span><br>
+                        evaluates to FALSE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">percent</i>
+                        </div>
+                        <div class="operator-name">MOD</div>
+                    </div>
+                    <div class="operator-desc">
+                        Finds the remainder when one number is divided by another
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">10 MOD 3</span><br>
+                        evaluates to 1
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">divide</i>
+                        </div>
+                        <div class="operator-name">DIV</div>
+                    </div>
+                    <div class="operator-desc">
+                        Finds the quotient when one number is divided by another
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">10 DIV 3</span><br>
+                        evaluates to 3
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison-operators">
+            <h2>Comparison Operators</h2>
+            <div class="operator-grid">
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">drag_handle</i>
+                        </div>
+                        <div class="operator-name">= (Equal To)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if two values are equal
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">Count = 4</span><br>
+                        evaluates to TRUE when Count contains 4
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">arrow_upward</i>
+                        </div>
+                        <div class="operator-name">> (Greater Than)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if left value is greater than right value
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">5 > 3</span><br>
+                        evaluates to TRUE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">arrow_downward</i>
+                        </div>
+                        <div class="operator-name">< (Less Than)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if left value is less than right value
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">2 < 7</span><br>
+                        evaluates to TRUE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">arrow_upward</i>
+                        </div>
+                        <div class="operator-name">>= (Greater Than or Equal)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if left value is greater than or equal to right value
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">5 >= 5</span><br>
+                        evaluates to TRUE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">arrow_downward</i>
+                        </div>
+                        <div class="operator-name"><= (Less Than or Equal)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if left value is less than or equal to right value
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">3 <= 5</span><br>
+                        evaluates to TRUE
+                    </div>
+                </div>
+                <div class="operator-card">
+                    <div class="operator-header">
+                        <div class="operator-icon">
+                            <i class="material-icons">not_equal</i>
+                        </div>
+                        <div class="operator-name"><> (Not Equal To)</div>
+                    </div>
+                    <div class="operator-desc">
+                        Returns TRUE if two values are not equal
+                    </div>
+                    <div class="operator-example">
+                        <span class="highlight">"Program" <> "program"</span><br>
+                        evaluates to TRUE (case sensitive)
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; background-color: rgba(25, 55, 109, 0.05); border-radius: 8px; padding: 20px;">
+                <h3 style="margin-bottom: 15px; display: flex; align-items: center;">
+                    <i class="material-icons" style="margin-right: 10px; color: #19376D;">info</i>
+                    Important Notes
+                </h3>
+                <ul style="list-style-type: none; padding-left: 10px;">
+                    <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                        <i class="material-icons" style="color: #576CBC; margin-right: 10px; font-size: 20px;">check_circle</i>
+                        <span style="font-size: 18px;">Can compare types REAL and INTEGER</span>
+                    </li>
+                    <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                        <i class="material-icons" style="color: #576CBC; margin-right: 10px; font-size: 20px;">check_circle</i>
+                        <span style="font-size: 18px;">Can compare types CHAR and STRING</span>
+                    </li>
+                    <li style="margin-bottom: 10px; display: flex; align-items: flex-start;">
+                        <i class="material-icons" style="color: #576CBC; margin-right: 10px; font-size: 20px;">check_circle</i>
+                        <span style="font-size: 18px;">Case sensitive when comparing CHAR or STRING</span>
+                    </li>
+                    <li style="display: flex; align-items: flex-start;">
+                        <i class="material-icons" style="color: #576CBC; margin-right: 10px; font-size: 20px;">cancel</i>
+                        <span style="font-size: 18px;">Cannot compare two records</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="exit-ticket">
+            <h2>Exit Ticket</h2>
+            <div class="exit-ticket">
+                <div class="exit-ticket-title">
+                    <i class="material-icons">assignment_turned_in</i>
+                    Assessment Questions
+                </div>
+                <div class="exit-questions">
+                    <div class="exit-question">
+                        <div class="question-number">Question 1</div>
+                        <div class="question-text">Explain the difference between the LEFT and MID string functions with an example for each.</div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">Question 2</div>
+                        <div class="question-text">What is the purpose of the EOF function and when would you use it in a program?</div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">Question 3</div>
+                        <div class="question-text">Describe two benefits of using library routines in programming.</div>
+                    </div>
+                    <div class="exit-question">
+                        <div class="question-number">Question 4</div>
+                        <div class="question-text">Write a program segment that uses the MOD operator to determine if a number is even or odd.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer">
+            <p>Cambridge International AS & A Level Computer Science - Data Types and Structures</p>
+            <p>© 2022 UCLES</p>
+        </div>
+    </div>
+
+    <div class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <i class="material-icons">arrow_upward</i>
+    </div>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
