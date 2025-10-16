@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Management: Paging and Segmentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #333;
+            background-color: #f5f7fa;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        header {
+            background: linear-gradient(rgba(25, 55, 100, 0.9), rgba(25, 55, 100, 0.9)), 
+                        url('https://picsum.photos/seed/computer-memory-management/1280/400.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        h1 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 22px;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        nav {
+            background-color: #193764;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+        .nav-item {
+            padding: 15px 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .nav-item:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        .section {
+            padding: 60px 0;
+            margin-bottom: 20px;
+        }
+        .section:nth-child(even) {
+            background-color: #ffffff;
+        }
+        .section:nth-child(odd) {
+            background-color: #f0f4f8;
+        }
+        h2 {
+            font-size: 40px;
+            color: #193764;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+        h2 i {
+            margin-right: 15px;
+            font-size: 44px;
+            color: #576CBC;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        .card-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #193764;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .card-title i {
+            margin-right: 12px;
+            font-size: 32px;
+            color: #576CBC;
+        }
+        .card-content {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .key-points {
+            margin-top: 20px;
+        }
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .key-point i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 22px;
+            margin-top: 2px;
+        }
+        .key-point-text {
+            font-size: 18px;
+        }
+        .highlight {
+            color: #193764;
+            font-weight: 600;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .comparison-table th {
+            background-color: #193764;
+            color: white;
+            padding: 18px 20px;
+            text-align: left;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 16px 20px;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(25, 55, 100, 0.1);
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(87, 108, 188, 0.05);
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        .feature-col {
+            width: 25%;
+            font-weight: 600;
+            color: #193764;
+        }
+        .paging-col {
+            width: 37.5%;
+        }
+        .segmentation-col {
+            width: 37.5%;
+        }
+        .formula-box {
+            background-color: rgba(87, 108, 188, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .formula {
+            font-size: 24px;
+            font-weight: 600;
+            color: #193764;
+        }
+        .formula-label {
+            font-size: 18px;
+            color: #576CBC;
+            margin-bottom: 10px;
+        }
+        .diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 25px 0;
+            background-color: rgba(87, 108, 188, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .diagram-box {
+            text-align: center;
+            width: 45%;
+        }
+        .diagram-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #193764;
+        }
+        .diagram-content {
+            font-size: 18px;
+        }
+        .arrow {
+            font-size: 36px;
+            color: #193764;
+        }
+        .address-parts {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .address-part {
+            background-color: #576CBC;
+            color: white;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .pros-cons {
+            display: flex;
+            margin-top: 25px;
+        }
+        .pros, .cons {
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .pros {
+            background-color: rgba(76, 175, 80, 0.1);
+            margin-right: 15px;
+        }
+        .cons {
+            background-color: rgba(244, 67, 54, 0.1);
+            margin-left: 15px;
+        }
+        .pros-cons-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .pros-cons-title i {
+            margin-right: 10px;
+        }
+        .pros-title {
+            color: #2E7D32;
+        }
+        .cons-title {
+            color: #C62828;
+        }
+        .pros-cons-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        .pros-cons-item i {
+            font-size: 18px;
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        .pros-item i {
+            color: #2E7D32;
+        }
+        .cons-item i {
+            color: #C62828;
+        }
+        .pros-cons-text {
+            font-size: 18px;
+        }
+        .use-cases {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .use-case {
+            flex: 1;
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        .use-case-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #193764;
+            display: flex;
+            align-items: center;
+        }
+        .use-case-title i {
+            margin-right: 12px;
+            font-size: 28px;
+        }
+        .paging-title i {
+            color: #576CBC;
+        }
+        .segmentation-title i {
+            color: #A5D7E8;
+        }
+        .use-case-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .use-case-item i {
+            margin-right: 12px;
+            font-size: 22px;
+            margin-top: 2px;
+        }
+        .paging-item i {
+            color: #576CBC;
+        }
+        .segmentation-item i {
+            color: #A5D7E8;
+        }
+        .use-case-text {
+            font-size: 18px;
+        }
+        .hybrid-section {
+            background-color: #193764;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        .hybrid-icon {
+            font-size: 48px;
+            margin-right: 25px;
+            color: #8ecdf9;
+        }
+        .hybrid-content {
+            flex-grow: 1;
+        }
+        .hybrid-title {
+            font-size: 26px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+        .hybrid-desc {
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .segment-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .segment-table th, .segment-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(87, 108, 188, 0.2);
+        }
+        .segment-table th {
+            background-color: rgba(87, 108, 188, 0.1);
+            color: #193764;
+            font-weight: 600;
+        }
+        .segment-table td {
+            font-size: 18px;
+        }
+        .page-fault-flow {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .fault-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            background-color: rgba(87, 108, 188, 0.05);
+            padding: 12px;
+            border-radius: 6px;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background-color: #576CBC;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            font-size: 18px;
+        }
+        .performance-factors {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .factor {
+            width: 48%;
+            margin-right: 2%;
+            margin-bottom: 15px;
+            background-color: rgba(87, 108, 188, 0.05);
+            padding: 15px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+        .factor i {
+            color: #576CBC;
+            margin-right: 12px;
+            font-size: 26px;
+        }
+        .factor-text {
+            font-size: 18px;
+        }
+        footer {
+            background-color: #193764;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+        .footer-content {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Memory Management: Paging and Segmentation</h1>
+            <p class="subtitle">Exploring how operating systems efficiently manage memory resources through paging and segmentation techniques</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-container">
+            <a href="#intro" class="nav-item">Introduction</a>
+            <a href="#logical-physical" class="nav-item">Logical vs Physical</a>
+            <a href="#paging" class="nav-item">Paging</a>
+            <a href="#evaluating-paging" class="nav-item">Evaluating Paging</a>
+            <a href="#segmentation" class="nav-item">Segmentation</a>
+            <a href="#comparison" class="nav-item">Comparison</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="intro" class="section">
+            <div class="container">
+                <h2><i class="material-icons">memory</i>Introduction to Memory Management</h2>
+                <div class="content-grid">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">settings</i>What is Memory Management?</h3>
+                        <div class="card-content">
+                            <p>Memory management is the process of controlling and coordinating computer memory, assigning portions called blocks to various running programs to optimize overall system performance.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Manages allocation and deallocation of memory</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Tracks memory usage by processes</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Protects memory from unauthorized access</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">priority_high</i>Why is Memory Management Important?</h3>
+                        <div class="card-content">
+                            <p>Effective memory management is crucial for system stability, performance, and security.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Enables efficient use of limited memory</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Prevents memory leaks and corruption</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Supports multitasking and virtual memory</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="logical-physical" class="section">
+            <div class="container">
+                <h2><i class="material-icons">swap_horiz</i>Logical vs Physical Memory</h2>
+                <div class="content-grid">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">memory</i>Logical Memory</h3>
+                        <div class="card-content">
+                            <p>Logical memory refers to the address space that a process sees. It's a virtual address space generated by the CPU.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Also called <span class="highlight">virtual address</span></span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Process-specific address space</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">User can view logical addresses</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Can be changed during execution</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">storage</i>Physical Memory</h3>
+                        <div class="card-content">
+                            <p>Physical memory refers to the actual RAM hardware where data is stored.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Also called <span class="highlight">real address</span></span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Real hardware memory addresses</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Users cannot directly access</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Computed by MMU</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card" style="margin-top: 30px;">
+                    <h3 class="card-title"><i class="material-icons">settings</i>Memory Management Unit (MMU)</h3>
+                    <div class="card-content">
+                        <p>The Memory Management Unit is a hardware component that translates logical addresses to physical addresses.</p>
+                        <div class="key-points">
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Performs address translation using page tables</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Provides memory protection</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Manages page tables and TLB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="paging" class="section">
+            <div class="container">
+                <h2><i class="material-icons">view_module</i>Paging</h2>
+                <div class="content-grid">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">view_module</i>How Paging Works</h3>
+                        <div class="card-content">
+                            <p>Paging is a memory management technique that divides a process's address space into fixed-size blocks called pages.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Process divided into equal-sized <span class="highlight">pages</span></span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Physical memory divided into equal-sized <span class="highlight">frames</span></span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Page size = Frame size (power of 2)</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Non-contiguous memory allocation</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">table_chart</i>Page Table</h3>
+                        <div class="card-content">
+                            <p>A page table is a data structure that maps logical pages to physical frames.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">One entry per logical page</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Contains frame number and control bits</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Stored in main memory</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 30px;">
+                    <h3 class="card-title"><i class="material-icons">swap_horiz</i>Address Translation</h3>
+                    <div class="card-content">
+                        <p>The process of converting logical addresses to physical addresses using the page table.</p>
+                        
+                        <div class="diagram">
+                            <div class="diagram-box">
+                                <div class="diagram-title">Logical Address</div>
+                                <div class="address-parts">
+                                    <div class="address-part">Page #</div>
+                                    <div class="address-part">Offset</div>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="diagram-box">
+                                <div class="diagram-title">Physical Address</div>
+                                <div class="address-parts">
+                                    <div class="address-part">Frame #</div>
+                                    <div class="address-part">Offset</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="key-points">
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">MMU performs translation using page table</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Page number → Frame number</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Offset remains unchanged</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 30px;">
+                    <h3 class="card-title"><i class="material-icons">compare_arrows</i>Advantages & Disadvantages</h3>
+                    <div class="card-content">
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <div class="pros-cons-title pros-title">
+                                    <i class="material-icons">thumb_up</i>
+                                    Advantages
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Eliminates external fragmentation</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Efficient memory utilization</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Supports virtual memory</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Process isolation</span>
+                                </div>
+                            </div>
+                            <div class="cons">
+                                <div class="pros-cons-title cons-title">
+                                    <i class="material-icons">thumb_down</i>
+                                    Disadvantages
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Internal fragmentation</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Page table overhead</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Slower memory access</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Page faults</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="evaluating-paging" class="section">
+            <div class="container">
+                <h2><i class="material-icons">speed</i>Evaluating Paging</h2>
+                <div class="content-grid">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">speed</i>Performance Metrics</h3>
+                        <div class="card-content">
+                            <p>Key factors affecting paging performance:</p>
+                            <div class="performance-factors">
+                                <div class="factor">
+                                    <i class="material-icons">aspect_ratio</i>
+                                    <span class="factor-text"><span class="highlight">Page size</span>: Larger pages reduce table entries but increase internal fragmentation</span>
+                                </div>
+                                <div class="factor">
+                                    <i class="material-icons">autorenew</i>
+                                    <span class="factor-text"><span class="highlight">Page replacement</span>: Algorithm choice affects page faults</span>
+                                </div>
+                                <div class="factor">
+                                    <i class="material-icons">table_chart</i>
+                                    <span class="factor-text"><span class="highlight">Page table size</span>: Larger tables slow memory access</span>
+                                </div>
+                                <div class="factor">
+                                    <i class="material-icons">account_tree</i>
+                                    <span class="factor-text"><span class="highlight">Table organization</span>: Hierarchical tables improve access speed</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">timer</i>Effective Memory Access Time</h3>
+                        <div class="card-content">
+                            <p>Time required to access data in memory:</p>
+                            
+                            <div class="formula-box">
+                                <div class="formula-label">Without TLB</div>
+                                <div class="formula">E.M.A.T = 2 × m</div>
+                            </div>
+                            
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text"><strong>m</strong> = main memory access time</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Two memory accesses: page table + actual data</span>
+                                </div>
+                            </div>
+                            
+                            <div class="formula-box">
+                                <div class="formula-label">With TLB (hit ratio = x, access time = c)</div>
+                                <div class="formula">E.M.A.T = x(c+m) + (1-x)(c+2m)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-grid" style="margin-top: 30px;">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">memory</i>Translation Lookaside Buffer (TLB)</h3>
+                        <div class="card-content">
+                            <p>Hardware cache for frequently accessed page table entries:</p>
+                            
+                            <div class="diagram">
+                                <div class="diagram-box">
+                                    <div class="diagram-title">TLB Hit</div>
+                                    <div class="diagram-content">Fast access to frame number</div>
+                                </div>
+                                <div class="arrow">→</div>
+                                <div class="diagram-box">
+                                    <div class="diagram-title">TLB Miss</div>
+                                    <div class="diagram-content">Access page table in memory</div>
+                                </div>
+                            </div>
+                            
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Associative, high-speed memory</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Contains frequently used page numbers and frame numbers</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Reduces memory access time significantly</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">error_outline</i>Page Faults</h3>
+                        <div class="card-content">
+                            <p>Occurs when accessed page is not in memory:</p>
+                            
+                            <div class="page-fault-flow">
+                                <div class="fault-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-text">Trap to OS</div>
+                                </div>
+                                <div class="fault-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-text">Check page table for validity</div>
+                                </div>
+                                <div class="fault-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-text">Find free frame or select victim</div>
+                                </div>
+                                <div class="fault-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-text">Load page from disk</div>
+                                </div>
+                                <div class="fault-step">
+                                    <div class="step-number">5</div>
+                                    <div class="step-text">Update page table</div>
+                                </div>
+                                <div class="fault-step">
+                                    <div class="step-number">6</div>
+                                    <div class="step-text">Resume process</div>
+                                </div>
+                            </div>
+                            
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">High overhead due to disk I/O</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Page replacement algorithms minimize faults</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="segmentation" class="section">
+            <div class="container">
+                <h2><i class="material-icons">category</i>Segmentation</h2>
+                <div class="content-grid">
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">category</i>How Segmentation Works</h3>
+                        <div class="card-content">
+                            <p>Segmentation is a memory management technique that divides a process into variable-sized logical units called segments.</p>
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Process divided into <span class="highlight">segments</span> of varying sizes</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Segments represent logical program units (functions, arrays)</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Non-contiguous memory allocation</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Matches user's logical view of program</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3 class="card-title"><i class="material-icons">table_chart</i>Segment Table</h3>
+                        <div class="card-content">
+                            <p>A segment table is a data structure that maps logical segments to physical memory:</p>
+                            
+                            <table class="segment-table">
+                                <tr>
+                                    <th>Segment</th>
+                                    <th>Base Address</th>
+                                    <th>Limit</th>
+                                </tr>
+                                <tr>
+                                    <td>Code</td>
+                                    <td>1400</td>
+                                    <td>1000</td>
+                                </tr>
+                                <tr>
+                                    <td>Data</td>
+                                    <td>6300</td>
+                                    <td>400</td>
+                                </tr>
+                                <tr>
+                                    <td>Stack</td>
+                                    <td>2400</td>
+                                    <td>200</td>
+                                </tr>
+                            </table>
+                            
+                            <div class="key-points">
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">Contains base address and segment limit</span>
+                                </div>
+                                <div class="key-point">
+                                    <i class="material-icons">check_circle</i>
+                                    <span class="key-point-text">One entry per logical segment</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 30px;">
+                    <h3 class="card-title"><i class="material-icons">swap_horiz</i>Address Translation</h3>
+                    <div class="card-content">
+                        <p>The process of converting logical addresses to physical addresses using the segment table:</p>
+                        
+                        <div class="diagram">
+                            <div class="diagram-box">
+                                <div class="diagram-title">Logical Address</div>
+                                <div class="address-parts">
+                                    <div class="address-part">Segment #</div>
+                                    <div class="address-part">Offset</div>
+                                </div>
+                            </div>
+                            <div class="arrow">→</div>
+                            <div class="diagram-box">
+                                <div class="diagram-title">Physical Address</div>
+                                <div class="address-parts">
+                                    <div class="address-part">Base + Offset</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="key-points">
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Physical Address = Base + Offset</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Offset must be less than segment limit</span>
+                            </div>
+                            <div class="key-point">
+                                <i class="material-icons">check_circle</i>
+                                <span class="key-point-text">Two memory accesses: segment table + data</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-top: 30px;">
+                    <h3 class="card-title"><i class="material-icons">compare_arrows</i>Advantages & Disadvantages</h3>
+                    <div class="card-content">
+                        <div class="pros-cons">
+                            <div class="pros">
+                                <div class="pros-cons-title pros-title">
+                                    <i class="material-icons">thumb_up</i>
+                                    Advantages
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">No internal fragmentation</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Smaller segment tables</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Better CPU utilization</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">User-controlled segment sizes</span>
+                                </div>
+                                <div class="pros-cons-item pros-item">
+                                    <i class="material-icons">check</i>
+                                    <span class="pros-cons-text">Security & separation</span>
+                                </div>
+                            </div>
+                            <div class="cons">
+                                <div class="pros-cons-title cons-title">
+                                    <i class="material-icons">thumb_down</i>
+                                    Disadvantages
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">External fragmentation</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Segment table overhead</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Slower memory access</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Complex management</span>
+                                </div>
+                                <div class="pros-cons-item cons-item">
+                                    <i class="material-icons">close</i>
+                                    <span class="pros-cons-text">Segmentation faults</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="comparison" class="section">
+            <div class="container">
+                <h2><i class="material-icons">compare</i>Comparison: Paging vs Segmentation</h2>
+                
+                <div class="card">
+                    <h3 class="card-title"><i class="material-icons">compare</i>Key Differences</h3>
+                    <div class="card-content">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th class="feature-col">Feature</th>
+                                    <th class="paging-col">Paging</th>
+                                    <th class="segmentation-col">Segmentation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="feature-col">Memory Division</td>
+                                    <td class="paging-col">Fixed-size blocks (pages)</td>
+                                    <td class="segmentation-col">Variable-size blocks (segments)</td>
+                                </tr>
+                                <tr>
+                                    <td class="feature-col">Address Space</td>
+                                    <td class="paging-col">One-dimensional</td>
+                                    <td class="segmentation-col">Two-dimensional</td>
+                                </tr>
+                                <tr>
+                                    <td class="feature-col">Fragmentation</td>
+                                    <td class="paging-col">Internal fragmentation</td>
+                                    <td class="segmentation-col">External fragmentation</td>
+                                </tr>
+                                <tr>
+                                    <td class="feature-col">Table Size</td>
+                                    <td class="paging-col">Large (one entry per page)</td>
+                                    <td class="segmentation-col">Smaller (one entry per segment)</td>
+                                </tr>
+                                <tr>
+                                    <td class="feature-col">Memory Access</td>
+                                    <td class="paging-col">Faster with TLB</td>
+                                    <td class="segmentation-col">Slower (two memory accesses)</td>
+                                </tr>
+                                <tr>
+                                    <td class="feature-col">User View</td>
+                                    <td class="paging-col">System-oriented</td>
+                                    <td class="segmentation-col">User-oriented</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="use-cases">
+                    <div class="use-case">
+                        <h3 class="use-case-title paging-title">
+                            <i class="material-icons">view_module</i>
+                            When to Use Paging
+                        </h3>
+                        <div class="use-case-item paging-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">Systems with <span class="highlight">limited memory</span></span>
+                        </div>
+                        <div class="use-case-item paging-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">When <span class="highlight">external fragmentation</span> is a concern</span>
+                        </div>
+                        <div class="use-case-item paging-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">For <span class="highlight">virtual memory</span> implementation</span>
+                        </div>
+                        <div class="use-case-item paging-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">When <span class="highlight">process isolation</span> is critical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="use-case">
+                        <h3 class="use-case-title segmentation-title">
+                            <i class="material-icons">category</i>
+                            When to Use Segmentation
+                        </h3>
+                        <div class="use-case-item segmentation-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">When <span class="highlight">logical organization</span> matters</span>
+                        </div>
+                        <div class="use-case-item segmentation-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">For <span class="highlight">sharing and protection</span> of code</span>
+                        </div>
+                        <div class="use-case-item segmentation-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">When <span class="highlight">internal fragmentation</span> is a concern</span>
+                        </div>
+                        <div class="use-case-item segmentation-item">
+                            <i class="material-icons">check_circle</i>
+                            <span class="use-case-text">For <span class="highlight">user-defined</span> memory organization</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hybrid-section">
+                    <i class="material-icons hybrid-icon">merge_type</i>
+                    <div class="hybrid-content">
+                        <h3 class="hybrid-title">Hybrid Approach: Segmentation with Paging</h3>
+                        <p class="hybrid-desc">Modern systems often combine both techniques: segments are divided into pages, providing logical organization with efficient memory management</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-content">Memory Management: Paging and Segmentation | Operating Systems Course Material</p>
+        </div>
+    </footer>
+</body>
+</html>
