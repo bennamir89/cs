@@ -14,202 +14,80 @@
         }
         body {
             font-family: 'Source Sans Pro', sans-serif;
-            overflow: hidden;
             background-color: #f5f7fa;
             color: #2c3e50;
+            line-height: 1.6;
         }
-        .presentation-container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .slide {
-            width: 1280px;
-            min-height: 720px;
-            position: relative;
-            background-color: #f5f7fa;
-            color: #2c3e50;
-            display: none;
-            flex-direction: column;
+        .container {
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 0 20px;
         }
-        .slide.active {
-            display: flex;
+        .section {
+            padding: 60px 0;
+            position: relative;
         }
-        .header {
-            padding: 40px 70px 20px;
-            background-color: #19376d;
-            color: white;
-        }
-        .title {
+        .section-title {
             font-size: 40px;
             font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .content {
-            flex-grow: 1;
-            padding: 30px 70px;
-            display: flex;
-            gap: 40px;
-        }
-        .navigation {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 100;
-            background-color: rgba(25, 55, 109, 0.9);
-            padding: 10px 20px;
-            border-radius: 30px;
-        }
-        .nav-button {
-            background-color: transparent;
-            border: none;
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
-        }
-        .nav-button:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        .nav-button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-        .slide-indicator {
-            color: white;
-            display: flex;
-            align-items: center;
-            font-weight: 600;
-            padding: 0 10px;
-        }
-        .material-icons {
-            font-size: 24px;
-        }
-        
-        /* Slide 1 - Title */
-        .title-slide {
-            width: 1280px;
-            height: 720px;
-            position: relative;
-            background-image: url('https://sfile.chatglm.cn/images-ppt/a9fd130d3171.png');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(25, 55, 109, 0.85);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        .main-title {
-            font-size: 64px;
-            font-weight: 700;
-            text-align: center;
+            color: #19376d;
             margin-bottom: 30px;
-            max-width: 80%;
-            line-height: 1.2;
-        }
-        .subtitle {
-            font-size: 28px;
-            font-weight: 400;
-            text-align: center;
-            max-width: 70%;
-            opacity: 0.9;
-        }
-        .icon-container {
-            margin-bottom: 40px;
-        }
-        .title-icon {
-            font-size: 64px;
-            color: #90CAF9;
-        }
-        
-        /* Slide 2 - Learning Objectives */
-        .objectives-content {
-            flex-grow: 1;
-            padding: 40px 70px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        .objective {
-            width: calc(50% - 15px);
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        .objective-number {
-            font-size: 32px;
-            font-weight: 700;
-            color: #576cbc;
-            margin-right: 15px;
-            min-width: 40px;
-            text-align: center;
-        }
-        .objective-text {
-            font-size: 20px;
-            line-height: 1.4;
-        }
-        .objective-icon-container {
-            margin-right: 15px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(87, 108, 188, 0.1);
-            border-radius: 50%;
+            gap: 15px;
         }
-        .objective-icon {
-            font-size: 28px;
+        .section-icon {
+            font-size: 40px;
             color: #576cbc;
         }
-        
-        /* Slide 3 - Selecting Techniques */
-        .techniques-container {
-            display: flex;
-            gap: 40px;
-            flex-grow: 1;
-        }
-        .technique {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        .card {
             background-color: white;
             border-radius: 12px;
+            padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        .card-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #576cbc;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-icon {
+            font-size: 28px;
+            color: #576cbc;
+        }
+        .card-content {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .key-point {
+            font-weight: 600;
+            color: #19376d;
+        }
+        .two-column {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .column {
+            flex: 1;
+        }
+        .technique {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            height: 100%;
         }
         .technique-header {
-            padding: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
-        }
-        .classification-header {
-            background-color: rgba(87, 108, 188, 0.1);
-        }
-        .clustering-header {
-            background-color: rgba(255, 152, 0, 0.1);
+            margin-bottom: 20px;
         }
         .technique-title {
             font-size: 28px;
@@ -221,20 +99,16 @@
         .clustering-title {
             color: #ff9800;
         }
-        .technique-content {
-            padding: 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
         .feature {
             display: flex;
             align-items: flex-start;
             gap: 12px;
+            margin-bottom: 15px;
         }
         .feature-icon {
             color: #576cbc;
+            font-size: 24px;
+            flex-shrink: 0;
         }
         .clustering-feature .feature-icon {
             color: #ff9800;
@@ -243,55 +117,25 @@
             font-size: 20px;
             line-height: 1.4;
         }
-        .key-point {
-            font-weight: 600;
-            color: #19376d;
-        }
-        .clustering-feature .key-point {
-            color: #e65100;
-        }
-        .image-container {
-            margin-top: auto;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .technique-image {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: 8px;
-            object-fit: contain;
-        }
-        
-        /* Slide 4 - Guided Tools */
-        .tools-container {
-            display: flex;
-            gap: 25px;
-            flex-grow: 1;
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
         }
         .tool {
-            flex: 1;
             background-color: white;
             border-radius: 12px;
+            padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
         .tool-header {
-            padding: 15px;
             display: flex;
             align-items: center;
-            gap: 12px;
-        }
-        .teachable-header {
-            background-color: rgba(76, 175, 80, 0.1);
-        }
-        .scratch-header {
-            background-color: rgba(255, 152, 0, 0.1);
-        }
-        .python-header {
-            background-color: rgba(33, 150, 243, 0.1);
+            gap: 15px;
+            margin-bottom: 20px;
         }
         .tool-title {
             font-size: 24px;
@@ -306,20 +150,15 @@
         .python-title {
             color: #2196F3;
         }
-        .tool-content {
-            padding: 15px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
         .tool-feature {
             display: flex;
             align-items: flex-start;
             gap: 10px;
+            margin-bottom: 15px;
         }
         .tool-feature-icon {
             font-size: 20px;
+            flex-shrink: 0;
         }
         .teachable-feature .tool-feature-icon {
             color: #4CAF50;
@@ -334,21 +173,8 @@
             font-size: 18px;
             line-height: 1.3;
         }
-        .tool-key-point {
-            font-weight: 600;
-        }
-        .teachable-feature .tool-key-point {
-            color: #2E7D32;
-        }
-        .scratch-feature .tool-key-point {
-            color: #E65100;
-        }
-        .python-feature .tool-key-point {
-            color: #0D47A1;
-        }
         .tool-image-container {
             margin-top: auto;
-            padding: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -360,22 +186,25 @@
             border-radius: 8px;
             object-fit: contain;
         }
-        
-        /* Slide 5 - Training with Teachable Machine */
         .steps-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
         .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 20px;
             background-color: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         .step-number {
             display: flex;
@@ -383,305 +212,110 @@
             align-items: center;
             width: 50px;
             height: 50px;
-            background-color: #4CAF50;
+            background-color: #576cbc;
             color: white;
             border-radius: 50%;
             font-size: 24px;
             font-weight: 700;
             flex-shrink: 0;
         }
-        .step-content {
-            flex-grow: 1;
+        .teachable-step .step-number {
+            background-color: #4CAF50;
+        }
+        .scratch-step .step-number {
+            background-color: #FF9800;
         }
         .step-title {
             font-size: 22px;
             font-weight: 600;
+            color: #576cbc;
+        }
+        .teachable-step .step-title {
             color: #2E7D32;
-            margin-bottom: 8px;
+        }
+        .scratch-step .step-title {
+            color: #E65100;
         }
         .step-description {
             font-size: 18px;
             line-height: 1.4;
         }
-        .step-key-point {
-            font-weight: 600;
-            color: #19376d;
-        }
-        .right-container {
-            flex: 1;
+        .step-image {
+            margin-top: 20px;
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            justify-content: center;
         }
-        .image-wrapper {
-            flex-grow: 1;
-            background-color: white;
+        .tips-container {
+            background-color: rgba(87, 108, 188, 0.1);
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
+            margin-top: 20px;
         }
-        .image-title {
-            font-size: 22px;
+        .teachable-tips {
+            background-color: rgba(76, 175, 80, 0.1);
+        }
+        .scratch-tips {
+            background-color: rgba(255, 152, 0, 0.1);
+        }
+        .tips-title {
+            font-size: 20px;
             font-weight: 600;
-            color: #19376d;
+            color: #576cbc;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .image-content {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .tips-container {
-            background-color: rgba(76, 175, 80, 0.1);
-            border-radius: 12px;
-            padding: 15px 20px;
-        }
-        .tips-title {
-            font-size: 20px;
-            font-weight: 600;
+        .teachable-tips .tips-title {
             color: #2E7D32;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        }
+        .scratch-tips .tips-title {
+            color: #E65100;
         }
         .tips-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
         .tip-item {
             display: flex;
             align-items: flex-start;
             gap: 10px;
         }
+        .tip-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .teachable-tips .tip-icon {
+            color: #4CAF50;
+        }
+        .scratch-tips .tip-icon {
+            color: #FF9800;
+        }
         .tip-text {
             font-size: 16px;
             line-height: 1.3;
         }
-        
-        /* Slide 6 - Training with Scratch AI */
-        .scratch-step-number {
-            background-color: #FF9800;
-        }
-        .scratch-step-title {
-            color: #E65100;
-        }
-        .scratch-image-title {
-            color: #FF9800;
-        }
-        .scratch-tips-title {
-            color: #E65100;
-        }
-        .scratch-tips-container {
-            background-color: rgba(255, 152, 0, 0.1);
-        }
-        .scratch-tip-icon {
-            color: #FF9800;
-        }
-        .scratch-key-point {
-            color: #E65100;
-        }
-        
-        /* Slide 7 - Testing Models */
-        .key-points {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-        .section-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #19376d;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .point {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-        .point-number {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 36px;
-            height: 36px;
-            background-color: #576cbc;
-            color: white;
-            border-radius: 50%;
-            font-size: 18px;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        .point-content {
-            flex-grow: 1;
-        }
-        .point-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #576cbc;
-            margin-bottom: 5px;
-        }
-        .point-description {
-            font-size: 18px;
-            line-height: 1.4;
-        }
-        .point-key-term {
-            font-weight: 600;
-            color: #19376d;
-        }
-        .example-container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-        }
-        .example-title {
-            font-size: 24px;
-            font-weight: 600;
-            color: #19376d;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .example-content {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .example-row {
-            display: flex;
-            gap: 15px;
-        }
-        .example-box {
-            flex: 1;
-            background-color: rgba(87, 108, 188, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .box-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #576cbc;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .box-content {
-            font-size: 16px;
-            line-height: 1.4;
-        }
-        .metrics-container {
-            background-color: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .metrics-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #19376d;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .metrics-grid {
-            display: flex;
-            gap: 15px;
-        }
-        .metric-box {
-            flex: 1;
-            background-color: rgba(87, 108, 188, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-            text-align: center;
-        }
-        .metric-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: #576cbc;
-            margin-bottom: 5px;
-        }
-        .metric-label {
-            font-size: 16px;
-            color: #2c3e50;
-        }
-        
-        /* Slide 8 - Comparing Tools */
         .comparison-table {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            overflow: hidden;
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
         }
-        .table-header {
-            display: flex;
-            background-color: rgba(25, 55, 109, 0.1);
-        }
-        .header-cell {
-            flex: 1;
+        .comparison-table th {
+            background-color: rgba(87, 108, 188, 0.1);
             padding: 15px;
-            font-size: 20px;
-            font-weight: 600;
-            color: #19376d;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-right: 1px solid rgba(25, 55, 109, 0.1);
-        }
-        .header-cell:first-child {
-            flex: 0.8;
-        }
-        .header-cell:last-child {
-            border-right: none;
-        }
-        .table-row {
-            display: flex;
-            border-bottom: 1px solid rgba(25, 55, 109, 0.1);
-        }
-        .table-row:last-child {
-            border-bottom: none;
-        }
-        .row-cell {
-            flex: 1;
-            padding: 15px;
+            text-align: left;
             font-size: 18px;
-            display: flex;
-            align-items: center;
-            border-right: 1px solid rgba(25, 55, 109, 0.1);
-        }
-        .row-cell:first-child {
-            flex: 0.8;
             font-weight: 600;
             color: #19376d;
         }
-        .row-cell:last-child {
-            border-right: none;
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(87, 108, 188, 0.1);
+            font-size: 16px;
+        }
+        .comparison-table tr:last-child td {
+            border-bottom: none;
         }
         .rating {
             display: flex;
@@ -695,23 +329,21 @@
             color: #E0E0E0;
         }
         .summary-container {
-            display: flex;
-            gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
         .summary-box {
-            flex: 1;
             background-color: white;
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
         .summary-title {
             font-size: 20px;
             font-weight: 600;
             color: #19376d;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -727,7 +359,6 @@
             gap: 10px;
         }
         .summary-icon {
-            color: #576cbc;
             font-size: 20px;
             flex-shrink: 0;
         }
@@ -744,80 +375,97 @@
             font-size: 16px;
             line-height: 1.3;
         }
-        .summary-key-point {
-            font-weight: 600;
+        .improvement-strategies {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
-        .teachable-point {
-            color: #2E7D32;
+        .strategy {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
         }
-        .scratch-point {
-            color: #E65100;
-        }
-        .python-point {
-            color: #0D47A1;
-        }
-        
-        /* Slide 9 - Improving Performance */
         .strategy-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
             background-color: #576cbc;
+            color: white;
+            border-radius: 50%;
+            font-size: 24px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .strategy-content {
+            flex-grow: 1;
         }
         .strategy-title {
+            font-size: 22px;
+            font-weight: 600;
             color: #576cbc;
+            margin-bottom: 10px;
+        }
+        .strategy-description {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .example-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-top: 30px;
         }
         .example-title {
-            color: #576cbc;
+            font-size: 24px;
+            font-weight: 600;
+            color: #19376d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         .parameter-comparison {
             display: flex;
-            gap: 20px;
+            gap: 30px;
+            margin-bottom: 30px;
         }
         .parameter-box {
             flex: 1;
             background-color: rgba(87, 108, 188, 0.1);
             border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            padding: 20px;
         }
-        .box-title {
+        .parameter-title {
             font-size: 18px;
             font-weight: 600;
             color: #576cbc;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .box-content {
-            font-size: 16px;
-            line-height: 1.4;
-        }
-        .metrics-container {
-            background-color: rgba(87, 108, 188, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .metrics-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #576cbc;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
+        .parameter-content {
+            font-size: 16px;
+            line-height: 1.4;
+        }
         .metrics-grid {
-            display: flex;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
         .metric-box {
-            flex: 1;
             background-color: white;
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
         .metric-value {
             font-size: 28px;
@@ -832,100 +480,52 @@
         .improvement {
             color: #4CAF50;
         }
-        
-        /* Slide 10 - Presenting Results */
-        .section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .results-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
         }
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 5px;
-        }
-        .section-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            background-color: rgba(87, 108, 188, 0.1);
-        }
-        .section-title {
-            font-size: 28px;
-            font-weight: 600;
-            color: #19376d;
-        }
-        .card {
+        .results-card {
             background-color: white;
             border-radius: 12px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            height: 100%;
         }
-        .card-title {
-            font-size: 22px;
+        .results-title {
+            font-size: 24px;
             font-weight: 600;
-            color: #576cbc;
+            color: #19376d;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .card-content {
+        .results-content {
             display: flex;
             flex-direction: column;
             gap: 15px;
-            flex-grow: 1;
         }
-        .item {
+        .results-item {
             display: flex;
             align-items: flex-start;
             gap: 12px;
         }
-        .item-icon {
+        .results-icon {
             color: #576cbc;
             font-size: 22px;
             flex-shrink: 0;
         }
-        .item-text {
-            font-size: 20px;
+        .results-text {
+            font-size: 18px;
             line-height: 1.4;
         }
-        .item-key-point {
-            font-weight: 600;
-            color: #19376d;
-        }
-        .example-container {
+        .chart-container {
             background-color: rgba(87, 108, 188, 0.1);
             border-radius: 12px;
             padding: 20px;
-            margin-top: auto;
-        }
-        .example-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #576cbc;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .example-content {
-            display: flex;
-            gap: 15px;
-        }
-        .chart-container {
-            flex: 1;
-            background-color: white;
-            border-radius: 8px;
-            padding: 15px;
+            margin-top: 20px;
+            height: 200px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -935,51 +535,43 @@
             font-size: 18px;
             font-weight: 600;
             color: #19376d;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             text-align: center;
         }
-        .chart-image {
-            width: 100%;
-            height: 120px;
-            background-color: rgba(87, 108, 188, 0.05);
-            border-radius: 6px;
+        .chart-bars {
             display: flex;
+            gap: 30px;
+            align-items: flex-end;
+            height: 120px;
+        }
+        .bar-container {
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            position: relative;
+            gap: 10px;
         }
         .bar {
-            position: absolute;
-            bottom: 0;
             width: 40px;
             background-color: #576cbc;
             border-radius: 4px 4px 0 0;
         }
         .bar-1 {
-            height: 60%;
-            left: 20%;
+            height: 60px;
         }
         .bar-2 {
-            height: 80%;
-            left: 40%;
+            height: 80px;
         }
         .bar-3 {
-            height: 45%;
-            left: 60%;
+            height: 45px;
         }
         .bar-4 {
-            height: 90%;
-            left: 80%;
+            height: 90px;
         }
         .bar-label {
-            position: absolute;
-            bottom: -25px;
             font-size: 14px;
             color: #2c3e50;
         }
         .bar-value {
-            position: absolute;
-            top: -25px;
             font-size: 14px;
             font-weight: 600;
             color: #576cbc;
@@ -987,7 +579,7 @@
         .reflection-questions {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
         .question {
             display: flex;
@@ -1003,1050 +595,1107 @@
             font-size: 18px;
             line-height: 1.4;
         }
-        
-        /* Responsive Design */
-        @media (max-width: 1280px) {
-            .slide {
-                width: 100%;
-            }
-            .content {
-                padding: 20px 40px;
-            }
+        .exercise-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
         }
-        
+        .exercise-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #19376d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .exercise-content {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .exercise-steps {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .exercise-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .exercise-step-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            background-color: #19376d;
+            color: white;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .exercise-step-content {
+            flex-grow: 1;
+        }
+        .exercise-step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376d;
+            margin-bottom: 5px;
+        }
+        .exercise-step-description {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .exit-ticket {
+            background-color: rgba(25, 55, 109, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        .exit-ticket-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #19376d;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .exit-ticket-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .exit-ticket-question {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .exit-ticket-question-number {
+            font-weight: 600;
+            color: #19376d;
+            margin-right: 10px;
+        }
+        .hero {
+            background-color: #19376d;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://sfile.chatglm.cn/images-ppt/a9fd130d3171.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: 0;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-title {
+            font-size: 60px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .hero-subtitle {
+            font-size: 28px;
+            font-weight: 400;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .objective {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .objective-number {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background-color: #576cbc;
+            color: white;
+            border-radius: 50%;
+            font-size: 20px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        .objective-content {
+            flex-grow: 1;
+        }
+        .objective-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #19376d;
+            margin-bottom: 5px;
+        }
+        .objective-description {
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        .objective-icon {
+            color: #576cbc;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        .footer {
+            background-color: #19376d;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        .footer-text {
+            font-size: 18px;
+            opacity: 0.8;
+        }
         @media (max-width: 768px) {
-            .header {
-                padding: 20px 30px 10px;
+            .section-title {
+                font-size: 32px;
             }
-            .title {
-                font-size: 28px;
-            }
-            .content {
-                padding: 15px 30px;
-                flex-direction: column;
-                gap: 20px;
-            }
-            .main-title {
-                font-size: 40px;
-            }
-            .subtitle {
-                font-size: 20px;
-            }
-            .objective {
-                width: 100%;
-            }
-            .techniques-container {
+            .two-column {
                 flex-direction: column;
             }
-            .tools-container {
-                flex-direction: column;
+            .tools-grid {
+                grid-template-columns: 1fr;
             }
             .steps-container {
-                gap: 15px;
+                grid-template-columns: 1fr;
             }
-            .step {
-                padding: 15px;
-            }
-            .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 20px;
-            }
-            .step-title {
-                font-size: 18px;
-            }
-            .step-description {
-                font-size: 16px;
-            }
-            .table-header {
-                flex-direction: column;
-            }
-            .header-cell {
-                border-right: none;
-                border-bottom: 1px solid rgba(25, 55, 109, 0.1);
-            }
-            .table-row {
-                flex-direction: column;
-            }
-            .row-cell {
-                border-right: none;
-                border-bottom: 1px solid rgba(25, 55, 109, 0.1);
+            .comparison-table {
+                font-size: 14px;
             }
             .summary-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
             }
-            .metrics-grid {
-                flex-direction: column;
-            }
-            .example-row {
-                flex-direction: column;
+            .improvement-strategies {
+                grid-template-columns: 1fr;
             }
             .parameter-comparison {
                 flex-direction: column;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .results-section {
+                grid-template-columns: 1fr;
+            }
+            .objectives-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-title {
+                font-size: 40px;
+            }
+            .hero-subtitle {
+                font-size: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="presentation-container">
-        <!-- Slide 1: Title -->
-        <div class="slide title-slide active">
-            <div class="overlay">
-                <div class="icon-container">
-                    <i class="material-icons title-icon">psychology</i>
-                </div>
-                <h1 class="main-title">Machine Learning Part 3: Applying Learning Techniques</h1>
-                <h2 class="subtitle">IGCSE Artificial Intelligence</h2>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Machine Learning Part 3: Applying Learning Techniques</h1>
+                <p class="hero-subtitle">IGCSE Artificial Intelligence</p>
             </div>
         </div>
-        
-        <!-- Slide 2: Learning Objectives -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Learning Objectives</h1>
-            </div>
-            <div class="objectives-content">
+    </section>
+
+    <!-- Learning Objectives Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">flag</i>
+                Learning Objectives
+            </h2>
+            <div class="objectives-grid">
                 <div class="objective">
                     <div class="objective-number">1</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">category</i>
+                    <i class="material-icons objective-icon">category</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Select Appropriate Techniques</h3>
+                        <p class="objective-description">Choose the right ML approach for specific problems</p>
                     </div>
-                    <div class="objective-text">Select appropriate machine learning techniques</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">2</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">build</i>
+                    <i class="material-icons objective-icon">build</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Use Guided Tools</h3>
+                        <p class="objective-description">Apply ML using Teachable Machine, Scratch AI, Python</p>
                     </div>
-                    <div class="objective-text">Use guided tools or software</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">3</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">school</i>
+                    <i class="material-icons objective-icon">school</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Train Models</h3>
+                        <p class="objective-description">Create models using labeled data</p>
                     </div>
-                    <div class="objective-text">Train a simple model</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">4</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">science</i>
+                    <i class="material-icons objective-icon">science</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Test Models</h3>
+                        <p class="objective-description">Evaluate performance with new data</p>
                     </div>
-                    <div class="objective-text">Test the model</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">5</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">compare</i>
+                    <i class="material-icons objective-icon">compare</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Compare Applications</h3>
+                        <p class="objective-description">Analyze different ML tools and techniques</p>
                     </div>
-                    <div class="objective-text">Compare different applications</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">6</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">tune</i>
+                    <i class="material-icons objective-icon">tune</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Adjust Parameters</h3>
+                        <p class="objective-description">Optimize models for better performance</p>
                     </div>
-                    <div class="objective-text">Adjust inputs or parameters</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">7</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">bar_chart</i>
+                    <i class="material-icons objective-icon">bar_chart</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Present Results</h3>
+                        <p class="objective-description">Visualize findings clearly</p>
                     </div>
-                    <div class="objective-text">Present results clearly</div>
                 </div>
                 <div class="objective">
                     <div class="objective-number">8</div>
-                    <div class="objective-icon-container">
-                        <i class="material-icons objective-icon">psychology</i>
-                    </div>
-                    <div class="objective-text">Reflect on suitability</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 3: Selecting Appropriate Machine Learning Techniques -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Selecting Appropriate Machine Learning Techniques</h1>
-            </div>
-            <div class="content">
-                <div class="techniques-container">
-                    <div class="technique">
-                        <div class="technique-header classification-header">
-                            <i class="material-icons" style="color: #576cbc;">category</i>
-                            <h2 class="technique-title classification-title">Classification</h2>
-                        </div>
-                        <div class="technique-content">
-                            <div class="feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text"><span class="key-point">Supervised learning</span> with predefined classes</div>
-                            </div>
-                            <div class="feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Uses <span class="key-point">labeled data</span> for training</div>
-                            </div>
-                            <div class="feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Predicts which <span class="key-point">category</span> new data belongs to</div>
-                            </div>
-                            <div class="feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Examples: Spam detection, image recognition</div>
-                            </div>
-                            <div class="image-container">
-                                <img src="https://sfile.chatglm.cn/images-ppt/a2fcedafc7c7.png" alt="Classification example" class="technique-image">
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="technique">
-                        <div class="technique-header clustering-header">
-                            <i class="material-icons" style="color: #ff9800;">bubble_chart</i>
-                            <h2 class="technique-title clustering-title">Clustering</h2>
-                        </div>
-                        <div class="technique-content">
-                            <div class="feature clustering-feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text"><span class="key-point">Unsupervised learning</span> with unknown classes</div>
-                            </div>
-                            <div class="feature clustering-feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Uses <span class="key-point">unlabeled data</span> to find patterns</div>
-                            </div>
-                            <div class="feature clustering-feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Groups similar data points into <span class="key-point">clusters</span></div>
-                            </div>
-                            <div class="feature clustering-feature">
-                                <i class="material-icons feature-icon">check_circle</i>
-                                <div class="feature-text">Examples: Customer segmentation, anomaly detection</div>
-                            </div>
-                            <div class="image-container">
-                                <img src="https://sfile.chatglm.cn/images-ppt/2968279f3cf4.jpeg" alt="Clustering example" class="technique-image">
-                            </div>
-                        </div>
+                    <i class="material-icons objective-icon">psychology</i>
+                    <div class="objective-content">
+                        <h3 class="objective-title">Reflect on Suitability</h3>
+                        <p class="objective-description">Evaluate if technique fits the application</p>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Slide 4: Guided Tools for Machine Learning -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Guided Tools for Machine Learning</h1>
-            </div>
-            <div class="content">
-                <div class="tools-container">
-                    <div class="tool">
-                        <div class="tool-header teachable-header">
-                            <i class="material-icons" style="color: #4CAF50;">school</i>
-                            <h2 class="tool-title teachable-title">Teachable Machine</h2>
-                        </div>
-                        <div class="tool-content">
-                            <div class="tool-feature teachable-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text"><span class="tool-key-point">Web-based tool</span> for creating ML models</div>
-                            </div>
-                            <div class="tool-feature teachable-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text">No coding required - <span class="tool-key-point">visual interface</span></div>
-                            </div>
-                            <div class="tool-feature teachable-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text">Works with <span class="tool-key-point">images, sounds, poses</span></div>
-                            </div>
-                            <div class="tool-image-container">
-                                <img src="https://sfile.chatglm.cn/images-ppt/e2dda53c387e.png" alt="Teachable Machine interface" class="tool-image">
-                            </div>
-                        </div>
+    </section>
+
+    <!-- Selecting Techniques Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">category</i>
+                Selecting Appropriate Machine Learning Techniques
+            </h2>
+            <div class="two-column">
+                <div class="technique">
+                    <div class="technique-header">
+                        <i class="material-icons" style="color: #576cbc; font-size: 32px;">category</i>
+                        <h3 class="technique-title classification-title">Classification</h3>
                     </div>
-                    
-                    <div class="tool">
-                        <div class="tool-header scratch-header">
-                            <i class="material-icons" style="color: #FF9800;">face</i>
-                            <h2 class="tool-title scratch-title">Scratch AI</h2>
-                        </div>
-                        <div class="tool-content">
-                            <div class="tool-feature scratch-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text"><span class="tool-key-point">Face Sensing blocks</span> for interactive projects</div>
-                            </div>
-                            <div class="tool-feature scratch-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text">Uses <span class="tool-key-point">block-based coding</span> approach</div>
-                            </div>
-                            <div class="tool-feature scratch-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text">Creates <span class="tool-key-point">games, filters, animations</span></div>
-                            </div>
-                            <div class="tool-image-container">
-                                <img src="https://sfile.chatglm.cn/images-ppt/abed51393301.svg" alt="Scratch AI Face Sensing blocks" class="tool-image">
-                            </div>
-                        </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text"><span class="key-point">Supervised learning</span> with predefined classes</div>
                     </div>
-                    
-                    <div class="tool">
-                        <div class="tool-header python-header">
-                            <i class="material-icons" style="color: #2196F3;">code</i>
-                            <h2 class="tool-title python-title">Python Libraries</h2>
-                        </div>
-                        <div class="tool-content">
-                            <div class="tool-feature python-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text"><span class="tool-key-point">Scikit-learn</span> for classical ML algorithms</div>
-                            </div>
-                            <div class="tool-feature python-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text"><span class="tool-key-point">NumPy & Pandas</span> for data manipulation</div>
-                            </div>
-                            <div class="tool-feature python-feature">
-                                <i class="material-icons tool-feature-icon">check_circle</i>
-                                <div class="tool-feature-text"><span class="tool-key-point">Matplotlib</span> for data visualization</div>
-                            </div>
-                            <div class="tool-image-container">
-                                <div style="font-size: 18px; text-align: center; color: #0D47A1;">
-                                    <i class="material-icons" style="font-size: 40px; margin-bottom: 10px;">terminal</i><br>
-                                    from sklearn import datasets<br>
-                                    from sklearn.tree import DecisionTreeClassifier<br>
-                                    # Train your model...
-                                </div>
-                            </div>
-                        </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Uses <span class="key-point">labeled data</span> for training</div>
                     </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 5: Training a Model with Teachable Machine -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Training a Model with Teachable Machine</h1>
-            </div>
-            <div class="content">
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Choose Project Type</h3>
-                            <p class="step-description">Select <span class="step-key-point">Image</span>, <span class="step-key-point">Sound</span>, or <span class="step-key-point">Pose</span> project based on your learning goal</p>
-                        </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Predicts which <span class="key-point">category</span> new data belongs to</div>
                     </div>
-                    
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Create Classes & Add Examples</h3>
-                            <p class="step-description">Define <span class="step-key-point">distinct classes</span> and provide <span class="step-key-point">training examples</span> for each class</p>
-                        </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Examples: Spam detection, image recognition</div>
                     </div>
-                    
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Train the Model</h3>
-                            <p class="step-description">Click <span class="step-key-point">"Train Model"</span> button to let the algorithm learn from your examples</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3 class="step-title">Test the Model</h3>
-                            <p class="step-description">Use <span class="step-key-point">new data</span> to evaluate how well your model performs</p>
-                        </div>
+                    <div class="step-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/a2fcedafc7c7.png" alt="Classification example" style="max-width: 100%; border-radius: 8px;">
                     </div>
                 </div>
                 
-                <div class="right-container">
-                    <div class="image-wrapper">
-                        <div class="image-title">
-                            <i class="material-icons" style="color: #4CAF50;">school</i>
-                            Teachable Machine Interface
-                        </div>
-                        <div class="image-content">
-                            <img src="https://sfile.chatglm.cn/images-ppt/9349cce4852f.jpg" alt="Teachable Machine training interface" class="tool-image">
+                <div class="technique">
+                    <div class="technique-header">
+                        <i class="material-icons" style="color: #ff9800; font-size: 32px;">bubble_chart</i>
+                        <h3 class="technique-title clustering-title">Clustering</h3>
+                    </div>
+                    <div class="feature clustering-feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text"><span class="key-point">Unsupervised learning</span> with unknown classes</div>
+                    </div>
+                    <div class="feature clustering-feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Uses <span class="key-point">unlabeled data</span> to find patterns</div>
+                    </div>
+                    <div class="feature clustering-feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Groups similar data points into <span class="key-point">clusters</span></div>
+                    </div>
+                    <div class="feature clustering-feature">
+                        <i class="material-icons feature-icon">check_circle</i>
+                        <div class="feature-text">Examples: Customer segmentation, anomaly detection</div>
+                    </div>
+                    <div class="step-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/2968279f3cf4.jpeg" alt="Clustering example" style="max-width: 100%; border-radius: 8px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guided Tools Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">build</i>
+                Guided Tools for Machine Learning
+            </h2>
+            <div class="tools-grid">
+                <div class="tool">
+                    <div class="tool-header">
+                        <i class="material-icons" style="color: #4CAF50; font-size: 32px;">school</i>
+                        <h3 class="tool-title teachable-title">Teachable Machine</h3>
+                    </div>
+                    <div class="tool-feature teachable-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text"><span class="key-point">Web-based tool</span> for creating ML models</div>
+                    </div>
+                    <div class="tool-feature teachable-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text">No coding required - <span class="key-point">visual interface</span></div>
+                    </div>
+                    <div class="tool-feature teachable-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text">Works with <span class="key-point">images, sounds, poses</span></div>
+                    </div>
+                    <div class="tool-image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/e2dda53c387e.png" alt="Teachable Machine interface" class="tool-image">
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <i class="material-icons" style="color: #FF9800; font-size: 32px;">face</i>
+                        <h3 class="tool-title scratch-title">Scratch AI</h3>
+                    </div>
+                    <div class="tool-feature scratch-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text"><span class="key-point">Face Sensing blocks</span> for interactive projects</div>
+                    </div>
+                    <div class="tool-feature scratch-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text">Uses <span class="key-point">block-based coding</span> approach</div>
+                    </div>
+                    <div class="tool-feature scratch-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text">Creates <span class="key-point">games, filters, animations</span></div>
+                    </div>
+                    <div class="tool-image-container">
+                        <img src="https://sfile.chatglm.cn/images-ppt/abed51393301.svg" alt="Scratch AI Face Sensing blocks" class="tool-image">
+                    </div>
+                </div>
+                
+                <div class="tool">
+                    <div class="tool-header">
+                        <i class="material-icons" style="color: #2196F3; font-size: 32px;">code</i>
+                        <h3 class="tool-title python-title">Python Libraries</h3>
+                    </div>
+                    <div class="tool-feature python-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text"><span class="key-point">Scikit-learn</span> for classical ML algorithms</div>
+                    </div>
+                    <div class="tool-feature python-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text"><span class="key-point">NumPy & Pandas</span> for data manipulation</div>
+                    </div>
+                    <div class="tool-feature python-feature">
+                        <i class="material-icons tool-feature-icon">check_circle</i>
+                        <div class="tool-feature-text"><span class="key-point">Matplotlib</span> for data visualization</div>
+                    </div>
+                    <div class="tool-image-container">
+                        <div style="font-size: 18px; text-align: center; color: #0D47A1;">
+                            <i class="material-icons" style="font-size: 40px; margin-bottom: 10px;">terminal</i><br>
+                            from sklearn import datasets<br>
+                            from sklearn.tree import DecisionTreeClassifier<br>
+                            # Train your model...
                         </div>
                     </div>
-                    
-                    <div class="tips-container">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Models Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">school</i>
+                Training Models
+            </h2>
+            <div class="steps-container">
+                <div class="step teachable-step">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Choose Project Type</h3>
+                    </div>
+                    <p class="step-description">Select <span class="key-point">Image</span>, <span class="key-point">Sound</span>, or <span class="key-point">Pose</span> project based on your learning goal</p>
+                    <div class="step-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/9349cce4852f.jpg" alt="Teachable Machine training interface" style="max-width: 100%; border-radius: 8px;">
+                    </div>
+                    <div class="tips-container teachable-tips">
                         <div class="tips-title">
                             <i class="material-icons" style="color: #2E7D32;">lightbulb</i>
                             Training Tips
                         </div>
                         <div class="tips-list">
                             <div class="tip-item">
-                                <i class="material-icons" style="color: #4CAF50; font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Provide <span class="step-key-point">varied examples</span> for each class</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Provide <span class="key-point">varied examples</span> for each class</div>
                             </div>
                             <div class="tip-item">
-                                <i class="material-icons" style="color: #4CAF50; font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Use <span class="step-key-point">balanced data</span> across all classes</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Use <span class="key-point">balanced data</span> across all classes</div>
                             </div>
                             <div class="tip-item">
-                                <i class="material-icons" style="color: #4CAF50; font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Test with <span class="step-key-point">unseen examples</span> to evaluate accuracy</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Test with <span class="key-point">unseen examples</span> to evaluate accuracy</div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 6: Training a Model with Scratch AI -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Training a Model with Scratch AI</h1>
-            </div>
-            <div class="content">
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number scratch-step-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title scratch-step-title">Add Face Sensing Extension</h3>
-                            <p class="step-description">Click the <span class="step-key-point">extension button</span> and select <span class="step-key-point">Face Sensing</span> from the menu</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number scratch-step-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title scratch-step-title">Use Face Sensing Blocks</h3>
-                            <p class="step-description">Access blocks to detect <span class="step-key-point">facial features</span> like nose, eyes, mouth, and face position</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number scratch-step-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title scratch-step-title">Create Interactive Projects</h3>
-                            <p class="step-description">Build <span class="step-key-point">face filters</span>, <span class="step-key-point">games</span>, or <span class="step-key-point">animations</span> that respond to facial movements</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number scratch-step-number">4</div>
-                        <div class="step-content">
-                            <h3 class="step-title scratch-step-title">Test Your Project</h3>
-                            <p class="step-description">Run the project and <span class="step-key-point">observe</span> how the AI responds to different facial expressions and movements</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="right-container">
-                    <div class="image-wrapper">
-                        <div class="image-title scratch-image-title">
-                            <i class="material-icons" style="color: #FF9800;">face</i>
-                            Face Sensing Blocks in Action
-                        </div>
-                        <div class="image-content">
-                            <img src="https://sfile.chatglm.cn/images-ppt/5bd673e4cf4e.png" alt="Scratch AI Face Sensing blocks" class="tool-image">
-                        </div>
+                <div class="step scratch-step">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Add Face Sensing Extension</h3>
                     </div>
-                    
-                    <div class="tips-container scratch-tips-container">
-                        <div class="tips-title scratch-tips-title">
+                    <p class="step-description">Click the <span class="key-point">extension button</span> and select <span class="key-point">Face Sensing</span> from the menu</p>
+                    <div class="step-image">
+                        <img src="https://sfile.chatglm.cn/images-ppt/5bd673e4cf4e.png" alt="Scratch AI Face Sensing blocks" style="max-width: 100%; border-radius: 8px;">
+                    </div>
+                    <div class="tips-container scratch-tips">
+                        <div class="tips-title">
                             <i class="material-icons" style="color: #E65100;">lightbulb</i>
                             Project Ideas
                         </div>
                         <div class="tips-list">
                             <div class="tip-item">
-                                <i class="material-icons scratch-tip-icon" style="font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Create <span class="scratch-key-point">face filters</span> that follow your facial features</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Create <span class="key-point">face filters</span> that follow your facial features</div>
                             </div>
                             <div class="tip-item">
-                                <i class="material-icons scratch-tip-icon" style="font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Build a <span class="scratch-key-point">game</span> controlled by head movements</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Build a <span class="key-point">game</span> controlled by head movements</div>
                             </div>
                             <div class="tip-item">
-                                <i class="material-icons scratch-tip-icon" style="font-size: 20px;">check_circle</i>
-                                <div class="tip-text">Make <span class="scratch-key-point">interactive art</span> that responds to facial expressions</div>
+                                <i class="material-icons tip-icon">check_circle</i>
+                                <div class="tip-text">Make <span class="key-point">interactive art</span> that responds to facial expressions</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Slide 7: Testing Models and Interpreting Results -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Testing Models and Interpreting Results</h1>
+    </section>
+
+    <!-- Testing Models Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">science</i>
+                Testing Models and Interpreting Results
+            </h2>
+            <div class="card">
+                <h3 class="card-title">
+                    <i class="material-icons card-icon">checklist</i>
+                    Testing Process
+                </h3>
+                <div class="card-content">
+                    <div class="feature">
+                        <i class="material-icons feature-icon">looks_one</i>
+                        <div class="feature-text">Use <span class="key-point">unseen data</span> not used in training to evaluate real performance</div>
+                    </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">looks_two</i>
+                        <div class="feature-text">Calculate <span class="key-point">accuracy</span> and other metrics to quantify model effectiveness</div>
+                    </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">looks_3</i>
+                        <div class="feature-text">Recognize <span class="key-point">false positives</span> and <span class="key-point">false negatives</span> in predictions</div>
+                    </div>
+                    <div class="feature">
+                        <i class="material-icons feature-icon">looks_4</i>
+                        <div class="feature-text">Look for <span class="key-point">systematic errors</span> to understand model limitations</div>
+                    </div>
+                </div>
             </div>
-            <div class="content">
-                <div class="left-container">
-                    <div class="key-points">
-                        <div class="section-title">
-                            <i class="material-icons" style="color: #576cbc;">science</i>
-                            Testing Process
+            
+            <div class="card">
+                <h3 class="card-title">
+                    <i class="material-icons card-icon">analytics</i>
+                    Classification Example: Image Recognition
+                </h3>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="feature">
+                            <i class="material-icons feature-icon">check_circle</i>
+                            <div class="feature-text"><span class="key-point">True Positive:</span> Model correctly identifies a cat as a cat</div>
                         </div>
-                        
-                        <div class="point">
-                            <div class="point-number">1</div>
-                            <div class="point-content">
-                                <h3 class="point-title">Use New Data</h3>
-                                <p class="point-description">Test with <span class="point-key-term">unseen data</span> not used in training to evaluate real performance</p>
+                        <div class="feature">
+                            <i class="material-icons feature-icon">cancel</i>
+                            <div class="feature-text"><span class="key-point">False Positive:</span> Model incorrectly identifies a dog as a cat</div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="feature">
+                            <i class="material-icons feature-icon">highlight_off</i>
+                            <div class="feature-text"><span class="key-point">False Negative:</span> Model fails to identify a cat as a cat</div>
+                        </div>
+                        <div class="feature">
+                            <i class="material-icons feature-icon">check_circle_outline</i>
+                            <div class="feature-text"><span class="key-point">True Negative:</span> Model correctly identifies a dog as not a cat</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">85%</div>
+                        <div class="metric-label">Accuracy</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">92%</div>
+                        <div class="metric-label">Precision</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">78%</div>
+                        <div class="metric-label">Recall</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-value">0.84</div>
+                        <div class="metric-label">F1 Score</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparing Tools Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">compare</i>
+                Comparing Tools and Techniques
+            </h2>
+            <div class="card">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>
+                                <i class="material-icons" style="color: #4CAF50; vertical-align: middle;">school</i>
+                                Teachable Machine
+                            </th>
+                            <th>
+                                <i class="material-icons" style="color: #FF9800; vertical-align: middle;">face</i>
+                                Scratch AI
+                            </th>
+                            <th>
+                                <i class="material-icons" style="color: #2196F3; vertical-align: middle;">code</i>
+                                Python Libraries
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Ease of Use</strong></td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Flexibility</strong></td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                    <i class="material-icons rating-empty">star</i>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="rating">
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                    <i class="material-icons rating-icon">star</i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Required Skills</strong></td>
+                            <td>Basic computer skills</td>
+                            <td>Basic Scratch knowledge</td>
+                            <td>Programming knowledge</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best For</strong></td>
+                            <td>Quick prototypes, beginners</td>
+                            <td>Interactive projects, games</td>
+                            <td>Complex ML applications</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="summary-container">
+                <div class="summary-box">
+                    <div class="summary-title">
+                        <i class="material-icons teachable-icon">school</i>
+                        Teachable Machine
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon teachable-icon">check_circle</i>
+                            <div class="summary-text"><strong>Strengths:</strong> No coding required, visual interface, quick results</div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon teachable-icon">highlight_off</i>
+                            <div class="summary-text"><strong>Limitations:</strong> Limited to basic ML tasks, less customizable</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-box">
+                    <div class="summary-title">
+                        <i class="material-icons scratch-icon">face</i>
+                        Scratch AI
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon scratch-icon">check_circle</i>
+                            <div class="summary-text"><strong>Strengths:</strong> Creative projects, visual programming, engaging</div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon scratch-icon">highlight_off</i>
+                            <div class="summary-text"><strong>Limitations:</strong> Limited to face sensing, requires Scratch knowledge</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="summary-box">
+                    <div class="summary-title">
+                        <i class="material-icons python-icon">code</i>
+                        Python Libraries
+                    </div>
+                    <div class="summary-content">
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon python-icon">check_circle</i>
+                            <div class="summary-text"><strong>Strengths:</strong> Powerful, flexible, industry standard</div>
+                        </div>
+                        <div class="summary-item">
+                            <i class="material-icons summary-icon python-icon">highlight_off</i>
+                            <div class="summary-text"><strong>Limitations:</strong> Steeper learning curve, requires coding skills</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Improving Performance Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">tune</i>
+                Improving Model Performance
+            </h2>
+            <div class="improvement-strategies">
+                <div class="strategy">
+                    <div class="strategy-number">1</div>
+                    <div class="strategy-content">
+                        <h3 class="strategy-title">Add More Diverse Data</h3>
+                        <p class="strategy-description">Increase <span class="key-point">training examples</span> with <span class="key-point">varied scenarios</span> to improve generalization</p>
+                    </div>
+                </div>
+                
+                <div class="strategy">
+                    <div class="strategy-number">2</div>
+                    <div class="strategy-content">
+                        <h3 class="strategy-title">Adjust Model Parameters</h3>
+                        <p class="strategy-description">Fine-tune <span class="key-point">hyperparameters</span> like learning rate, depth, and complexity</p>
+                    </div>
+                </div>
+                
+                <div class="strategy">
+                    <div class="strategy-number">3</div>
+                    <div class="strategy-content">
+                        <h3 class="strategy-title">Try Different Algorithms</h3>
+                        <p class="strategy-description">Experiment with <span class="key-point">alternative models</span> better suited to your data type</p>
+                    </div>
+                </div>
+                
+                <div class="strategy">
+                    <div class="strategy-number">4</div>
+                    <div class="strategy-content">
+                        <h3 class="strategy-title">Feature Engineering</h3>
+                        <p class="strategy-description">Create <span class="key-point">meaningful features</span> that help the model identify patterns</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="example-container">
+                <h3 class="example-title">
+                    <i class="material-icons" style="color: #576cbc;">tune</i>
+                    Parameter Adjustment Example
+                </h3>
+                
+                <div class="parameter-comparison">
+                    <div class="parameter-box">
+                        <div class="parameter-title">
+                            <i class="material-icons" style="color: #576cbc;">settings</i>
+                            Default Parameters
+                        </div>
+                        <div class="parameter-content">
+                            • Learning rate: 0.01<br>
+                            • Max depth: 5<br>
+                            • Min samples: 2<br>
+                            • Features: Basic
+                        </div>
+                    </div>
+                    
+                    <div class="parameter-box">
+                        <div class="parameter-title">
+                            <i class="material-icons" style="color: #576cbc;">auto_fix_high</i>
+                            Optimized Parameters
+                        </div>
+                        <div class="parameter-content">
+                            • Learning rate: 0.001<br>
+                            • Max depth: 8<br>
+                            • Min samples: 5<br>
+                            • Features: Enhanced
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <div class="metric-value">72%</div>
+                        <div class="metric-label">Initial Accuracy</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <div class="metric-value improvement">85%</div>
+                        <div class="metric-label">Final Accuracy</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <div class="metric-value">+13%</div>
+                        <div class="metric-label">Improvement</div>
+                    </div>
+                    
+                    <div class="metric-box">
+                        <div class="metric-value">3x</div>
+                        <div class="metric-label">Training Time</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presenting Results Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">bar_chart</i>
+                Presenting Results and Reflecting
+            </h2>
+            <div class="results-section">
+                <div class="results-card">
+                    <h3 class="results-title">
+                        <i class="material-icons" style="color: #576cbc;">visibility</i>
+                        Effective Visualization
+                    </h3>
+                    <div class="results-content">
+                        <div class="results-item">
+                            <i class="material-icons results-icon">check_circle</i>
+                            <div class="results-text"><span class="key-point">Charts</span> for comparing model performance</div>
+                        </div>
+                        <div class="results-item">
+                            <i class="material-icons results-icon">check_circle</i>
+                            <div class="results-text"><span class="key-point">Tables</span> for detailed numerical results</div>
+                        </div>
+                        <div class="results-item">
+                            <i class="material-icons results-icon">check_circle</i>
+                            <div class="results-text"><span class="key-point">Annotated outputs</span> to highlight key findings</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-title">Model Comparison</div>
+                        <div class="chart-bars">
+                            <div class="bar-container">
+                                <div class="bar bar-1"></div>
+                                <div class="bar-value">72%</div>
+                                <div class="bar-label">Model A</div>
                             </div>
-                        </div>
-                        
-                        <div class="point">
-                            <div class="point-number">2</div>
-                            <div class="point-content">
-                                <h3 class="point-title">Measure Performance</h3>
-                                <p class="point-description">Calculate <span class="point-key-term">accuracy</span> and other metrics to quantify model effectiveness</p>
+                            <div class="bar-container">
+                                <div class="bar bar-2"></div>
+                                <div class="bar-value">85%</div>
+                                <div class="bar-label">Model B</div>
                             </div>
-                        </div>
-                        
-                        <div class="point">
-                            <div class="point-number">3</div>
-                            <div class="point-content">
-                                <h3 class="point-title">Identify Errors</h3>
-                                <p class="point-description">Recognize <span class="point-key-term">false positives</span> and <span class="point-key-term">false negatives</span> in predictions</p>
+                            <div class="bar-container">
+                                <div class="bar bar-3"></div>
+                                <div class="bar-value">68%</div>
+                                <div class="bar-label">Model C</div>
                             </div>
-                        </div>
-                        
-                        <div class="point">
-                            <div class="point-number">4</div>
-                            <div class="point-content">
-                                <h3 class="point-title">Analyze Patterns</h3>
-                                <p class="point-description">Look for <span class="point-key-term">systematic errors</span> to understand model limitations</p>
+                            <div class="bar-container">
+                                <div class="bar bar-4"></div>
+                                <div class="bar-value">90%</div>
+                                <div class="bar-label">Model D</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="right-container">
-                    <div class="example-container">
-                        <div class="example-title">
-                            <i class="material-icons" style="color: #576cbc;">analytics</i>
-                            Classification Example: Image Recognition
+                <div class="results-card">
+                    <h3 class="results-title">
+                        <i class="material-icons" style="color: #576cbc;">psychology</i>
+                        Reflecting on Suitability
+                    </h3>
+                    <div class="reflection-questions">
+                        <div class="question">
+                            <i class="material-icons question-icon">priority_high</i>
+                            <div class="question-text">Does the technique match the <span class="key-point">problem type</span>?</div>
+                        </div>
+                        <div class="question">
+                            <i class="material-icons question-icon">priority_high</i>
+                            <div class="question-text">Is the <span class="key-point">accuracy</span> sufficient for the application?</div>
+                        </div>
+                        <div class="question">
+                            <i class="material-icons question-icon">priority_high</i>
+                            <div class="question-text">What are the <span class="key-point">limitations</span> of the chosen approach?</div>
+                        </div>
+                        <div class="question">
+                            <i class="material-icons question-icon">priority_high</i>
+                            <div class="question-text">Could a <span class="key-point">different technique</span> yield better results?</div>
+                        </div>
+                        <div class="question">
+                            <i class="material-icons question-icon">priority_high</i>
+                            <div class="question-text">How does the technique handle <span class="key-point">edge cases</span>?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exercises Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">assignment</i>
+                Exercises
+            </h2>
+            <div class="exercise-card">
+                <h3 class="exercise-title">
+                    <i class="material-icons" style="color: #19376d;">groups</i>
+                    Classification vs. Clustering Activity
+                </h3>
+                <div class="exercise-content">
+                    <p>In this activity, students will work in groups to classify and cluster different objects, demonstrating their understanding of these two machine learning techniques.</p>
+                    
+                    <div class="exercise-steps">
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">1</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Form Groups</h4>
+                                <p class="exercise-step-description">Divide students into groups of 3-4</p>
+                            </div>
                         </div>
                         
-                        <div class="example-content">
-                            <div class="example-row">
-                                <div class="example-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">check_circle</i>
-                                        True Positive
-                                    </div>
-                                    <div class="box-content">
-                                        Model correctly identifies a cat as a cat
-                                    </div>
-                                </div>
-                                
-                                <div class="example-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">cancel</i>
-                                        False Positive
-                                    </div>
-                                    <div class="box-content">
-                                        Model incorrectly identifies a dog as a cat
-                                    </div>
-                                </div>
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">2</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Classification Task</h4>
+                                <p class="exercise-step-description">Provide each group with a set of objects (e.g., fruits, shapes, or images) and predefined categories. Ask them to classify each object into the correct category.</p>
                             </div>
-                            
-                            <div class="example-row">
-                                <div class="example-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">highlight_off</i>
-                                        False Negative
-                                    </div>
-                                    <div class="box-content">
-                                        Model fails to identify a cat as a cat
-                                    </div>
-                                </div>
-                                
-                                <div class="example-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">check_circle_outline</i>
-                                        True Negative
-                                    </div>
-                                    <div class="box-content">
-                                        Model correctly identifies a dog as not a cat
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="metrics-container">
-                        <div class="metrics-title">
-                            <i class="material-icons" style="color: #576cbc;">bar_chart</i>
-                            Performance Metrics
                         </div>
                         
-                        <div class="metrics-grid">
-                            <div class="metric-box">
-                                <div class="metric-value">85%</div>
-                                <div class="metric-label">Accuracy</div>
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">3</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Clustering Task</h4>
+                                <p class="exercise-step-description">Give each group a different set of objects without predefined categories. Ask them to create their own groups based on similarities they observe.</p>
                             </div>
-                            
-                            <div class="metric-box">
-                                <div class="metric-value">92%</div>
-                                <div class="metric-label">Precision</div>
-                            </div>
-                            
-                            <div class="metric-box">
-                                <div class="metric-value">78%</div>
-                                <div class="metric-label">Recall</div>
-                            </div>
-                            
-                            <div class="metric-box">
-                                <div class="metric-value">0.84</div>
-                                <div class="metric-label">F1 Score</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 8: Comparing Tools and Techniques -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Comparing Tools and Techniques</h1>
-            </div>
-            <div class="content">
-                <div class="comparison-table">
-                    <div class="table-header">
-                        <div class="header-cell">Criteria</div>
-                        <div class="header-cell">
-                            <i class="material-icons" style="color: #4CAF50;">school</i>
-                            Teachable Machine
-                        </div>
-                        <div class="header-cell">
-                            <i class="material-icons" style="color: #FF9800;">face</i>
-                            Scratch AI
-                        </div>
-                        <div class="header-cell">
-                            <i class="material-icons" style="color: #2196F3;">code</i>
-                            Python Libraries
-                        </div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="row-cell">Ease of Use</div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                            </div>
-                        </div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                            </div>
-                        </div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="row-cell">Flexibility</div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                            </div>
-                        </div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                                <i class="material-icons rating-empty">star</i>
-                            </div>
-                        </div>
-                        <div class="row-cell">
-                            <div class="rating">
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                                <i class="material-icons rating-icon">star</i>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="row-cell">Required Skills</div>
-                        <div class="row-cell">Basic computer skills</div>
-                        <div class="row-cell">Basic Scratch knowledge</div>
-                        <div class="row-cell">Programming knowledge</div>
-                    </div>
-                    
-                    <div class="table-row">
-                        <div class="row-cell">Best For</div>
-                        <div class="row-cell">Quick prototypes, beginners</div>
-                        <div class="row-cell">Interactive projects, games</div>
-                        <div class="row-cell">Complex ML applications</div>
-                    </div>
-                </div>
-                
-                <div class="summary-container">
-                    <div class="summary-box">
-                        <div class="summary-title">
-                            <i class="material-icons teachable-icon">school</i>
-                            Teachable Machine
-                        </div>
-                        <div class="summary-content">
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon teachable-icon">check_circle</i>
-                                <div class="summary-text"><span class="summary-key-point teachable-point">Strengths:</span> No coding required, visual interface, quick results</div>
-                            </div>
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon teachable-icon">highlight_off</i>
-                                <div class="summary-text"><span class="summary-key-point teachable-point">Limitations:</span> Limited to basic ML tasks, less customizable</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-box">
-                        <div class="summary-title">
-                            <i class="material-icons scratch-icon">face</i>
-                            Scratch AI
-                        </div>
-                        <div class="summary-content">
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon scratch-icon">check_circle</i>
-                                <div class="summary-text"><span class="summary-key-point scratch-point">Strengths:</span> Creative projects, visual programming, engaging</div>
-                            </div>
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon scratch-icon">highlight_off</i>
-                                <div class="summary-text"><span class="summary-key-point scratch-point">Limitations:</span> Limited to face sensing, requires Scratch knowledge</div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="summary-box">
-                        <div class="summary-title">
-                            <i class="material-icons python-icon">code</i>
-                            Python Libraries
-                        </div>
-                        <div class="summary-content">
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon python-icon">check_circle</i>
-                                <div class="summary-text"><span class="summary-key-point python-point">Strengths:</span> Powerful, flexible, industry standard</div>
-                            </div>
-                            <div class="summary-item">
-                                <i class="material-icons summary-icon python-icon">highlight_off</i>
-                                <div class="summary-text"><span class="summary-key-point python-point">Limitations:</span> Steeper learning curve, requires coding skills</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Slide 9: Improving Model Performance -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Improving Model Performance</h1>
-            </div>
-            <div class="content">
-                <div class="steps-container">
-                    <div class="step">
-                        <div class="step-number strategy-number">1</div>
-                        <div class="step-content">
-                            <h3 class="step-title strategy-title">Add More Diverse Data</h3>
-                            <p class="step-description">Increase <span class="step-key-point">training examples</span> with <span class="step-key-point">varied scenarios</span> to improve generalization</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number strategy-number">2</div>
-                        <div class="step-content">
-                            <h3 class="step-title strategy-title">Adjust Model Parameters</h3>
-                            <p class="step-description">Fine-tune <span class="step-key-point">hyperparameters</span> like learning rate, depth, and complexity</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number strategy-number">3</div>
-                        <div class="step-content">
-                            <h3 class="step-title strategy-title">Try Different Algorithms</h3>
-                            <p class="step-description">Experiment with <span class="step-key-point">alternative models</span> better suited to your data type</p>
-                        </div>
-                    </div>
-                    
-                    <div class="step">
-                        <div class="step-number strategy-number">4</div>
-                        <div class="step-content">
-                            <h3 class="step-title strategy-title">Feature Engineering</h3>
-                            <p class="step-description">Create <span class="step-key-point">meaningful features</span> that help the model identify patterns</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="right-container">
-                    <div class="image-wrapper">
-                        <div class="example-title">
-                            <i class="material-icons" style="color: #576cbc;">tune</i>
-                            Parameter Adjustment Example
                         </div>
                         
-                        <div class="example-content">
-                            <div class="parameter-comparison">
-                                <div class="parameter-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">settings</i>
-                                        Default Parameters
-                                    </div>
-                                    <div class="box-content">
-                                        • Learning rate: 0.01<br>
-                                        • Max depth: 5<br>
-                                        • Min samples: 2<br>
-                                        • Features: Basic
-                                    </div>
-                                </div>
-                                
-                                <div class="parameter-box">
-                                    <div class="box-title">
-                                        <i class="material-icons" style="font-size: 20px; color: #576cbc;">auto_fix_high</i>
-                                        Optimized Parameters
-                                    </div>
-                                    <div class="box-content">
-                                        • Learning rate: 0.001<br>
-                                        • Max depth: 8<br>
-                                        • Min samples: 5<br>
-                                        • Features: Enhanced
-                                    </div>
-                                </div>
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">4</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Discuss Differences</h4>
+                                <p class="exercise-step-description">Have each group present their classifications and clusters, discussing the differences between the two approaches.</p>
                             </div>
-                            
-                            <div class="metrics-container">
-                                <div class="metrics-title">
-                                    <i class="material-icons" style="color: #576cbc;">analytics</i>
-                                    Performance Improvement
-                                </div>
-                                
-                                <div class="metrics-grid">
-                                    <div class="metric-box">
-                                        <div class="metric-value">72%</div>
-                                        <div class="metric-label">Initial Accuracy</div>
-                                    </div>
-                                    
-                                    <div class="metric-box">
-                                        <div class="metric-value improvement">85%</div>
-                                        <div class="metric-label">Final Accuracy</div>
-                                    </div>
-                                    
-                                    <div class="metric-box">
-                                        <div class="metric-value">+13%</div>
-                                        <div class="metric-label">Improvement</div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="exercise-card">
+                <h3 class="exercise-title">
+                    <i class="material-icons" style="color: #19376d;">laptop</i>
+                    Teachable Machine Project
+                </h3>
+                <div class="exercise-content">
+                    <p>Students will create their own machine learning model using Teachable Machine to solve a real-world problem.</p>
+                    
+                    <div class="exercise-steps">
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">1</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Choose a Problem</h4>
+                                <p class="exercise-step-description">Identify a problem that can be solved using image, sound, or pose classification</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">2</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Collect Data</h4>
+                                <p class="exercise-step-description">Gather at least 20 examples for each class, ensuring variety in the data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">3</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Train Model</h4>
+                                <p class="exercise-step-description">Use Teachable Machine to train the model with the collected data</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">4</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Test and Refine</h4>
+                                <p class="exercise-step-description">Test the model with new examples and make adjustments to improve accuracy</p>
+                            </div>
+                        </div>
+                        
+                        <div class="exercise-step">
+                            <div class="exercise-step-number">5</div>
+                            <div class="exercise-step-content">
+                                <h4 class="exercise-step-title">Present Results</h4>
+                                <p class="exercise-step-description">Create a short presentation explaining the problem, solution, and results</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Slide 10: Presenting Results and Reflecting -->
-        <div class="slide">
-            <div class="header">
-                <h1 class="title">Presenting Results and Reflecting</h1>
-            </div>
-            <div class="content">
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="material-icons" style="color: #576cbc;">bar_chart</i>
-                        </div>
-                        <h2 class="section-title">Presenting Results</h2>
+    </section>
+
+    <!-- Exit Ticket Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">
+                <i class="material-icons section-icon">exit_to_app</i>
+                Exit Ticket
+            </h2>
+            <div class="exit-ticket">
+                <h3 class="exit-ticket-title">
+                    <i class="material-icons" style="color: #19376d;">quiz</i>
+                    Assessment Questions
+                </h3>
+                <div class="exit-ticket-questions">
+                    <div class="exit-ticket-question">
+                        <span class="exit-ticket-question-number">1.</span>
+                        Explain the difference between classification and clustering, and provide an example of when each would be appropriate.
                     </div>
-                    
-                    <div class="card">
-                        <div class="card-title">
-                            <i class="material-icons" style="color: #576cbc;">visibility</i>
-                            Effective Visualization
-                        </div>
-                        <div class="card-content">
-                            <div class="item">
-                                <i class="material-icons item-icon">check_circle</i>
-                                <div class="item-text"><span class="item-key-point">Charts</span> for comparing model performance</div>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons item-icon">check_circle</i>
-                                <div class="item-text"><span class="item-key-point">Tables</span> for detailed numerical results</div>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons item-icon">check_circle</i>
-                                <div class="item-text"><span class="item-key-point">Annotated outputs</span> to highlight key findings</div>
-                            </div>
-                        </div>
+                    <div class="exit-ticket-question">
+                        <span class="exit-ticket-question-number">2.</span>
+                        Compare Teachable Machine, Scratch AI, and Python libraries in terms of ease of use and flexibility.
                     </div>
-                    
-                    <div class="example-container">
-                        <div class="example-title">
-                            <i class="material-icons" style="color: #576cbc;">insert_chart</i>
-                            Example: Classification Accuracy
-                        </div>
-                        <div class="example-content">
-                            <div class="chart-container">
-                                <div class="chart-title">Model Comparison</div>
-                                <div class="chart-image">
-                                    <div class="bar bar-1">
-                                        <div class="bar-value">72%</div>
-                                        <div class="bar-label">Model A</div>
-                                    </div>
-                                    <div class="bar bar-2">
-                                        <div class="bar-value">85%</div>
-                                        <div class="bar-label">Model B</div>
-                                    </div>
-                                    <div class="bar bar-3">
-                                        <div class="bar-value">68%</div>
-                                        <div class="bar-label">Model C</div>
-                                    </div>
-                                    <div class="bar bar-4">
-                                        <div class="bar-value">90%</div>
-                                        <div class="bar-label">Model D</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="exit-ticket-question">
+                        <span class="exit-ticket-question-number">3.</span>
+                        Describe three strategies you could use to improve the performance of a machine learning model.
                     </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-icon">
-                            <i class="material-icons" style="color: #576cbc;">psychology</i>
-                        </div>
-                        <h2 class="section-title">Reflecting on Suitability</h2>
+                    <div class="exit-ticket-question">
+                        <span class="exit-ticket-question-number">4.</span>
+                        How would you determine if a machine learning technique is suitable for a specific application?
                     </div>
-                    
-                    <div class="card">
-                        <div class="card-title">
-                            <i class="material-icons" style="color: #576cbc;">help_outline</i>
-                            Key Questions
-                        </div>
-                        <div class="card-content">
-                            <div class="reflection-questions">
-                                <div class="question">
-                                    <i class="material-icons question-icon">priority_high</i>
-                                    <div class="question-text">Does the technique match the <span class="item-key-point">problem type</span>?</div>
-                                </div>
-                                <div class="question">
-                                    <i class="material-icons question-icon">priority_high</i>
-                                    <div class="question-text">Is the <span class="item-key-point">accuracy</span> sufficient for the application?</div>
-                                </div>
-                                <div class="question">
-                                    <i class="material-icons question-icon">priority_high</i>
-                                    <div class="question-text">What are the <span class="item-key-point">limitations</span> of the chosen approach?</div>
-                                </div>
-                                <div class="question">
-                                    <i class="material-icons question-icon">priority_high</i>
-                                    <div class="question-text">Could a <span class="item-key-point">different technique</span> yield better results?</div>
-                                </div>
-                                <div class="question">
-                                    <i class="material-icons question-icon">priority_high</i>
-                                    <div class="question-text">How does the technique handle <span class="item-key-point">edge cases</span>?</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card">
-                        <div class="card-title">
-                            <i class="material-icons" style="color: #576cbc">lightbulb</i>
-                            Evaluation Criteria
-                        </div>
-                        <div class="card-content">
-                            <div class="item">
-                                <i class="material-icons item-icon">speed</i>
-                                <div class="item-text"><span class="item-key-point">Performance</span> - Speed and accuracy</div>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons item-icon">build</i>
-                                <div class="item-text"><span class="item-key-point">Implementation</span> - Complexity and resources</div>
-                            </div>
-                            <div class="item">
-                                <i class="material-icons item-icon">trending_up</i>
-                                <div class="item-text"><span class="item-key-point">Scalability</span> - Handling larger datasets</div>
-                            </div>
-                        </div>
+                    <div class="exit-ticket-question">
+                        <span class="exit-ticket-question-number">5.</span>
+                        Design a simple machine learning project that could help solve a problem in your school or community.
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Navigation Controls -->
-        <div class="navigation">
-            <button class="nav-button" id="prevBtn" onclick="changeSlide(-1)">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            <div class="slide-indicator">
-                <span id="currentSlide">1</span> / <span id="totalSlides">10</span>
-            </div>
-            <button class="nav-button" id="nextBtn" onclick="changeSlide(1)">
-                <i class="material-icons">arrow_forward</i>
-            </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">Machine Learning Part 3: Applying Learning Techniques | IGCSE Artificial Intelligence</p>
         </div>
-    </div>
-    
-    <script>
-        let currentSlideIndex = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        
-        document.getElementById('totalSlides').textContent = totalSlides;
-        
-        function showSlide(index) {
-            // Hide all slides
-            slides.forEach(slide => slide.classList.remove('active'));
-            
-            // Show the current slide
-            slides[index].classList.add('active');
-            
-            // Update slide indicator
-            document.getElementById('currentSlide').textContent = index + 1;
-            
-            // Update navigation buttons
-            document.getElementById('prevBtn').disabled = index === 0;
-            document.getElementById('nextBtn').disabled = index === totalSlides - 1;
-        }
-        
-        function changeSlide(direction) {
-            currentSlideIndex += direction;
-            
-            // Ensure the index is within bounds
-            if (currentSlideIndex < 0) currentSlideIndex = 0;
-            if (currentSlideIndex >= totalSlides) currentSlideIndex = totalSlides - 1;
-            
-            showSlide(currentSlideIndex);
-        }
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'ArrowLeft') {
-                changeSlide(-1);
-            } else if (event.key === 'ArrowRight') {
-                changeSlide(1);
-            }
-        });
-        
-        // Initialize the first slide
-        showSlide(currentSlideIndex);
-    </script>
+    </footer>
 </body>
 </html>
