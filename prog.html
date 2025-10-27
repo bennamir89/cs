@@ -1,0 +1,1576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE Computer Science - Chapter 8: Programming Concepts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            color: #333;
+            background-color: #f5f9ff;
+            line-height: 1.6;
+        }
+        .section {
+            width: 100%;
+            padding: 40px 0;
+            position: relative;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .title {
+            font-size: 50px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .chinese {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #a9d0f5;
+        }
+        .section-title {
+            font-size: 40px;
+            font-weight: 700;
+            color: #003366;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #0066cc;
+        }
+        .card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        .card-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .card-title i {
+            margin-right: 15px;
+            font-size: 32px;
+        }
+        .card-content {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        .chinese-text {
+            font-size: 18px;
+            color: #555;
+            margin-top: 8px;
+        }
+        .code-block {
+            background-color: #e6f0ff;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 18px;
+            margin: 20px 0;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        .highlight {
+            color: #0066cc;
+            font-weight: 600;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .grid-item {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .grid-item-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .grid-item-title i {
+            margin-right: 10px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .table th {
+            background-color: #0066cc;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 20px;
+        }
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            font-size: 18px;
+        }
+        .table tr:nth-child(even) {
+            background-color: #f2f7ff;
+        }
+        .key-point {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        .key-point i {
+            color: #0066cc;
+            margin-right: 15px;
+            font-size: 24px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .key-point-text {
+            font-size: 20px;
+            line-height: 1.4;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question-text {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0066cc;
+        }
+        .answer-space {
+            border: 1px dashed #0066cc;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 10px;
+            min-height: 60px;
+            background-color: #f9fbff;
+        }
+        .note {
+            font-size: 18px;
+            color: #666;
+            font-style: italic;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .two-column {
+            display: flex;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        .column {
+            flex: 1;
+        }
+        .sequence-comparison {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .sequence-column {
+            flex: 1;
+            background-color: #f2f7ff;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        .sequence-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .sequence-title i {
+            margin-right: 10px;
+        }
+        .highlight-red {
+            color: #cc0000;
+            font-weight: 600;
+        }
+        .highlight-green {
+            color: #009900;
+            font-weight: 600;
+        }
+        .resource-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f2f7ff;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .resource-item:hover {
+            background-color: #e6f0ff;
+            transform: translateY(-2px);
+        }
+        .resource-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #0066cc;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .resource-icon i {
+            color: white;
+            font-size: 24px;
+        }
+        .resource-content {
+            flex-grow: 1;
+        }
+        .resource-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        .resource-description {
+            font-size: 18px;
+            color: #555;
+        }
+        .rating-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+        }
+        .rating-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .rating-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #0066cc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #0066cc;
+        }
+        .rating-label {
+            font-size: 16px;
+            color: #555;
+        }
+        .mark-item {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        .mark-number {
+            font-weight: 600;
+            color: #0066cc;
+            margin-right: 10px;
+            flex-shrink: 0;
+            min-width: 30px;
+        }
+        .mark-details {
+            flex-grow: 1;
+        }
+        .mark-criteria {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .mark-points {
+            font-size: 16px;
+            color: #555;
+            font-style: italic;
+        }
+        .total-marks {
+            margin-top: 15px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #0066cc;
+            text-align: right;
+        }
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .topic {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .topic i {
+            margin-right: 8px;
+            font-size: 20px;
+        }
+        .footer {
+            background-color: #003366;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="container">
+            <div class="title">Chapter 8: Programming Concepts</div>
+            <div class="subtitle">Understanding the fundamental building blocks of computer programming</div>
+            <div class="topics">
+                <div class="topic"><i class="material-icons">storage</i>Variables & Constants</div>
+                <div class="topic"><i class="material-icons">category</i>Data Types</div>
+                <div class="topic"><i class="material-icons">input</i>Input & Output</div>
+                <div class="topic"><i class="material-icons">calculate</i>Arithmetic Operators</div>
+                <div class="topic"><i class="material-icons">format_list_numbered</i>Sequence</div>
+            </div>
+            <div class="chinese">编程概念：变量、常量、数据类型、输入输出、算术运算符和顺序结构</div>
+        </div>
+    </div>
+
+    <!-- Lesson Objectives Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Lesson Objectives / 学习目标</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">school</i>
+                            By the end of this lesson, you will be able to:
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">storage</i>
+                            <div class="key-point-text">Understand and use variables and constants</div>
+                            <div class="chinese-text">理解和使用变量和常量</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">category</i>
+                            <div class="key-point-text">Identify and apply basic data types</div>
+                            <div class="chinese-text">识别和应用基本数据类型</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">input</i>
+                            <div class="key-point-text">Implement input and output operations</div>
+                            <div class="chinese-text">实现输入和输出操作</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">school</i>
+                            在本课结束时，您将能够：
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">calculate</i>
+                            <div class="key-point-text">Use arithmetic operators in programming</div>
+                            <div class="chinese-text">在编程中使用算术运算符</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">format_list_numbered</i>
+                            <div class="key-point-text">Understand sequence in programming</div>
+                            <div class="chinese-text">理解编程中的顺序结构</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">psychology</i>
+                            <div class="key-point-text">Apply these concepts to solve problems</div>
+                            <div class="chinese-text">应用这些概念解决问题</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Engage Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">Engage - Starter Activity / 参与活动</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">lightbulb</i>
+                    Think About It / 思考一下
+                </div>
+                <div class="card-content">
+                    How many <span class="highlight">programming concepts</span> do you use in your daily life without realizing it?
+                    <div class="chinese-text">在日常生活中，您在不知不觉中使用了多少<span class="highlight">编程概念</span>？</div>
+                </div>
+                <div class="card-content" style="margin-top: 20px;">
+                    Discuss with a partner and list examples of where you encounter:
+                    <div class="chinese-text">与同伴讨论并列出您在以下方面遇到的例子：</div>
+                </div>
+                <div class="grid">
+                    <div class="grid-item">
+                        <div class="grid-item-title">
+                            <i class="material-icons">storage</i>
+                            Variables
+                        </div>
+                        <div class="card-content">
+                            Examples of variables in everyday life
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="grid-item-title">
+                            <i class="material-icons">format_list_numbered</i>
+                            Sequences
+                        </div>
+                        <div class="card-content">
+                            Examples of sequences in everyday life
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="grid-item-title">
+                            <i class="material-icons">calculate</i>
+                            Calculations
+                        </div>
+                        <div class="card-content">
+                            Examples of calculations in everyday life
+                        </div>
+                    </div>
+                    <div class="grid-item">
+                        <div class="grid-item-title">
+                            <i class="material-icons">input</i>
+                            Input/Output
+                        </div>
+                        <div class="card-content">
+                            Examples of input/output in everyday life
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Introduction to Pseudocode Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Introduction to Pseudocode / 伪代码介绍</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">code</i>
+                    What is Pseudocode? / 什么是伪代码？
+                </div>
+                <div class="card-content">
+                    Pseudocode is a method of writing up a set of instructions for a computer program using plain English.
+                    <div class="chinese-text">伪代码是一种使用简单英语编写计算机程序指令集的方法。</div>
+                </div>
+                <div class="code-block">
+                    <span class="highlight">DECLARE</span> name : STRING<br>
+                    <span class="highlight">DECLARE</span> age : INTEGER<br>
+                    <span class="highlight">DECLARE</span> price : REAL<br>
+                    <span class="highlight">DECLARE</span> grade : CHAR<br>
+                    <span class="highlight">DECLARE</span> isStudent : BOOLEAN
+                </div>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">category</i>
+                            Data Types / 数据类型
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <th width="30%">Data Type / 数据类型</th>
+                                <th width="70%">Description / 描述</th>
+                            </tr>
+                            <tr>
+                                <td>INTEGER</td>
+                                <td>Whole numbers (positive, negative, or zero)</td>
+                            </tr>
+                            <tr>
+                                <td>REAL</td>
+                                <td>Decimal numbers with fractional parts</td>
+                            </tr>
+                            <tr>
+                                <td>CHAR</td>
+                                <td>Single alphanumeric character</td>
+                            </tr>
+                            <tr>
+                                <td>STRING</td>
+                                <td>Sequence of characters</td>
+                            </tr>
+                            <tr>
+                                <td>BOOLEAN</td>
+                                <td>TRUE or FALSE values</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">sync_alt</i>
+                            Input & Output / 输入与输出
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">input</i>
+                            <div class="key-point-text"><span class="highlight">INPUT</span> - Read data from user or source</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">output</i>
+                            <div class="key-point-text"><span class="highlight">OUTPUT</span> - Display data to user or destination</div>
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">INPUT</span> name<br>
+                            <span class="highlight">INPUT</span> age<br><br>
+                            <span class="highlight">OUTPUT</span> "Hello, " & name<br>
+                            <span class="highlight">OUTPUT</span> "Your age is: " & age
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Variables and Constants Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">Variables and Constants / 变量和常量</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">storage</i>
+                            Variables / 变量
+                        </div>
+                        <div class="card-content">
+                            A named memory location that holds a value which can change during program execution.
+                            <div class="chinese-text">一个命名的内存位置，用于存储在程序执行期间可以更改的值。</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Must be declared before use</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Can be assigned new values</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Follow naming conventions</div>
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">DECLARE</span> score : INTEGER<br>
+                            score ← 0<br>
+                            score ← score + 10
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">lock</i>
+                            Constants / 常量
+                        </div>
+                        <div class="card-content">
+                            A named memory location that holds a value which cannot change during program execution.
+                            <div class="chinese-text">一个命名的内存位置，用于存储在程序执行期间不能更改的值。</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Declared once, used many times</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">check_circle</i>
+                            <div class="key-point-text">Usually written in uppercase</div>
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">CONST</span> PI ← 3.142<br>
+                            <span class="highlight">CONST</span> TAX_RATE ← 0.15
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">compare</i>
+                    Variables vs. Constants / 变量与常量的比较
+                </div>
+                <table class="table">
+                    <tr>
+                        <th width="30%">Feature / 特性</th>
+                        <th width="35%">Variable / 变量</th>
+                        <th width="35%">Constant / 常量</th>
+                    </tr>
+                    <tr>
+                        <td>Value can change / 值可更改</td>
+                        <td>Yes / 是</td>
+                        <td>No / 否</td>
+                    </tr>
+                    <tr>
+                        <td>Naming convention / 命名规则</td>
+                        <td>camelCase / 驼峰命名</td>
+                        <td>UPPERCASE / 大写</td>
+                    </tr>
+                    <tr>
+                        <td>Declaration / 声明</td>
+                        <td><span class="highlight">DECLARE</span> score : INTEGER</td>
+                        <td><span class="highlight">CONST</span> PI ← 3.142</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Types Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Basic Data Types / 基本数据类型</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">category</i>
+                    Common Data Types / 常见数据类型
+                </div>
+                <div class="card-content">
+                    Data types determine what type of value a variable can hold and what operations can be performed on it.
+                    <div class="chinese-text">数据类型决定变量可以保存什么类型的值以及可以对其执行什么操作。</div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th width="25%">Data Type / 数据类型</th>
+                        <th width="35%">Purpose / 用途</th>
+                        <th width="40%">Declaration Example / 声明示例</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>INTEGER</div>
+                            <div class="chinese-text">整数</div>
+                        </td>
+                        <td>Whole numbers (positive, negative, or zero)</td>
+                        <td><span class="highlight">DECLARE</span> age : INTEGER</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>REAL</div>
+                            <div class="chinese-text">实数/浮点数</div>
+                        </td>
+                        <td>Decimal numbers with fractional parts</td>
+                        <td><span class="highlight">DECLARE</span> price : REAL</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>CHAR</div>
+                            <div class="chinese-text">字符</div>
+                        </td>
+                        <td>Single alphanumeric character</td>
+                        <td><span class="highlight">DECLARE</span> grade : CHAR</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>STRING</div>
+                            <div class="chinese-text">字符串</div>
+                        </td>
+                        <td>Sequence of characters</td>
+                        <td><span class="highlight">DECLARE</span> name : STRING</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>BOOLEAN</div>
+                            <div class="chinese-text">布尔值</div>
+                        </td>
+                        <td>True or False values</td>
+                        <td><span class="highlight">DECLARE</span> isStudent : BOOLEAN</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">swap_horiz</i>
+                            Type Coercion / 类型转换
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_forward</i>
+                            <div class="key-point-text">Process of changing a variable's data type</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_forward</i>
+                            <div class="key-point-text">Also called casting</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_forward</i>
+                            <div class="key-point-text">Example: <span class="highlight">STRING(68)</span> returns "68"</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_forward</i>
+                            <div class="key-point-text">Example: <span class="highlight">INTEGER("54")</span> returns 54</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">warning</i>
+                            Limitations / 限制
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">block</i>
+                            <div class="key-point-text">Integers and floats cannot be concatenated</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">block</i>
+                            <div class="key-point-text">Numbers in strings cannot be used in calculations</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">block</i>
+                            <div class="key-point-text">Characters cannot be used in mathematical operations</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input & Output Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">Input & Output / 输入与输出</h2>
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">input</i>
+                            Input / 输入
+                        </div>
+                        <div class="card-content">
+                            Data entered into a program from external sources.
+                            <div class="chinese-text">从外部源输入到程序中的数据。</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">keyboard</i>
+                            <div class="key-point-text">Keyboard input</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">mouse</i>
+                            <div class="key-point-text">Mouse input</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">sensors</i>
+                            <div class="key-point-text">Sensor data</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">folder</i>
+                            <div class="key-point-text">File input</div>
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">DECLARE</span> name : STRING<br>
+                            <span class="highlight">DECLARE</span> age : INTEGER<br><br>
+                            
+                            <span class="highlight">INPUT</span> name<br>
+                            <span class="highlight">INPUT</span> age
+                        </div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">output</i>
+                            Output / 输出
+                        </div>
+                        <div class="card-content">
+                            Data sent from a program to external destinations.
+                            <div class="chinese-text">从程序发送到外部目标的数据。</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">monitor</i>
+                            <div class="key-point-text">Display output</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">print</i>
+                            <div class="key-point-text">Printer output</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">speaker</i>
+                            <div class="key-point-text">Audio output</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">save</i>
+                            <div class="key-point-text">File output</div>
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">OUTPUT</span> "Hello, " & name<br>
+                            <span class="highlight">OUTPUT</span> "Your age is: " & age<br>
+                            <span class="highlight">OUTPUT</span> "Next year you will be " & (age + 1)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">sync_alt</i>
+                    Input-Process-Output Cycle / 输入-处理-输出循环
+                </div>
+                <div class="card-content">
+                    Most programs follow this fundamental structure.
+                    <div class="chinese-text">大多数程序遵循这个基本结构。</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">looks_one</i>
+                    <div class="key-point-text">Input: Get data from user or source</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">looks_two</i>
+                    <div class="key-point-text">Process: Perform operations on data</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">looks_3</i>
+                    <div class="key-point-text">Output: Display or store results</div>
+                </div>
+                <div class="code-block">
+                    <span class="highlight">DECLARE</span> num1 : INTEGER<br>
+                    <span class="highlight">DECLARE</span> num2 : INTEGER<br>
+                    <span class="highlight">DECLARE</span> sum : INTEGER<br><br>
+                    
+                    <span class="highlight">INPUT</span> num1<br>
+                    <span class="highlight">INPUT</span> num2<br>
+                    sum ← num1 + num2<br>
+                    <span class="highlight">OUTPUT</span> "The sum is: " & sum
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Arithmetic Operators Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Arithmetic Operators / 算术运算符</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">calculate</i>
+                    Common Arithmetic Operators / 常见算术运算符
+                </div>
+                <div class="card-content">
+                    Arithmetic operators allow numerical operations to be performed on values in programming.
+                    <div class="chinese-text">算术运算符允许在编程中对值执行数值运算。</div>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th width="25%">Operation / 运算</th>
+                        <th width="15%">Operator / 运算符</th>
+                        <th width="30%">Example / 示例</th>
+                        <th width="30%">Result / 结果</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Addition</div>
+                            <div class="chinese-text">加法</div>
+                        </td>
+                        <td>+</td>
+                        <td><span class="highlight">result ← 5 + 3</span></td>
+                        <td>result = 8</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Subtraction</div>
+                            <div class="chinese-text">减法</div>
+                        </td>
+                        <td>-</td>
+                        <td><span class="highlight">result ← 10 - 4</span></td>
+                        <td>result = 6</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Multiplication</div>
+                            <div class="chinese-text">乘法</div>
+                        </td>
+                        <td>*</td>
+                        <td><span class="highlight">result ← 7 * 3</span></td>
+                        <td>result = 21</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Real Division</div>
+                            <div class="chinese-text">实数除法</div>
+                        </td>
+                        <td>/</td>
+                        <td><span class="highlight">result ← 10 / 4</span></td>
+                        <td>result = 2.5</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Integer Division</div>
+                            <div class="chinese-text">整数除法</div>
+                        </td>
+                        <td>DIV</td>
+                        <td><span class="highlight">result ← 10 DIV 4</span></td>
+                        <td>result = 2</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div>Remainder</div>
+                            <div class="chinese-text">余数</div>
+                        </td>
+                        <td>MOD</td>
+                        <td><span class="highlight">result ← 10 MOD 4</span></td>
+                        <td>result = 2</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">calculate</i>
+                            Integer Division (DIV) / 整数除法
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">Divides two integers and discards any remainder</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">9 DIV 2 = 4 (remainder 1 is discarded)</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">29 DIV 7 = 4 (remainder 1 is discarded)</div>
+                        </div>
+                        <div class="chinese-text">将两个整数相除并丢弃任何余数</div>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">exposure</i>
+                            Remainder (MOD) / 余数
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">Determines the remainder when one integer is divided by another</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">12 MOD 5 = 2 (12 ÷ 5 = 2 remainder 2)</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">arrow_right</i>
+                            <div class="key-point-text">23 MOD 6 = 5 (23 ÷ 6 = 3 remainder 5)</div>
+                        </div>
+                        <div class="chinese-text">确定一个整数除以另一个整数时的余数</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sequence Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">Sequence / 顺序结构</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">format_list_numbered</i>
+                    What is Sequence? / 什么是顺序结构？
+                </div>
+                <div class="card-content">
+                    Sequence is the order in which instructions are executed in a program.
+                    <div class="chinese-text">顺序结构是程序中指令执行的顺序。</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">arrow_right</i>
+                    <div class="key-point-text">Instructions executed one after another</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">arrow_right</i>
+                    <div class="key-point-text">Order is critical for correct program execution</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">arrow_right</i>
+                    <div class="key-point-text">Most common programming error: wrong sequence</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">compare_arrows</i>
+                    Correct vs. Incorrect Sequence / 正确与错误的顺序
+                </div>
+                <div class="sequence-comparison">
+                    <div class="sequence-column">
+                        <div class="sequence-title">
+                            <i class="material-icons">cancel</i>
+                            Incorrect / 错误
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">DECLARE</span> total : INTEGER<br>
+                            <span class="highlight">DECLARE</span> average : REAL<br>
+                            <span class="highlight">DECLARE</span> number1 : INTEGER<br>
+                            <span class="highlight">DECLARE</span> number2 : INTEGER<br><br>
+                            
+                            total ← 0<br>
+                            <span class="highlight-red">average ← number1 / number2</span><br>
+                            <span class="highlight">OUTPUT</span> "Enter first number"<br>
+                            <span class="highlight">INPUT</span> number1<br>
+                            <span class="highlight">OUTPUT</span> "Enter second number"<br>
+                            <span class="highlight">INPUT</span> number2<br>
+                            <span class="highlight">OUTPUT</span> "Average is " & average
+                        </div>
+                    </div>
+                    <div class="sequence-column">
+                        <div class="sequence-title">
+                            <i class="material-icons">check_circle</i>
+                            Correct / 正确
+                        </div>
+                        <div class="code-block">
+                            <span class="highlight">DECLARE</span> total : INTEGER<br>
+                            <span class="highlight">DECLARE</span> average : REAL<br>
+                            <span class="highlight">DECLARE</span> number1 : INTEGER<br>
+                            <span class="highlight">DECLARE</span> number2 : INTEGER<br><br>
+                            
+                            total ← 0<br>
+                            <span class="highlight">OUTPUT</span> "Enter first number"<br>
+                            <span class="highlight">INPUT</span> number1<br>
+                            <span class="highlight">OUTPUT</span> "Enter second number"<br>
+                            <span class="highlight">INPUT</span> number2<br>
+                            <span class="highlight-green">average ← number1 / number2</span><br>
+                            <span class="highlight">OUTPUT</span> "Average is " & average
+                        </div>
+                    </div>
+                </div>
+                <div class="key-point" style="margin-top: 15px;">
+                    <i class="material-icons">lightbulb</i>
+                    <div class="key-point-text">The incorrect sequence tries to calculate the average before getting the input values</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extend Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Extend - Practice Exercises / 扩展练习</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">assignment</i>
+                    Complete these exercises to practice the programming concepts you've learned.
+                </div>
+                <div class="chinese-text">完成这些练习，以练习您学到的编程概念。</div>
+            </div>
+            
+            <div class="grid">
+                <div class="grid-item">
+                    <div class="grid-item-title">
+                        <i class="material-icons">storage</i>
+                        Variables & Constants
+                    </div>
+                    <div class="question">
+                        <div class="question-text">1. Identify valid variable names:</div>
+                        <div class="code-block">
+                            studentName<br>
+                            1stPlace<br>
+                            final_score<br>
+                            $total<br>
+                            age
+                        </div>
+                        <div class="answer-space"></div>
+                    </div>
+                    <div class="question">
+                        <div class="question-text">2. Declare a constant named TAX_RATE with value 0.15:</div>
+                        <div class="answer-space"></div>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <div class="grid-item-title">
+                        <i class="material-icons">category</i>
+                        Data Types
+                    </div>
+                    <div class="question">
+                        <div class="question-text">1. Match data types to values:</div>
+                        <div class="code-block">
+                            INTEGER: 3.14, 42, "Hello", TRUE<br>
+                            STRING: 3.14, 42, "Hello", TRUE<br>
+                            BOOLEAN: 3.14, 42, "Hello", TRUE<br>
+                            REAL: 3.14, 42, "Hello", TRUE
+                        </div>
+                        <div class="answer-space"></div>
+                    </div>
+                    <div class="question">
+                        <div class="question-text">2. What will be the result of: INTEGER("54")?</div>
+                        <div class="answer-space"></div>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <div class="grid-item-title">
+                        <i class="material-icons">calculate</i>
+                        Arithmetic Operators
+                    </div>
+                    <div class="question">
+                        <div class="question-text">1. Calculate the following:</div>
+                        <div class="code-block">
+                            15 DIV 4 = ?<br>
+                            15 MOD 4 = ?<br>
+                            10 / 3 = ?
+                        </div>
+                        <div class="answer-space"></div>
+                    </div>
+                    <div class="question">
+                        <div class="question-text">2. Write an expression to calculate the area of a rectangle:</div>
+                        <div class="answer-space"></div>
+                    </div>
+                </div>
+                
+                <div class="grid-item">
+                    <div class="grid-item-title">
+                        <i class="material-icons">format_list_numbered</i>
+                        Input/Output & Sequence
+                    </div>
+                    <div class="question">
+                        <div class="question-text">1. Rearrange these steps to calculate the average of two numbers:</div>
+                        <div class="code-block">
+                            <span class="highlight">OUTPUT</span> "Average is: " & average<br>
+                            <span class="highlight">INPUT</span> num1<br>
+                            average ← (num1 + num2) / 2<br>
+                            <span class="highlight">INPUT</span> num2
+                        </div>
+                        <div class="answer-space"></div>
+                    </div>
+                    <div class="question">
+                        <div class="question-text">2. Write a validation check for age input (0-120):</div>
+                        <div class="answer-space"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note">
+                Note: Write your answers in the provided spaces. Discuss with a partner if you need help.
+                <br>
+                注意：在提供的空间中写下您的答案。如果需要帮助，请与同伴讨论。
+            </div>
+        </div>
+    </div>
+
+    <!-- Evaluate Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">Evaluate - Exit Ticket / 评估 - 出门票</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">quiz</i>
+                    Complete this exit ticket before leaving class to show what you've learned today.
+                </div>
+                <div class="chinese-text">在离开教室前完成这张出门票，展示您今天学到的内容。</div>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">school</i>
+                            Knowledge Check / 知识检查
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">1. What is the difference between a variable and a constant?</div>
+                            <div class="chinese-text">变量和常量之间有什么区别？</div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">2. List three basic data types used in programming.</div>
+                            <div class="chinese-text">列出编程中使用的三种基本数据类型。</div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">3. What does the MOD operator do?</div>
+                            <div class="chinese-text">MOD运算符的作用是什么？</div>
+                            <div class="answer-space"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">psychology</i>
+                            Reflection / 反思
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">4. Which concept was most challenging for you today?</div>
+                            <div class="chinese-text">今天哪个概念对您来说最具挑战性？</div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">5. How confident are you with today's material?</div>
+                            <div class="chinese-text">您对今天的材料有多自信？</div>
+                            <div class="rating-container">
+                                <div class="rating-option">
+                                    <div class="rating-circle">1</div>
+                                    <div class="rating-label">Not confident / 不自信</div>
+                                </div>
+                                <div class="rating-option">
+                                    <div class="rating-circle">2</div>
+                                    <div class="rating-label">Somewhat / 有点</div>
+                                </div>
+                                <div class="rating-option">
+                                    <div class="rating-circle">3</div>
+                                    <div class="rating-label">Moderately / 中等</div>
+                                </div>
+                                <div class="rating-option">
+                                    <div class="rating-circle">4</div>
+                                    <div class="rating-label">Very / 很</div>
+                                </div>
+                                <div class="rating-option">
+                                    <div class="rating-circle">5</div>
+                                    <div class="rating-label">Extremely / 非常</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">lightbulb</i>
+                    Key Takeaways / 关键要点
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">storage</i>
+                    <div class="key-point-text">Variables store values that can change</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">lock</i>
+                    <div class="key-point-text">Constants store values that cannot change</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">category</i>
+                    <div class="key-point-text">Data types determine what operations can be performed</div>
+                </div>
+                <div class="key-point">
+                    <i class="material-icons">format_list_numbered</i>
+                    <div class="key-point-text">Sequence is the order in which instructions execute</div>
+                </div>
+            </div>
+            
+            <div class="note">
+                Submit your completed exit ticket before leaving. Thank you for your participation today!
+                <br>
+                在离开前提交您完成的出门票。感谢您今天的参与！
+            </div>
+        </div>
+    </div>
+
+    <!-- Homework Section -->
+    <div class="section">
+        <div class="container">
+            <h2 class="section-title">Homework & Mark Scheme / 作业与评分标准</h2>
+            <div class="card">
+                <div class="card-title">
+                    <i class="material-icons">assignment</i>
+                    Complete this homework assignment to reinforce your understanding of programming concepts.
+                </div>
+                <div class="chinese-text">完成这项作业，以巩固您对编程概念的理解。</div>
+            </div>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">edit</i>
+                            Homework Questions / 作业问题
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">1. Variables and Constants</div>
+                            <div class="chinese-text">变量和常量</div>
+                            <div class="code-block">
+                                Write pseudocode to:<br>
+                                - Declare a variable named <span class="highlight">studentName</span> of type STRING<br>
+                                - Declare a constant named <span class="highlight">MAX_SCORE</span> with value 100<br>
+                                - Assign a value to the variable<br>
+                                - Display the variable and constant values
+                            </div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">2. Data Types</div>
+                            <div class="chinese-text">数据类型</div>
+                            <div class="code-block">
+                                Identify the appropriate data type for:<br>
+                                - A person's age<br>
+                                - A product price<br>
+                                - A student's grade (A, B, C, etc.)<br>
+                                - Whether a student has passed (TRUE/FALSE)<br>
+                                - A single character for a menu option
+                            </div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">3. Input/Output</div>
+                            <div class="chinese-text">输入/输出</div>
+                            <div class="code-block">
+                                Write pseudocode to:<br>
+                                - Ask for a user's name<br>
+                                - Ask for a user's age<br>
+                                - Display a greeting with their name<br>
+                                - Display how old they will be in 5 years
+                            </div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">4. Arithmetic Operators</div>
+                            <div class="chinese-text">算术运算符</div>
+                            <div class="code-block">
+                                Calculate the result of:<br>
+                                - 17 DIV 5<br>
+                                - 17 MOD 5<br>
+                                - Write pseudocode to convert 125 minutes to hours and minutes<br>
+                                - Write pseudocode to calculate the area of a circle with radius 5
+                            </div>
+                            <div class="answer-space"></div>
+                        </div>
+                        
+                        <div class="question">
+                            <div class="question-text">5. Sequence</div>
+                            <div class="chinese-text">顺序结构</div>
+                            <div class="code-block">
+                                Arrange these steps in the correct order:<br>
+                                - Calculate sum<br>
+                                - Declare variables<br>
+                                - Input numbers<br>
+                                - Output result
+                            </div>
+                            <div class="answer-space"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">grading</i>
+                            Mark Scheme / 评分标准
+                        </div>
+                        
+                        <div class="mark-item">
+                            <div class="mark-number">1.</div>
+                            <div class="mark-details">
+                                <div class="mark-criteria">Correctly declare variables and constants</div>
+                                <div class="mark-points">2 marks for correct syntax, 1 mark for each correct declaration</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mark-item">
+                            <div class="mark-number">2.</div>
+                            <div class="mark-details">
+                                <div class="mark-criteria">Identify appropriate data types</div>
+                                <div class="mark-points">1 mark per correct data type (max 5 marks)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mark-item">
+                            <div class="mark-number">3.</div>
+                            <div class="mark-details">
+                                <div class="mark-criteria">Demonstrate input/output operations</div>
+                                <div class="mark-points">2 marks for correct input, 2 marks for correct output</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mark-item">
+                            <div class="mark-number">4.</div>
+                            <div class="mark-details">
+                                <div class="mark-criteria">Use arithmetic operators correctly</div>
+                                <div class="mark-points">1 mark per correct calculation (max 4 marks)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="mark-item">
+                            <div class="mark-number">5.</div>
+                            <div class="mark-details">
+                                <div class="mark-criteria">Arrange instructions in correct sequence</div>
+                                <div class="mark-points">1 mark per correctly sequenced step (max 4 marks)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="total-marks">
+                            Total: 20 marks / 总分：20分
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note">
+                Submit your completed homework by next class. Use the spaces provided to write your answers.
+                <br>
+                在下节课前提交您完成的作业。使用提供的空间写下您的答案。
+            </div>
+        </div>
+    </div>
+
+    <!-- References Section -->
+    <div class="section" style="background-color: #f0f5ff;">
+        <div class="container">
+            <h2 class="section-title">References & Resources / 参考资料</h2>
+            
+            <div class="two-column">
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">menu_book</i>
+                            Textbook Sources / 教材来源
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">book</i>
+                            <div class="key-point-text">IGCSE Computer Science Textbook (Hodder Education)</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">book</i>
+                            <div class="key-point-text">Cambridge IGCSE Computer Science (David Watson, Helen Williams)</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">description</i>
+                            <div class="key-point-text">Chapter 8: Programming Concepts</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">language</i>
+                            Online Resources / 在线资源
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">public</i>
+                            <div class="key-point-text">BBC Bitesize - Computer Science</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">public</i>
+                            <div class="key-point-text">Save My Exams - IGCSE Computer Science</div>
+                        </div>
+                        <div class="key-point">
+                            <i class="material-icons">public</i>
+                            <div class="key-point-text">Cambridge International - Computer Science</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="column">
+                    <div class="card">
+                        <div class="card-title">
+                            <i class="material-icons">extension</i>
+                            Additional Learning Resources / 额外学习资源
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="material-icons">video_library</i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Video Tutorials</div>
+                                <div class="resource-description">YouTube channels with programming tutorials</div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="material-icons">code</i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Interactive Coding Platforms</div>
+                                <div class="resource-description">Practice programming concepts online</div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="material-icons">quiz</i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Practice Questions</div>
+                                <div class="resource-description">Past papers and revision questions</div>
+                            </div>
+                        </div>
+                        
+                        <div class="resource-item">
+                            <div class="resource-icon">
+                                <i class="material-icons">translate</i>
+                            </div>
+                            <div class="resource-content">
+                                <div class="resource-title">Bilingual Resources</div>
+                                <div class="resource-description">Programming concepts in English and Mandarin</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="note">
+                For additional support, please visit the school's computer science department website or contact your teacher.
+                <br>
+                如需额外支持，请访问学校的计算机科学系网站或联系您的老师。
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <p>© 2023 IGCSE Computer Science - Chapter 8: Programming Concepts</p>
+            <p>Designed for educational purposes</p>
+        </div>
+    </div>
+</body>
+</html>
